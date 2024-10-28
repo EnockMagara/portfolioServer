@@ -1,0 +1,872 @@
+/* General Styles */
+:root {
+  --primary-color: #003366; /* Deep Blue */
+  --secondary-color: #ff6600; /* Orange */
+  --background-color: #f0f0f0; /* Light Gray */
+  --text-color: #333333; /* Dark Text */
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #211e1e; /* This is a gray color, adjust as needed */
+}
+
+body {
+  font-family: 'Courier New', monospace;
+  line-height: 1.6;
+  color: #fff; /* Adjust text color for better contrast */
+  padding-top: 40px; /* Adjust this value to match the height of your social links bar */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.main {
+  min-height: calc(100vh - 40px); /* Subtract the height of the social links bar */
+  background-color: #1d1b1b; /* Same as body background */
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.social-links-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px 0;
+  text-align: center;
+  z-index: 1002;
+}
+
+/* Remove any margin or padding from sections if present */
+.section {
+  margin: 0;
+  padding: 60px 0;
+}
+
+/* Adjust the hero section to remove any potential gaps */
+#hero {
+  margin-top: -40px; /* Negative margin to offset the social links bar */
+  padding-top: 40px; /* Add padding to push content down */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Courier New', monospace;
+  /* Add other heading styles as needed */
+}
+
+/* Layout */
+.card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Header Styles */
+.header {
+  background: linear-gradient(180deg, #1a1a1a, #333333);
+  padding: 20px;
+}
+
+.profile-img img {
+  border-radius: 50%;
+  max-width: 150px;
+  margin: 0 auto;
+  display: block;
+}
+
+.sitename {
+  color: #fff;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.social-links a {
+  color: #fff;
+  font-size: 1.2rem;
+  margin: 0 10px;
+}
+
+/* Navigation Menu */
+.navmenu {
+  overflow-x: hidden;
+}
+
+.navmenu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.navmenu ul li a {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  transition: color 0.3s;
+}
+
+.navmenu ul li a:hover,
+.navmenu ul li a.active {
+  color: var(--secondary-color);
+}
+
+.navmenu ul li a i {
+  margin-right: 10px;
+}
+
+/* Hero Section */
+#hero {
+  background-image: url('../img/background1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  color: #fff; /* Ensure text is visible on the background */
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.hero-greeting {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  opacity: 0;
+  animation: slideInFromLeft 1s ease forwards;
+  animation-delay: 0.5s;
+}
+
+.hero-name {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: slideInFromRight 1s ease forwards;
+  animation-delay: 0.5s;
+}
+
+.hero-description {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: slideInFromLeft 1s ease forwards;
+  animation-delay: 0.5s;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: transparent;
+  color: rgb(236, 91, 95);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid rgb(236, 91, 95);
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  opacity: 0;
+  animation: fadeInButton 0.5s ease forwards;
+  animation-delay: 1s; 
+  z-index: 2000; 
+  position: relative; 
+
+}
+
+.cta-button:hover {
+  background-color: rgb(236, 91, 95);
+  color: #fff;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px); /* Start from -100px off the left */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px); /* Start from 100px off the right */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInButton {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* About Section */
+.about {
+  color: #fff;
+  background-color: #000; /* Assuming a dark theme as per your inspiration */
+  padding: 50px 0;
+}
+
+.about h2 {
+  color: #ff6600; /* Styling for the section title */
+  margin-bottom: 20px;
+}
+
+.about-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.about-description {
+  width: 50%;
+  padding-right: 20px;
+}
+
+.about-tech {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  width: 50%;
+}
+
+.tech-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #222; /* Dark background for each icon */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.tech-icon i {
+  font-size: 2rem;
+  color: #ff6600; /* Icon color */
+  margin-bottom: 10px;
+}
+
+.tech-icon span {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .about-flex {
+    flex-direction: column;
+  }
+
+  .about-description,
+  .about-tech {
+    width: 100%;
+  }
+
+  .about-tech {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Portfolio Section */
+.project-card {
+  margin-bottom: 30px;
+}
+
+.project-image {
+  border-radius: 15px;
+  margin: 10px;
+  width: calc(100% - 20px);
+  height: auto;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.tech-icons i {
+  font-size: 1.5rem;
+  margin-right: 10px;
+  color: var(--secondary-color);
+}
+
+.website-demo {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-top: 15px;
+}
+
+.website-demo iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300%;
+  height: 300%;
+  transform: scale(0.33);
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.copyright {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.copyright .sitename {
+  color: #ff6600; /* Your secondary color */
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.copyright span {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .section {
+    padding: 40px 0;
+  }
+
+  .hero-greeting {
+    font-size: 1.2rem;
+  }
+
+  .hero-name {
+    font-size: 2.5rem;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .about-me h3 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .about-me .skills-category {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .about-me .skills-category i {
+    margin-bottom: 5px;
+  }
+}
+
+#showResumeBtn {
+display: inline-block;
+padding: 15px 25px;
+color: #e5dbdb;
+text-decoration: none;
+font-weight: bold;
+text-transform: uppercase;
+letter-spacing: 1px;
+border: 2px solid rgb(236, 91, 95);
+border-radius: 5px;
+background-color: transparent;
+transition: background-color 0.3s ease, color 0.3s ease;
+cursor: pointer;
+-webkit-tap-highlight-color: transparent;
+font-size: 16px;
+overflow-x: hidden;
+}
+
+#showResumeBtn:hover,
+#showResumeBtn:active {
+background-color: rgb(236, 91, 95);
+color: #fff;
+}
+
+#resumeFrame {
+display: none;
+width: 100%;
+height: 0;
+border: none;
+transition: height 0.3s ease, opacity 0.3s ease;
+opacity: 0;
+position: relative;
+z-index: 1003; /* Higher than the social links top bar */
+}
+
+/* Improve touch area for mobile */
+@media (max-width: 768px) {
+#showResumeBtn {
+  padding: 15px 25px;
+  font-size: 16px;
+}
+}
+
+.social-links-top {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+background-color: rgba(0, 0, 0, 0.8);
+padding: 10px 0;
+text-align: center;
+z-index: 1002; /* Increased z-index to be above section-separator */
+}
+
+.social-links-top a {
+color: #fff;
+font-size: 20px;
+margin: 0 10px;
+transition: color 0.3s ease;
+}
+
+.social-links-top a:hover {
+color: rgb(159, 159, 222);
+}
+
+.section-separator {
+background-color: rgb(51, 51, 51); /* Dark gray color */
+padding: 10px 0;
+position: sticky;
+top: 40px; /* Should match the height of social-links-top */
+left: 0;
+width: 100%;
+z-index: 1001;
+}
+
+.navbar ul {
+display: flex;
+justify-content: space-around; /* Distributes space around items */
+list-style: none;
+margin: 0;
+padding: 0;
+}
+
+.navbar li {
+margin: 0 15px;
+}
+
+.nav-link {
+color: #ffffff; /* White color for default state */
+text-decoration: none;
+font-weight: bold;
+transition: color 0.3s ease;
+font-size: 1.1rem;
+padding: 10px 15px; /* Adjust padding around links for better spacing */
+}
+
+.nav-link:hover, .nav-link.active {
+color: #ff6600; /* Red color for hover and active states (using your secondary color) */
+}
+
+.navicon {
+margin-right: 5px;
+}
+
+/* Project card styles */
+.project-card .card-title {
+font-size: 1.5rem; /* Increased font size */
+font-weight: bold;
+margin-bottom: 15px;
+color: #300404; /* Dark red color to match the theme */
+}
+
+/* You may want to adjust the body text size for better contrast */
+.project-card .card-text {
+font-size: 1rem;
+}
+
+/* Back to Home button styles */
+.container.mt-3 {
+padding: 20px 0;
+}
+
+.container.mt-3 .animated-button {
+display: inline-block;
+padding: 12px 24px;
+color: rgb(236, 91, 95);
+text-decoration: none;
+font-weight: bold;
+font-size: 1.2rem;
+text-transform: uppercase;
+letter-spacing: 1px;
+border: 2px solid rgb(236, 91, 95);
+border-radius: 5px;
+position: relative;
+overflow: hidden;
+background-color: transparent;
+transition: color 0.3s ease;
+}
+
+.container.mt-3 .animated-button .button-text {
+position: relative;
+z-index: 2;
+}
+
+.container.mt-3 .animated-button .button-line {
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 2px;
+background-color: rgb(236, 91, 95);
+transition: height 0.3s ease;
+}
+
+.container.mt-3 .animated-button:hover {
+color: #fff;
+}
+
+.container.mt-3 .animated-button:hover .button-line {
+height: 100%;
+}
+
+main.main {
+padding-top: 90px; /* Adjust this value based on the combined height of social-links-top and section-separator */
+}
+
+.scroll-top {
+position: fixed;
+visibility: hidden;
+opacity: 0;
+right: 15px;
+bottom: 15px;
+z-index: 99999;
+background: #ff6600; /* Red color */
+width: 50px; /* Increased size */
+height: 50px; /* Increased size */
+border-radius: 50%;
+transition: all 0.4s;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.scroll-top i {
+font-size: 30px; /* Bigger icon */
+color: #000000; /* Changed to black for better contrast */
+line-height: 0;
+}
+
+.scroll-top:hover {
+background: #ff8533; /* Lighter red on hover */
+transform: scale(1.1); /* Slight grow effect on hover */
+}
+
+.scroll-top:hover i {
+color: #ffffff; /* Change to white on hover for additional effect */
+}
+
+.scroll-top.active {
+visibility: visible;
+opacity: 1;
+animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+0%, 20%, 50%, 80%, 100% {
+  transform: translateY(0);
+}
+40% {
+  transform: translateY(-10px);
+}
+60% {
+  transform: translateY(-5px);
+}
+}
+
+/* Styles specific to portfolio-details.html */
+.portfolio-details-page .main {
+padding: 20px 20px 40px; /* Reduced top padding, consistent side padding */
+}
+
+.portfolio-details-page .container {
+max-width: 1000px; /* Reduced max-width for better content density */
+margin: 0 auto;
+}
+
+/* Adjust the 'Back to Home' button positioning */
+.portfolio-details-page .container.mt-3 {
+margin-bottom: 20px; /* Reduced space below the button */
+}
+
+/* Adjust spacing for project cards */
+.portfolio-details-page .project-card {
+margin-bottom: 30px; /* Reduced space between projects */
+padding: 20px; /* Reduced internal padding of the card */
+background-color: #f8f9fa; /* Light background for contrast */
+border-radius: 8px; /* Rounded corners */
+}
+
+/* Adjust spacing for project titles */
+.portfolio-details-page .project-card .card-title {
+margin-bottom: 15px; /* Slightly reduced space below the title */
+font-size: 1.5rem; /* Larger font size for titles */
+}
+
+/* Adjust spacing for project description */
+.portfolio-details-page .project-card .card-text {
+margin-bottom: 15px;
+}
+
+/* Adjust spacing for tech icons */
+.portfolio-details-page .tech-icons {
+margin: 15px 0;
+}
+
+/* Adjust spacing for 'View Project' button */
+.portfolio-details-page .animated-button {
+margin-top: 15px;
+}
+
+/* Adjust iframe container spacing */
+.portfolio-details-page .website-demo {
+margin-top: 20px;
+}
+
+/* Adjust space between sections */
+.portfolio-details-page .section {
+margin-bottom: 40px;
+}
+
+/* Improve readability of project descriptions */
+.portfolio-details-page .project-card .card-text {
+line-height: 1.6;
+color: #333; /* Darker text for better contrast */
+}
+
+/* Style for project images */
+.portfolio-details-page .project-image {
+width: 100%;
+height: auto;
+border-radius: 6px;
+margin-bottom: 15px;
+}
+
+/* Styles for the Back to Home button */
+.portfolio-details-page .container.mt-3 {
+padding-left: 15px; /* Default padding for all screen sizes */
+padding-right: 15px;
+margin-bottom: 20px;
+}
+
+/* Additional padding for mobile screens */
+@media (max-width: 767px) {
+.portfolio-details-page .container.mt-3 {
+  padding-left: 20px; /* Increased left padding for mobile */
+}
+}
+
+/* Ensure the button doesn't stretch full width on mobile */
+.portfolio-details-page .animated-button {
+display: inline-block;
+margin-top: 10px;
+}
+
+.resume-container {
+position: relative;
+z-index: 1003;
+}
+
+.animated-button {
+display: inline-block;
+padding: 12px 24px;
+color: rgb(236, 91, 95);
+text-decoration: none;
+font-weight: bold;
+font-size: 1.2rem;
+text-transform: uppercase;
+letter-spacing: 1px;
+border: 2px solid rgb(236, 91, 95);
+border-radius: 5px;
+position: relative;
+overflow: hidden;
+background-color: transparent;
+transition: color 0.3s ease;
+margin: 5px;
+cursor: pointer;
+}
+
+.animated-button .button-text {
+position: relative;
+z-index: 2;
+}
+
+.animated-button .button-line {
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 2px;
+background-color: rgb(236, 91, 95);
+transition: height 0.3s ease;
+z-index: 1;
+overflow: hidden;
+}
+
+.animated-button:hover {
+color: #fff;
+}
+
+.animated-button:hover .button-line {
+height: 100%;
+}
+
+/* About Section Hyperlink Styling */
+.about-description a {
+color: #ff6600; /* Assuming the up arrow uses this color, adjust as needed */
+text-decoration: none; /* Removes underline */
+}
+
+/* Ensure the hyperlink does not underline on hover */
+.about-description a:hover {
+text-decoration: none;
+}
+
+/* Icon Colors */
+.tech-icon .fa-python { color: #3776AB; } /* Python blue */
+.tech-icon .fa-js-square { color: #F7DF1E; } /* JavaScript yellow */
+.tech-icon .fa-html5 { color: #E34F26; } /* HTML5 orange */
+.tech-icon .fa-css3-alt { color: #1572B6; } /* CSS3 blue */
+.tech-icon .fa-swift { color: #F05138; } /* Swift orange */
+.tech-icon .fa-code { color: #5C5C5C; } /* Generic code icon gray */
+.tech-icon .fa-react { color: #61DAFB; } /* React blue */
+.tech-icon .fa-database { color: #006400; } /* Generic database green */
+.tech-icon .fa-git-alt { color: #F05032; } /* Git red */
+.tech-icon .fa-docker { color: #2496ED; } /* Docker blue */
+.tech-icon .fa-flask { color: #000000; } /* Flask black for generic */
+.tech-icon .fa-node-js { color: #68A063; } /* Node.js green */
+.tech-icon .fa-server { color: #333333; } /* Express gray */
+.tech-icon .fa-cogs { color: #FF5733; } /* CI/CD orange */
+.tech-icon .fa-microchip { color: #8A2BE2; } /* Assembly purple */
+
+/* New Icon Colors */
+.tech-icon .fa-vuejs { color: #42b883; } /* Vue.js green */
+.tech-icon .fa-lock { color: #4285F4; } /* OAuth blue */
+
+/* Contact Form Styles */
+#contact {
+  padding: 20px; /* Add padding around the contact form */
+  background-color: #1d1b1b; /* Match the main background color */
+  border-radius: 8px; /* Round the corners of the contact form */
+  color: #fff; /* Set the text color to white */
+}
+
+#contact h2 {
+  color: #ff6600; /* Set the heading color to the secondary color */
+  margin-bottom: 20px; /* Add space below the heading */
+}
+
+#contact .form-group {
+  margin-bottom: 15px; /* Add space below each form group */
+}
+
+#contact label {
+  display: block; /* Make the label a block element */
+  margin-bottom: 5px; /* Add space below the label */
+  font-weight: bold; /* Make the label text bold */
+}
+
+#contact input, #contact textarea {
+  width: 100%; /* Make the input and textarea take the full width */
+  padding: 10px; /* Add padding inside the input and textarea */
+  border: 1px solid #333; /* Set the border color to dark gray */
+  border-radius: 5px; /* Round the corners of the input and textarea */
+  background-color: #333; /* Set the background color to dark gray */
+  color: #fff; /* Set the text color to white */
+}
+
+#contact button.animated-button {
+  margin-top: 10px; /* Add space above the button */
+}
+
+/* Bouncing Animation */
+@keyframes bounce {
+0%, 20%, 50%, 80%, 100% {
+  transform: translateY(0);
+}
+40% {
+  transform: translateY(-30px);
+}
+60% {
+  transform: translateY(-15px);
+}
+}
+
+.tech-icon {
+animation: bounce 5s infinite;
+}
+
+/* Additional styling for hover effect to enhance the bounce */
+.tech-icon:hover {
+animation: bounce 1s infinite;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  .navbar {
+    /* Adjust the font size for smaller screens */
+    font-size: 14px;
+    /* Reduce padding to make the navbar more compact */
+    padding: 10px;
+  }
+
+  .navbar ul {
+    /* Stack the navbar items vertically */
+    flex-direction: column;
+    /* Center the items */
+    align-items: center;
+  }
+
+  .navbar li {
+    /* Add some margin between items */
+    margin-bottom: 10px;
+  }
+
+  .nav-link {
+    /* Adjust the size of the icons */
+    font-size: 16px;
+  }
+}
+

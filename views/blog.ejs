@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - Enock Mecheo</title>
+  <meta name="description" content="Portfolio of Enock Mecheo, showcasing skills in software development, web development, and more.">
+  <meta name="keywords" content="Enock Mecheo, portfolio, software development, web development, NYU Abu Dhabi, fullstack developer">
+  <meta name="author" content="Enock Mecheo">
+  <link href="/assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+</head>
+<body class="portfolio-details-page">
+  <header>
+    <div class="container mt-3">
+      <a href="/" class="animated-button">
+        <span class="button-text">Home</span>
+        <span class="button-line"></span>
+      </a>
+      <a href="/portfolio-details" class="animated-button">
+        <span class="button-text">Portfolio</span>
+        <span class="button-line"></span>
+      </a>
+      <h1>Blog</h1>
+    </div>
+  </header>
+  <main class="main">
+    <section id="blog-posts" class="container">
+      <h2>Recent Posts</h2>
+      <div class="row gy-4">
+        <% posts.forEach(post => { %>
+          <div class="col-lg-4">
+            <div class="card project-card">
+              <div class="card-body">
+                <h5 class="card-title"><%= post.title %></h5>
+                <p class="card-text">
+                  <%= post.snippet || 'No snippet available' %>...
+                </p>
+                <!-- <p class="card-text"><small class="text-muted">Published on: <%= new Date(post.pubDate).toLocaleDateString() %></small></p> -->
+                <a href="<%= post.link %>" target="_blank" class="animated-button">
+                  <span class="button-text">Read More</span>
+                  <span class="button-line"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <p class="copyright">
+        <span>&copy; Copyright</span>
+        <span class="sitename">EnockMecheo</span>
+        <span>All Rights Reserved</span>
+      </p>
+    </div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>
