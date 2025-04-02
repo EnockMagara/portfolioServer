@@ -26,8 +26,9 @@ jobs:
       # Step 4: Write SSH private key to a file
       - name: Write SSH private key
         run: |
-          echo "${{ secrets.SFTP_PRIVATE_KEY }}" > deploy_key
-          chmod 600 deploy_key
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SFTP_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
 
       # Step 5: Deploy files to the server via SSH
       - name: Deploy to server
@@ -38,8 +39,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}
           SOURCE: "./"
           TARGET: "/root/portfolioServer/"
-          ARGS: "-rltgoDzvO --delete"
-          EXCLUDE: ".git,.github,node_modules"
+          ARGS: "-rltgoDzvO --delete --exclude='.git' --exclude='.github' --exclude='node_modules'"
 
       # Step 6: SSH into the server and restart the service
       - name: Restart portfolio.service
