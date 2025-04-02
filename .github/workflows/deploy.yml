@@ -17,8 +17,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18' # Use the same Node.js version as your server (v18.19.1)
-
+          node-version: '18.19.1' # Use the same Node.js version as your server (v18.19.1)
       # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
