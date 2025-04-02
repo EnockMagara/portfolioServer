@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Enock Mecheo - Portfolio</title>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <title>Enock Mecheo - Projects</title>
   <meta content="Portfolio of Enock Mecheo, Computer Science student at NYU Abu Dhabi" name="description">
-  <meta content="portfolio, computer science, software development, NYU Abu Dhabi, Enock Magara" name="keywords">
+  <meta content="portfolio, computer science, software development, NYU, Enock Mecheo, Enock Magara" name="keywords">
   <meta name="author" content="Enock Mecheo">
 
   <!-- Favicons -->
@@ -14,218 +14,107 @@
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- GSAP library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
 </head>
 
 <body class="portfolio-details-page">
 
-  <div class="container mt-3">
-    <a href="/" class="animated-button">
-      <span class="button-text">Back to Home</span>
-      <span class="button-line"></span>
-    </a>
-    <a href="/blog" class="animated-button">
-      <span class="button-text">Blog</span>
-      <span class="button-line"></span>
-    </a>
+  <!-- Top Navigation Bar -->
+  <div class="top-navbar">
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a href="/" class="nav-link"><i class="bi bi-house navicon"></i>Home</a></li>
+        <li><a href="/portfolio-details" class="nav-link active"><i class="bi bi-images navicon"></i>Projects</a></li>
+        <li><a href="/blog" class="nav-link"><i class="bi bi-journal navicon"></i>Blog</a></li>
+      </ul>
+    </nav>
   </div>
 
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
   <main class="main">
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio section light-background">
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Projects</h2>
-        <p>Check out some of my recent projects.</p>
-      </div>
-
-      <div class="container">
-        <div class="row gy-4" data-aos="fade-up" data-aos-delay="200">
-          <!-- Project 1 -->
-          <div class="col-lg-12">
-            <div class="card project-card">
-              <div class="row g-0">
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">NarrateNow: Web Page Narrator</h5>
-                    <p class="card-text">Developed a full-stack web application that converts online articles into audio narrations in multiple languages. Key features include:</p>
-                    <ul class="card-text">
-                      <li>Built with HTML, CSS, JavaScript frontend and Python Flask backend</li>
-                      <li>Integrates web scraping, language translation, and text-to-speech technologies</li>
-                      <li>Supports 10+ languages including English, Spanish, French, and Mandarin</li>
-                      <li>Deployed frontend on GitHub Pages and backend on DigitalOcean for scalability</li>
-                      <li>Implemented error handling and user-friendly interface for seamless experience</li>
-                    </ul>
-                    <div class="tech-icons">
-                      <i class="bi bi-github"></i>
-                      <i class="bi bi-html5"></i>
-                      <i class="bi bi-css3"></i>
-                      <i class="bi bi-javascript"></i>
-                      <i class="bi bi-python"></i>
-                    </div>
-                    <a href="https://enockmagara.github.io/NarrateNow/" class="animated-button" target="_blank">
-                      <span class="button-text">View Project</span>
-                      <span class="button-line"></span>
-                    </a>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  
-                  <div class="website-demo">
-                    <iframe src="https://enockmagara.github.io/NarrateNow/" frameborder="0"></iframe>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 2 -->
-          <div class="col-lg-12">
-            <div class="card project-card">
-              <div class="row g-0">
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">Virtual File System (VFS) - C++ Project</h5>
-                    <p class="card-text">Developed a command-line virtual file system simulator in C++, featuring:</p>
-                    <ul class="card-text">
-                      <li>Implementation of core file system operations (create, delete, move, navigate)</li>
-                      <li>Custom data structures (Vector, Queue) for efficient memory management</li>
-                      <li>Recycle bin functionality with file recovery options</li>
-                      <li>Persistent storage through file I/O operations</li>
-                      <li>Search capabilities and directory size calculations</li>
-                      <li>Modular design with separate classes for inodes and file system operations</li>
-                    </ul>
-                    <div class="tech-icons">
-                      <i class="bi bi-github"></i>
-                      <i class="bi bi-cplusplus"></i>
-                    </div>
-                    <a href="https://github.com/EnockMagara/VFileManager" class="animated-button" target="_blank">
-                      <span class="button-text">View Project</span>
-                      <span class="button-line"></span>
-                    </a>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <!-- Updated image for Virtual File System (VFS) - C++ Project -->
-                  <img src="assets/img/IMG_0008.PNG" class="img-fluid project-image" alt="Virtual File System (VFS) - C++ Project">
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 3 -->
-          <div class="col-lg-12">
-            <div class="card project-card">
-              <div class="row g-0">
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">Hotel Database Management System</h5>
-                    <p class="card-text">Developed an efficient Hotel Information Management System in C++, utilizing a hash table with binary search trees, resulting in O(1) average-case time complexity for data operations and supporting management of over 100,000 hotel records.</p>
-                    <div class="tech-icons">
-                      <i class="bi bi-github"></i>
-                      <i class="bi bi-cplusplus"></i>
-                    </div>
-                    <a href="https://github.com/EnockMagara/FIND-HOTEL" class="animated-button" target="_blank">
-                      <span class="button-text">View Project</span>
-                      <span class="button-line"></span>
-                    </a>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <!-- Updated image for Hotel Database Management System -->
-                  <img src="assets/img/IMG_0009.PNG" class="img-fluid project-image" alt="Hotel Database Management System">
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 4 (New Project) -->
-          <div class="col-lg-12">
-            <div class="card project-card">
-              <div class="row g-0">
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <!-- Renamed project title from JavaScript UI Project to WebCanvas -->
-                    <h5 class="card-title">WebCanvas</h5>
-                    <!-- Updated project description for WebCanvas -->
-                    <p class="card-text">An interactive Canvas Drawing App using HTML5, CSS3, and JavaScript. This web-based application features a robust set of drawing tools including freehand drawing, erasing, color selection, and line width adjustment. Implemented advanced functionalities such as undo/redo actions, zoom and pan capabilities, and the ability to save and load drawings. Includes a user-friendly interface with a color palette and responsive design for both desktop and mobile use.</p>
-                    <div class="tech-icons">
-                      <i class="bi bi-github"></i>
-                      <i class="bi bi-javascript"></i>
-                      <i class="bi bi-html5"></i>
-                      <i class="bi bi-css3"></i>
-                    </div>
-                    <a href="https://enockmagara.github.io/WEBCANVAS/" class="animated-button" target="_blank">
-                      <span class="button-text">View Project</span>
-                      <span class="button-line"></span>
-                    </a>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                 
-                  <div class="website-demo">
-                    <iframe src="https://enockmagara.github.io/WEBCANVAS/" frameborder="0"></iframe>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 5 (Non-Profit Website) -->
-          <div class="col-lg-12">
-            <div class="card project-card">
-              <div class="row g-0">
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">Moraa Mema Non-Profit Website</h5>
-                    <p class="card-text">A responsive website designed and developed for Moraa Mema, a non-profit organization. The site showcases the organization's mission, projects, and impact, while providing an easy-to-use interface for donations and volunteer sign-ups.</p>
-                    <div class="tech-icons">
-                      <i class="bi bi-wordpress"></i>
-                      <i class="bi bi-html5"></i>
-                      <i class="bi bi-css3"></i>
-                      <i class="bi bi-bootstrap"></i>
-                    </div>
-                    <a href="https://moraamema.org" class="animated-button" target="_blank">
-                      <span class="button-text">Visit Website</span>
-                      <span class="button-line"></span>
-                    </a>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                 
-                  <div class="website-demo">
-                    <iframe src="https://moraamema.org" frameborder="0"></iframe>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Add more projects here -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="text-center mb-5">My Projects</h1>
         </div>
       </div>
-    </section><!-- /Portfolio Section -->
 
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="project-card">
+            <img src="assets/img/projects/project1.jpg" alt="Project 1" class="project-image">
+            <h3 class="card-title">Project 1</h3>
+            <p class="card-text">Description of project 1</p>
+            <div class="tech-icons">
+              <i class="fab fa-react"></i>
+              <i class="fab fa-node-js"></i>
+              <i class="fab fa-mongodb"></i>
+            </div>
+            <a href="#" class="animated-button">
+              <span class="button-text">View Project</span>
+              <span class="button-line"></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="project-card">
+            <img src="assets/img/projects/project2.jpg" alt="Project 2" class="project-image">
+            <h3 class="card-title">Project 2</h3>
+            <p class="card-text">Description of project 2</p>
+            <div class="tech-icons">
+              <i class="fab fa-python"></i>
+              <i class="fab fa-flask"></i>
+              <i class="fab fa-docker"></i>
+            </div>
+            <a href="#" class="animated-button">
+              <span class="button-text">View Project</span>
+              <span class="button-line"></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="project-card">
+            <img src="assets/img/projects/project3.jpg" alt="Project 3" class="project-image">
+            <h3 class="card-title">Project 3</h3>
+            <p class="card-text">Description of project 3</p>
+            <div class="tech-icons">
+              <i class="fab fa-vuejs"></i>
+              <i class="fab fa-node-js"></i>
+              <i class="fab fa-aws"></i>
+            </div>
+            <a href="#" class="animated-button">
+              <span class="button-text">View Project</span>
+              <span class="button-line"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 
-  <!-- Scroll Top Arrow -->
-  <a href="#" class="scroll-top d-flex align-items-center justify-content-center">
-    <i class="bi bi-arrow-up-short"></i>
-    <span class="fallback-text">↑</span>
-  </a>
-
-  <!-- Footer -->
   <footer>
     <div class="container">
+      <div class="social-links-footer">
+        <a href="mailto:emm10042@nyu.edu" class="gmail"><i class="bi bi-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/enock-mecheo-56390b1a6/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        <a href="https://github.com/EnockMagara" class="github"><i class="bi bi-github"></i></a>
+      </div>
       <p class="copyright">
         <span>&copy; Copyright</span>
         <span class="sitename">EnockMecheo</span>
@@ -234,13 +123,17 @@
     </div>
   </footer>
 
+  <!-- Scroll Top -->
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
   <!-- Preloader -->
   <div id="preloader"></div>
 
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
