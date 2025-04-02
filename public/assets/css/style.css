@@ -1,42 +1,158 @@
 /* General Styles */
 :root {
-  --primary-color: #003366; /* Deep Blue */
-  --secondary-color: #ff6600; /* Orange */
-  --background-color: #f0f0f0; /* Light Gray */
-  --text-color: #333333; /* Dark Text */
+  /* Common variables */
+  --primary-color: #ff6600; /* Orange - main interactive color */
+  --hover-color: #ff8533; /* Lighter orange for hover states */
+  
+  /* Dark mode variables (default) */
+  --background-color: #1d1b1b; /* Dark background */
+  --text-color: #ffffff; /* White text */
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 102, 0, 0.1);
+  --navbar-bg: rgba(25, 25, 25, 0.95);
+  --footer-bg: #333;
+}
+
+/* Light mode variables */
+[data-theme="light"] {
+  --background-color: #f5f5f5; /* Light background */
+  --text-color: #333333; /* Dark text */
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-border: rgba(255, 102, 0, 0.2);
+  --navbar-bg: rgba(245, 245, 245, 0.95);
+  --footer-bg: #e0e0e0;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 1003;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--hover-color);
+  transform: scale(1.1);
+}
+
+.theme-toggle i {
+  font-size: 20px;
 }
 
 body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: #211e1e; /* This is a gray color, adjust as needed */
+  background-color: var(--background-color);
 }
 
 body {
   font-family: 'Courier New', monospace;
   line-height: 1.6;
-  color: #fff; /* Adjust text color for better contrast */
-  padding-top: 40px; /* Adjust this value to match the height of your social links bar */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  color: var(--text-color);
+  padding-top: 40px;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .main {
-  min-height: calc(100vh - 40px); /* Subtract the height of the social links bar */
-  background-color: #1d1b1b; /* Same as body background */
+  min-height: calc(100vh - 120px);
+  background-color: var(--background-color);
   padding-top: 0;
   margin-top: 0;
+  transition: background-color 0.3s ease;
 }
 
-.social-links-top {
+/* Footer social links (moved from top) */
+.social-links-footer {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.social-links-footer a {
+  color: var(--text-color);
+  font-size: 20px;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+  font-family: 'Courier New', monospace;
+}
+
+.social-links-footer a:hover {
+  color: var(--primary-color);
+  transform: translateY(-3px);
+}
+
+/* Top Navigation Bar */
+.top-navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 10px 0;
-  text-align: center;
+  background-color: var(--navbar-bg);
   z-index: 1002;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.top-navbar .navbar {
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.top-navbar .navbar ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.top-navbar .navbar li {
+  margin: 0 25px;
+}
+
+.top-navbar .nav-link {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  font-family: 'Courier New', monospace;
+}
+
+.top-navbar .nav-link i {
+  margin-right: 8px;
+  font-size: 1.2rem;
+}
+
+.top-navbar .nav-link:hover {
+  color: var(--primary-color);
+  background-color: rgba(255, 102, 0, 0.1);
+}
+
+.top-navbar .nav-link.active {
+  color: var(--primary-color);
+  background-color: rgba(255, 102, 0, 0.1);
+  border-bottom: 2px solid var(--primary-color);
 }
 
 /* Remove any margin or padding from sections if present */
@@ -47,7 +163,7 @@ body {
 
 /* Adjust the hero section to remove any potential gaps */
 #hero {
-  margin-top: -40px; /* Negative margin to offset the social links bar */
+  margin-top: -40px; /* Updated to offset navbar only */
   padding-top: 40px; /* Add padding to push content down */
 }
 
@@ -58,12 +174,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Layout */
 .card {
-  background: #fff;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin-bottom: 20px;
-  transition: transform 0.3s;
+  transition: transform 0.3s, background-color 0.3s, border 0.3s;
 }
 
 .card:hover {
@@ -96,7 +213,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 10px;
 }
 
-/* Navigation Menu */
+/* Remove old navbar styling */
 .navmenu {
   overflow-x: hidden;
 }
@@ -184,13 +301,13 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block;
   padding: 12px 24px;
   background-color: transparent;
-  color: rgb(236, 91, 95);
+  color: var(--primary-color);
   text-decoration: none;
   font-weight: bold;
   font-size: 1.2rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  border: 2px solid rgb(236, 91, 95);
+  border: 2px solid var(--primary-color);
   border-radius: 5px;
   transition: all 0.3s ease;
   opacity: 0;
@@ -198,12 +315,11 @@ h1, h2, h3, h4, h5, h6 {
   animation-delay: 1s; 
   z-index: 2000; 
   position: relative; 
-
 }
 
 .cta-button:hover {
-  background-color: rgb(236, 91, 95);
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--text-color);
 }
 
 @keyframes slideInFromLeft {
@@ -301,6 +417,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Portfolio Section */
 .project-card {
   margin-bottom: 30px;
+  background-color: var(--card-bg);
+  transition: background-color 0.3s ease;
 }
 
 .project-image {
@@ -314,7 +432,7 @@ h1, h2, h3, h4, h5, h6 {
 .tech-icons i {
   font-size: 1.5rem;
   margin-right: 10px;
-  color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
 .website-demo {
@@ -340,20 +458,23 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Footer */
 footer {
-  background-color: #333;
-  color: #fff;
+  background-color: var(--footer-bg);
+  color: var(--text-color);
   padding: 20px 0;
   text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .copyright {
   font-family: 'Courier New', monospace;
   font-size: 14px;
   letter-spacing: 1px;
+  margin-bottom: 15px;
+  color: var(--text-color);
 }
 
 .copyright .sitename {
-  color: #ff6600; /* Your secondary color */
+  color: var(--primary-color);
   font-weight: bold;
   font-size: 16px;
 }
@@ -365,6 +486,19 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  body {
+    padding-top: 60px; /* Adjusted for mobile navbar */
+  }
+
+  .top-navbar .navbar ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .top-navbar .navbar li {
+    margin: 5px 0;
+  }
+
   .section {
     padding: 40px 0;
   }
@@ -383,20 +517,6 @@ footer {
 
   .card {
     padding: 15px;
-  }
-
-  .about-me h3 {
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .about-me .skills-category {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .about-me .skills-category i {
-    margin-bottom: 5px;
   }
 }
 
@@ -443,36 +563,14 @@ z-index: 1003; /* Higher than the social links top bar */
 }
 }
 
+/* Remove social-links-top as we've moved to footer */
 .social-links-top {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-background-color: rgba(0, 0, 0, 0.8);
-padding: 10px 0;
-text-align: center;
-z-index: 1002; /* Increased z-index to be above section-separator */
+  display: none;
 }
 
-.social-links-top a {
-color: #fff;
-font-size: 20px;
-margin: 0 10px;
-transition: color 0.3s ease;
-}
-
-.social-links-top a:hover {
-color: rgb(159, 159, 222);
-}
-
+/* Remove old section-separator styling */
 .section-separator {
-background-color: rgb(51, 51, 51); /* Dark gray color */
-padding: 10px 0;
-position: sticky;
-top: 40px; /* Should match the height of social-links-top */
-left: 0;
-width: 100%;
-z-index: 1001;
+  display: none;
 }
 
 .navbar ul {
@@ -509,12 +607,13 @@ margin-right: 5px;
 font-size: 1.5rem; /* Increased font size */
 font-weight: bold;
 margin-bottom: 15px;
-color: #300404; /* Dark red color to match the theme */
+color: var(--text-color);
 }
 
 /* You may want to adjust the body text size for better contrast */
 .project-card .card-text {
 font-size: 1rem;
+color: var(--text-color);
 }
 
 /* Back to Home button styles */
@@ -525,13 +624,13 @@ padding: 20px 0;
 .container.mt-3 .animated-button {
 display: inline-block;
 padding: 12px 24px;
-color: rgb(236, 91, 95);
+color: var(--primary-color);
 text-decoration: none;
 font-weight: bold;
 font-size: 1.2rem;
 text-transform: uppercase;
 letter-spacing: 1px;
-border: 2px solid rgb(236, 91, 95);
+border: 2px solid var(--primary-color);
 border-radius: 5px;
 position: relative;
 overflow: hidden;
@@ -550,12 +649,12 @@ bottom: 0;
 left: 0;
 width: 100%;
 height: 2px;
-background-color: rgb(236, 91, 95);
+background-color: var(--primary-color);
 transition: height 0.3s ease;
 }
 
 .container.mt-3 .animated-button:hover {
-color: #fff;
+color: var(--text-color);
 }
 
 .container.mt-3 .animated-button:hover .button-line {
@@ -563,7 +662,7 @@ height: 100%;
 }
 
 main.main {
-padding-top: 90px; /* Adjust this value based on the combined height of social-links-top and section-separator */
+padding-top: 40px; /* Adjusted padding for the new navbar system */
 }
 
 .scroll-top {
@@ -573,7 +672,7 @@ opacity: 0;
 right: 15px;
 bottom: 15px;
 z-index: 99999;
-background: #ff6600; /* Red color */
+background: var(--primary-color);
 width: 50px; /* Increased size */
 height: 50px; /* Increased size */
 border-radius: 50%;
@@ -590,7 +689,7 @@ line-height: 0;
 }
 
 .scroll-top:hover {
-background: #ff8533; /* Lighter red on hover */
+background: var(--hover-color);
 transform: scale(1.1); /* Slight grow effect on hover */
 }
 
@@ -618,7 +717,7 @@ animation: bounce 2s infinite;
 
 /* Styles specific to portfolio-details.html */
 .portfolio-details-page .main {
-padding: 20px 20px 40px; /* Reduced top padding, consistent side padding */
+padding: 60px 20px 40px; /* Adjusted top padding for navbar */
 }
 
 .portfolio-details-page .container {
@@ -628,7 +727,7 @@ margin: 0 auto;
 
 /* Adjust the 'Back to Home' button positioning */
 .portfolio-details-page .container.mt-3 {
-margin-bottom: 20px; /* Reduced space below the button */
+display: none; /* Hide the old navigation buttons */
 }
 
 /* Adjust spacing for project cards */
@@ -684,20 +783,6 @@ border-radius: 6px;
 margin-bottom: 15px;
 }
 
-/* Styles for the Back to Home button */
-.portfolio-details-page .container.mt-3 {
-padding-left: 15px; /* Default padding for all screen sizes */
-padding-right: 15px;
-margin-bottom: 20px;
-}
-
-/* Additional padding for mobile screens */
-@media (max-width: 767px) {
-.portfolio-details-page .container.mt-3 {
-  padding-left: 20px; /* Increased left padding for mobile */
-}
-}
-
 /* Ensure the button doesn't stretch full width on mobile */
 .portfolio-details-page .animated-button {
 display: inline-block;
@@ -706,19 +791,19 @@ margin-top: 10px;
 
 .resume-container {
 position: relative;
-z-index: 1003;
+z-index: 1;
 }
 
 .animated-button {
 display: inline-block;
 padding: 12px 24px;
-color: rgb(236, 91, 95);
+color: var(--primary-color);
 text-decoration: none;
 font-weight: bold;
 font-size: 1.2rem;
 text-transform: uppercase;
 letter-spacing: 1px;
-border: 2px solid rgb(236, 91, 95);
+border: 2px solid var(--primary-color);
 border-radius: 5px;
 position: relative;
 overflow: hidden;
@@ -739,14 +824,14 @@ bottom: 0;
 left: 0;
 width: 100%;
 height: 2px;
-background-color: rgb(236, 91, 95);
+background-color: var(--primary-color);
 transition: height 0.3s ease;
 z-index: 1;
 overflow: hidden;
 }
 
 .animated-button:hover {
-color: #fff;
+color: var(--text-color);
 }
 
 .animated-button:hover .button-line {
@@ -785,42 +870,6 @@ text-decoration: none;
 .tech-icon .fa-vuejs { color: #42b883; } /* Vue.js green */
 .tech-icon .fa-lock { color: #4285F4; } /* OAuth blue */
 
-/* Contact Form Styles */
-#contact {
-  padding: 20px; /* Add padding around the contact form */
-  background-color: #1d1b1b; /* Match the main background color */
-  border-radius: 8px; /* Round the corners of the contact form */
-  color: #fff; /* Set the text color to white */
-}
-
-#contact h2 {
-  color: #ff6600; /* Set the heading color to the secondary color */
-  margin-bottom: 20px; /* Add space below the heading */
-}
-
-#contact .form-group {
-  margin-bottom: 15px; /* Add space below each form group */
-}
-
-#contact label {
-  display: block; /* Make the label a block element */
-  margin-bottom: 5px; /* Add space below the label */
-  font-weight: bold; /* Make the label text bold */
-}
-
-#contact input, #contact textarea {
-  width: 100%; /* Make the input and textarea take the full width */
-  padding: 10px; /* Add padding inside the input and textarea */
-  border: 1px solid #333; /* Set the border color to dark gray */
-  border-radius: 5px; /* Round the corners of the input and textarea */
-  background-color: #333; /* Set the background color to dark gray */
-  color: #fff; /* Set the text color to white */
-}
-
-#contact button.animated-button {
-  margin-top: 10px; /* Add space above the button */
-}
-
 /* Bouncing Animation */
 @keyframes bounce {
 0%, 20%, 50%, 80%, 100% {
@@ -845,28 +894,33 @@ animation: bounce 1s infinite;
 
 /* Media query for mobile devices */
 @media (max-width: 768px) {
-  .navbar {
-    /* Adjust the font size for smaller screens */
-    font-size: 14px;
-    /* Reduce padding to make the navbar more compact */
-    padding: 10px;
+  .top-navbar {
+    position: fixed;
+    top: 0;
+    height: auto;
   }
-
-  .navbar ul {
-    /* Stack the navbar items vertically */
+  
+  .top-navbar .navbar ul {
     flex-direction: column;
-    /* Center the items */
     align-items: center;
+    padding: 10px 0;
   }
 
-  .navbar li {
-    /* Add some margin between items */
-    margin-bottom: 10px;
+  .top-navbar .navbar li {
+    margin: 5px 0;
+    width: 100%;
+    text-align: center;
   }
 
-  .nav-link {
-    /* Adjust the size of the icons */
-    font-size: 16px;
+  .top-navbar .nav-link {
+    padding: 8px 0;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Adjust to display the blog page properly on mobile */
+  .portfolio-details-page header h1 {
+    margin-top: 60px;
   }
 }
 

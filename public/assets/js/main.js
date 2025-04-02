@@ -56,7 +56,9 @@
   const preloader = document.querySelector('#preloader');
   if (preloader) {
     window.addEventListener('load', () => {
-      preloader.remove();
+      setTimeout(() => {
+        preloader.remove();
+      }, 500);
     });
   }
 
@@ -112,58 +114,75 @@
   /**
    * Initiate glightbox
    */
-  const glightbox = GLightbox({
-    selector: '.glightbox'
-  });
-
+  if (typeof GLightbox !== 'undefined') {
+    const glightbox = GLightbox({
+      selector: '.glightbox'
+    });
+  }
+  
   // GSAP Animations
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', function() {
+    initAnimations();
+    setupSPA();
+    setupThemeToggle();
+  });
+  
+  /**
+   * Initialize animations
+   */
+  function initAnimations() {
     // Initial animation for hero content
-    gsap.from('.hero-greeting', { opacity: 0, y: 50, duration: 1, delay: 0.2 });
-    gsap.from('.hero-name', { opacity: 0, y: 50, duration: 1, delay: 0.4 });
-    gsap.from('.hero-description', { opacity: 0, y: 50, duration: 1, delay: 0.6 });
-    gsap.from('.cta-button', { opacity: 0, y: 50, duration: 1, delay: 0.8 });
+    if (document.querySelector('.hero-greeting')) {
+      gsap.from('.hero-greeting', { opacity: 0, y: 50, duration: 1, delay: 0.2 });
+      gsap.from('.hero-name', { opacity: 0, y: 50, duration: 1, delay: 0.4 });
+      gsap.from('.hero-description', { opacity: 0, y: 50, duration: 1, delay: 0.6 });
+      gsap.from('.cta-button', { opacity: 0, y: 50, duration: 1, delay: 0.8 });
+    }
 
     // Hover animation for CTA button
     const ctaButton = document.querySelector('.cta-button');
     
-    ctaButton.addEventListener('mouseenter', () => {
-      gsap.to(ctaButton, {
-        scale: 1.1,
-        backgroundColor: 'rgba(236, 91, 95, 1)',
-        color: '#ffffff',
-        duration: 0.3
+    if (ctaButton) {
+      ctaButton.addEventListener('mouseenter', () => {
+        gsap.to(ctaButton, {
+          scale: 1.1,
+          backgroundColor: 'var(--primary-color)',
+          color: '#ffffff',
+          duration: 0.3
+        });
       });
-    });
 
-    ctaButton.addEventListener('mouseleave', () => {
-      gsap.to(ctaButton, {
-        scale: 1,
-        backgroundColor: 'transparent',
-        color: 'rgb(236, 91, 95)',
-        duration: 0.3
+      ctaButton.addEventListener('mouseleave', () => {
+        gsap.to(ctaButton, {
+          scale: 1,
+          backgroundColor: 'transparent',
+          color: 'var(--primary-color)',
+          duration: 0.3
+        });
       });
-    });
+    }
 
     // Parallax effect for hero section
-    window.addEventListener('mousemove', (e) => {
-      const mouseX = e.clientX / window.innerWidth - 0.5;
-      const mouseY = e.clientY / window.innerHeight - 0.5;
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+      window.addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX / window.innerWidth - 0.5;
+        const mouseY = e.clientY / window.innerHeight - 0.5;
 
-      gsap.to('.hero-content', {
-        x: mouseX * 20,
-        y: mouseY * 20,
-        duration: 0.5
+        gsap.to('.hero-content', {
+          x: mouseX * 20,
+          y: mouseY * 20,
+          duration: 0.5
+        });
       });
-    });
+    }
 
     // Animated buttons
     const buttons = document.querySelectorAll('.animated-button');
-    const showResumeBtn = document.getElementById('showResumeBtn');
-    const resumeFrame = document.getElementById('resumeFrame');
-
+    
     buttons.forEach(button => {
       const line = button.querySelector('.button-line');
+      if (!line) return;
 
       // Function to handle animation
       const animateButton = (entering) => {
@@ -190,6 +209,9 @@
     });
 
     // Resume button functionality
+    const showResumeBtn = document.getElementById('showResumeBtn');
+    const resumeFrame = document.getElementById('resumeFrame');
+    
     if (showResumeBtn && resumeFrame) {
       let isResumeVisible = false; // Track the state of the resume
 
@@ -232,8 +254,6 @@
       });
 
       console.log('Resume button event listeners added'); // Debug log
-    } else {
-      console.error('Resume button or frame not found');
     }
 
     // Disable hover effects on mobile devices
@@ -242,107 +262,194 @@
     if (isTouchDevice) {
       document.body.classList.add('touch-device');
     }
+  }
 
-    // Navigation active state on scroll
-    function setActiveLink() {
-      const navLinks = document.querySelectorAll('.nav-link');
-      const sections = document.querySelectorAll('section');
-      const scrollPosition = window.pageYOffset;
-
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100; // Adjust this value based on your header height
-        const sectionHeight = section.clientHeight;
-        const sectionId = section.getAttribute('id');
-
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-          navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${sectionId}`) {
-              link.classList.add('active');
-            }
-          });
-        }
-      });
-    }
-
-    // Set active link on page load
-    document.addEventListener('DOMContentLoaded', setActiveLink);
-
-    // Update active link on scroll
-    window.addEventListener('scroll', setActiveLink);
-  });
-
-  document.addEventListener('DOMContentLoaded', function() {
-    // AOS initialization
-    if (typeof AOS !== 'undefined') {
-      AOS.init({
-        duration: 600,
-        easing: 'ease-in-out',
-        once: true,
-        mirror: false
-      });
-    }
-
-    // Typed.js initialization
-    if (typeof Typed !== 'undefined') {
-      const typed = document.querySelector('.typed');
-      if (typed) {
-        let typed_strings = typed.getAttribute('data-typed-items');
-        typed_strings = typed_strings.split(',');
-        new Typed('.typed', {
-          strings: typed_strings,
-          typeSpeed: 50,        // Moderate typing speed
-          backSpeed: 30,        // Slightly slower erasing speed
-          backDelay: 2000,      // Pause before starting to erase
-          startDelay: 1000,     // Delay before typing starts
-          loop: true,
-          smartBackspace: false, // Ensures it always erases the full string
-          showCursor: true,
-          cursorChar: '|',
-          autoInsertCss: true,
-          fadeOut: true,
-          fadeOutClass: 'typed-fade-out',
-          fadeOutDelay: 500,
-          preStringTyped: (arrayPos, self) => {
-            // Add a delay before typing the next string
-            return new Promise(resolve => setTimeout(resolve, 1000));
-          },
-          onStringTyped: (arrayPos, self) => {
-            // Pause at the end of each string
-            return new Promise(resolve => setTimeout(resolve, 1500));
-          },
-          onComplete: (self) => {
-            // Optional: hide cursor when animation completes
-            self.cursor.style.display = 'none';
-          }
-        });
-      }
-    }
-
-    // GLightbox initialization
-    if (typeof GLightbox !== 'undefined') {
-      const lightbox = GLightbox({
-        selector: '.glightbox'
-      });
-    }
-
-    // Resume button toggle
-    const toggleResumeBtn = document.getElementById('toggleResumeBtn');
-    const resumeFrame = document.getElementById('resumeFrame');
-
-    if (toggleResumeBtn && resumeFrame) {
-      toggleResumeBtn.addEventListener('click', function(e) {
+  /**
+   * SPA-like navigation implementation
+   */
+  function setupSPA() {
+    // Get all navigation links
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    // Add click event listeners to each link
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        // Prevent default link behavior
         e.preventDefault();
         
-        if (resumeFrame.classList.contains('active')) {
-          resumeFrame.classList.remove('active');
-          toggleResumeBtn.querySelector('.button-text').textContent = 'View Resume';
-        } else {
-          resumeFrame.classList.add('active');
-          toggleResumeBtn.querySelector('.button-text').textContent = 'Hide Resume';
-          resumeFrame.scrollIntoView({ behavior: 'smooth' });
+        // Get the href attribute
+        const href = this.getAttribute('href');
+        
+        // Skip if it's an external link or anchor
+        if (href.startsWith('http') || href.startsWith('#')) {
+          window.location.href = href;
+          return;
         }
+        
+        // Show preloader
+        const preloader = document.querySelector('#preloader');
+        if (preloader) {
+          preloader.style.display = 'block';
+        }
+        
+        // Update browser history
+        window.history.pushState({path: href}, '', href);
+        
+        // Load the page content
+        loadPage(href);
+        
+        // Update active nav link
+        updateActiveNav(href);
       });
+    });
+    
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', function(e) {
+      if (e.state && e.state.path) {
+        loadPage(e.state.path);
+        updateActiveNav(e.state.path);
+      }
+    });
+    
+    // Initial state on page load
+    window.history.replaceState({path: window.location.pathname}, '', window.location.pathname);
+  }
+
+  /**
+   * Load page content via AJAX
+   */
+  function loadPage(url) {
+    // Show loading indicator
+    const preloader = document.querySelector('#preloader');
+    if (preloader) {
+      preloader.style.display = 'block';
     }
-  });
+    
+    // Fetch the page content
+    fetch(url)
+      .then(response => response.text())
+      .then(html => {
+        // Create a temporary element to parse the HTML
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        
+        // Extract the main content
+        const newMain = doc.querySelector('main');
+        const currentMain = document.querySelector('main');
+        
+        // Replace the main content
+        if (newMain && currentMain) {
+          currentMain.innerHTML = newMain.innerHTML;
+          
+          // Update the page title
+          document.title = doc.title;
+          
+          // Scroll to top
+          window.scrollTo(0, 0);
+          
+          // Re-initialize animations and scripts
+          initAnimations();
+          if (typeof AOS !== 'undefined') {
+            AOS.refresh();
+          }
+        }
+        
+        // Hide loading indicator after a short delay
+        setTimeout(() => {
+          if (preloader) {
+            preloader.style.display = 'none';
+          }
+        }, 300);
+      })
+      .catch(error => {
+        console.error('Error loading page:', error);
+        // Fallback to normal navigation on error
+        window.location.href = url;
+      });
+  }
+
+  /**
+   * Update active navigation link
+   */
+  function updateActiveNav(url) {
+    // Remove active class from all nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.classList.remove('active');
+    });
+    
+    // Add active class to current page link
+    let activeLink;
+    
+    if (url === '/' || url === '') {
+      activeLink = document.querySelector('.nav-link[href="/"]');
+    } else {
+      activeLink = document.querySelector(`.nav-link[href="${url}"]`);
+    }
+    
+    if (activeLink) {
+      activeLink.classList.add('active');
+    }
+  }
+
+  /**
+   * Set up theme toggle functionality
+   */
+  function setupThemeToggle() {
+    // Create theme toggle button if it doesn't exist
+    if (!document.querySelector('.theme-toggle')) {
+      const themeToggle = document.createElement('button');
+      themeToggle.className = 'theme-toggle';
+      themeToggle.setAttribute('aria-label', 'Toggle dark/light mode');
+      themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+      document.body.appendChild(themeToggle);
+      
+      // Add click event listener
+      themeToggle.addEventListener('click', toggleTheme);
+    }
+    
+    // Check for saved theme in localStorage
+    const savedTheme = localStorage.getItem('theme');
+    
+    // If there's a saved theme, apply it
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateThemeIcon(savedTheme);
+    } else {
+      // If no saved theme, use the default from HTML
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      localStorage.setItem('theme', currentTheme);
+      updateThemeIcon(currentTheme);
+    }
+  }
+
+  /**
+   * Toggle between dark and light themes
+   */
+  function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    // Update theme attribute
+    document.documentElement.setAttribute('data-theme', newTheme);
+    
+    // Save preference to localStorage
+    localStorage.setItem('theme', newTheme);
+    
+    // Update icon
+    updateThemeIcon(newTheme);
+  }
+
+  /**
+   * Update theme toggle icon based on current theme
+   */
+  function updateThemeIcon(theme) {
+    const themeToggle = document.querySelector('.theme-toggle');
+    if (!themeToggle) return;
+    
+    if (theme === 'light') {
+      themeToggle.innerHTML = '<i class="bi bi-moon-fill"></i>';
+    } else {
+      themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+    }
+  }
 })();
