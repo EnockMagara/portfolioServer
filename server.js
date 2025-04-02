@@ -26,8 +26,8 @@ app.get('/', (req, res) => {
 });
 
 // Route for the portfolio details page
-app.get('/portfolio-details', (req, res) => {
-  res.render('portfolio-details');
+app.get('/portfolio', (req, res) => {
+  res.render('portfolio');
 });
 
 // Route to fetch and display Medium blog posts
