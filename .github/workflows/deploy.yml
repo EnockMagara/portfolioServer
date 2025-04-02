@@ -25,14 +25,14 @@ jobs:
 
       # Step 4: Deploy files to the server via SFTP
       - name: Deploy to server
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.SFTP_HOST }}
-          username: ${{ secrets.SFTP_USERNAME }}
-          password: ${{ secrets.SFTP_PRIVATE_KEY }}
-          local-dir: ./ # Deploy all files in the repository root
-          server-dir: /root/portfolioServer/ # Deploy to this directory on the server
-          exclude: |
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SFTP_HOST }}
+          SSH_USERNAME: ${{ secrets.SFTP_USERNAME }}
+          SOURCE: "./"
+          TARGET: "/root/portfolioServer/"
+          EXCLUDE: |
             **/.git/**
             **/.github/**
             **/node_modules/**
