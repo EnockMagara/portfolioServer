@@ -126,6 +126,7 @@
     setupSPA();
     setupThemeToggle();
     setupMobileNav();
+    setupNavIndicator();
   });
   
   /**
@@ -537,5 +538,65 @@
         });
       }
     }
+  }
+
+  /**
+   * Setup navigation indicator
+   */
+  function setupNavIndicator() {
+    const navbar = document.querySelector('.top-navbar .navbar ul');
+    if (!navbar) return;
+    
+    // Create the indicator element if it doesn't exist
+    let indicator = document.querySelector('.nav-indicator');
+    if (!indicator) {
+      indicator = document.createElement('div');
+      indicator.className = 'nav-indicator';
+      navbar.appendChild(indicator);
+    }
+    
+    // Position the indicator under the active link
+    function positionIndicator() {
+      const activeLink = document.querySelector('.nav-link.active');
+      if (activeLink) {
+        const parentLi = activeLink.closest('li');
+        const rect = parentLi.getBoundingClientRect();
+        const navRect = navbar.getBoundingClientRect();
+        
+        // Set the indicator width and position
+        indicator.style.width = `${rect.width - 30}px`;
+        indicator.style.left = `${rect.left - navRect.left + 15}px`;
+        indicator.style.opacity = '1';
+      } else {
+        // Hide the indicator if no active link
+        indicator.style.opacity = '0';
+      }
+    }
+    
+    // Position on load
+    positionIndicator();
+    
+    // Position on window resize
+    window.addEventListener('resize', positionIndicator);
+    
+    // Add hover effect to smoothly move indicator
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('mouseenter', function() {
+        const parentLi = this.closest('li');
+        const rect = parentLi.getBoundingClientRect();
+        const navRect = navbar.getBoundingClientRect();
+        
+        indicator.style.width = `${rect.width - 30}px`;
+        indicator.style.left = `${rect.left - navRect.left + 15}px`;
+      });
+      
+      link.addEventListener('mouseleave', function() {
+        // Return to active link position
+        positionIndicator();
+      });
+    });
+    
+    // Update on page change (for SPA functionality)
+    document.addEventListener('spa:pagechange', positionIndicator);
   }
 })();
