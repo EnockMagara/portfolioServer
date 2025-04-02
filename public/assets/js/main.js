@@ -125,6 +125,7 @@
     initAnimations();
     setupSPA();
     setupThemeToggle();
+    setupMobileNav();
   });
   
   /**
@@ -479,6 +480,62 @@
       themeToggle.innerHTML = '<i class="bi bi-moon-fill"></i>';
     } else {
       themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+    }
+  }
+
+  /**
+   * Setup mobile navigation
+   */
+  function setupMobileNav() {
+    // Create mobile toggle button if it doesn't exist
+    if (!document.querySelector('.mobile-nav-toggle')) {
+      const navbar = document.querySelector('.top-navbar');
+      const mobileToggle = document.createElement('button');
+      mobileToggle.className = 'mobile-nav-toggle';
+      mobileToggle.setAttribute('aria-label', 'Toggle navigation menu');
+      mobileToggle.innerHTML = '<i class="bi bi-list"></i>';
+      
+      if (navbar) {
+        navbar.appendChild(mobileToggle);
+        
+        // Add click event listener
+        mobileToggle.addEventListener('click', function() {
+          navbar.classList.toggle('mobile-nav-open');
+          // Toggle icon between hamburger and X
+          const icon = this.querySelector('i');
+          if (icon.classList.contains('bi-list')) {
+            icon.classList.remove('bi-list');
+            icon.classList.add('bi-x-lg');
+          } else {
+            icon.classList.remove('bi-x-lg');
+            icon.classList.add('bi-list');
+          }
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', () => {
+            navbar.classList.remove('mobile-nav-open');
+            const icon = mobileToggle.querySelector('i');
+            if (icon.classList.contains('bi-x-lg')) {
+              icon.classList.remove('bi-x-lg');
+              icon.classList.add('bi-list');
+            }
+          });
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+          if (!navbar.contains(e.target) && navbar.classList.contains('mobile-nav-open')) {
+            navbar.classList.remove('mobile-nav-open');
+            const icon = mobileToggle.querySelector('i');
+            if (icon.classList.contains('bi-x-lg')) {
+              icon.classList.remove('bi-x-lg');
+              icon.classList.add('bi-list');
+            }
+          }
+        });
+      }
     }
   }
 })();
