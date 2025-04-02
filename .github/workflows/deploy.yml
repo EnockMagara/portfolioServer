@@ -39,7 +39,7 @@ jobs:
 
       # Step 5: SSH into the server and restart the service
       - name: Restart portfolio.service
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v0.1.5
         with:
           host: ${{ secrets.SFTP_HOST }}
           username: ${{ secrets.SFTP_USERNAME }}
