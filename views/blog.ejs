@@ -85,5 +85,29 @@
   
   <!-- Main JS File -->
   <script src="/assets/js/main.js"></script>
+  
+  <!-- Blog page specific script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Find the preloader element
+      const preloader = document.getElementById('preloader');
+      
+      // Function to hide preloader
+      function hidePreloader() {
+        if (preloader) {
+          preloader.style.opacity = '0';
+          setTimeout(() => {
+            preloader.style.display = 'none';
+          }, 300);
+        }
+      }
+      
+      // Hide preloader when content is fully loaded
+      window.addEventListener('load', hidePreloader);
+      
+      // Fallback: Hide preloader after 5 seconds regardless, to prevent indefinite loading state
+      setTimeout(hidePreloader, 5000);
+    });
+  </script>
 </body>
 </html>
