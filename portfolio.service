@@ -1,0 +1,16 @@
+[Unit]
+Description=PortfolioServer - Enock Mecheo's Portfolio Website
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/root/portfolioServer
+ExecStart=/usr/bin/node /root/portfolioServer/server.js
+Restart=always
+RestartSec=10
+StandardOutput=append:/var/log/portfolio/stdout.log
+StandardError=append:/var/log/portfolio/stderr.log
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+[Install]
+WantedBy=multi-user.target

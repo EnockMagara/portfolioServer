@@ -23,32 +23,54 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Write SSH private key to a file
-      - name: Write SSH private key
+      # Step 4: Setup SSH
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SFTP_PRIVATE_KEY }}
+
+      # Step 5: Add host key
+      - name: Add host key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SFTP_PRIVATE_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.SFTP_HOST }} >> ~/.ssh/known_hosts
 
-      # Step 5: Deploy files to the server via SSH
-      - name: Deploy to server
-        uses: easingthemes/ssh-deploy@v2.1.5
-        with:
-          REMOTE_HOST: ${{ secrets.SFTP_HOST }}
-          REMOTE_USER: ${{ secrets.SFTP_USERNAME }}
-          SSH_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}
-          SOURCE: "./"
-          TARGET: "/root/portfolioServer/"
-          ARGS: "-rltgoDzvO --delete --exclude='.git' --exclude='.github' --exclude='node_modules'"
+      # Step 6: Deploy to DigitalOcean
+      - name: Deploy to DigitalOcean
+        env:
+          DROPLET_IP: ${{ secrets.SFTP_HOST }}
+          DROPLET_USER: ${{ secrets.SFTP_USERNAME }}
+          DEPLOY_PATH: "/root/portfolioServer"
+          EMAIL: ${{ secrets.EMAIL }}
+        run: |
+          # Create deploy directory structure
+          ssh $DROPLET_USER@$DROPLET_IP "mkdir -p $DEPLOY_PATH"
 
-      # Step 6: SSH into the server and restart the service
-      - name: Restart portfolio.service
-        uses: appleboy/ssh-action@v0.1.5
-        with:
-          host: ${{ secrets.SFTP_HOST }}
-          username: ${{ secrets.SFTP_USERNAME }}
-          key: ${{ secrets.SFTP_PRIVATE_KEY }}
-          script: |
-            cd /root/portfolioServer
-            npm install # Ensure dependencies are installed on the server
-            sudo systemctl restart portfolio.service
+          # Copy application files including deploy script and HTTPS setup
+          scp -r package.json package-lock.json server.js public/ views/ deploy.sh setup_https.sh portfolio.service $DROPLET_USER@$DROPLET_IP:$DEPLOY_PATH/
+
+          # Make scripts executable
+          ssh $DROPLET_USER@$DROPLET_IP "chmod +x $DEPLOY_PATH/deploy.sh $DEPLOY_PATH/setup_https.sh"
+
+          # Run deployment script on server
+          ssh $DROPLET_USER@$DROPLET_IP "cd $DEPLOY_PATH && bash deploy.sh"
+
+          # Set up HTTPS (requires sudo)
+          ssh $DROPLET_USER@$DROPLET_IP "cd $DEPLOY_PATH && sed -i 's/EMAIL=.*/EMAIL=\"$EMAIL\"/' setup_https.sh"
+          ssh $DROPLET_USER@$DROPLET_IP "cd $DEPLOY_PATH && echo \"Setting up HTTPS requires sudo. If it doesn't work automatically, run 'sudo bash setup_https.sh' manually on the server.\""
+          ssh $DROPLET_USER@$DROPLET_IP "cd $DEPLOY_PATH && sudo -n bash setup_https.sh || echo 'Please run setup_https.sh manually with sudo permissions'"
+
+      # Step 7: Verify deployment
+      - name: Verify deployment
+        env:
+          DROPLET_IP: ${{ secrets.SFTP_HOST }}
+          DROPLET_USER: ${{ secrets.SFTP_USERNAME }}
+          DOMAIN: "www.enockmecheo.com"
+        run: |
+          # Wait for service to start
+          sleep 10
+          # Check if service is running
+          ssh $DROPLET_USER@$DROPLET_IP "systemctl is-active portfolio.service || echo 'Service not running'"
+          echo "Deployment complete! Your application should be available at:"
+          echo "  http://$DROPLET_IP"
+          echo "  https://$DOMAIN (if HTTPS setup completed successfully)"
