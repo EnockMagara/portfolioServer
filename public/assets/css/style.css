@@ -374,6 +374,14 @@ h1, h2, h3, h4, h5, h6 {
   animation-delay: 0.5s;
 }
 
+.hero-tagline {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
 .cta-button {
   display: inline-block;
   padding: 12px 24px;
@@ -564,7 +572,7 @@ footer {
 /* Responsive Design */
 @media (max-width: 768px) {
   body {
-    padding-top: 60px; /* Adjusted for mobile navbar */
+    padding-top: 50px; /* Adjusted for compact mobile navbar */
   }
 
   .top-navbar .navbar ul {
@@ -590,6 +598,11 @@ footer {
 
   .hero-description {
     font-size: 1rem;
+  }
+  
+  .hero-tagline {
+    font-size: 1.6rem;
+    margin-bottom: 5px;
   }
 
   .card {
