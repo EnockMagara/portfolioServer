@@ -36,9 +36,10 @@ jobs:
           REMOTE_HOST: ${{ secrets.SFTP_HOST }}
           REMOTE_USER: ${{ secrets.SFTP_USERNAME }}
           SSH_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}
-          SOURCE_DIR: "./"
-          REMOTE_TARGET: "/root/portfolioServer/"
-          EXCLUDE: "/.git/,/.github/,/node_modules/"
+          SOURCE: "./"
+          TARGET: "/root/portfolioServer/"
+          ARGS: "-rltgoDzvO --delete"
+          EXCLUDE: ".git,.github,node_modules"
 
       # Step 6: SSH into the server and restart the service
       - name: Restart portfolio.service
