@@ -271,36 +271,21 @@
     // Get all navigation links
     const navLinks = document.querySelectorAll('.nav-link');
     
-    // Add click event listeners to each link
+    // Add click event listeners to each nav link
     navLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        // Prevent default link behavior
-        e.preventDefault();
-        
-        // Get the href attribute
-        const href = this.getAttribute('href');
-        
-        // Skip if it's an external link or anchor
-        if (href.startsWith('http') || href.startsWith('#')) {
-          window.location.href = href;
-          return;
-        }
-        
-        // Show preloader
-        const preloader = document.querySelector('#preloader');
-        if (preloader) {
-          preloader.style.display = 'block';
-        }
-        
-        // Update browser history
-        window.history.pushState({path: href}, '', href);
-        
-        // Load the page content
-        loadPage(href);
-        
-        // Update active nav link
-        updateActiveNav(href);
-      });
+      link.addEventListener('click', handleLinkClick);
+    });
+    
+    // Add click event listener to all links within the main content area
+    document.addEventListener('click', function(e) {
+      // Check if the clicked element is a link or contains a link
+      const link = e.target.closest('a');
+      
+      // If it's not a link or it's a nav link (already handled), ignore
+      if (!link || link.classList.contains('nav-link')) return;
+      
+      // Handle the link click
+      handleLinkClick.call(link, e);
     });
     
     // Handle browser back/forward buttons
@@ -313,6 +298,50 @@
     
     // Initial state on page load
     window.history.replaceState({path: window.location.pathname}, '', window.location.pathname);
+  }
+
+  /**
+   * Handle link clicks for SPA navigation
+   */
+  function handleLinkClick(e) {
+    // Prevent default link behavior
+    e.preventDefault();
+    
+    // Get the href attribute
+    const href = this.getAttribute('href');
+    const target = this.getAttribute('target');
+    
+    // Check link type and handle accordingly
+    if (!href || href.startsWith('javascript:')) {
+      // JavaScript links or links without href - do nothing
+      return;
+    } else if (href.startsWith('http') || href.startsWith('mailto:') || href.includes('://') || target === '_blank') {
+      // External link or link with target="_blank" - use default browser behavior
+      window.open(href, target || '_self');
+      return;
+    } else if (href.startsWith('#')) {
+      // Same-page anchor - scroll to the element
+      const targetElement = document.querySelector(href);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+      return;
+    }
+    
+    // Show preloader
+    const preloader = document.querySelector('#preloader');
+    if (preloader) {
+      preloader.style.display = 'block';
+    }
+    
+    // Internal route - update browser history
+    window.history.pushState({path: href}, '', href);
+    
+    // Load the page content
+    loadPage(href);
+    
+    // Update active nav link
+    updateActiveNav(href);
   }
 
   /**
