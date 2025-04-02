@@ -1,0 +1,49 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the latest code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.19.1' # Use the same Node.js version as your server (v18.19.1)
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Deploy files to the server via SFTP
+      - name: Deploy to server
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SFTP_HOST }}
+          SSH_USERNAME: ${{ secrets.SFTP_USERNAME }}
+          SOURCE: "./"
+          TARGET: "/root/portfolioServer/"
+          EXCLUDE: |
+            **/.git/**
+            **/.github/**
+            **/node_modules/**
+
+      # Step 5: SSH into the server and restart the service
+      - name: Restart portfolio.service
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          key: ${{ secrets.SFTP_PRIVATE_KEY }}
+          script: |
+            cd /root/portfolioServer
+            npm install # Ensure dependencies are installed on the server
+            sudo systemctl restart portfolio.service
