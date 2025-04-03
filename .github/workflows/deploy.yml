@@ -65,7 +65,8 @@ jobs:
         env:
           DROPLET_IP: ${{ secrets.SFTP_HOST }}
           DROPLET_USER: ${{ secrets.SFTP_USERNAME }}
-          DOMAIN: "www.enockmecheo.com"
+          PRIMARY_DOMAIN: "enockmecheo.com"
+          WWW_DOMAIN: "www.enockmecheo.com"
         run: |
           # Wait for service to start
           sleep 10
@@ -73,4 +74,5 @@ jobs:
           ssh $DROPLET_USER@$DROPLET_IP "systemctl is-active portfolio.service || echo 'Service not running'"
           echo "Deployment complete! Your application should be available at:"
           echo "  http://$DROPLET_IP"
-          echo "  https://$DOMAIN (if HTTPS setup completed successfully)"
+          echo "  https://$PRIMARY_DOMAIN (if HTTPS setup completed successfully)"
+          echo "  https://$WWW_DOMAIN (if HTTPS setup completed successfully)"

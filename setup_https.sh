@@ -1,15 +1,17 @@
 #!/bin/bash
 
 # PortfolioServer HTTPS Setup Script
-# This script sets up HTTPS for www.enockmecheo.com using Let's Encrypt
+# This script sets up HTTPS for enockmecheo.com using Let's Encrypt
 
 # Exit on error
 set -e
 
-DOMAIN="www.enockmecheo.com"
+# Set domains to include both www and non-www versions
+PRIMARY_DOMAIN="enockmecheo.com"
+WWW_DOMAIN="www.enockmecheo.com"
 EMAIL="your-email@example.com"  # Placeholder - real email is set via GitHub secrets
 
-echo "=== Setting up HTTPS for $DOMAIN ==="
+echo "=== Setting up HTTPS for $PRIMARY_DOMAIN and $WWW_DOMAIN ==="
 
 # Check if running as root
 if [ "$(id -u)" -ne 0 ]; then
@@ -30,12 +32,12 @@ if ! command -v nginx &> /dev/null; then
     apt-get install -y nginx
 fi
 
-# Create Nginx configuration for the domain
-echo "Creating Nginx configuration for $DOMAIN..."
-cat > /etc/nginx/sites-available/$DOMAIN << EOF
+# Create Nginx configuration for both domains
+echo "Creating Nginx configuration for $PRIMARY_DOMAIN and $WWW_DOMAIN..."
+cat > /etc/nginx/sites-available/$PRIMARY_DOMAIN << EOF
 server {
     listen 80;
-    server_name $DOMAIN;
+    server_name $PRIMARY_DOMAIN $WWW_DOMAIN;
 
     location / {
         proxy_pass http://localhost:3000;
@@ -48,8 +50,8 @@ server {
 EOF
 
 # Enable the site
-if [ ! -f /etc/nginx/sites-enabled/$DOMAIN ]; then
-    ln -s /etc/nginx/sites-available/$DOMAIN /etc/nginx/sites-enabled/
+if [ ! -f /etc/nginx/sites-enabled/$PRIMARY_DOMAIN ]; then
+    ln -s /etc/nginx/sites-available/$PRIMARY_DOMAIN /etc/nginx/sites-enabled/
 fi
 
 # Test Nginx configuration
@@ -58,12 +60,12 @@ nginx -t
 # Restart Nginx
 systemctl restart nginx
 
-# Obtain SSL certificate
+# Obtain SSL certificate for both domains
 echo "Obtaining SSL certificate from Let's Encrypt..."
-certbot --nginx -d $DOMAIN --non-interactive --agree-tos --email $EMAIL
+certbot --nginx -d $PRIMARY_DOMAIN -d $WWW_DOMAIN --non-interactive --agree-tos --email $EMAIL
 
 # Check if certificate was installed successfully
-if [ -d "/etc/letsencrypt/live/$DOMAIN" ]; then
+if [ -d "/etc/letsencrypt/live/$PRIMARY_DOMAIN" ]; then
     echo "SSL certificate installed successfully!"
 else
     echo "Failed to install SSL certificate. Check the certbot logs."
@@ -77,7 +79,9 @@ if ! crontab -l | grep -q 'certbot renew'; then
 fi
 
 echo "=== HTTPS Setup Complete ==="
-echo "Your site should now be accessible at: https://$DOMAIN"
+echo "Your site should now be accessible at:"
+echo "  https://$PRIMARY_DOMAIN"
+echo "  https://$WWW_DOMAIN"
 echo ""
 echo "To check the status of your SSL certificate:"
 echo "  certbot certificates"

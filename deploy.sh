@@ -57,7 +57,7 @@ if command -v nginx &> /dev/null; then
     cat > /tmp/portfolio_nginx << EOF
 server {
     listen 80;
-    server_name www.enockmecheo.com;
+    server_name enockmecheo.com www.enockmecheo.com;
 
     location / {
         proxy_pass http://localhost:3000;
