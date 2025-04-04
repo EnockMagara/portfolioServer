@@ -4,6 +4,25 @@ const router = express.Router();
 // Project data
 const projects = [
   {
+    id: 'cloudtrace',
+    title: 'CloudTrace - Cloud Provider Benchmark',
+    description: 'CloudTrace is a high-performance network analysis tool leveraging raw ICMP sockets to benchmark connectivity metrics to major cloud providers. Built on Python/Flask with modular architecture, it performs multi-point traceroute analysis with precise RTT measurements and geospatial visualization.',
+    challenges: 'One of the key challenges was implementing a custom socket-level ICMP implementation with packet crafting while ensuring proper privilege escalation handling and fallback visualization for permission-restricted environments. The project also required complex statistical aggregation with outlier identification and geographic path visualization with cross-border transit detection.',
+    image: '/assets/img/projects/cloudtrace.png',
+    technologies: [
+      { name: 'Python', icon: 'fab fa-python' },
+      { name: 'Flask', icon: 'fas fa-flask' },
+      { name: 'JavaScript', icon: 'fab fa-js-square' },
+      { name: 'SQLite', icon: 'fas fa-database' },
+      { name: 'AJAX', icon: 'fas fa-sync-alt' },
+      { name: 'Plotly.js', icon: 'fas fa-chart-line' }
+    ],
+    date: 'March 2024',
+    category: 'Network Analysis',
+    liveUrl: 'https://cloudtrace.duckdns.org/',
+    githubUrl: 'https://github.com/EnockMagara/CloudTrace-Benchmark'
+  },
+  {
     id: 'project1',
     title: 'Project 1',
     description: 'Detailed description of project 1. This is a comprehensive explanation of what the project does, how it works, and what technologies it uses.',
