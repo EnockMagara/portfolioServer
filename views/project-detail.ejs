@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <title>Enock Mecheo - Projects</title>
-  <meta content="Portfolio of Enock Mecheo, Computer Science student at NYU Abu Dhabi" name="description">
+  <title>Enock Mecheo - <%= project.title %></title>
+  <meta content="<%= project.description %>" name="description">
   <meta content="portfolio, computer science, software development, NYU, Enock Mecheo, Enock Magara" name="keywords">
   <meta name="author" content="Enock Mecheo">
 
@@ -49,29 +49,78 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <h1 class="text-center mb-5">My Projects</h1>
+          <a href="/portfolio" class="back-button mb-4 d-inline-block">
+            <i class="bi bi-arrow-left"></i> Back to Projects
+          </a>
+          <h1 class="mb-4"><%= project.title %></h1>
         </div>
       </div>
 
-      <div class="row">
-        <% projects.forEach(function(project) { %>
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="project-card">
-            <img src="<%= project.image %>" alt="<%= project.title %>" class="project-image">
-            <h3 class="card-title"><%= project.title %></h3>
-            <p class="card-text"><%= project.description.substring(0, 100) %>...</p>
-            <div class="tech-icons">
+      <div class="row mb-5">
+        <div class="col-lg-8">
+          <img src="<%= project.image %>" alt="<%= project.title %>" class="img-fluid rounded mb-4">
+          <div class="project-description">
+            <h3>Description</h3>
+            <p><%= project.description %></p>
+            
+            <% if (project.challenges) { %>
+            <h3>Challenges & Solutions</h3>
+            <p><%= project.challenges %></p>
+            <% } %>
+            
+            <h3>Technologies Used</h3>
+            <div class="tech-icons my-3">
               <% project.technologies.forEach(function(tech) { %>
-                <i class="<%= tech.icon %>" title="<%= tech.name %>"></i>
+                <span class="tech-badge"><i class="<%= tech.icon %>"></i> <%= tech.name %></span>
               <% }); %>
             </div>
-            <a href="/project/<%= project.id %>" class="animated-button">
-              <span class="button-text">View Project</span>
-              <span class="button-line"></span>
-            </a>
           </div>
         </div>
-        <% }); %>
+        
+        <div class="col-lg-4">
+          <div class="project-sidebar card">
+            <div class="card-body">
+              <h4>Project Details</h4>
+              
+              <div class="project-meta">
+                <div class="meta-item">
+                  <strong>Date:</strong>
+                  <span><%= project.date %></span>
+                </div>
+                
+                <% if (project.client) { %>
+                <div class="meta-item">
+                  <strong>Client:</strong>
+                  <span><%= project.client %></span>
+                </div>
+                <% } %>
+                
+                <% if (project.category) { %>
+                <div class="meta-item">
+                  <strong>Category:</strong>
+                  <span><%= project.category %></span>
+                </div>
+                <% } %>
+              </div>
+              
+              <div class="project-links mt-4">
+                <% if (project.liveUrl) { %>
+                <a href="<%= project.liveUrl %>" target="_blank" class="animated-button w-100 mb-3">
+                  <span class="button-text">View Live</span>
+                  <span class="button-line"></span>
+                </a>
+                <% } %>
+                
+                <% if (project.githubUrl) { %>
+                <a href="<%= project.githubUrl %>" target="_blank" class="animated-button w-100">
+                  <span class="button-text">GitHub Repo</span>
+                  <span class="button-line"></span>
+                </a>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -105,4 +154,4 @@
 
 </body>
 
-</html>
+</html> 
