@@ -8,7 +8,7 @@ const projects = [
     title: 'Project 1',
     description: 'Detailed description of project 1. This is a comprehensive explanation of what the project does, how it works, and what technologies it uses.',
     challenges: 'Some of the challenges faced during development and how they were overcome.',
-    image: 'assets/img/projects/project1.jpg',
+    image: '/assets/img/projects/project1.jpg',
     technologies: [
       { name: 'React', icon: 'fab fa-react' },
       { name: 'Node.js', icon: 'fab fa-node-js' },
@@ -24,7 +24,7 @@ const projects = [
     title: 'Project 2',
     description: 'Detailed description of project 2. This is a comprehensive explanation of what the project does, how it works, and what technologies it uses.',
     challenges: 'Some of the challenges faced during development and how they were overcome.',
-    image: 'assets/img/projects/project2.jpg',
+    image: '/assets/img/projects/project2.jpg',
     technologies: [
       { name: 'Python', icon: 'fab fa-python' },
       { name: 'Flask', icon: 'fab fa-flask' },
@@ -40,7 +40,7 @@ const projects = [
     title: 'Project 3',
     description: 'Detailed description of project 3. This is a comprehensive explanation of what the project does, how it works, and what technologies it uses.',
     challenges: 'Some of the challenges faced during development and how they were overcome.',
-    image: 'assets/img/projects/project3.jpg',
+    image: '/assets/img/projects/project3.jpg',
     technologies: [
       { name: 'Vue.js', icon: 'fab fa-vuejs' },
       { name: 'Node.js', icon: 'fab fa-node-js' },
