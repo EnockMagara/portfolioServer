@@ -47,7 +47,7 @@ jobs:
           ssh $DROPLET_USER@$DROPLET_IP "mkdir -p $DEPLOY_PATH"
 
           # Copy application files including deploy script and HTTPS setup
-          scp -r package.json package-lock.json server.js public/ views/ deploy.sh setup_https.sh portfolio.service $DROPLET_USER@$DROPLET_IP:$DEPLOY_PATH/
+          scp -r package.json package-lock.json server.js public/ views/ routes/ deploy.sh setup_https.sh portfolio.service $DROPLET_USER@$DROPLET_IP:$DEPLOY_PATH/
 
           # Make scripts executable
           ssh $DROPLET_USER@$DROPLET_IP "chmod +x $DEPLOY_PATH/deploy.sh $DEPLOY_PATH/setup_https.sh"
