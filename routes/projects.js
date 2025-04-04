@@ -17,7 +17,7 @@ const projects = [
       { name: 'AJAX', icon: 'fas fa-sync-alt' },
       { name: 'Plotly.js', icon: 'fas fa-chart-line' }
     ],
-    date: 'March 2024',
+    date: 'March 2025',
     category: 'Network Analysis',
     liveUrl: 'https://cloudtrace.duckdns.org/',
     githubUrl: 'https://github.com/EnockMagara/CloudTrace-Benchmark'
@@ -39,20 +39,22 @@ const projects = [
     githubUrl: 'https://github.com/EnockMagara/project1'
   },
   {
-    id: 'project2',
-    title: 'Project 2',
-    description: 'Detailed description of project 2. This is a comprehensive explanation of what the project does, how it works, and what technologies it uses.',
-    challenges: 'Some of the challenges faced during development and how they were overcome.',
-    image: '/assets/img/projects/project2.jpg',
+    id: 'assignflow',
+    title: 'AssignFlow - Task Management System',
+    description: 'AssignFlow is a robust task management platform built with a modern Node.js/Express stack and MongoDB integration. This application leverages a comprehensive MVC architecture to provide dynamic task allocation, intuitive project management, and real-time notification systems. The platform features a RESTful API backend with JWT authentication, efficient in-memory caching for performance optimization, and a responsive EJS-powered templating system with modular component architecture. The deployment infrastructure utilizes a fully automated CI/CD pipeline through GitHub Actions with seamless integration for continuous deployment to production servers.',
+    challenges: 'One significant challenge was implementing an intelligent task prioritization algorithm that balances workload distribution while respecting user-specified dependencies and deadlines. The system also required creating a sophisticated notification engine with multiple delivery channels and customizable triggers based on task state transitions.',
+    image: '/assets/img/projects/assignflow.png',
     technologies: [
-      { name: 'Python', icon: 'fab fa-python' },
-      { name: 'Flask', icon: 'fab fa-flask' },
-      { name: 'Docker', icon: 'fab fa-docker' }
+      { name: 'Node.js', icon: 'fab fa-node-js' },
+      { name: 'Express', icon: 'fas fa-server' },
+      { name: 'MongoDB', icon: 'fas fa-database' },
+      { name: 'EJS', icon: 'fas fa-file-code' },
+      { name: 'GitHub Actions', icon: 'fab fa-github' },
+      { name: 'Nginx', icon: 'fas fa-cloud' }
     ],
-    date: 'March 2023',
-    category: 'Backend Development',
-    liveUrl: 'https://example.com/project2',
-    githubUrl: 'https://github.com/EnockMagara/project2'
+    date: 'December 2024',
+    category: 'Full-stack web development',
+    liveUrl: 'https://assignflow.duckdns.org/'
   },
   {
     id: 'project3',
