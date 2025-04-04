@@ -4,6 +4,23 @@ const router = express.Router();
 // Project data
 const projects = [
   {
+    id: 'moraamema',
+    title: 'MoraaMema Initiative - Non-Profit Website',
+    description: 'Designed and developed the official website for MoraaMema Initiative Inc., a non-profit organization dedicated to improving the lives of underprivileged children in Kenya through educational initiatives. The website serves as the organization\'s primary online presence, providing information about their mission, vision, projects, and facilitating donations.',
+    challenges: 'The key challenge was creating a visually engaging yet lightweight website that would function well in regions with limited internet connectivity. I implemented progressive loading techniques and optimized media assets while maintaining a professional aesthetic that effectively communicates the organization\'s mission and impact.',
+    image: '/assets/img/projects/moraamema.jpg',
+    technologies: [
+      { name: 'HTML5', icon: 'fab fa-html5' },
+      { name: 'CSS3', icon: 'fab fa-css3-alt' },
+      { name: 'JavaScript', icon: 'fab fa-js' },
+      { name: 'Bootstrap', icon: 'fab fa-bootstrap' },
+      { name: 'Responsive Design', icon: 'fas fa-mobile-alt' }
+    ],
+    date: 'July 2024',
+    category: 'web development',
+    liveUrl: 'https://moraamema.org/'
+  },
+  {
     id: 'cloudtrace',
     title: 'CloudTrace - Cloud Provider Benchmark',
     description: 'CloudTrace is a high-performance network analysis tool leveraging raw ICMP sockets to benchmark connectivity metrics to major cloud providers. Built on Python/Flask with modular architecture, it performs multi-point traceroute analysis with precise RTT measurements and geospatial visualization. I implement a comprehensive CI/CD pipeline for automated testing and deployment, along with extensive unit testing to ensure reliability.',
