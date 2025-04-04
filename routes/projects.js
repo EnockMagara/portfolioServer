@@ -40,20 +40,20 @@ const projects = [
     githubUrl: 'https://github.com/EnockMagara/CloudTrace-Benchmark'
   },
   {
-    id: 'project1',
-    title: 'Project 1',
-    description: 'Detailed description of project 1. This is a comprehensive explanation of what the project does, how it works, and what technologies it uses.',
-    challenges: 'Some of the challenges faced during development and how they were overcome.',
-    image: '/assets/img/projects/project1.jpg',
+    id: 'jegededge',
+    title: 'JegedEdge Hair Care - Professional Grooming Services',
+    description: 'Designed and developed a professional website for JegedEdge Hair Care, a specialized grooming service for clients in rehab/nursing homes and group homes. The website showcases their premium services while emphasizing their mission to enhance well-being and self-esteem through professional grooming experiences.',
+    challenges: 'The main challenge was creating a website that would appeal to both institutional clients (nursing homes, rehabilitation centers) and individual customers, while effectively communicating the specialized nature of their services. I focused on an accessible design with clear service descriptions and compelling visuals to bridge this gap.',
+    image: '/assets/img/projects/jegededge.jpg',
     technologies: [
-      { name: 'React', icon: 'fab fa-react' },
-      { name: 'Node.js', icon: 'fab fa-node-js' },
-      { name: 'MongoDB', icon: 'fab fa-mongodb' }
+      { name: 'HTML5', icon: 'fab fa-html5' },
+      { name: 'CSS3', icon: 'fab fa-css3-alt' },
+      { name: 'JavaScript', icon: 'fab fa-js' },
+      { name: 'Responsive Design', icon: 'fas fa-mobile-alt' }
     ],
-    date: 'January 2023',
-    category: 'Web Development',
-    liveUrl: 'https://example.com/project1',
-    githubUrl: 'https://github.com/EnockMagara/project1'
+    date: 'November 2024',
+    category: 'Business Website',
+    liveUrl: 'https://jegededgehaircare.com/'
   },
   {
     id: 'assignflow',
