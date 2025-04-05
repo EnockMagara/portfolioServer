@@ -74,21 +74,22 @@ const projects = [
     liveUrl: 'https://assignflow.duckdns.org/'
   },
   {
-    id: 'project3',
-    title: 'Project 3',
-    description: 'Detailed description of project 3. This is a comprehensive explanation of what the project does, how it works, and what technologies it uses.',
-    challenges: 'Some of the challenges faced during development and how they were overcome.',
-    image: '/assets/img/projects/project3.jpg',
+    id: 'webcanvas',
+    title: 'WEBCANVAS - Interactive Drawing Application',
+    description: 'WEBCANVAS is an interactive web-based drawing application that provides a comprehensive set of tools for digital art creation. Users can engage in free-form drawing with a customizable pen, create shapes like rectangles, circles, and lines, and select colors from a versatile palette. The application also features functionality to save artwork or load existing images, with a clean, intuitive interface for seamless user experience.',
+    challenges: 'Key challenges included implementing precise cursor tracking for drawing tools, creating a responsive canvas that adapts to different screen sizes, and developing an efficient way to handle undo/redo functionality. I also focused on optimizing performance for smooth drawing experience even with complex artwork, and ensuring cross-browser compatibility for consistent behavior across different platforms.',
+    image: '/assets/img/projects/webcanvas.jpg',
     technologies: [
-      { name: 'Vue.js', icon: 'fab fa-vuejs' },
-      { name: 'Node.js', icon: 'fab fa-node-js' },
-      { name: 'AWS', icon: 'fab fa-aws' }
+      { name: 'HTML5 Canvas', icon: 'fab fa-html5' },
+      { name: 'CSS3', icon: 'fab fa-css3-alt' },
+      { name: 'JavaScript', icon: 'fab fa-js-square' },
+      { name: 'DOM Manipulation', icon: 'fas fa-code' },
+      { name: 'Responsive Design', icon: 'fas fa-mobile-alt' }
     ],
-    date: 'June 2023',
-    client: 'Client Name',
-    category: 'Full Stack Development',
-    liveUrl: 'https://example.com/project3',
-    githubUrl: 'https://github.com/EnockMagara/project3'
+    date: 'February 2023',
+    category: 'Interactive Web Application',
+    liveUrl: 'https://enockmagara.github.io/WEBCANVAS/',
+    githubUrl: 'https://github.com/EnockMagara/WEBCANVAS'
   }
 ];
 
