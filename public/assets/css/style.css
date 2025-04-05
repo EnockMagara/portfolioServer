@@ -1198,3 +1198,21 @@ animation: bounce 1s infinite;
   text-align: center;
 }
 
+/* Improve touch interactions for mobile devices */
+@media (max-width: 768px) {
+  .animated-button {
+    touch-action: manipulation; /* Improves touch behavior */
+    -webkit-tap-highlight-color: transparent; /* Removes tap highlight */
+    padding: 15px 25px; /* Larger touch target */
+  }
+  
+  /* Add specific styles for touch devices */
+  .touch-device .animated-button {
+    transition: transform 0.3s ease; /* Add transform transition */
+  }
+  
+  .touch-device .animated-button:active {
+    transform: scale(0.95); /* Visual feedback on touch */
+  }
+}
+

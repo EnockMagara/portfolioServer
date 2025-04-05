@@ -198,14 +198,17 @@
       button.addEventListener('mouseenter', () => animateButton(true));
       button.addEventListener('mouseleave', () => animateButton(false));
 
-      // Touch events for mobile
+      // Touch events for mobile - modified to allow navigation
       button.addEventListener('touchstart', (e) => {
-        e.preventDefault(); // Prevent default touch behavior
+        // Trigger the animation but don't prevent default behavior
         animateButton(true);
-      }, { passive: false });
+      }, { passive: true });
 
-      button.addEventListener('touchend', () => {
-        animateButton(false);
+      button.addEventListener('touchend', (e) => {
+        // Set a small delay to allow the animation to complete
+        setTimeout(() => {
+          animateButton(false);
+        }, 100);
       });
     });
 
@@ -250,7 +253,9 @@
       // Add event listeners for both click and touch
       showResumeBtn.addEventListener('click', toggleResume);
       showResumeBtn.addEventListener('touchend', function(e) {
-        e.preventDefault(); // Prevent default touch behavior
+        // Keep preventDefault only for this specific button to allow the toggle function to work
+        // but we're making a special case only for this button
+        e.preventDefault(); 
         toggleResume(e);
       });
 
