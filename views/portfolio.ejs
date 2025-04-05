@@ -57,8 +57,8 @@
         <% projects.forEach(function(project) { %>
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="project-card">
-            <img src="<%= project.image %>" alt="<%= project.title %>" class="project-image">
             <h3 class="card-title"><%= project.title %></h3>
+            <img src="<%= project.image %>" alt="<%= project.title %>" class="project-image">
             <p class="card-text"><%= project.description.substring(0, 100) %>...</p>
             <div class="tech-icons">
               <% project.technologies.forEach(function(tech) { %>
