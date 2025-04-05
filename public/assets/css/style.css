@@ -817,8 +817,11 @@ border-radius: 8px; /* Rounded corners */
 
 /* Adjust spacing for project titles */
 .portfolio-page .project-card .card-title {
-margin-bottom: 15px; /* Slightly reduced space below the title */
+margin-bottom: 15px; /* Space below the title */
 font-size: 1.5rem; /* Larger font size for titles */
+color: var(--primary-color); /* Use theme color for better visibility */
+text-align: center; /* Center the title */
+padding: 5px 0; /* Add some padding */
 }
 
 /* Adjust spacing for project description */
@@ -1214,5 +1217,34 @@ animation: bounce 1s infinite;
   .touch-device .animated-button:active {
     transform: scale(0.95); /* Visual feedback on touch */
   }
+}
+
+/* Technical Achievements list styling */
+.technical-achievements-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 25px;
+}
+
+.technical-achievements-list li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+.technical-achievements-list li:before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.technical-achievements-list li:hover {
+  transform: translateX(5px);
+  transition: transform 0.3s ease;
 }
 

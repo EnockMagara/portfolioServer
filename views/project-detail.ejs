@@ -68,6 +68,15 @@
             <p><%= project.challenges %></p>
             <% } %>
             
+            <% if (project.technicalAchievements && project.technicalAchievements.length > 0) { %>
+            <h3>Technical Achievements</h3>
+            <ul class="technical-achievements-list">
+              <% project.technicalAchievements.forEach(function(achievement) { %>
+                <li><%= achievement %></li>
+              <% }); %>
+            </ul>
+            <% } %>
+            
             <h3>Technologies Used</h3>
             <div class="tech-icons my-3">
               <% project.technologies.forEach(function(tech) { %>

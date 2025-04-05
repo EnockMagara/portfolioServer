@@ -21,6 +21,39 @@ const projects = [
     liveUrl: 'https://moraamema.org/'
   },
   {
+    id: 'calmingspace',
+    title: 'Calming Space - Meditation & Relaxation App',
+    description: 'Calming Space is a full-stack meditation and relaxation application designed to create a personalized sanctuary for mindfulness. It features ambient sound mixing, a mindfulness timer, user authentication, and Spotify integration. Users can mix different ambient sounds (rain, forest, ocean), use a meditation timer, and play music from a curated collection or their Spotify playlists.',
+    challenges: 'The key challenges included implementing a responsive audio mixing interface with precise volume controls, setting up secure authentication with both local and OAuth strategies for Spotify, and developing a CI/CD pipeline for automated testing and deployment. I also had to ensure the audio synchronization worked flawlessly across different devices and browsers.',
+    image: '/assets/img/projects/calmingspace.jpg',
+    technologies: [
+      { name: 'Node.js', icon: 'fab fa-node-js' },
+      { name: 'Express', icon: 'fas fa-server' },
+      { name: 'MongoDB', icon: 'fas fa-database' },
+      { name: 'JavaScript', icon: 'fab fa-js-square' },
+      { name: 'CSS3', icon: 'fab fa-css3-alt' },
+      { name: 'EJS', icon: 'fas fa-file-code' },
+      { name: 'Passport.js', icon: 'fas fa-passport' },
+      { name: 'Spotify API', icon: 'fab fa-spotify' },
+      { name: 'WebAudio API', icon: 'fas fa-volume-up' },
+      { name: 'OAuth2', icon: 'fas fa-lock' },
+      { name: 'GitHub Actions', icon: 'fab fa-github' }
+    ],
+    date: 'January 2023',
+    category: 'Full-stack Web Application',
+    liveUrl: 'https://calmingspace.duckdns.org/dashboard',
+    githubUrl: 'https://github.com/EnockMagara/calming_space',
+    technicalAchievements: [
+      'Custom Audio Engine: Implemented a WebAudio API-based system that allows users to mix and control multiple audio sources simultaneously with volume adjustment',
+      'OAuth Integration: Securely implemented Spotify OAuth2 authentication flow, enabling users to access and play their personal music library',
+      'Responsive UI/UX: Created an intuitive interface with CSS animations and responsive design principles that works across all devices',
+      'Session Management: Built a robust user authentication system using Passport.js with secure cookie handling and MongoDB session storage',
+      'CI/CD Pipeline: Established a GitHub Actions workflow for automated testing and deployment to a Digital Ocean cloud server',
+      'HTTPS Security: Configured SSL/TLS with automatic certificate renewal via Let\'s Encrypt for secure HTTPS connections',
+      'API Integration: Developed RESTful endpoints to interact with Spotify\'s Web API and WebPlayback SDK for music streaming functionality'
+    ]
+  },
+  {
     id: 'cloudtrace',
     title: 'CloudTrace - Cloud Provider Benchmark',
     description: 'CloudTrace is a high-performance network analysis tool leveraging raw ICMP sockets to benchmark connectivity metrics to major cloud providers. Built on Python/Flask with modular architecture, it performs multi-point traceroute analysis with precise RTT measurements and geospatial visualization. I implement a comprehensive CI/CD pipeline for automated testing and deployment, along with extensive unit testing to ensure reliability.',
