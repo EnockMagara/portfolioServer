@@ -123,6 +123,37 @@ const projects = [
     category: 'Interactive Web Application',
     liveUrl: 'https://enockmagara.github.io/WEBCANVAS/',
     githubUrl: 'https://github.com/EnockMagara/WEBCANVAS'
+  },
+  {
+    id: 'hackheist',
+    title: 'AYN - AI-Powered Visual Assistant',
+    description: 'AYN is an advanced visual assistance application designed to help visually impaired users navigate and understand their surroundings. This full-stack application combines machine learning-based object detection with natural language processing to provide real-time audio descriptions of environments captured by the camera. The system features a Flask backend that integrates YOLOv5 for object detection and MiDaS for depth estimation, along with a sleek Next.js frontend with responsive design and accessible UI.',
+    challenges: 'Key challenges included implementing robust real-time object detection with spatial awareness, creating an accessible and intuitive UI for visually impaired users, and developing an efficient pipeline for processing video frames and generating meaningful audio descriptions. The project required integrating multiple machine learning models and ensuring they worked together seamlessly while maintaining low latency for real-time feedback.',
+    image: '/assets/img/projects/hackheist.jpg',
+    technologies: [
+      { name: 'Python', icon: 'fab fa-python' },
+      { name: 'Flask', icon: 'fas fa-flask' },
+      { name: 'PyTorch', icon: 'fas fa-fire' },
+      { name: 'Next.js', icon: 'fab fa-react' },
+      { name: 'React', icon: 'fab fa-react' },
+      { name: 'Tailwind CSS', icon: 'fab fa-css3-alt' },
+      { name: 'OpenAI API', icon: 'fas fa-robot' },
+      { name: 'YOLOv5', icon: 'fas fa-eye' },
+      { name: 'MiDaS', icon: 'fas fa-mountain' }
+    ],
+    date: 'February 2025',
+    category: 'AI & Accessibility',
+    liveUrl: 'https://drive.google.com/file/d/1Wl9L5GRE-5ZyQLFlioMG-RcnTCGqplIT/view?usp=share_link',
+    githubUrl: 'https://github.com/Danjari/hackheist',
+    technicalAchievements: [
+      'Multi-Model AI System: Integrated YOLOv5 for object detection and MiDaS for depth estimation to create comprehensive spatial awareness',
+      'Real-time Processing: Implemented efficient video frame processing with WebRTC for camera access and canvas manipulation',
+      'Depth-Based Object Prioritization: Created an algorithm to identify and prioritize nearby objects based on depth estimation',
+      'Natural Language Generation: Used GPT-4o to translate technical object data into natural, helpful descriptions for users',
+      'Text-to-Speech Integration: Implemented OpenAI\'s TTS API to convert descriptions into clear audio feedback',
+      'Accessibility-First Design: Built a UI specifically optimized for users with visual impairments, featuring large buttons and voice feedback',
+      'Cross-Platform Compatibility: Ensured the application works across different devices and browsers with responsive design'
+    ]
   }
 ];
 
