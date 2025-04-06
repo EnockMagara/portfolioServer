@@ -18,7 +18,7 @@ const projects = [
       { name: 'Google Sign-In', icon: 'fab fa-google' },
       { name: 'Xcode', icon: 'fas fa-code' }
     ],
-    date: 'March 2025',
+    date: 'November 2024',
     category: 'Mobile Development',
     liveUrl: 'https://drive.google.com/file/d/1QkNvNutOjk3Q9SezRdckK_e_FsCcYred/view?usp=sharing',
     githubUrl: 'https://github.com/EnockMagara/molab-2024-09-Enock/tree/main/WEEK10',
@@ -88,7 +88,7 @@ const projects = [
       { name: 'OAuth2', icon: 'fas fa-lock' },
       { name: 'GitHub Actions', icon: 'fab fa-github' }
     ],
-    date: 'January 2023',
+    date: 'October 2024',
     category: 'Full-stack Web Application',
     liveUrl: 'https://calmingspace.duckdns.org/dashboard',
     githubUrl: 'https://github.com/EnockMagara/calming_space',
