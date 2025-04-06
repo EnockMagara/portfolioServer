@@ -4,6 +4,35 @@ const router = express.Router();
 // Project data
 const projects = [
   {
+    id: 'mapjournal',
+    title: 'MapJournal - iOS Location Sharing App',
+    description: 'MapJournal is an iOS application built with SwiftUI that allows users to discover, save, and share their favorite places. The app features interactive mapping with MapKit and CoreLocation, secure user authentication via Google Sign-In, and real-time data synchronization using Firebase. Users can add detailed information to saved locations including tags, descriptions, and images, then easily share these locations with others.',
+    challenges: 'Key challenges included implementing a complete location services system with proper permission handling, designing an efficient data structure for storing location data in Firestore, creating a seamless authentication flow with Google Sign-In, and building an intuitive UI for map interaction. The project required careful planning to ensure smooth integration between multiple frameworks while maintaining excellent performance.',
+    image: '/assets/img/projects/mapjournal.jpg',
+    technologies: [
+      { name: 'Swift', icon: 'fab fa-swift' },
+      { name: 'SwiftUI', icon: 'fab fa-apple' },
+      { name: 'CoreLocation', icon: 'fas fa-map-marker-alt' },
+      { name: 'MapKit', icon: 'fas fa-map' },
+      { name: 'Firebase', icon: 'fas fa-database' },
+      { name: 'Google Sign-In', icon: 'fab fa-google' },
+      { name: 'Xcode', icon: 'fas fa-code' }
+    ],
+    date: 'March 2025',
+    category: 'Mobile Development',
+    liveUrl: 'https://drive.google.com/file/d/1QkNvNutOjk3Q9SezRdckK_e_FsCcYred/view?usp=sharing',
+    githubUrl: 'https://github.com/EnockMagara/molab-2024-09-Enock/tree/main/WEEK10',
+    technicalAchievements: [
+      'Location Services: Implemented comprehensive location tracking and region monitoring using CoreLocation with user privacy considerations',
+      'Map Integration: Designed an interactive map interface with custom annotations, location selection, and geocoding functionality',
+      'Cloud Integration: Set up Firestore database with optimized data models for efficient querying and real-time updates',
+      'Authentication System: Integrated Google Sign-In for secure user authentication and profile management',
+      'Photo Management: Implemented photo selection, storage, and retrieval system with Firebase Storage',
+      'Sharing Features: Created a flexible sharing system allowing users to share locations across multiple platforms',
+      'MVVM Architecture: Structured the app following MVVM design pattern for better separation of concerns and maintainability'
+    ]
+  },
+  {
     id: 'cloudtrace',
     title: 'CloudTrace - Cloud Provider Benchmark',
     description: 'CloudTrace is a high-performance network analysis tool leveraging raw ICMP sockets to benchmark connectivity metrics to major cloud providers. Built on Python/Flask with modular architecture, it performs multi-point traceroute analysis with precise RTT measurements and geospatial visualization. I implement a comprehensive CI/CD pipeline for automated testing and deployment, along with extensive unit testing to ensure reliability.',
