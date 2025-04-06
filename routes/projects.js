@@ -4,6 +4,56 @@ const router = express.Router();
 // Project data
 const projects = [
   {
+    id: 'cloudtrace',
+    title: 'CloudTrace - Cloud Provider Benchmark',
+    description: 'CloudTrace is a high-performance network analysis tool leveraging raw ICMP sockets to benchmark connectivity metrics to major cloud providers. Built on Python/Flask with modular architecture, it performs multi-point traceroute analysis with precise RTT measurements and geospatial visualization. I implement a comprehensive CI/CD pipeline for automated testing and deployment, along with extensive unit testing to ensure reliability.',
+    challenges: 'One of the key challenges was implementing a custom socket-level ICMP implementation with packet crafting while ensuring proper privilege escalation handling and fallback visualization for permission-restricted environments. The project also required complex statistical aggregation with outlier identification and geographic path visualization with cross-border transit detection.',
+    image: '/assets/img/projects/cloudtrace.png',
+    technologies: [
+      { name: 'Python', icon: 'fab fa-python' },
+      { name: 'Flask', icon: 'fas fa-flask' },
+      { name: 'JavaScript', icon: 'fab fa-js-square' },
+      { name: 'SQLite', icon: 'fas fa-database' },
+      { name: 'AJAX', icon: 'fas fa-sync-alt' },
+      { name: 'Plotly.js', icon: 'fas fa-chart-line' }
+    ],
+    date: 'March 2025',
+    category: 'Network Analysis',
+    liveUrl: 'https://cloudtrace.duckdns.org/',
+    githubUrl: 'https://github.com/EnockMagara/CloudTrace-Benchmark'
+  },
+  {
+    id: 'hackheist',
+    title: 'AYN - AI-Powered Visual Assistant',
+    description: 'AYN is an advanced visual assistance application designed to help visually impaired users navigate and understand their surroundings. This full-stack application combines machine learning-based object detection with natural language processing to provide real-time audio descriptions of environments captured by the camera. The system features a Flask backend that integrates YOLOv5 for object detection and MiDaS for depth estimation, along with a sleek Next.js frontend with responsive design and accessible UI.',
+    challenges: 'Key challenges included implementing robust real-time object detection with spatial awareness, creating an accessible and intuitive UI for visually impaired users, and developing an efficient pipeline for processing video frames and generating meaningful audio descriptions. The project required integrating multiple machine learning models and ensuring they worked together seamlessly while maintaining low latency for real-time feedback.',
+    image: '/assets/img/projects/hackheist.jpg',
+    technologies: [
+      { name: 'Python', icon: 'fab fa-python' },
+      { name: 'Flask', icon: 'fas fa-flask' },
+      { name: 'PyTorch', icon: 'fas fa-fire' },
+      { name: 'Next.js', icon: 'fab fa-react' },
+      { name: 'React', icon: 'fab fa-react' },
+      { name: 'Tailwind CSS', icon: 'fab fa-css3-alt' },
+      { name: 'OpenAI API', icon: 'fas fa-robot' },
+      { name: 'YOLOv5', icon: 'fas fa-eye' },
+      { name: 'MiDaS', icon: 'fas fa-mountain' }
+    ],
+    date: 'February 2025',
+    category: 'AI & Accessibility',
+    liveUrl: 'https://drive.google.com/file/d/1Wl9L5GRE-5ZyQLFlioMG-RcnTCGqplIT/view?usp=share_link',
+    githubUrl: 'https://github.com/Danjari/hackheist',
+    technicalAchievements: [
+      'Multi-Model AI System: Integrated YOLOv5 for object detection and MiDaS for depth estimation to create comprehensive spatial awareness',
+      'Real-time Processing: Implemented efficient video frame processing with WebRTC for camera access and canvas manipulation',
+      'Depth-Based Object Prioritization: Created an algorithm to identify and prioritize nearby objects based on depth estimation',
+      'Natural Language Generation: Used GPT-4o to translate technical object data into natural, helpful descriptions for users',
+      'Text-to-Speech Integration: Implemented OpenAI\'s TTS API to convert descriptions into clear audio feedback',
+      'Accessibility-First Design: Built a UI specifically optimized for users with visual impairments, featuring large buttons and voice feedback',
+      'Cross-Platform Compatibility: Ensured the application works across different devices and browsers with responsive design'
+    ]
+  },
+  {
     id: 'mapjournal',
     title: 'MapJournal - iOS Location Sharing App',
     description: 'MapJournal is an iOS application built with SwiftUI that allows users to discover, save, and share their favorite places. The app features interactive mapping with MapKit and CoreLocation, secure user authentication via Google Sign-In, and real-time data synchronization using Firebase. Users can add detailed information to saved locations including tags, descriptions, and images, then easily share these locations with others.',
@@ -31,25 +81,6 @@ const projects = [
       'Sharing Features: Created a flexible sharing system allowing users to share locations across multiple platforms',
       'MVVM Architecture: Structured the app following MVVM design pattern for better separation of concerns and maintainability'
     ]
-  },
-  {
-    id: 'cloudtrace',
-    title: 'CloudTrace - Cloud Provider Benchmark',
-    description: 'CloudTrace is a high-performance network analysis tool leveraging raw ICMP sockets to benchmark connectivity metrics to major cloud providers. Built on Python/Flask with modular architecture, it performs multi-point traceroute analysis with precise RTT measurements and geospatial visualization. I implement a comprehensive CI/CD pipeline for automated testing and deployment, along with extensive unit testing to ensure reliability.',
-    challenges: 'One of the key challenges was implementing a custom socket-level ICMP implementation with packet crafting while ensuring proper privilege escalation handling and fallback visualization for permission-restricted environments. The project also required complex statistical aggregation with outlier identification and geographic path visualization with cross-border transit detection.',
-    image: '/assets/img/projects/cloudtrace.png',
-    technologies: [
-      { name: 'Python', icon: 'fab fa-python' },
-      { name: 'Flask', icon: 'fas fa-flask' },
-      { name: 'JavaScript', icon: 'fab fa-js-square' },
-      { name: 'SQLite', icon: 'fas fa-database' },
-      { name: 'AJAX', icon: 'fas fa-sync-alt' },
-      { name: 'Plotly.js', icon: 'fas fa-chart-line' }
-    ],
-    date: 'March 2025',
-    category: 'Network Analysis',
-    liveUrl: 'https://cloudtrace.duckdns.org/',
-    githubUrl: 'https://github.com/EnockMagara/CloudTrace-Benchmark'
   },
   {
     id: 'assignflow',
@@ -152,37 +183,6 @@ const projects = [
     category: 'Interactive Web Application',
     liveUrl: 'https://enockmagara.github.io/WEBCANVAS/',
     githubUrl: 'https://github.com/EnockMagara/WEBCANVAS'
-  },
-  {
-    id: 'hackheist',
-    title: 'AYN - AI-Powered Visual Assistant',
-    description: 'AYN is an advanced visual assistance application designed to help visually impaired users navigate and understand their surroundings. This full-stack application combines machine learning-based object detection with natural language processing to provide real-time audio descriptions of environments captured by the camera. The system features a Flask backend that integrates YOLOv5 for object detection and MiDaS for depth estimation, along with a sleek Next.js frontend with responsive design and accessible UI.',
-    challenges: 'Key challenges included implementing robust real-time object detection with spatial awareness, creating an accessible and intuitive UI for visually impaired users, and developing an efficient pipeline for processing video frames and generating meaningful audio descriptions. The project required integrating multiple machine learning models and ensuring they worked together seamlessly while maintaining low latency for real-time feedback.',
-    image: '/assets/img/projects/hackheist.jpg',
-    technologies: [
-      { name: 'Python', icon: 'fab fa-python' },
-      { name: 'Flask', icon: 'fas fa-flask' },
-      { name: 'PyTorch', icon: 'fas fa-fire' },
-      { name: 'Next.js', icon: 'fab fa-react' },
-      { name: 'React', icon: 'fab fa-react' },
-      { name: 'Tailwind CSS', icon: 'fab fa-css3-alt' },
-      { name: 'OpenAI API', icon: 'fas fa-robot' },
-      { name: 'YOLOv5', icon: 'fas fa-eye' },
-      { name: 'MiDaS', icon: 'fas fa-mountain' }
-    ],
-    date: 'February 2025',
-    category: 'AI & Accessibility',
-    liveUrl: 'https://drive.google.com/file/d/1Wl9L5GRE-5ZyQLFlioMG-RcnTCGqplIT/view?usp=share_link',
-    githubUrl: 'https://github.com/Danjari/hackheist',
-    technicalAchievements: [
-      'Multi-Model AI System: Integrated YOLOv5 for object detection and MiDaS for depth estimation to create comprehensive spatial awareness',
-      'Real-time Processing: Implemented efficient video frame processing with WebRTC for camera access and canvas manipulation',
-      'Depth-Based Object Prioritization: Created an algorithm to identify and prioritize nearby objects based on depth estimation',
-      'Natural Language Generation: Used GPT-4o to translate technical object data into natural, helpful descriptions for users',
-      'Text-to-Speech Integration: Implemented OpenAI\'s TTS API to convert descriptions into clear audio feedback',
-      'Accessibility-First Design: Built a UI specifically optimized for users with visual impairments, featuring large buttons and voice feedback',
-      'Cross-Platform Compatibility: Ensured the application works across different devices and browsers with responsive design'
-    ]
   }
 ];
 
