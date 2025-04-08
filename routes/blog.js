@@ -24,8 +24,8 @@ router.get('/', async (req, res) => {
     console.log('Fetching blog posts from Medium');
     const feed = await parser.parseURL('https://medium.com/feed/@emm10042');
     
-    // Start displaying posts from the third one
-    const postsToDisplay = feed.items.slice(2, 5).map(post => {
+    // Process all posts
+    const postsToDisplay = feed.items.map(post => {
       // Extract a snippet from the content
       const content = post['content:encoded'] || '';
       const snippet = content.replace(/<[^>]+>/g, '').substring(0, 500); // Remove HTML tags and get first 500 chars
