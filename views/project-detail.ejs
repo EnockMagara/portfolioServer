@@ -52,7 +52,7 @@
           <a href="/portfolio" class="back-button mb-4 d-inline-block">
             <i class="bi bi-arrow-left"></i> Back to Projects
           </a>
-          <h1 class="mb-4"><%= project.title %></h1>
+          <h1 class="mb-4" style="font-size: 2.5rem;"><%= project.title %></h1>
         </div>
       </div>
 
@@ -60,25 +60,25 @@
         <div class="col-lg-8">
           <img src="<%= project.image.startsWith('/') ? project.image : '/' + project.image %>" alt="<%= project.title %>" class="img-fluid rounded mb-4">
           <div class="project-description">
-            <h3>Description</h3>
-            <p><%= project.description %></p>
+            <h3 style="font-size: 2rem;">Description</h3>
+            <p style="font-size: 1.2rem;"><%= project.description %></p>
             
             <% if (project.challenges) { %>
-            <h3>Challenges & Solutions</h3>
-            <p><%= project.challenges %></p>
+            <h3 style="font-size: 2rem;">Challenges & Solutions</h3>
+            <p style="font-size: 1.2rem;"><%= project.challenges %></p>
             <% } %>
             
             <% if (project.technicalAchievements && project.technicalAchievements.length > 0) { %>
-            <h3>Technical Achievements</h3>
-            <ul class="technical-achievements-list">
+            <h3 style="font-size: 2rem;">Technical Achievements</h3>
+            <ul class="technical-achievements-list" style="font-size: 1.2rem;">
               <% project.technicalAchievements.forEach(function(achievement) { %>
                 <li><%= achievement %></li>
               <% }); %>
             </ul>
             <% } %>
             
-            <h3>Technologies Used</h3>
-            <div class="tech-icons my-3">
+            <h3 style="font-size: 2rem;">Technologies Used</h3>
+            <div class="tech-icons my-3" style="font-size: 1.2rem;">
               <% project.technologies.forEach(function(tech) { %>
                 <span class="tech-badge"><i class="<%= tech.icon %>"></i> <%= tech.name %></span>
               <% }); %>
