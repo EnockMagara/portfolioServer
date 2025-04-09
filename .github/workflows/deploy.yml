@@ -60,6 +60,7 @@ jobs:
           ssh $DROPLET_USER@$DROPLET_IP "cd $DEPLOY_PATH && echo \"Setting up HTTPS requires sudo. If it doesn't work automatically, run 'sudo bash setup_https.sh' manually on the server.\""
           ssh $DROPLET_USER@$DROPLET_IP "cd $DEPLOY_PATH && sudo -n bash setup_https.sh || echo 'Please run setup_https.sh manually with sudo permissions'"
 
+          
       # Step 7: Verify deployment
       - name: Verify deployment
         env:
