@@ -10,7 +10,6 @@ const blogPostsCache = {
   timestamp: null
 };
 
-
 // Route to fetch and display Medium blog posts
 router.get('/', async (req, res) => {
   try {
