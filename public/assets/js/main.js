@@ -457,7 +457,7 @@
     reveals.forEach(element => {
       const windowHeight = window.innerHeight;
       const elementTop = element.getBoundingClientRect().top;
-      const elementVisible = 150; // Adjust this value to control when the element becomes visible
+      const elementVisible = 100; // Reduced from 150 to make animation trigger earlier
       
       if (elementTop < windowHeight - elementVisible) {
         element.classList.add('active');

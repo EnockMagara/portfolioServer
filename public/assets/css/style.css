@@ -1253,7 +1253,7 @@ animation: bounce 1s infinite;
   position: relative;
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .reveal.active {
