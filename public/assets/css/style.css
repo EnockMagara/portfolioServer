@@ -240,94 +240,31 @@ body {
 
 /* Adjust the hero section to remove any potential gaps */
 #hero {
-  margin-top: -40px; /* Updated to offset navbar only */
-  padding-top: 40px; /* Add padding to push content down */
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Courier New', monospace;
-  /* Add other heading styles as needed */
-}
-
-/* Layout */
-.card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-bottom: 20px;
-  transition: transform 0.3s, background-color 0.3s, border 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-/* Header Styles */
-.header {
-  background: linear-gradient(180deg, #1a1a1a, #333333);
-  padding: 20px;
-}
-
-.profile-img img {
-  border-radius: 50%;
-  max-width: 150px;
-  margin: 0 auto;
-  display: block;
-}
-
-.sitename {
-  color: #fff;
-  font-size: 1.5rem;
-  text-align: center;
-  margin-top: 15px;
-}
-
-.social-links a {
-  color: #fff;
-  font-size: 1.2rem;
-  margin: 0 10px;
-}
-
-/* Remove old navbar styling */
-.navmenu {
-  overflow-x: hidden;
-}
-
-.navmenu ul {
-  list-style: none;
-  padding: 0;
-}
-
-.navmenu ul li a {
-  color: #fff;
-  display: flex;
-  align-items: center;
-  padding: 10px 0;
-  transition: color 0.3s;
-}
-
-.navmenu ul li a:hover,
-.navmenu ul li a.active {
-  color: var(--secondary-color);
-}
-
-.navmenu ul li a i {
-  margin-right: 10px;
-}
-
-/* Hero Section */
-#hero {
-  background-image: url('../img/background1.jpg');
-  background-size: cover;
+  background-image: none;
+  background-color: var(--background-color);
+  /* Subtle SVG pattern background */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='%23ff6600' fill-opacity='0.05'%3E%3Cpath d='M20 0c11.046 0 20 8.954 20 20s-8.954 20-20 20S0 31.046 0 20 8.954 0 20 0zm0 5c-8.284 0-15 6.716-15 15 0 8.284 6.716 15 15 15 8.284 0 15-6.716 15-15 0-8.284-6.716-15-15-15z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+}
+
+/* Secondary SVG overlay for depth - more subtle */
+#hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+  background-size: 60px 60px;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .hero-overlay {
@@ -336,17 +273,28 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+  background: radial-gradient(circle at center, transparent 0%, var(--background-color) 70%);
+  z-index: 0;
 }
 
 .hero-content {
   position: relative;
   z-index: 1;
-  color: #fff; /* Ensure text is visible on the background */
+  color: var(--text-color); /* Use theme variable for text color */
   text-align: center;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+}
+
+/* Ensure proper contrast in light mode */
+[data-theme="light"] .hero-content {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow for light mode */
+}
+
+/* Ensure proper contrast in dark mode */
+[data-theme="dark"] .hero-content {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Stronger text shadow for dark mode */
 }
 
 .hero-greeting {
@@ -1265,4 +1213,79 @@ animation: bounce 1s infinite;
 .reveal .delay-1 { transition-delay: 0.2s; }
 .reveal .delay-2 { transition-delay: 0.4s; }
 .reveal .delay-3 { transition-delay: 0.6s; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Courier New', monospace;
+  /* Add other heading styles as needed */
+}
+
+/* Layout */
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: transform 0.3s, background-color 0.3s, border 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Header Styles */
+.header {
+  background: linear-gradient(180deg, #1a1a1a, #333333);
+  padding: 20px;
+}
+
+.profile-img img {
+  border-radius: 50%;
+  max-width: 150px;
+  margin: 0 auto;
+  display: block;
+}
+
+.sitename {
+  color: #fff;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.social-links a {
+  color: #fff;
+  font-size: 1.2rem;
+  margin: 0 10px;
+}
+
+/* Remove old navbar styling */
+.navmenu {
+  overflow-x: hidden;
+}
+
+.navmenu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.navmenu ul li a {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  transition: color 0.3s;
+}
+
+.navmenu ul li a:hover,
+.navmenu ul li a.active {
+  color: var(--secondary-color);
+}
+
+.navmenu ul li a i {
+  margin-right: 10px;
+}
+
+/* Hero Section */
 
