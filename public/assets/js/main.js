@@ -127,6 +127,7 @@
     setupThemeToggle();
     setupMobileNav();
     setupNavIndicator();
+    revealOnScroll();
   });
   
   /**
@@ -448,4 +449,24 @@
     // Update on page change (for SPA functionality)
     document.addEventListener('spa:pagechange', positionIndicator);
   }
+
+  // Add scroll reveal functionality
+  function revealOnScroll() {
+    const reveals = document.querySelectorAll('.reveal');
+    
+    reveals.forEach(element => {
+      const windowHeight = window.innerHeight;
+      const elementTop = element.getBoundingClientRect().top;
+      const elementVisible = 150; // Adjust this value to control when the element becomes visible
+      
+      if (elementTop < windowHeight - elementVisible) {
+        element.classList.add('active');
+      } else {
+        element.classList.remove('active');
+      }
+    });
+  }
+
+  // Add event listener for scroll
+  window.addEventListener('scroll', revealOnScroll);
 })();
