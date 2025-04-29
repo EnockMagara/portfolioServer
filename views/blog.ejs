@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog - Enock Mecheo</title>
-  <meta name="description" content="Portfolio of Enock Mecheo, showcasing skills in software development, web development, and more.">
-  <meta name="keywords" content="Enock Mecheo, portfolio, software development, web development, NYU Abu Dhabi, fullstack developer">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <title>Enock Mecheo - Blog & Research</title>
+  <meta content="Blog posts and research articles by Enock Mecheo" name="description">
+  <meta content="blog, tech, programming, software development, research, Enock Mecheo" name="keywords">
   <meta name="author" content="Enock Mecheo">
-  <link href="/assets/css/style.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+
+  <!-- Favicons -->
+  <link href="/assets/img/favicon.png" rel="icon">
+  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-  
-  <!-- GSAP library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-  
-  <!-- AOS library -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="/assets/css/style.css" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="portfolio-page">
+
+<body class="blog-page">
+
   <!-- Top Navigation Bar -->
   <div class="top-navbar">
     <nav id="navbar" class="navbar">
@@ -29,42 +38,113 @@
       </ul>
     </nav>
   </div>
-  
-  <!-- Preloader -->
-  <div id="preloader"></div>
-  
-  <header>
-    <div class="container mt-3">
-      <h1>Blog</h1>
-    </div>
-  </header>
+
   <main class="main">
-    <section id="blog-posts" class="container">
-      <h2>Recent Posts</h2>
-      <div class="row gy-4">
-        <% posts.forEach(post => { %>
-          <div class="col-lg-4">
-            <div class="card project-card">
-              <div class="card-body">
-                <h5 class="card-title"><%= post.title %></h5>
-                <p class="card-text">
-                  <%= post.snippet || 'No snippet available' %>...
-                </p>
-                <!-- <p class="card-text"><small class="text-muted">Published on: <%= new Date(post.pubDate).toLocaleDateString() %></small></p> -->
-                <a href="<%= post.link %>" target="_blank" rel="noopener noreferrer" class="animated-button">
-                  <span class="button-text">Read More</span>
-                  <span class="button-line"></span>
-                </a>
-              </div>
-            </div>
-          </div>
-        <% }) %>
+    <div class="container">
+      <!-- Content Type Toggle -->
+      <div class="content-toggle reveal">
+        <button class="toggle-btn active" data-content="blog">Blog Articles</button>
+        <button class="toggle-btn" data-content="research">Research & Insights</button>
       </div>
-    </section>
+
+      <!-- Blog Section -->
+      <section id="blogSection" class="blog-categories reveal">
+        <div class="blog-header">
+          <h1 class="blog-title">Blog Articles</h1>
+        </div>
+
+        <div class="category-filters">
+          <button class="category-filter active" data-category="all">All Posts</button>
+          <button class="category-filter" data-category="deeplearning">Deep Learning</button>
+          <button class="category-filter" data-category="webdev">Web Dev</button>
+          <button class="category-filter" data-category="appdev">App Dev</button>
+          <button class="category-filter" data-category="devops">DevOps</button>
+          <button class="category-filter" data-category="databases">Databases</button>
+        </div>
+
+        <div class="blog-grid">
+          <% if (typeof posts !== 'undefined' && posts.length > 0) { %>
+            <% posts.forEach(function(post) { %>
+              <article class="blog-card reveal" data-category="<%= post.category %>">
+                <div class="card">
+                  <% if (post.image) { %>
+                    <img src="<%= post.image %>" class="card-img-top" alt="<%= post.title %>">
+                  <% } %>
+                  <div class="card-body">
+                    <div class="post-meta">
+                      <span class="post-category"><%= post.category %></span>
+                      <span class="post-date"><%= post.date %></span>
+                    </div>
+                    <div class="post-tags">
+                      <% if (post.tags && post.tags.includes('databases')) { %>
+                        <span class="tag">Databases</span>
+                      <% } %>
+                    </div>
+                    <h2 class="card-title"><%= post.title %></h2>
+                    <p class="card-text"><%= post.excerpt %></p>
+                    <a href="/blog/<%= post.slug %>" class="animated-button">
+                      <span class="button-text">Read More</span>
+                      <span class="button-line"></span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            <% }); %>
+          <% } else { %>
+            <div class="no-posts">
+              <p>No blog posts available yet. Check back soon!</p>
+            </div>
+          <% } %>
+        </div>
+      </section>
+
+      <!-- Research Section -->
+      <section id="researchSection" class="research-section reveal" style="display: none;">
+        <div class="research-header">
+          <h1 class="research-title">Research & Insights</h1>
+          <% if (typeof isAdmin !== 'undefined' && isAdmin) { %>
+            <button class="upload-btn animated-button">
+              <i class="bi bi-upload"></i>
+              <span class="button-text">Upload Research</span>
+            </button>
+          <% } %>
+        </div>
+
+        <div class="research-grid">
+          <% if (typeof research !== 'undefined' && research.length > 0) { %>
+            <% research.forEach(function(paper) { %>
+              <div class="research-card reveal">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="research-meta">
+                      <span class="research-date"><%= paper.date %></span>
+                      <span class="research-type"><%= paper.type %></span>
+                    </div>
+                    <h2 class="card-title"><%= paper.title %></h2>
+                    <p class="card-text"><%= paper.abstract %></p>
+                    <a href="<%= paper.pdfUrl %>" class="animated-button" target="_blank">
+                      <i class="bi bi-file-pdf"></i>
+                      <span class="button-text">View PDF</span>
+                      <span class="button-line"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            <% }); %>
+          <% } else { %>
+            <div class="no-research">
+              <p>No research papers available yet. Check back soon!</p>
+            </div>
+          <% } %>
+        </div>
+      </section>
+    </div>
   </main>
+
   <footer>
     <div class="container">
-      <div class="social-links-footer">
+      <p class="contact-message">Feel free to contact me through any of these channels:</p>
+      <div class="social-links-footer mb-4">
         <a href="mailto:enockmecheo@nyu.edu" class="gmail"><i class="bi bi-envelope"></i></a>
         <a href="https://www.linkedin.com/in/enock-mecheo-56390b1a6/" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
         <a href="https://github.com/EnockMagara" class="github" target="_blank"><i class="bi bi-github"></i></a>
@@ -76,14 +156,72 @@
       </p>
     </div>
   </footer>
-  
+
   <!-- Scroll Top -->
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-  
+
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
+
   <!-- Main JS File -->
   <script src="/assets/js/main.js"></script>
+
+  <!-- Content Toggle and Category Filter Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Content Toggle
+      const toggleBtns = document.querySelectorAll('.toggle-btn');
+      const blogSection = document.getElementById('blogSection');
+      const researchSection = document.getElementById('researchSection');
+
+      toggleBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          toggleBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+
+          const contentType = this.dataset.content;
+          if (contentType === 'blog') {
+            blogSection.style.display = 'block';
+            researchSection.style.display = 'none';
+          } else {
+            blogSection.style.display = 'none';
+            researchSection.style.display = 'block';
+          }
+        });
+      });
+
+      // Category Filter
+      const filters = document.querySelectorAll('.category-filter');
+      const posts = document.querySelectorAll('.blog-card');
+
+      filters.forEach(filter => {
+        filter.addEventListener('click', function() {
+          filters.forEach(f => f.classList.remove('active'));
+          this.classList.add('active');
+
+          const category = this.dataset.category;
+
+          posts.forEach(post => {
+            if (category === 'all' || post.dataset.category === category) {
+              post.style.display = 'block';
+              setTimeout(() => {
+                post.style.opacity = '1';
+                post.style.transform = 'translateY(0)';
+              }, 50);
+            } else {
+              post.style.opacity = '0';
+              post.style.transform = 'translateY(20px)';
+              setTimeout(() => {
+                post.style.display = 'none';
+              }, 300);
+            }
+          });
+        });
+      });
+    });
+  </script>
 </body>
+
 </html>

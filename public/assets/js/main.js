@@ -128,6 +128,38 @@
     setupMobileNav();
     setupNavIndicator();
     revealOnScroll();
+    const blogToggle = document.getElementById('blog-toggle');
+    const researchToggle = document.getElementById('research-toggle');
+    const blogSection = document.getElementById('blog-section');
+    const researchSection = document.getElementById('research-section');
+
+    if (blogToggle && researchToggle) {
+        blogToggle.addEventListener('click', () => {
+            blogToggle.classList.add('active');
+            researchToggle.classList.remove('active');
+            blogSection.style.display = 'block';
+            blogSection.classList.add('active');
+            researchSection.style.display = 'none';
+            researchSection.classList.remove('active');
+        });
+
+        researchToggle.addEventListener('click', () => {
+            researchToggle.classList.add('active');
+            blogToggle.classList.remove('active');
+            researchSection.style.display = 'block';
+            researchSection.classList.add('active');
+            blogSection.style.display = 'none';
+            blogSection.classList.remove('active');
+        });
+    }
+
+    // Initialize the view (default to blog posts)
+    if (blogToggle && blogSection && researchSection) {
+        blogToggle.classList.add('active');
+        blogSection.style.display = 'block';
+        blogSection.classList.add('active');
+        researchSection.style.display = 'none';
+    }
   });
   
   /**
@@ -469,4 +501,14 @@
 
   // Add event listener for scroll
   window.addEventListener('scroll', revealOnScroll);
+
+  // Handle Research PDF Upload
+  const uploadBtn = document.getElementById('upload-research');
+  if (uploadBtn) {
+    uploadBtn.addEventListener('click', () => {
+      // This is a placeholder for the upload functionality
+      // You'll need to implement the actual upload logic based on your backend
+      console.log('Upload research PDF clicked');
+    });
+  }
 })();
