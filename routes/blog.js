@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
 
     // Cache expired or doesn't exist, fetch from Medium
     console.log('Fetching blog posts from Medium');
-    const feed = await parser.parseURL('https://medium.com/feed/@emm10042');
+    const feed = await parser.parseURL('https://medium.com/feed/@enockmecheo');
     
     // Process all posts
     const postsToDisplay = feed.items.map(post => {
