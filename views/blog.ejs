@@ -76,14 +76,16 @@
                       <span class="post-date"><%= post.date %></span>
                     </div>
                     <div class="post-tags">
-                      <% if (post.tags && post.tags.includes('databases')) { %>
-                        <span class="tag">Databases</span>
+                      <% if (post.tags && post.tags.length > 0) { %>
+                        <% post.tags.forEach(function(tag) { %>
+                          <span class="tag"><%= tag %></span>
+                        <% }); %>
                       <% } %>
                     </div>
                     <h2 class="card-title"><%= post.title %></h2>
                     <p class="card-text"><%= post.excerpt %></p>
-                    <a href="/blog/<%= post.slug %>" class="animated-button">
-                      <span class="button-text">Read More</span>
+                    <a href="<%= post.link %>" class="animated-button" target="_blank">
+                      <span class="button-text">Read on Medium</span>
                       <span class="button-line"></span>
                     </a>
                   </div>
@@ -117,16 +119,23 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="research-meta">
-                      <span class="research-date"><%= paper.date %></span>
                       <span class="research-type"><%= paper.type %></span>
+                      <span class="research-date"><%= paper.date %></span>
                     </div>
                     <h2 class="card-title"><%= paper.title %></h2>
                     <p class="card-text"><%= paper.abstract %></p>
-                    <a href="<%= paper.pdfUrl %>" class="animated-button" target="_blank">
-                      <i class="bi bi-file-pdf"></i>
-                      <span class="button-text">View PDF</span>
-                      <span class="button-line"></span>
-                    </a>
+                    <div class="button-group">
+                      <a href="/blog/research/<%= paper.id %>" class="animated-button">
+                        <i class="bi bi-eye"></i>
+                        <span class="button-text">Preview</span>
+                        <span class="button-line"></span>
+                      </a>
+                      <a href="<%= paper.pdfUrl %>" class="animated-button" target="_blank">
+                        <i class="bi bi-download"></i>
+                        <span class="button-text">Download PDF</span>
+                        <span class="button-line"></span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -176,19 +185,37 @@
       const blogSection = document.getElementById('blogSection');
       const researchSection = document.getElementById('researchSection');
 
+      // Function to update URL with active tab
+      function updateURL(tab) {
+        const url = new URL(window.location);
+        url.searchParams.set('tab', tab);
+        window.history.replaceState({}, '', url);
+      }
+
+      // Function to show active tab
+      function showTab(tab) {
+        toggleBtns.forEach(b => b.classList.remove('active'));
+        if (tab === 'research') {
+          document.querySelector('[data-content="research"]').classList.add('active');
+          blogSection.style.display = 'none';
+          researchSection.style.display = 'block';
+        } else {
+          document.querySelector('[data-content="blog"]').classList.add('active');
+          blogSection.style.display = 'block';
+          researchSection.style.display = 'none';
+        }
+      }
+
+      // Check URL parameters for active tab
+      const urlParams = new URLSearchParams(window.location.search);
+      const activeTab = urlParams.get('tab') || 'blog';
+      showTab(activeTab);
+
       toggleBtns.forEach(btn => {
         btn.addEventListener('click', function() {
-          toggleBtns.forEach(b => b.classList.remove('active'));
-          this.classList.add('active');
-
           const contentType = this.dataset.content;
-          if (contentType === 'blog') {
-            blogSection.style.display = 'block';
-            researchSection.style.display = 'none';
-          } else {
-            blogSection.style.display = 'none';
-            researchSection.style.display = 'block';
-          }
+          showTab(contentType);
+          updateURL(contentType);
         });
       });
 
@@ -196,29 +223,58 @@
       const filters = document.querySelectorAll('.category-filter');
       const posts = document.querySelectorAll('.blog-card');
 
+      // Function to update URL with active category
+      function updateCategoryURL(category) {
+        const url = new URL(window.location);
+        if (category === 'all') {
+          url.searchParams.delete('category');
+        } else {
+          url.searchParams.set('category', category);
+        }
+        window.history.replaceState({}, '', url);
+      }
+
+      // Function to show category
+      function showCategory(category) {
+        filters.forEach(f => f.classList.remove('active'));
+        document.querySelector(`[data-category="${category}"]`).classList.add('active');
+
+        posts.forEach(post => {
+          if (category === 'all' || post.dataset.category === category) {
+            post.style.display = 'block';
+            setTimeout(() => {
+              post.style.opacity = '1';
+              post.style.transform = 'translateY(0)';
+            }, 50);
+          } else {
+            post.style.opacity = '0';
+            post.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+              post.style.display = 'none';
+            }, 300);
+          }
+        });
+      }
+
+      // Check URL parameters for active category
+      const activeCategory = urlParams.get('category') || 'all';
+      showCategory(activeCategory);
+
       filters.forEach(filter => {
         filter.addEventListener('click', function() {
-          filters.forEach(f => f.classList.remove('active'));
-          this.classList.add('active');
-
           const category = this.dataset.category;
-
-          posts.forEach(post => {
-            if (category === 'all' || post.dataset.category === category) {
-              post.style.display = 'block';
-              setTimeout(() => {
-                post.style.opacity = '1';
-                post.style.transform = 'translateY(0)';
-              }, 50);
-            } else {
-              post.style.opacity = '0';
-              post.style.transform = 'translateY(20px)';
-              setTimeout(() => {
-                post.style.display = 'none';
-              }, 300);
-            }
-          });
+          showCategory(category);
+          updateCategoryURL(category);
         });
+      });
+
+      // Handle browser back/forward
+      window.addEventListener('popstate', function() {
+        const params = new URLSearchParams(window.location.search);
+        const tab = params.get('tab') || 'blog';
+        const category = params.get('category') || 'all';
+        showTab(tab);
+        showCategory(category);
       });
     });
   </script>

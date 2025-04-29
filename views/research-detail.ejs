@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <title><%= paper.title %> - Research Paper</title>
+  <meta content="<%= paper.abstract %>" name="description">
+  <meta name="author" content="Enock Mecheo">
+
+  <!-- Favicons -->
+  <link href="/assets/img/favicon.png" rel="icon">
+  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="/assets/css/style.css" rel="stylesheet">
+
+  <!-- PDF.js -->
+  <script src="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+  <script>
+    // Initialize PDF.js
+    window.pdfjsLib = window['pdfjs-dist/build/pdf'];
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+  </script>
+</head>
+
+<body class="research-page">
+  <!-- Top Navigation Bar -->
+  <div class="top-navbar">
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a href="/" class="nav-link"><i class="bi bi-house navicon"></i>Home</a></li>
+        <li><a href="/portfolio" class="nav-link"><i class="bi bi-images navicon"></i>Projects</a></li>
+        <li><a href="/blog" class="nav-link active"><i class="bi bi-journal navicon"></i>Blog</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <main class="main">
+    <div class="container">
+      <div class="research-detail-header reveal">
+        <a href="/blog?tab=research" class="back-button">
+          <i class="bi bi-arrow-left"></i>
+          Back to Research
+        </a>
+        <h1 class="research-title"><%= paper.title %></h1>
+        <div class="research-meta">
+          <span class="research-type"><%= paper.type %></span>
+          <span class="research-date"><%= paper.date %></span>
+        </div>
+        <div class="post-tags">
+          <% if (paper.tags && paper.tags.length > 0) { %>
+            <% paper.tags.forEach(function(tag) { %>
+              <span class="tag"><%= tag %></span>
+            <% }); %>
+          <% } %>
+        </div>
+        <p class="research-abstract"><%= paper.abstract %></p>
+      </div>
+
+      <div class="research-content reveal">
+        <div class="pdf-controls">
+          <button id="prev" class="animated-button">
+            <i class="bi bi-chevron-left"></i>
+            Previous
+          </button>
+          <span>Page: <span id="page_num">0</span> / <span id="page_count">0</span></span>
+          <button id="next" class="animated-button">
+            Next
+            <i class="bi bi-chevron-right"></i>
+          </button>
+          <a href="<%= paper.pdfUrl %>" class="animated-button" target="_blank">
+            <i class="bi bi-download"></i>
+            Download PDF
+          </a>
+        </div>
+        <div id="pdf-viewer">
+          <canvas id="pdf-render"></canvas>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p class="contact-message">Feel free to contact me through any of these channels:</p>
+      <div class="social-links-footer mb-4">
+        <a href="mailto:enockmecheo@nyu.edu" class="gmail"><i class="bi bi-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/enock-mecheo-56390b1a6/" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
+        <a href="https://github.com/EnockMagara" class="github" target="_blank"><i class="bi bi-github"></i></a>
+      </div>
+      <p class="copyright">
+        <span>&copy; Copyright</span>
+        <span class="sitename">EnockMecheo</span>
+        <span>All Rights Reserved</span>
+      </p>
+    </div>
+  </footer>
+
+  <!-- PDF Viewer Script -->
+  <script>
+    // Initialize variables
+    let pdfDoc = null,
+        pageNum = 1,
+        pageRendering = false,
+        pageNumPending = null,
+        scale = 1.5;
+
+    const canvas = document.getElementById('pdf-render'),
+          ctx = canvas.getContext('2d');
+
+    // Function to determine optimal scale based on screen size
+    function getOptimalScale() {
+      const width = window.innerWidth;
+      if (width <= 768) {
+        return Math.min(1.0, width / 800); // Scale down on mobile
+      }
+      return 1.5; // Default scale for desktop
+    }
+
+    // Update scale when window is resized
+    window.addEventListener('resize', () => {
+      scale = getOptimalScale();
+      if (pdfDoc) {
+        renderPage(pageNum);
+      }
+    });
+
+    // Initial scale
+    scale = getOptimalScale();
+
+    // Initial canvas size
+    canvas.width = window.innerWidth > 768 ? 800 : window.innerWidth - 40;
+    canvas.height = 600;
+
+    // Show loading
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#000';
+    ctx.font = '24px Arial';
+    ctx.fillText('Loading PDF...', canvas.width/2 - 60, canvas.height/2);
+
+    function renderPage(num) {
+      pageRendering = true;
+      pdfDoc.getPage(num).then(function(page) {
+        const viewport = page.getViewport({ scale: scale });
+        
+        // Adjust canvas size to viewport while maintaining aspect ratio
+        const containerWidth = document.getElementById('pdf-viewer').clientWidth - 40;
+        const scaleFactor = containerWidth / viewport.width;
+        
+        if (scaleFactor < 1) {
+          const adjustedViewport = page.getViewport({ scale: scale * scaleFactor });
+          canvas.height = adjustedViewport.height;
+          canvas.width = adjustedViewport.width;
+          
+          const renderContext = {
+            canvasContext: ctx,
+            viewport: adjustedViewport
+          };
+          return page.render(renderContext).promise;
+        } else {
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
+          
+          const renderContext = {
+            canvasContext: ctx,
+            viewport: viewport
+          };
+          return page.render(renderContext).promise;
+        }
+      }).then(() => {
+        pageRendering = false;
+        if (pageNumPending !== null) {
+          renderPage(pageNumPending);
+          pageNumPending = null;
+        }
+        document.getElementById('page_num').textContent = num;
+      }).catch(error => {
+        console.error('Error rendering page:', error);
+        pageRendering = false;
+      });
+    }
+
+    function queueRenderPage(num) {
+      if (pageRendering) {
+        pageNumPending = num;
+      } else {
+        renderPage(num);
+      }
+    }
+
+    function onPrevPage() {
+      if (pageNum <= 1) return;
+      pageNum--;
+      queueRenderPage(pageNum);
+    }
+
+    function onNextPage() {
+      if (pageNum >= pdfDoc.numPages) return;
+      pageNum++;
+      queueRenderPage(pageNum);
+    }
+
+    // Load the PDF
+    pdfjsLib.getDocument('<%= paper.pdfUrl %>').promise
+      .then(function(pdf) {
+        pdfDoc = pdf;
+        document.getElementById('page_count').textContent = pdf.numPages;
+        renderPage(pageNum);
+      })
+      .catch(function(error) {
+        console.error('Error loading PDF:', error);
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#f00';
+        ctx.fillText('Error loading PDF', canvas.width/2 - 60, canvas.height/2);
+      });
+
+    document.getElementById('prev').addEventListener('click', onPrevPage);
+    document.getElementById('next').addEventListener('click', onNextPage);
+
+    // Add keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft') onPrevPage();
+      if (e.key === 'ArrowRight') onNextPage();
+    });
+  </script>
+
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="/assets/js/main.js"></script>
+</body>
+
+</html> 
