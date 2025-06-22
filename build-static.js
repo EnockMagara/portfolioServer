@@ -139,7 +139,23 @@ projects.forEach(project => {
   const template = fs.readFileSync(templatePath, 'utf8');
   const html = ejs.render(template, { project });
   
-  fs.writeFileSync(outputPath, html);
+  // Fix paths for project detail pages (they're in a subdirectory)
+  let fixedHtml = html
+    // Fix navigation links (project pages are in subdirectory, so need ../)
+    .replace(/href="\/"/g, 'href="../index.html"')
+    .replace(/href="\/portfolio"/g, 'href="../portfolio.html"')
+    .replace(/href="\/commlab"/g, 'href="../commlab.html"')
+    .replace(/href="\/photos"/g, 'href="../photos.html"')
+    .replace(/href="\/blog"/g, 'href="../blog.html"')
+    // Fix back button
+    .replace(/href="\/portfolio"/g, 'href="../portfolio.html"')
+    // Fix asset paths (project pages need ../ to go up one level)
+    .replace(/href="\/assets\//g, 'href="../assets/')
+    .replace(/src="\/assets\//g, 'src="../assets/')
+    // Fix other absolute paths
+    .replace(/window\.location\.href = '\/portfolio'/g, "window.location.href = '../portfolio.html'");
+  
+  fs.writeFileSync(outputPath, fixedHtml);
   console.log(`Generated: project/${project.id}.html`);
 });
 
