@@ -72,6 +72,7 @@ app.get('/api/location', async (req, res) => {
     const region = locationData.region || '';
     const country = locationData.country || 'Unknown Country';
     
+    
     let locationString = city;
     if (region && region !== city) {
       locationString += `, ${region}`;
