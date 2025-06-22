@@ -43,20 +43,26 @@ jobs:
           DEPLOY_PATH: "/root/portfolioServer"
           EMAIL: ${{ secrets.EMAIL }}
         run: |
+          # Clean up old deployments and free disk space
+          ssh $DROPLET_USER@$DROPLET_IP "sudo apt-get autoremove -y && sudo apt-get autoclean -y" || echo "Cleanup failed, continuing..."
+          ssh $DROPLET_USER@$DROPLET_IP "sudo rm -rf $DEPLOY_PATH/node_modules" || echo "No node_modules to remove"
+          ssh $DROPLET_USER@$DROPLET_IP "sudo docker system prune -f" || echo "No docker to clean"
+
           # Create deploy directory structure with proper permissions
           ssh $DROPLET_USER@$DROPLET_IP "sudo mkdir -p $DEPLOY_PATH && sudo chown -R $DROPLET_USER:$DROPLET_USER $DEPLOY_PATH"
 
           # Test SSH connection and check server prerequisites
           ssh $DROPLET_USER@$DROPLET_IP "echo 'SSH connection successful' && whoami && pwd"
+          ssh $DROPLET_USER@$DROPLET_IP "df -h"  # Check disk space after cleanup
           ssh $DROPLET_USER@$DROPLET_IP "ls -la $DEPLOY_PATH || echo 'Deploy path does not exist yet'"
           ssh $DROPLET_USER@$DROPLET_IP "which node || echo 'Node.js not found'"
           ssh $DROPLET_USER@$DROPLET_IP "which npm || echo 'npm not found'"
 
           # Copy application files including deploy script and HTTPS setup
           echo "Copying files to $DEPLOY_PATH..."
-          rsync -avz --progress package.json package-lock.json server.js public/ views/ routes/ deploy.sh setup_https.sh portfolio.service $DROPLET_USER@$DROPLET_IP:$DEPLOY_PATH/ || {
+          rsync -avz --progress --exclude='node_modules' --exclude='.git' --exclude='.DS_Store' --delete package.json package-lock.json server.js public/ views/ routes/ deploy.sh setup_https.sh portfolio.service $DROPLET_USER@$DROPLET_IP:$DEPLOY_PATH/ || {
             echo "Rsync failed, trying scp..."
-            scp -v -r package.json package-lock.json server.js public/ views/ routes/ deploy.sh setup_https.sh portfolio.service $DROPLET_USER@$DROPLET_IP:$DEPLOY_PATH/
+            scp -r package.json package-lock.json server.js public/ views/ routes/ deploy.sh setup_https.sh portfolio.service $DROPLET_USER@$DROPLET_IP:$DEPLOY_PATH/
           }
 
           # Make scripts executable
