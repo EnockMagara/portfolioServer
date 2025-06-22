@@ -43,10 +43,13 @@ jobs:
           DEPLOY_PATH: "/root/portfolioServer"
           EMAIL: ${{ secrets.EMAIL }}
         run: |
-          # Clean up old deployments and free disk space
-          ssh $DROPLET_USER@$DROPLET_IP "sudo apt-get autoremove -y && sudo apt-get autoclean -y" || echo "Cleanup failed, continuing..."
-          ssh $DROPLET_USER@$DROPLET_IP "sudo rm -rf $DEPLOY_PATH/node_modules" || echo "No node_modules to remove"
-          ssh $DROPLET_USER@$DROPLET_IP "sudo docker system prune -f" || echo "No docker to clean"
+          # Emergency disk space cleanup - server is full!
+          ssh $DROPLET_USER@$DROPLET_IP "sudo rm -rf /tmp/* /var/tmp/*" || echo "Temp cleanup failed"
+          ssh $DROPLET_USER@$DROPLET_IP "sudo journalctl --vacuum-time=1d" || echo "Journal cleanup failed"
+          ssh $DROPLET_USER@$DROPLET_IP "sudo rm -rf /var/log/*.log.* /var/log/*/*.log.*" || echo "Log cleanup failed"
+          ssh $DROPLET_USER@$DROPLET_IP "sudo rm -rf $DEPLOY_PATH/node_modules $DEPLOY_PATH/public $DEPLOY_PATH/views" || echo "Old deployment cleanup failed"
+          ssh $DROPLET_USER@$DROPLET_IP "sudo apt-get clean" || echo "APT clean failed"
+          ssh $DROPLET_USER@$DROPLET_IP "sudo find /var/cache -type f -delete" || echo "Cache cleanup failed"
 
           # Create deploy directory structure with proper permissions
           ssh $DROPLET_USER@$DROPLET_IP "sudo mkdir -p $DEPLOY_PATH && sudo chown -R $DROPLET_USER:$DROPLET_USER $DEPLOY_PATH"
@@ -54,16 +57,21 @@ jobs:
           # Test SSH connection and check server prerequisites
           ssh $DROPLET_USER@$DROPLET_IP "echo 'SSH connection successful' && whoami && pwd"
           ssh $DROPLET_USER@$DROPLET_IP "df -h"  # Check disk space after cleanup
+          ssh $DROPLET_USER@$DROPLET_IP "sudo du -sh /* 2>/dev/null | sort -hr | head -10" || echo "Disk usage check failed"
           ssh $DROPLET_USER@$DROPLET_IP "ls -la $DEPLOY_PATH || echo 'Deploy path does not exist yet'"
           ssh $DROPLET_USER@$DROPLET_IP "which node || echo 'Node.js not found'"
           ssh $DROPLET_USER@$DROPLET_IP "which npm || echo 'npm not found'"
 
-          # Copy application files including deploy script and HTTPS setup
-          echo "Copying files to $DEPLOY_PATH..."
-          rsync -avz --progress --exclude='node_modules' --exclude='.git' --exclude='.DS_Store' --delete package.json package-lock.json server.js public/ views/ routes/ deploy.sh setup_https.sh portfolio.service $DROPLET_USER@$DROPLET_IP:$DEPLOY_PATH/ || {
-            echo "Rsync failed, trying scp..."
-            scp -r package.json package-lock.json server.js public/ views/ routes/ deploy.sh setup_https.sh portfolio.service $DROPLET_USER@$DROPLET_IP:$DEPLOY_PATH/
+          # Copy essential files first (excluding large images)
+          echo "Copying essential files to $DEPLOY_PATH..."
+          rsync -avz --progress --exclude='node_modules' --exclude='.git' --exclude='.DS_Store' --exclude='public/assets/img/portfolio/*.JPEG' --exclude='public/assets/img/portfolio/*.png' --delete package.json package-lock.json server.js views/ routes/ deploy.sh setup_https.sh portfolio.service $DROPLET_USER@$DROPLET_IP:$DEPLOY_PATH/ || {
+            echo "Essential files rsync failed, trying scp..."
+            scp -r package.json package-lock.json server.js views/ routes/ deploy.sh setup_https.sh portfolio.service $DROPLET_USER@$DROPLET_IP:$DEPLOY_PATH/
           }
+          
+          # Copy public assets (excluding large portfolio images for now)
+          echo "Copying public assets (excluding large portfolio images)..."
+          rsync -avz --progress --exclude='assets/img/portfolio/*.JPEG' --exclude='assets/img/portfolio/*.png' public/ $DROPLET_USER@$DROPLET_IP:$DEPLOY_PATH/public/ || echo "Public assets copy failed"
 
           # Make scripts executable
           ssh $DROPLET_USER@$DROPLET_IP "chmod +x $DEPLOY_PATH/deploy.sh $DEPLOY_PATH/setup_https.sh"
