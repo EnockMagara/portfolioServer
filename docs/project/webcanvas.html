@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <title>Enock Mecheo - WEBCANVAS - Interactive Drawing Application</title>
+  <meta content="WEBCANVAS is an interactive web-based drawing application that provides a comprehensive set of tools for digital art creation. Users can engage in free-form drawing with a customizable pen, create shapes like rectangles, circles, and lines, and select colors from a versatile palette. The application also features functionality to save artwork or load existing images, with a clean, intuitive interface for seamless user experience." name="description">
+  <meta content="portfolio, computer science, software development, NYU, Enock Mecheo, Enock Magara" name="keywords">
+  <meta name="author" content="Enock Mecheo">
+
+  <!-- Favicons -->
+  <link href="/assets/img/favicon.png" rel="icon">
+  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Space Grotesk Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="/assets/css/style.css" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- GSAP library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+</head>
+
+<body class="portfolio-page">
+
+  <!-- Navigation System -->
+  <!-- Menu Toggle Button -->
+  <button class="menu-toggle" id="menuToggle">
+    <span class="menu-toggle-text">MENU</span>
+    <div class="menu-toggle-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </button>
+
+  <!-- Navigation Overlay -->
+  <div class="nav-overlay" id="navOverlay">
+    <div class="nav-overlay-content">
+      <!-- Corner Elements -->
+      <div class="nav-corner nav-corner-top-right">
+        <button class="nav-close" id="navClose">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      
+      <!-- Main Navigation -->
+      <div class="nav-main">
+        <nav class="nav-menu">
+          <ul>
+            <li><a href="/" class="nav-menu-link">home</a></li>
+            <li class="active-page"><a href="/portfolio" class="nav-menu-link active">projects</a></li>
+            <li><a href="/commlab" class="nav-menu-link">comm lab</a></li>
+            <li><a href="/photos" class="nav-menu-link">photos</a></li>
+          </ul>
+                </nav>
+      </div>
+      
+      <!-- Bottom Corner Elements -->
+      <div class="nav-corner nav-corner-bottom-left">
+        <div class="corner-info">
+          <div class="corner-text">Enock Mecheo</div>
+          <div class="corner-text">NYU Abu Dhabi</div>
+          <div class="corner-text">Computer Science</div>
+          <div class="corner-text">enockmecheo@nyu.edu</div>
+          <div class="corner-text">github.com/EnockMagara</div>
+        </div>
+      </div>
+      
+      <div class="nav-corner nav-corner-bottom-right">
+        <div class="corner-info">
+          <div class="corner-text">portfolio</div>
+          <div class="corner-text">2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <main class="main">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <a href="/portfolio" class="back-button mb-4 d-inline-block reveal" style="transition-delay: 0.1s;">
+            <i class="bi bi-arrow-left"></i> Back to Projects
+          </a>
+          <h1 class="mb-4 reveal" style="font-size: 2.5rem; transition-delay: 0.2s;">WEBCANVAS - Interactive Drawing Application</h1>
+        </div>
+      </div>
+
+      <div class="row mb-5">
+        <div class="col-lg-8">
+          <img src="/assets/img/projects/webcanvas.jpg" alt="WEBCANVAS - Interactive Drawing Application" class="img-fluid rounded mb-4 reveal" style="transition-delay: 0.3s;">
+          <div class="project-description">
+            <h3 class="reveal" style="font-size: 2rem; transition-delay: 0.4s;">Description</h3>
+            <p class="reveal" style="font-size: 1.2rem; transition-delay: 0.5s;">WEBCANVAS is an interactive web-based drawing application that provides a comprehensive set of tools for digital art creation. Users can engage in free-form drawing with a customizable pen, create shapes like rectangles, circles, and lines, and select colors from a versatile palette. The application also features functionality to save artwork or load existing images, with a clean, intuitive interface for seamless user experience.</p>
+            
+            
+            <h3 class="reveal" style="font-size: 2rem; transition-delay: 0.6s;">Challenges & Solutions</h3>
+            <p class="reveal" style="font-size: 1.2rem; transition-delay: 0.7s;">Key challenges included implementing precise cursor tracking for drawing tools, creating a responsive canvas that adapts to different screen sizes, and developing an efficient way to handle undo/redo functionality. I also focused on optimizing performance for smooth drawing experience even with complex artwork, and ensuring cross-browser compatibility for consistent behavior across different platforms.</p>
+            
+            
+            
+            
+            <h3 class="reveal" style="font-size: 2rem; transition-delay: 1s;">Technologies Used</h3>
+            <div class="tech-icons my-3 reveal" style="font-size: 1.2rem; transition-delay: 1.1s;">
+              
+                <span class="tech-badge"><i class="fab fa-html5"></i> HTML5 Canvas</span>
+              
+                <span class="tech-badge"><i class="fab fa-css3-alt"></i> CSS3</span>
+              
+                <span class="tech-badge"><i class="fab fa-js-square"></i> JavaScript</span>
+              
+                <span class="tech-badge"><i class="fas fa-code"></i> DOM Manipulation</span>
+              
+                <span class="tech-badge"><i class="fas fa-mobile-alt"></i> Responsive Design</span>
+              
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4">
+          <div class="project-sidebar card reveal" style="transition-delay: 0.3s;">
+            <div class="card-body">
+              <h4 class="reveal" style="transition-delay: 0.4s;">Project Details</h4>
+              
+              <div class="project-meta reveal" style="transition-delay: 0.5s;">
+                <div class="meta-item">
+                  <strong>Date:</strong>
+                  <span>February 2023</span>
+                </div>
+                
+                
+                
+                
+                <div class="meta-item">
+                  <strong>Category:</strong>
+                  <span>Interactive Web Application</span>
+                </div>
+                
+              </div>
+              
+              <div class="project-links mt-4 reveal" style="transition-delay: 0.6s;">
+                
+                <a href="https://enockmagara.github.io/WEBCANVAS/" target="_blank" class="animated-button w-100 mb-3">
+                  <span class="button-text">View Live</span>
+                  <span class="button-line"></span>
+                </a>
+                
+                
+                
+                <a href="https://github.com/EnockMagara/WEBCANVAS" target="_blank" class="animated-button w-100">
+                  <span class="button-text">GitHub Repo</span>
+                  <span class="button-line"></span>
+                </a>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p class="contact-message">Feel free to contact me through any of these channels:</p>
+      <div class="social-links-footer mb-4">
+        <a href="mailto:enockmecheo@nyu.edu" class="gmail"><i class="bi bi-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/enock-mecheo-56390b1a6/" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
+        <a href="https://github.com/EnockMagara" class="github" target="_blank"><i class="bi bi-github"></i></a>
+      </div>
+      <!-- Visitor Information Section -->
+      <div id="visitor-info" class="visitor-info">
+        <!-- Content will be populated by JavaScript -->
+      </div>
+      
+      <p class="thank-you-message">Thank you for your interest in my work.</p>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="/assets/js/main.js"></script>
+
+</body>
+
+</html> 

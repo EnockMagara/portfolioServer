@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <!-- Meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>Enock Mecheo - Portfolio</title>
+  <meta content="Portfolio of Enock Mecheo, Computer Science student at NYU Abu Dhabi" name="description">
+  <meta content="portfolio, computer science, software development, NYU, Enock Mecheo, Enock Magara" name="keywords">
+  <meta name="author" content="Enock Mecheo">
+
+  <!-- Favicons -->
+  <link href="/assets/img/favicon.png" rel="icon">
+  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Space Grotesk Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="/assets/css/style.css" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- GSAP library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+</head>
+
+<body class="index-page">
+
+  <!-- Time Display -->
+  <div id="time-display" class="time-display">
+    <span id="current-time"></span>
+  </div>
+
+  <!-- Location Display -->
+  <div id="location-display" class="location-display">
+    <span id="location-text">Loading location...</span>
+  </div>
+
+  <!-- Navigation System -->
+  <!-- Menu Toggle Button -->
+  <button class="menu-toggle" id="menuToggle">
+    <span class="menu-toggle-text">MENU</span>
+    <div class="menu-toggle-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </button>
+
+  <!-- Navigation Overlay -->
+  <div class="nav-overlay" id="navOverlay">
+    <div class="nav-overlay-content">
+      <!-- Corner Elements -->
+      <div class="nav-corner nav-corner-top-right">
+        <button class="nav-close" id="navClose">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      
+      <!-- Main Navigation -->
+      <div class="nav-main">
+        <nav class="nav-menu">
+          <ul>
+            <li class="active-page"><a href="/" class="nav-menu-link active">home</a></li>
+            <li><a href="/portfolio" class="nav-menu-link">projects</a></li>
+            <li><a href="/commlab" class="nav-menu-link">comm lab</a></li>
+            <li><a href="/photos" class="nav-menu-link">photos</a></li>
+          </ul>
+                </nav>
+      </div>
+      
+      <!-- Bottom Corner Elements -->
+      <div class="nav-corner nav-corner-bottom-left">
+        <div class="corner-info">
+          <div class="corner-text">Enock Mecheo</div>
+          <div class="corner-text">NYU Abu Dhabi</div>
+          <div class="corner-text">Computer Science</div>
+          <div class="corner-text">enockmecheo@nyu.edu</div>
+          <div class="corner-text">github.com/EnockMagara</div>
+        </div>
+      </div>
+      
+      <div class="nav-corner nav-corner-bottom-right">
+        <div class="corner-info">
+          <div class="corner-text">portfolio</div>
+          <div class="corner-text">2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <main class="main">
+    <section id="hero" class="hero section">
+      <div class="hero-container">
+        <!-- Stylistic Background Text -->
+        <div class="hero-background-text">
+          <div class="bg-text-line">FULLSTACK</div>
+          <div class="bg-text-line highlight">DEVELOPER</div>
+          <div class="bg-text-line">DEVELOPER</div>
+        </div>
+        
+        <div class="hero-content-new">
+          <div class="hero-text-section">
+            <div class="hero-label">PORTFOLIO 2025</div>
+            <h1 class="hero-title">
+              <span class="hero-title-line hero-title-main">ENOCK</span>
+              <span class="hero-title-line hero-title-secondary">MECHEO</span>
+            </h1>
+            <div class="hero-subtitle">
+              <span class="hero-role">FULLSTACK DEVELOPER</span>
+              <span class="hero-separator">×</span>
+              <span class="hero-location">NYU ABU DHABI</span>
+            </div>
+          </div>
+          
+          <!-- Interactive About Text -->
+          <div class="hero-about-interactive">
+            <div class="about-trigger">
+              <span class="about-label">ABOUT</span>
+              <span class="about-indicator">→</span>
+            </div>
+            <div class="about-content">
+              <div class="about-text-overlay">
+                <h3>Software Engineer</h3>
+                <p>I am a software engineer with a focus on full-stack web development, mobile app development, and cybersecurity. With experience building real-time platforms using React, Node.js, and MongoDB, as well as cross-platform apps in Flutter, I aim to create secure, efficient, and scalable solutions.</p>
+                <div class="about-highlights">
+                  <span class="highlight-item">Full-Stack Development</span>
+                  <span class="highlight-item">Mobile Apps</span>
+                  <span class="highlight-item">Cybersecurity</span>
+                  <span class="highlight-item">React & Node.js</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="hero-actions">
+            <a href="/portfolio" class="hero-cta-primary">
+              <span class="cta-text">VIEW PROJECTS</span>
+              <span class="cta-arrow">→</span>
+            </a>
+          </div>
+        </div>
+        
+        <div class="hero-background-elements">
+          <div class="bg-grid"></div>
+          <div class="bg-gradient"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>
