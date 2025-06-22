@@ -2,9 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ brutalist ]
+    branches: [ main ]
   pull_request:
-    branches: [ brutalist ]
+    branches: [ main ]
 
 permissions:
   contents: read
