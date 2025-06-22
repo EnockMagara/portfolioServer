@@ -118,6 +118,34 @@
   transition: all 0.3s ease;
 }
 
+/* Mobile theme toggle positioning */
+@media (max-width: 768px) {
+  .theme-toggle {
+    top: 20px;
+    right: 80px;
+    width: 35px;
+    height: 35px;
+  }
+  
+  .theme-toggle i {
+    font-size: 16px;
+  }
+}
+
+/* Additional mobile fixes */
+@media (max-width: 480px) {
+  .theme-toggle {
+    top: 15px;
+    right: 70px;
+    width: 32px;
+    height: 32px;
+  }
+  
+  .theme-toggle i {
+    font-size: 14px;
+  }
+}
+
 .theme-toggle:hover {
   background-color: var(--hover-color);
   transform: scale(1.1);
@@ -1370,17 +1398,20 @@ body.index-page .section {
 
 @media (max-width: 768px) {
   .hero-container {
-    padding: 0 20px;
+    padding: 0 15px;
+    height: 100vh;
+    overflow: hidden;
   }
   
   .hero-content-new {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
-    gap: 30px;
-    height: auto;
+    gap: 20px;
+    height: 100vh;
     justify-items: center;
     text-align: center;
-    padding: 60px 0 40px;
+    padding: 80px 0 60px;
+    align-content: center;
   }
   
   .hero-text-section {
@@ -1394,11 +1425,12 @@ body.index-page .section {
     grid-column: 1;
     grid-row: 2;
     order: 2;
-    margin: 20px auto;
+    margin: 10px auto;
     right: auto;
     top: auto;
     display: flex;
     justify-content: center;
+    z-index: 10;
   }
   
   .about-content {
@@ -1419,13 +1451,15 @@ body.index-page .section {
     grid-row: 3;
     order: 3;
     flex-direction: column;
-    gap: 20px;
-    margin-top: 20px;
+    gap: 15px;
+    margin-top: 10px;
+    z-index: 10;
   }
   
   .hero-title {
-    font-size: clamp(2.5rem, 12vw, 4rem);
-    margin-bottom: 20px;
+    font-size: clamp(2.2rem, 10vw, 3.5rem);
+    margin-bottom: 15px;
+    line-height: 1.1;
   }
   
   .hero-subtitle {
@@ -1439,7 +1473,8 @@ body.index-page .section {
   }
   
   .bg-text-line {
-    font-size: clamp(4rem, 20vw, 12rem);
+    font-size: clamp(2rem, 15vw, 8rem);
+    opacity: 0.03;
   }
   
   .about-trigger {
@@ -1479,11 +1514,20 @@ body.index-page .section {
 
 @media (max-width: 480px) {
   .hero-container {
-    padding: 0 15px;
+    padding: 0 10px;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .hero-content-new {
+    padding: 60px 0 40px;
+    gap: 15px;
+    align-content: center;
   }
   
   .hero-title {
-    font-size: clamp(2rem, 15vw, 3rem);
+    font-size: clamp(1.8rem, 12vw, 2.8rem);
+    line-height: 1.1;
   }
   
   .hero-label {
@@ -1497,7 +1541,13 @@ body.index-page .section {
   }
   
   .bg-text-line {
-    font-size: clamp(3rem, 25vw, 8rem);
+    font-size: clamp(1.5rem, 12vw, 6rem);
+    opacity: 0.02;
+  }
+  
+  /* Hide background text on very small screens to prevent interference */
+  .hero-background-text {
+    display: none;
   }
   
   .about-trigger {
@@ -2000,7 +2050,12 @@ footer {
 /* Responsive Design */
 @media (max-width: 768px) {
   body {
-    padding-top: 50px; /* Adjusted for compact mobile navbar */
+    padding-top: 0;
+  }
+  
+  body.index-page {
+    height: 100vh;
+    overflow: hidden;
   }
 
   .time-display {
