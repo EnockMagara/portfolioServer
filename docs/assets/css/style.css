@@ -1631,7 +1631,7 @@ body.index-page .section {
   min-height: 500px;
   display: flex;
   flex-direction: column;
-  padding: 60px 40px 40px;
+  padding: 40px 40px 40px;
 }
 
 .project-tile:hover {
@@ -1681,16 +1681,17 @@ body.index-page .section {
 
 .project-number {
   position: absolute;
-  top: 40px;
+  top: 20px;
   left: 40px;
   font-size: 6rem;
   font-weight: 700;
   color: #000000;
-  opacity: 0.05;
+  opacity: 0.08;
   font-family: 'Space Grotesk', sans-serif;
   z-index: 1;
   transition: all 0.3s ease;
   letter-spacing: -0.02em;
+  line-height: 1;
 }
 
 .project-tile:hover .project-number {
@@ -1724,6 +1725,7 @@ body.index-page .section {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  margin-top: 120px; /* Add space below the number */
 }
 
 .project-category {
@@ -1866,14 +1868,18 @@ body.index-page .section {
   }
   
   .project-tile {
-    padding: 40px 30px 30px;
+    padding: 30px 30px 30px;
     min-height: 450px;
   }
   
   .project-number {
     font-size: 4rem;
-    top: 30px;
+    top: 15px;
     left: 30px;
+  }
+  
+  .project-content {
+    margin-top: 90px;
   }
   
   .project-image-bg {
@@ -1891,14 +1897,18 @@ body.index-page .section {
   }
   
   .project-tile {
-    padding: 30px 25px 25px;
+    padding: 25px 25px 25px;
     min-height: 400px;
   }
   
   .project-number {
     font-size: 3.5rem;
-    top: 25px;
+    top: 10px;
     left: 25px;
+  }
+  
+  .project-content {
+    margin-top: 80px;
   }
   
   .project-title {
@@ -1924,14 +1934,18 @@ body.index-page .section {
   }
   
   .project-tile {
-    padding: 25px 20px 20px;
+    padding: 20px 20px 20px;
     min-height: 380px;
   }
   
   .project-number {
     font-size: 3rem;
-    top: 20px;
+    top: 10px;
     left: 20px;
+  }
+  
+  .project-content {
+    margin-top: 70px;
   }
   
   .project-title {
