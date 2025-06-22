@@ -491,7 +491,7 @@
 
   
   /**
-   * Initialize location display (static version)
+   * Initialize location display (dynamic worldwide locations)
    */
   function initLocationDisplay() {
     const locationElement = document.getElementById('location-text');
@@ -500,17 +500,55 @@
     // Check if we're on the homepage (index page)
     if (!document.body.classList.contains('index-page')) return;
 
-    // Static location display
-    const now = new Date();
-    const timeString = now.toLocaleString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true
-    });
+    // Array of 20 worldwide locations
+    const worldwideLocations = [
+      'San Francisco, California, USA',
+      'Tokyo, Japan',
+      'London, England, UK',
+      'Sydney, Australia',
+      'Dubai, UAE',
+      'Singapore',
+      'New York, NY, USA',
+      'Paris, France',
+      'Mumbai, India',
+      'São Paulo, Brazil',
+      'Toronto, Canada',
+      'Berlin, Germany',
+      'Seoul, South Korea',
+      'Lagos, Nigeria',
+      'Mexico City, Mexico',
+      'Stockholm, Sweden',
+      'Cairo, Egypt',
+      'Bangkok, Thailand',
+      'Amsterdam, Netherlands',
+      'Cape Town, South Africa'
+    ];
+
+    function updateLocation() {
+      // Get current minute to determine which location to show
+      const now = new Date();
+      const currentMinute = now.getMinutes();
+      
+      // Cycle through locations based on current minute
+      const locationIndex = currentMinute % worldwideLocations.length;
+      const currentLocation = worldwideLocations[locationIndex];
+      
+      const timeString = now.toLocaleString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      });
+      
+      locationElement.textContent = `Last visit from ${currentLocation} at ${timeString}`;
+    }
+
+    // Update location immediately
+    updateLocation();
     
-    locationElement.textContent = `Portfolio deployed via GitHub Pages at ${timeString}`;
+    // Update location every minute (60000 milliseconds)
+    setInterval(updateLocation, 60000);
   }
 
   /**
