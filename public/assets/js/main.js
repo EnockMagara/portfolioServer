@@ -128,54 +128,38 @@
     setupMobileNav();
     setupNavIndicator();
     revealOnScroll();
+
+    initPhotosPageEscape();
+    initTimeDisplay();
+    initLocationDisplay();
+    initNewNavigation();
+    initAboutToggle();
   });
   
   /**
    * Initialize animations
    */
   function initAnimations() {
-    // Initial animation for hero content
-    if (document.querySelector('.hero-greeting')) {
-      gsap.from('.hero-greeting', { opacity: 0, y: 50, duration: 1, delay: 0.2 });
-      gsap.from('.hero-name', { opacity: 0, y: 50, duration: 1, delay: 0.4 });
-      gsap.from('.hero-description', { opacity: 0, y: 50, duration: 1, delay: 0.6 });
-      gsap.from('.cta-button', { opacity: 0, y: 50, duration: 1, delay: 0.8 });
-    }
-
-    // Hover animation for CTA button
-    const ctaButton = document.querySelector('.cta-button');
-    
-    if (ctaButton) {
-      ctaButton.addEventListener('mouseenter', () => {
-        gsap.to(ctaButton, {
-          scale: 1.1,
-          backgroundColor: 'var(--primary-color)',
-          color: '#ffffff',
-          duration: 0.3
-        });
-      });
-
-      ctaButton.addEventListener('mouseleave', () => {
-        gsap.to(ctaButton, {
-          scale: 1,
-          backgroundColor: 'transparent',
-          color: 'var(--primary-color)',
-          duration: 0.3
-        });
-      });
-    }
-
-    // Parallax effect for hero section
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent) {
+    // New hero animations are handled by CSS animations
+    // Adding subtle parallax effect for hero background elements
+    const heroContainer = document.querySelector('.hero-container');
+    if (heroContainer) {
       window.addEventListener('mousemove', (e) => {
-        const mouseX = e.clientX / window.innerWidth - 0.5;
-        const mouseY = e.clientY / window.innerHeight - 0.5;
+        const mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        const mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
 
-        gsap.to('.hero-content', {
-          x: mouseX * 20,
-          y: mouseY * 20,
-          duration: 0.5
+        gsap.to('.bg-grid', {
+          x: mouseX * 10,
+          y: mouseY * 10,
+          duration: 1,
+          ease: 'power2.out'
+        });
+
+        gsap.to('.bg-gradient', {
+          x: mouseX * 15,
+          y: mouseY * 15,
+          duration: 1.5,
+          ease: 'power2.out'
         });
       });
     }
@@ -273,6 +257,103 @@
   }
 
   /**
+   * Initialize new navigation system
+   */
+  function initNewNavigation() {
+    const menuToggle = document.getElementById('menuToggle');
+    const navOverlay = document.getElementById('navOverlay');
+    const navClose = document.getElementById('navClose');
+    
+    if (!menuToggle || !navOverlay || !navClose) return;
+    
+    // Toggle navigation overlay
+    function toggleNav() {
+      const isActive = navOverlay.classList.contains('active');
+      
+      if (isActive) {
+        closeNav();
+      } else {
+        openNav();
+      }
+    }
+    
+    function openNav() {
+      navOverlay.classList.add('active');
+      menuToggle.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      
+      // Animate menu links
+      const menuLinks = document.querySelectorAll('.nav-menu-link');
+      menuLinks.forEach((link, index) => {
+        link.style.animationDelay = `${index * 0.1 + 0.1}s`;
+      });
+    }
+    
+    function closeNav() {
+      navOverlay.classList.remove('active');
+      menuToggle.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    // Event listeners
+    menuToggle.addEventListener('click', toggleNav);
+    navClose.addEventListener('click', closeNav);
+    
+    // Close on nav link click
+    const navLinks = document.querySelectorAll('.nav-menu-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        // Small delay to allow navigation
+        setTimeout(closeNav, 100);
+      });
+    });
+    
+    // Close on overlay click (but not on content)
+    navOverlay.addEventListener('click', (e) => {
+      if (e.target === navOverlay) {
+        closeNav();
+      }
+    });
+    
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navOverlay.classList.contains('active')) {
+        closeNav();
+      }
+    });
+    
+    // Update active nav link based on current page
+    updateActiveNavLink();
+  }
+  
+  /**
+   * Update active navigation link
+   */
+  function updateActiveNavLink() {
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('.nav-menu-link');
+    const navItems = document.querySelectorAll('.nav-menu ul li');
+    
+    // Remove active classes from all links and items
+    navLinks.forEach(link => link.classList.remove('active'));
+    navItems.forEach(item => item.classList.remove('active-page'));
+    
+    navLinks.forEach((link, index) => {
+      const href = link.getAttribute('href');
+      
+      if (href === currentPath || 
+          (currentPath === '/' && href === '/') ||
+          (currentPath.startsWith('/portfolio') && href === '/portfolio') ||
+          (currentPath.startsWith('/commlab') && href === '/commlab') ||
+          (currentPath.startsWith('/photos') && href === '/photos')) {
+        link.classList.add('active');
+        // Add active-page class to parent li element
+        link.parentElement.classList.add('active-page');
+      }
+    });
+  }
+
+  /**
    * Set up theme toggle functionality
    */
   function setupThemeToggle() {
@@ -338,116 +419,16 @@
    * Setup mobile navigation
    */
   function setupMobileNav() {
-    // Create mobile toggle button if it doesn't exist
-    if (!document.querySelector('.mobile-nav-toggle')) {
-      const navbar = document.querySelector('.top-navbar');
-      const mobileToggle = document.createElement('button');
-      mobileToggle.className = 'mobile-nav-toggle';
-      mobileToggle.setAttribute('aria-label', 'Toggle navigation menu');
-      mobileToggle.innerHTML = '<i class="bi bi-list"></i>';
-      
-      if (navbar) {
-        navbar.appendChild(mobileToggle);
-        
-        // Add click event listener
-        mobileToggle.addEventListener('click', function() {
-          navbar.classList.toggle('mobile-nav-open');
-          // Toggle icon between hamburger and X
-          const icon = this.querySelector('i');
-          if (icon.classList.contains('bi-list')) {
-            icon.classList.remove('bi-list');
-            icon.classList.add('bi-x-lg');
-          } else {
-            icon.classList.remove('bi-x-lg');
-            icon.classList.add('bi-list');
-          }
-        });
-        
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-link').forEach(link => {
-          link.addEventListener('click', () => {
-            navbar.classList.remove('mobile-nav-open');
-            const icon = mobileToggle.querySelector('i');
-            if (icon.classList.contains('bi-x-lg')) {
-              icon.classList.remove('bi-x-lg');
-              icon.classList.add('bi-list');
-            }
-          });
-        });
-        
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-          if (!navbar.contains(e.target) && navbar.classList.contains('mobile-nav-open')) {
-            navbar.classList.remove('mobile-nav-open');
-            const icon = mobileToggle.querySelector('i');
-            if (icon.classList.contains('bi-x-lg')) {
-              icon.classList.remove('bi-x-lg');
-              icon.classList.add('bi-list');
-            }
-          }
-        });
-      }
-    }
+    // Mobile navigation is now handled by the new overlay system
+    // This function is kept for compatibility but functionality moved to initNewNavigation
   }
 
   /**
    * Setup navigation indicator
    */
   function setupNavIndicator() {
-    const navbar = document.querySelector('.top-navbar .navbar ul');
-    if (!navbar) return;
-    
-    // Create the indicator element if it doesn't exist
-    let indicator = document.querySelector('.nav-indicator');
-    if (!indicator) {
-      indicator = document.createElement('div');
-      indicator.className = 'nav-indicator';
-      navbar.appendChild(indicator);
-    }
-    
-    // Position the indicator under the active link
-    function positionIndicator() {
-      const activeLink = document.querySelector('.nav-link.active');
-      if (activeLink) {
-        const parentLi = activeLink.closest('li');
-        const rect = parentLi.getBoundingClientRect();
-        const navRect = navbar.getBoundingClientRect();
-        
-        // Set the indicator width and position
-        indicator.style.width = `${rect.width - 30}px`;
-        indicator.style.left = `${rect.left - navRect.left + 15}px`;
-        indicator.style.opacity = '1';
-      } else {
-        // Hide the indicator if no active link
-        indicator.style.opacity = '0';
-      }
-    }
-    
-    // Position on load
-    positionIndicator();
-    
-    // Position on window resize
-    window.addEventListener('resize', positionIndicator);
-    
-    // Add hover effect to smoothly move indicator
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('mouseenter', function() {
-        const parentLi = this.closest('li');
-        const rect = parentLi.getBoundingClientRect();
-        const navRect = navbar.getBoundingClientRect();
-        
-        indicator.style.width = `${rect.width - 30}px`;
-        indicator.style.left = `${rect.left - navRect.left + 15}px`;
-      });
-      
-      link.addEventListener('mouseleave', function() {
-        // Return to active link position
-        positionIndicator();
-      });
-    });
-    
-    // Update on page change (for SPA functionality)
-    document.addEventListener('spa:pagechange', positionIndicator);
+    // Navigation indicator is no longer needed with the new overlay system
+    // This function is kept for compatibility
   }
 
   // Add scroll reveal functionality
@@ -469,4 +450,120 @@
 
   // Add event listener for scroll
   window.addEventListener('scroll', revealOnScroll);
+
+
+
+  /**
+   * Photos page escape key handler
+   */
+  function initPhotosPageEscape() {
+    if (document.body.classList.contains('photos-page')) {
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          window.location.href = '/portfolio';
+        }
+      });
+    }
+  }
+
+  /**
+   * Initialize time display
+   */
+  function initTimeDisplay() {
+    const timeElement = document.getElementById('current-time');
+    if (!timeElement) return;
+
+    function updateTime() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      });
+      timeElement.textContent = timeString;
+    }
+
+    // Update time immediately and then every second
+    updateTime();
+    setInterval(updateTime, 1000);
+  }
+
+  /**
+   * Initialize location display
+   */
+  function initLocationDisplay() {
+    const locationElement = document.getElementById('location-text');
+    if (!locationElement) return;
+
+    // Check if we're on the homepage (index page)
+    if (!document.body.classList.contains('index-page')) return;
+
+    async function fetchLocation() {
+      try {
+        const response = await fetch('/api/location');
+        const data = await response.json();
+        
+        if (data.success) {
+          const now = new Date();
+          const timeString = now.toLocaleString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+          });
+          
+          locationElement.textContent = `Last visit from ${data.location} at ${timeString}`;
+        } else {
+          locationElement.textContent = 'Location unavailable';
+        }
+      } catch (error) {
+        console.log('Location fetch error:', error);
+        locationElement.textContent = 'Location unavailable';
+      }
+    }
+
+    // Fetch location on page load
+    fetchLocation();
+  }
+
+  /**
+   * Initialize about toggle functionality
+   */
+  function initAboutToggle() {
+    const aboutTrigger = document.querySelector('.about-trigger');
+    const aboutContent = document.querySelector('.about-content');
+    
+    if (!aboutTrigger || !aboutContent) return;
+    
+    aboutTrigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Toggle the active class
+      aboutContent.classList.toggle('active');
+      aboutTrigger.classList.toggle('active');
+      
+      // Update the indicator arrow
+      const indicator = aboutTrigger.querySelector('.about-indicator');
+      if (aboutContent.classList.contains('active')) {
+        indicator.textContent = '↓';
+        aboutTrigger.setAttribute('aria-expanded', 'true');
+      } else {
+        indicator.textContent = '→';
+        aboutTrigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+    
+    // Close about content when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!aboutTrigger.contains(e.target) && !aboutContent.contains(e.target)) {
+        aboutContent.classList.remove('active');
+        aboutTrigger.classList.remove('active');
+        const indicator = aboutTrigger.querySelector('.about-indicator');
+        indicator.textContent = '→';
+        aboutTrigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
 })();
