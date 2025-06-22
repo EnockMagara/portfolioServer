@@ -342,10 +342,10 @@
       const href = link.getAttribute('href');
       
       if (href === currentPath || 
-          (currentPath === '/' && href === '/') ||
-          (currentPath.startsWith('/portfolio') && href === '/portfolio') ||
-          (currentPath.startsWith('/commlab') && href === '/commlab') ||
-          (currentPath.startsWith('/photos') && href === '/photos')) {
+          (currentPath.includes('index.html') || currentPath.endsWith('/') && href === 'index.html') ||
+          (currentPath.includes('portfolio.html') && href === 'portfolio.html') ||
+          (currentPath.includes('commlab.html') && href === 'commlab.html') ||
+          (currentPath.includes('photos.html') && href === 'photos.html')) {
         link.classList.add('active');
         // Add active-page class to parent li element
         link.parentElement.classList.add('active-page');
@@ -460,7 +460,7 @@
     if (document.body.classList.contains('photos-page')) {
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
-          window.location.href = '/portfolio';
+          window.location.href = 'portfolio.html';
         }
       });
     }

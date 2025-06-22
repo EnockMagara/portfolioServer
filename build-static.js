@@ -71,6 +71,18 @@ mainJsContent = mainJsContent.replace(
   staticLocationFunction
 );
 
+// Fix navigation paths in main.js for GitHub Pages
+mainJsContent = mainJsContent
+  .replace(/window\.location\.href = '\/portfolio'/g, "window.location.href = 'portfolio.html'")
+  .replace(/href === '\/'/g, "href === 'index.html'")
+  .replace(/href === '\/portfolio'/g, "href === 'portfolio.html'")
+  .replace(/href === '\/commlab'/g, "href === 'commlab.html'")
+  .replace(/href === '\/photos'/g, "href === 'photos.html'")
+  .replace(/currentPath === '\/'/g, "currentPath.includes('index.html') || currentPath.endsWith('/')")
+  .replace(/currentPath\.startsWith\('\/portfolio'\)/g, "currentPath.includes('portfolio.html')")
+  .replace(/currentPath\.startsWith\('\/commlab'\)/g, "currentPath.includes('commlab.html')")
+  .replace(/currentPath\.startsWith\('\/photos'\)/g, "currentPath.includes('photos.html')");
+
 // Write the modified main.js
 fs.writeFileSync(staticMainJsPath, mainJsContent);
 
@@ -82,7 +94,23 @@ function renderTemplate(templateName, data = {}, outputName = templateName) {
   const template = fs.readFileSync(templatePath, 'utf8');
   const html = ejs.render(template, data);
   
-  fs.writeFileSync(outputPath, html);
+  // Fix paths for GitHub Pages deployment
+  let fixedHtml = html
+    // Fix navigation links
+    .replace(/href="\/"/g, 'href="index.html"')
+    .replace(/href="\/portfolio"/g, 'href="portfolio.html"')
+    .replace(/href="\/commlab"/g, 'href="commlab.html"')
+    .replace(/href="\/photos"/g, 'href="photos.html"')
+    .replace(/href="\/blog"/g, 'href="blog.html"')
+    // Fix project links
+    .replace(/href="\/project\//g, 'href="project/')
+    // Fix asset paths
+    .replace(/href="\/assets\//g, 'href="assets/')
+    .replace(/src="\/assets\//g, 'src="assets/')
+    // Fix other absolute paths
+    .replace(/window\.location\.href = '\/portfolio'/g, "window.location.href = 'portfolio.html'");
+  
+  fs.writeFileSync(outputPath, fixedHtml);
   console.log(`Generated: ${outputName}.html`);
 }
 
