@@ -156,7 +156,8 @@ const staticBlogData = {
 renderTemplate('blog', staticBlogData, 'blog');
 
 // Create CNAME file for custom domain (if needed)
-fs.writeFileSync(path.join(docsDir, 'CNAME'), 'www.enockmecheo.com');
+// Commented out to avoid conflicts - uncomment and set up DNS if you want custom domain
+// fs.writeFileSync(path.join(docsDir, 'CNAME'), 'www.enockmecheo.com');
 
 console.log('Static site generated successfully in docs/ directory!');
 console.log('You can now deploy the docs/ directory to GitHub Pages.'); 
