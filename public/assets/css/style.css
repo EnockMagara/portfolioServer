@@ -2493,6 +2493,34 @@ color: var(--text-color);
 height: 100%;
 }
 
+/* Light mode specific styles for animated buttons */
+[data-theme="light"] .animated-button {
+  color: #000;
+  border-color: #000;
+}
+
+[data-theme="light"] .animated-button .button-line {
+  background-color: #000;
+}
+
+[data-theme="light"] .animated-button:hover {
+  color: #fff;
+}
+
+/* Dark mode specific styles for animated buttons */
+[data-theme="dark"] .animated-button {
+  color: #fff;
+  border-color: #fff;
+}
+
+[data-theme="dark"] .animated-button .button-line {
+  background-color: #fff;
+}
+
+[data-theme="dark"] .animated-button:hover {
+  color: #000;
+}
+
 /* About Section Hyperlink Styling */
 .about-description a {
 color: #ff6600; /* Assuming the up arrow uses this color, adjust as needed */
