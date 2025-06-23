@@ -2699,6 +2699,17 @@ animation: bounce 1s infinite;
   transform: translateX(-3px);
 }
 
+/* Light mode specific styles for back button */
+[data-theme="light"] .back-button {
+  color: #000;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] .back-button:hover {
+  color: #ff6600;
+  background-color: rgba(255, 102, 0, 0.05);
+}
+
 .project-sidebar {
   position: sticky;
   top: 80px;
@@ -2712,6 +2723,18 @@ animation: bounce 1s infinite;
 .project-sidebar .card {
   background-color: var(--card-bg);
   border: 1px solid var(--card-border);
+}
+
+/* Light mode specific styles for project sidebar */
+[data-theme="light"] .project-sidebar {
+  background-color: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .project-sidebar .card {
+  background-color: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .meta-item {
@@ -2737,6 +2760,15 @@ animation: bounce 1s infinite;
   color: var(--text-color);
 }
 
+/* Light mode specific styles for meta items */
+[data-theme="light"] .meta-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .meta-item strong {
+  color: #000;
+}
+
 .tech-badge {
   display: inline-block;
   padding: 6px 12px;
@@ -2752,6 +2784,16 @@ animation: bounce 1s infinite;
   color: var(--primary-color);
 }
 
+/* Light mode specific styles for tech badges */
+[data-theme="light"] .tech-badge {
+  background-color: rgba(0, 0, 0, 0.08);
+  color: #000;
+}
+
+[data-theme="light"] .tech-badge i {
+  color: #ff6600;
+}
+
 .project-description h3 {
   margin-top: 30px;
   margin-bottom: 15px;
@@ -2764,6 +2806,11 @@ animation: bounce 1s infinite;
   margin-bottom: 20px;
   line-height: 1.6;
   font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Light mode specific styles for project description */
+[data-theme="light"] .project-description h3 {
+  color: #000;
 }
 
 @media (max-width: 768px) {
@@ -2834,6 +2881,11 @@ animation: bounce 1s infinite;
   transition: transform 0.3s ease;
 }
 
+/* Light mode specific styles for technical achievements */
+[data-theme="light"] .technical-achievements-list li:before {
+  color: #ff6600;
+}
+
 /* Scroll Reveal Animation */
 .reveal {
   position: relative;
@@ -2871,6 +2923,18 @@ h1, h2, h3, h4, h5, h6 {
 
 .card:hover {
   transform: translateY(-5px);
+}
+
+/* Light mode specific styles for cards */
+[data-theme="light"] .card {
+  background-color: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .card:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
 /* Header Styles */
