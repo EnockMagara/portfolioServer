@@ -2813,6 +2813,24 @@ animation: bounce 1s infinite;
   color: #000;
 }
 
+/* Project sidebar heading styles */
+.project-sidebar h4 {
+  color: var(--text-color);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Dark mode specific styles for project sidebar heading */
+[data-theme="dark"] .project-sidebar h4 {
+  color: #fff;
+}
+
+/* Light mode specific styles for project sidebar heading */
+[data-theme="light"] .project-sidebar h4 {
+  color: #000;
+}
+
 @media (max-width: 768px) {
   .project-sidebar {
     position: static;
