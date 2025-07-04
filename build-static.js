@@ -192,14 +192,27 @@ function renderTemplateToSubfolder(templateName, data = {}, outputSubfolder = te
   // Fix paths for GitHub Pages deployment (use trailing slashes)
   let fixedHtml = html
     .replace(/href="\/(?!assets|project|blog|photos|portfolio|commlab|index)/g, 'href="/')
-    .replace(/href="\/portfolio"/g, 'href="/portfolio/')
-    .replace(/href="\/commlab"/g, 'href="/commlab/')
-    .replace(/href="\/photos"/g, 'href="/photos/')
-    .replace(/href="\/blog"/g, 'href="/blog/')
+    .replace(/href="\/portfolio"/g, 'href="/portfolio/"')
+    .replace(/href="\/commlab"/g, 'href="/commlab/"')
+    .replace(/href="\/photos"/g, 'href="/photos/"')
+    .replace(/href="\/blog"/g, 'href="/blog/"')
     .replace(/href="\/project\//g, 'href="/project/')
-    .replace(/href="\/assets\//g, 'href="assets/')
-    .replace(/src="\/assets\//g, 'src="assets/')
     .replace(/window\.location\.href = '\/portfolio'/g, "window.location.href = '/portfolio/'");
+
+  // Fix asset paths based on subfolder depth
+  if (outputSubfolder === '') {
+    // Root level - keep assets paths as is
+    fixedHtml = fixedHtml
+      .replace(/href="\/assets\//g, 'href="assets/')
+      .replace(/src="\/assets\//g, 'src="assets/')
+      .replace(/url\('\/assets\//g, "url('assets/");
+  } else {
+    // Subfolder level - use ../ for assets
+    fixedHtml = fixedHtml
+      .replace(/href="\/assets\//g, 'href="../assets/')
+      .replace(/src="\/assets\//g, 'src="../assets/')
+      .replace(/url\('\/assets\//g, "url('../assets/");
+  }
 
   writeToSubfolderIndex(outputDir, fixedHtml);
   console.log(`Generated: ${outputSubfolder}/index.html`);
@@ -227,14 +240,18 @@ projects.forEach(project => {
   // Fix paths for project detail pages (they're in a subdirectory)
   let fixedHtml = html
     .replace(/href="\/(?!assets|project|blog|photos|portfolio|commlab|index)/g, 'href="/')
-    .replace(/href="\/portfolio"/g, 'href="/portfolio/')
-    .replace(/href="\/commlab"/g, 'href="/commlab/')
-    .replace(/href="\/photos"/g, 'href="/photos/')
-    .replace(/href="\/blog"/g, 'href="/blog/')
+    .replace(/href="\/portfolio"/g, 'href="/portfolio/"')
+    .replace(/href="\/commlab"/g, 'href="/commlab/"')
+    .replace(/href="\/photos"/g, 'href="/photos/"')
+    .replace(/href="\/blog"/g, 'href="/blog/"')
     .replace(/href="\/project\//g, 'href="/project/')
-    .replace(/href="\/assets\//g, 'href="../assets/')
-    .replace(/src="\/assets\//g, 'src="../assets/')
     .replace(/window\.location\.href = '\/portfolio'/g, "window.location.href = '/portfolio/'");
+
+  // Fix asset paths for project pages (two levels deep: /project/[id]/)
+  fixedHtml = fixedHtml
+    .replace(/href="\/assets\//g, 'href="../../assets/')
+    .replace(/src="\/assets\//g, 'src="../../assets/')
+    .replace(/url\('\/assets\//g, "url('../../assets/");
 
   writeToSubfolderIndex(projectDir, fixedHtml);
   console.log(`Generated: project/${project.id}/index.html`);
