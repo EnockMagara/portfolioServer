@@ -1,3 +1,48 @@
+
+  // Clean URL handling for GitHub Pages
+  (function() {
+    // Function to handle clean URLs
+    function handleCleanUrls() {
+      const currentPath = window.location.pathname;
+      
+      // If we're on a clean URL (no .html), we need to handle navigation differently
+      if (!currentPath.includes('.html')) {
+        // Update all internal links to use clean URLs
+        document.querySelectorAll('a[href]').forEach(link => {
+          const href = link.getAttribute('href');
+          
+          // Convert .html links to clean URLs
+          if (href.endsWith('.html')) {
+            const cleanHref = href.replace('.html', '');
+            link.setAttribute('href', cleanHref);
+          }
+          
+          // Handle relative links from project pages
+          if (href.startsWith('../') && href.includes('.html')) {
+            const cleanHref = href.replace('.html', '');
+            link.setAttribute('href', cleanHref);
+          }
+        });
+        
+        // Handle form submissions and programmatic navigation
+        const originalPushState = history.pushState;
+        history.pushState = function(state, title, url) {
+          if (url && url.endsWith('.html')) {
+            url = url.replace('.html', '');
+          }
+          return originalPushState.call(this, state, title, url);
+        };
+      }
+    }
+    
+    // Run on page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', handleCleanUrls);
+    } else {
+      handleCleanUrls();
+    }
+  })();
+
 (function() {
   "use strict";
 
@@ -342,10 +387,10 @@
       const href = link.getAttribute('href');
       
       if (href === currentPath || 
-          (currentPath.includes('index.html') || currentPath.endsWith('/') && href === 'index.html') ||
-          (currentPath.includes('portfolio.html') && href === 'portfolio.html') ||
-          (currentPath.includes('commlab.html') && href === 'commlab.html') ||
-          (currentPath.includes('photos.html') && href === 'photos.html')) {
+          (currentPath === '/' || currentPath.endsWith('/') || currentPath.endsWith('/index') && href === '/' || href === '/index') ||
+          (currentPath.startsWith('/portfolio') && href === '/portfolio') ||
+          (currentPath.startsWith('/commlab') && href === '/commlab') ||
+          (currentPath.startsWith('/photos') && href === '/photos')) {
         link.classList.add('active');
         // Add active-page class to parent li element
         link.parentElement.classList.add('active-page');
@@ -460,7 +505,7 @@
     if (document.body.classList.contains('photos-page')) {
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
-          window.location.href = 'portfolio.html';
+          window.location.href = '/portfolio';
         }
       });
     }

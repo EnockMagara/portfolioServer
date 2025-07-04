@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        // Clean URL handling for GitHub Pages
+        (function() {
+            const path = window.location.pathname;
+            
+            // Map clean URLs to their .html equivalents
+            const urlMap = {
+                '/': '/index.html',
+                '/portfolio': '/portfolio.html',
+                '/commlab': '/commlab.html',
+                '/photos': '/photos.html',
+                '/blog': '/blog.html'
+            };
+            
+            // Check if this is a project page
+            if (path.startsWith('/project/')) {
+                const projectId = path.split('/project/')[1];
+                if (projectId) {
+                    window.location.href = `/project/${projectId}.html`;
+                    return;
+                }
+            }
+            
+            // Check if we have a direct mapping
+            if (urlMap[path]) {
+                window.location.href = urlMap[path];
+                return;
+            }
+            
+            // If no mapping found, try adding .html extension
+            if (!path.includes('.html') && !path.includes('.')) {
+                window.location.href = path + '.html';
+                return;
+            }
+            
+            // If still no match, redirect to home
+            window.location.href = '/index.html';
+        })();
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>

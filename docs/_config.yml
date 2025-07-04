@@ -1,0 +1,59 @@
+# GitHub Pages Configuration
+# This file helps GitHub Pages handle clean URLs without .html extensions
+
+# Enable Jekyll processing (required for GitHub Pages)
+include: []
+
+# Exclude files from processing
+exclude:
+  - node_modules
+  - package.json
+  - package-lock.json
+  - build-static.js
+  - server.js
+  - routes/
+  - views/
+  - public/
+  - portfolio.service
+  - setup_https.sh
+  - deploy.sh
+  - GITHUB_PAGES_SETUP.md
+  - README.md
+
+# Set default layout
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Permalinks - this helps with clean URLs
+permalink: /:title/
+
+# Collections
+collections:
+  projects:
+    output: true
+    permalink: /project/:name/
+
+# Plugins (GitHub Pages has limited plugin support)
+plugins:
+  - jekyll-redirect-from
+
+# Markdown settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# Liquid settings
+liquid:
+  error_mode: warn
+
+# Sass settings
+sass:
+  style: compressed
+
+# Build settings
+build:
+  output: _site 

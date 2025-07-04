@@ -111,15 +111,65 @@ mainJsContent = mainJsContent.replace(
 
 // Fix navigation paths in main.js for GitHub Pages
 mainJsContent = mainJsContent
-  .replace(/window\.location\.href = '\/portfolio'/g, "window.location.href = 'portfolio.html'")
-  .replace(/href === '\/'/g, "href === 'index.html'")
-  .replace(/href === '\/portfolio'/g, "href === 'portfolio.html'")
-  .replace(/href === '\/commlab'/g, "href === 'commlab.html'")
-  .replace(/href === '\/photos'/g, "href === 'photos.html'")
-  .replace(/currentPath === '\/'/g, "currentPath.includes('index.html') || currentPath.endsWith('/')")
-  .replace(/currentPath\.startsWith\('\/portfolio'\)/g, "currentPath.includes('portfolio.html')")
-  .replace(/currentPath\.startsWith\('\/commlab'\)/g, "currentPath.includes('commlab.html')")
-  .replace(/currentPath\.startsWith\('\/photos'\)/g, "currentPath.includes('photos.html')");
+  .replace(/window\.location\.href = '\/portfolio'/g, "window.location.href = '/portfolio'")
+  .replace(/href === '\/'/g, "href === '/' || href === '/index'")
+  .replace(/href === '\/portfolio'/g, "href === '/portfolio'")
+  .replace(/href === '\/commlab'/g, "href === '/commlab'")
+  .replace(/href === '\/photos'/g, "href === '/photos'")
+  .replace(/currentPath === '\/'/g, "currentPath === '/' || currentPath.endsWith('/') || currentPath.endsWith('/index')")
+  .replace(/currentPath\.startsWith\('\/portfolio'\)/g, "currentPath.startsWith('/portfolio')")
+  .replace(/currentPath\.startsWith\('\/commlab'\)/g, "currentPath.startsWith('/commlab')")
+  .replace(/currentPath\.startsWith\('\/photos'\)/g, "currentPath.startsWith('/photos')");
+
+// Add clean URL handling for GitHub Pages
+const cleanUrlScript = `
+  // Clean URL handling for GitHub Pages
+  (function() {
+    // Function to handle clean URLs
+    function handleCleanUrls() {
+      const currentPath = window.location.pathname;
+      
+      // If we're on a clean URL (no .html), we need to handle navigation differently
+      if (!currentPath.includes('.html')) {
+        // Update all internal links to use clean URLs
+        document.querySelectorAll('a[href]').forEach(link => {
+          const href = link.getAttribute('href');
+          
+          // Convert .html links to clean URLs
+          if (href.endsWith('.html')) {
+            const cleanHref = href.replace('.html', '');
+            link.setAttribute('href', cleanHref);
+          }
+          
+          // Handle relative links from project pages
+          if (href.startsWith('../') && href.includes('.html')) {
+            const cleanHref = href.replace('.html', '');
+            link.setAttribute('href', cleanHref);
+          }
+        });
+        
+        // Handle form submissions and programmatic navigation
+        const originalPushState = history.pushState;
+        history.pushState = function(state, title, url) {
+          if (url && url.endsWith('.html')) {
+            url = url.replace('.html', '');
+          }
+          return originalPushState.call(this, state, title, url);
+        };
+      }
+    }
+    
+    // Run on page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', handleCleanUrls);
+    } else {
+      handleCleanUrls();
+    }
+  })();
+`;
+
+// Insert the clean URL script at the beginning of main.js
+mainJsContent = cleanUrlScript + '\n' + mainJsContent;
 
 // Write the modified main.js
 fs.writeFileSync(staticMainJsPath, mainJsContent);
@@ -134,19 +184,19 @@ function renderTemplate(templateName, data = {}, outputName = templateName) {
   
   // Fix paths for GitHub Pages deployment
   let fixedHtml = html
-    // Fix navigation links
-    .replace(/href="\/"/g, 'href="index.html"')
-    .replace(/href="\/portfolio"/g, 'href="portfolio.html"')
-    .replace(/href="\/commlab"/g, 'href="commlab.html"')
-    .replace(/href="\/photos"/g, 'href="photos.html"')
-    .replace(/href="\/blog"/g, 'href="blog.html"')
+    // Fix navigation links - use clean URLs
+    .replace(/href="\/"/g, 'href="/"')
+    .replace(/href="\/portfolio"/g, 'href="/portfolio"')
+    .replace(/href="\/commlab"/g, 'href="/commlab"')
+    .replace(/href="\/photos"/g, 'href="/photos"')
+    .replace(/href="\/blog"/g, 'href="/blog"')
     // Fix project links
-    .replace(/href="\/project\//g, 'href="project/')
+    .replace(/href="\/project\//g, 'href="/project/')
     // Fix asset paths
     .replace(/href="\/assets\//g, 'href="assets/')
     .replace(/src="\/assets\//g, 'src="assets/')
     // Fix other absolute paths
-    .replace(/window\.location\.href = '\/portfolio'/g, "window.location.href = 'portfolio.html'");
+    .replace(/window\.location\.href = '\/portfolio'/g, "window.location.href = '/portfolio'");
   
   fs.writeFileSync(outputPath, fixedHtml);
   console.log(`Generated: ${outputName}.html`);
@@ -180,18 +230,18 @@ projects.forEach(project => {
   // Fix paths for project detail pages (they're in a subdirectory)
   let fixedHtml = html
     // Fix navigation links (project pages are in subdirectory, so need ../)
-    .replace(/href="\/"/g, 'href="../index.html"')
-    .replace(/href="\/portfolio"/g, 'href="../portfolio.html"')
-    .replace(/href="\/commlab"/g, 'href="../commlab.html"')
-    .replace(/href="\/photos"/g, 'href="../photos.html"')
-    .replace(/href="\/blog"/g, 'href="../blog.html"')
+    .replace(/href="\/"/g, 'href="/"')
+    .replace(/href="\/portfolio"/g, 'href="/portfolio"')
+    .replace(/href="\/commlab"/g, 'href="/commlab"')
+    .replace(/href="\/photos"/g, 'href="/photos"')
+    .replace(/href="\/blog"/g, 'href="/blog"')
     // Fix back button
-    .replace(/href="\/portfolio"/g, 'href="../portfolio.html"')
+    .replace(/href="\/portfolio"/g, 'href="/portfolio"')
     // Fix asset paths (project pages need ../ to go up one level)
     .replace(/href="\/assets\//g, 'href="../assets/')
     .replace(/src="\/assets\//g, 'src="../assets/')
     // Fix other absolute paths
-    .replace(/window\.location\.href = '\/portfolio'/g, "window.location.href = '../portfolio.html'");
+    .replace(/window\.location\.href = '\/portfolio'/g, "window.location.href = '/portfolio'");
   
   fs.writeFileSync(outputPath, fixedHtml);
   console.log(`Generated: project/${project.id}.html`);
@@ -209,9 +259,65 @@ const staticBlogData = {
 };
 renderTemplate('blog', staticBlogData, 'blog');
 
+// Create 404.html for clean URL handling
+const fourOhFourHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        // Clean URL handling for GitHub Pages
+        (function() {
+            const path = window.location.pathname;
+            
+            // Map clean URLs to their .html equivalents
+            const urlMap = {
+                '/': '/index.html',
+                '/portfolio': '/portfolio.html',
+                '/commlab': '/commlab.html',
+                '/photos': '/photos.html',
+                '/blog': '/blog.html'
+            };
+            
+            // Check if this is a project page
+            if (path.startsWith('/project/')) {
+                const projectId = path.split('/project/')[1];
+                if (projectId) {
+                    window.location.href = \`/project/\${projectId}.html\`;
+                    return;
+                }
+            }
+            
+            // Check if we have a direct mapping
+            if (urlMap[path]) {
+                window.location.href = urlMap[path];
+                return;
+            }
+            
+            // If no mapping found, try adding .html extension
+            if (!path.includes('.html') && !path.includes('.')) {
+                window.location.href = path + '.html';
+                return;
+            }
+            
+            // If still no match, redirect to home
+            window.location.href = '/index.html';
+        })();
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>`;
+
+fs.writeFileSync(path.join(docsDir, '404.html'), fourOhFourHtml);
+console.log('Generated: 404.html (for clean URL handling)');
+
 // Create CNAME file for custom domain (if needed)
 // Commented out to avoid conflicts - uncomment and set up DNS if you want custom domain
 // fs.writeFileSync(path.join(docsDir, 'CNAME'), 'www.enockmecheo.com');
 
 console.log('Static site generated successfully in docs/ directory!');
-console.log('You can now deploy the docs/ directory to GitHub Pages.'); 
+console.log('You can now deploy the docs/ directory to GitHub Pages.');
+console.log('Clean URLs will work automatically (e.g., /portfolio instead of /portfolio.html)'); 
