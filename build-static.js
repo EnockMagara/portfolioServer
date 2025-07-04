@@ -174,77 +174,70 @@ mainJsContent = cleanUrlScript + '\n' + mainJsContent;
 // Write the modified main.js
 fs.writeFileSync(staticMainJsPath, mainJsContent);
 
-// Function to render EJS template to HTML
-function renderTemplate(templateName, data = {}, outputName = templateName) {
+// Helper to write HTML to subfolder as index.html
+function writeToSubfolderIndex(outputDir, html) {
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true });
+  }
+  fs.writeFileSync(path.join(outputDir, 'index.html'), html);
+}
+
+// Function to render EJS template to HTML (now outputs to subfolder/index.html)
+function renderTemplateToSubfolder(templateName, data = {}, outputSubfolder = templateName) {
   const templatePath = path.join(__dirname, 'views', `${templateName}.ejs`);
-  const outputPath = path.join(docsDir, `${outputName}.html`);
-  
+  const outputDir = path.join(docsDir, outputSubfolder);
   const template = fs.readFileSync(templatePath, 'utf8');
   const html = ejs.render(template, data);
-  
-  // Fix paths for GitHub Pages deployment
+
+  // Fix paths for GitHub Pages deployment (use trailing slashes)
   let fixedHtml = html
-    // Fix navigation links - use clean URLs
-    .replace(/href="\/"/g, 'href="/"')
-    .replace(/href="\/portfolio"/g, 'href="/portfolio"')
-    .replace(/href="\/commlab"/g, 'href="/commlab"')
-    .replace(/href="\/photos"/g, 'href="/photos"')
-    .replace(/href="\/blog"/g, 'href="/blog"')
-    // Fix project links
+    .replace(/href="\/(?!assets|project|blog|photos|portfolio|commlab|index)/g, 'href="/')
+    .replace(/href="\/portfolio"/g, 'href="/portfolio/')
+    .replace(/href="\/commlab"/g, 'href="/commlab/')
+    .replace(/href="\/photos"/g, 'href="/photos/')
+    .replace(/href="\/blog"/g, 'href="/blog/')
     .replace(/href="\/project\//g, 'href="/project/')
-    // Fix asset paths
     .replace(/href="\/assets\//g, 'href="assets/')
     .replace(/src="\/assets\//g, 'src="assets/')
-    // Fix other absolute paths
-    .replace(/window\.location\.href = '\/portfolio'/g, "window.location.href = '/portfolio'");
-  
-  fs.writeFileSync(outputPath, fixedHtml);
-  console.log(`Generated: ${outputName}.html`);
+    .replace(/window\.location\.href = '\/portfolio'/g, "window.location.href = '/portfolio/'");
+
+  writeToSubfolderIndex(outputDir, fixedHtml);
+  console.log(`Generated: ${outputSubfolder}/index.html`);
 }
 
 // Render homepage
-renderTemplate('index', {}, 'index');
+renderTemplateToSubfolder('index', {}, '');
 
 // Render portfolio page
-renderTemplate('portfolio', { projects }, 'portfolio');
+renderTemplateToSubfolder('portfolio', { projects }, 'portfolio');
 
 // Render photos page
-renderTemplate('photos', {}, 'photos');
+renderTemplateToSubfolder('photos', {}, 'photos');
 
 // Render comm lab page
-renderTemplate('commlab', {}, 'commlab');
+renderTemplateToSubfolder('commlab', {}, 'commlab');
 
-// Render individual project pages
+// Render individual project pages (as /project/[id]/index.html)
 projects.forEach(project => {
-  const projectDir = path.join(docsDir, 'project');
-  if (!fs.existsSync(projectDir)) {
-    fs.mkdirSync(projectDir);
-  }
-  
-  const outputPath = path.join(projectDir, `${project.id}.html`);
+  const projectDir = path.join(docsDir, 'project', project.id);
   const templatePath = path.join(__dirname, 'views', 'project-detail.ejs');
-  
   const template = fs.readFileSync(templatePath, 'utf8');
   const html = ejs.render(template, { project });
-  
+
   // Fix paths for project detail pages (they're in a subdirectory)
   let fixedHtml = html
-    // Fix navigation links (project pages are in subdirectory, so need ../)
-    .replace(/href="\/"/g, 'href="/"')
-    .replace(/href="\/portfolio"/g, 'href="/portfolio"')
-    .replace(/href="\/commlab"/g, 'href="/commlab"')
-    .replace(/href="\/photos"/g, 'href="/photos"')
-    .replace(/href="\/blog"/g, 'href="/blog"')
-    // Fix back button
-    .replace(/href="\/portfolio"/g, 'href="/portfolio"')
-    // Fix asset paths (project pages need ../ to go up one level)
+    .replace(/href="\/(?!assets|project|blog|photos|portfolio|commlab|index)/g, 'href="/')
+    .replace(/href="\/portfolio"/g, 'href="/portfolio/')
+    .replace(/href="\/commlab"/g, 'href="/commlab/')
+    .replace(/href="\/photos"/g, 'href="/photos/')
+    .replace(/href="\/blog"/g, 'href="/blog/')
+    .replace(/href="\/project\//g, 'href="/project/')
     .replace(/href="\/assets\//g, 'href="../assets/')
     .replace(/src="\/assets\//g, 'src="../assets/')
-    // Fix other absolute paths
-    .replace(/window\.location\.href = '\/portfolio'/g, "window.location.href = '/portfolio'");
-  
-  fs.writeFileSync(outputPath, fixedHtml);
-  console.log(`Generated: project/${project.id}.html`);
+    .replace(/window\.location\.href = '\/portfolio'/g, "window.location.href = '/portfolio/'");
+
+  writeToSubfolderIndex(projectDir, fixedHtml);
+  console.log(`Generated: project/${project.id}/index.html`);
 });
 
 // Create a simple blog page without RSS (since GitHub Pages can't run server-side code)
@@ -257,9 +250,9 @@ const staticBlogData = {
     }
   ]
 };
-renderTemplate('blog', staticBlogData, 'blog');
+renderTemplateToSubfolder('blog', staticBlogData, 'blog');
 
-// Create 404.html for clean URL handling
+// Update 404.html to redirect to subfolder URLs
 const fourOhFourHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -267,42 +260,41 @@ const fourOhFourHtml = `<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
     <script>
-        // Clean URL handling for GitHub Pages
+        // Clean URL handling for GitHub Pages (subfolder version)
         (function() {
             const path = window.location.pathname;
-            
-            // Map clean URLs to their .html equivalents
+            // Map clean URLs to their subfolder equivalents
             const urlMap = {
                 '/': '/index.html',
-                '/portfolio': '/portfolio.html',
-                '/commlab': '/commlab.html',
-                '/photos': '/photos.html',
-                '/blog': '/blog.html'
+                '/portfolio': '/portfolio/',
+                '/portfolio/': '/portfolio/',
+                '/commlab': '/commlab/',
+                '/commlab/': '/commlab/',
+                '/photos': '/photos/',
+                '/photos/': '/photos/',
+                '/blog': '/blog/',
+                '/blog/': '/blog/'
             };
-            
             // Check if this is a project page
             if (path.startsWith('/project/')) {
-                const projectId = path.split('/project/')[1];
-                if (projectId) {
-                    window.location.href = \`/project/\${projectId}.html\`;
+                const parts = path.split('/').filter(Boolean);
+                if (parts.length === 2) {
+                    window.location.href = '/project/' + parts[1] + '/';
                     return;
                 }
             }
-            
             // Check if we have a direct mapping
             if (urlMap[path]) {
                 window.location.href = urlMap[path];
                 return;
             }
-            
-            // If no mapping found, try adding .html extension
-            if (!path.includes('.html') && !path.includes('.')) {
-                window.location.href = path + '.html';
+            // If no mapping found, try adding trailing slash
+            if (!path.endsWith('/')) {
+                window.location.href = path + '/';
                 return;
             }
-            
             // If still no match, redirect to home
-            window.location.href = '/index.html';
+            window.location.href = '/';
         })();
     </script>
 </head>

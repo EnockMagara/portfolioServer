@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <title>Enock Mecheo - AYN - AI-Powered Visual Assistant</title>
+  <meta content="AYN is an advanced visual assistance application designed to help visually impaired users navigate and understand their surroundings. This full-stack application combines machine learning-based object detection with natural language processing to provide real-time audio descriptions of environments captured by the camera. The system features a Flask backend that integrates YOLOv5 for object detection and MiDaS for depth estimation, along with a sleek Next.js frontend with responsive design and accessible UI." name="description">
+  <meta content="portfolio, computer science, software development, NYU, Enock Mecheo, Enock Magara" name="keywords">
+  <meta name="author" content="Enock Mecheo">
+
+  <!-- Favicons -->
+  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Space Grotesk Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- GSAP library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+</head>
+
+<body class="portfolio-page">
+
+  <!-- Navigation System -->
+  <!-- Menu Toggle Button -->
+  <button class="menu-toggle" id="menuToggle">
+    <span class="menu-toggle-text">MENU</span>
+    <div class="menu-toggle-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </button>
+
+  <!-- Navigation Overlay -->
+  <div class="nav-overlay" id="navOverlay">
+    <div class="nav-overlay-content">
+      <!-- Corner Elements -->
+      <div class="nav-corner nav-corner-top-right">
+        <button class="nav-close" id="navClose">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      
+      <!-- Main Navigation -->
+      <div class="nav-main">
+        <nav class="nav-menu">
+          <ul>
+            <li><a href="/" class="nav-menu-link">home</a></li>
+            <li class="active-page"><a href="/portfolio/ class="nav-menu-link active">projects</a></li>
+            <li><a href="/commlab/ class="nav-menu-link">comm lab</a></li>
+            <li><a href="/photos/ class="nav-menu-link">photos</a></li>
+          </ul>
+                </nav>
+      </div>
+      
+      <!-- Bottom Corner Elements -->
+      <div class="nav-corner nav-corner-bottom-left">
+        <div class="corner-info">
+          <div class="corner-text">Enock Mecheo</div>
+          <div class="corner-text">NYU Abu Dhabi</div>
+          <div class="corner-text">Computer Science</div>
+          <div class="corner-text">enockmecheo@nyu.edu</div>
+          <div class="corner-text">github.com/EnockMagara</div>
+        </div>
+      </div>
+      
+      <div class="nav-corner nav-corner-bottom-right">
+        <div class="corner-info">
+          <div class="corner-text">portfolio</div>
+          <div class="corner-text">2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <main class="main">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <a href="/portfolio/ class="back-button mb-4 d-inline-block">
+            <i class="bi bi-arrow-left"></i> Back to Projects
+          </a>
+          <h1 class="mb-4" style="font-size: 2.5rem;">AYN - AI-Powered Visual Assistant</h1>
+        </div>
+      </div>
+
+      <div class="row mb-5">
+        <div class="col-lg-8">
+          <img src="../assets/img/projects/hackheist.jpg" alt="AYN - AI-Powered Visual Assistant" class="img-fluid rounded mb-4">
+          <div class="project-description">
+            <h3 style="font-size: 2rem;">Description</h3>
+            <p style="font-size: 1.2rem;">AYN is an advanced visual assistance application designed to help visually impaired users navigate and understand their surroundings. This full-stack application combines machine learning-based object detection with natural language processing to provide real-time audio descriptions of environments captured by the camera. The system features a Flask backend that integrates YOLOv5 for object detection and MiDaS for depth estimation, along with a sleek Next.js frontend with responsive design and accessible UI.</p>
+            
+            
+            <h3 style="font-size: 2rem;">Challenges & Solutions</h3>
+            <p style="font-size: 1.2rem;">Key challenges included implementing robust real-time object detection with spatial awareness, creating an accessible and intuitive UI for visually impaired users, and developing an efficient pipeline for processing video frames and generating meaningful audio descriptions. The project required integrating multiple machine learning models and ensuring they worked together seamlessly while maintaining low latency for real-time feedback.</p>
+            
+            
+            
+            <h3 style="font-size: 2rem;">Technical Achievements</h3>
+            <ul class="technical-achievements-list" style="font-size: 1.2rem;">
+              
+                <li>Multi-Model AI System: Integrated YOLOv5 for object detection and MiDaS for depth estimation to create comprehensive spatial awareness</li>
+              
+                <li>Real-time Processing: Implemented efficient video frame processing with WebRTC for camera access and canvas manipulation</li>
+              
+                <li>Depth-Based Object Prioritization: Created an algorithm to identify and prioritize nearby objects based on depth estimation</li>
+              
+                <li>Natural Language Generation: Used GPT-4o to translate technical object data into natural, helpful descriptions for users</li>
+              
+                <li>Text-to-Speech Integration: Implemented OpenAI&#39;s TTS API to convert descriptions into clear audio feedback</li>
+              
+                <li>Accessibility-First Design: Built a UI specifically optimized for users with visual impairments, featuring large buttons and voice feedback</li>
+              
+                <li>Cross-Platform Compatibility: Ensured the application works across different devices and browsers with responsive design</li>
+              
+            </ul>
+            
+            
+            <h3 style="font-size: 2rem;">Technologies Used</h3>
+            <div class="tech-icons my-3" style="font-size: 1.2rem;">
+              
+                <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
+              
+                <span class="tech-badge"><i class="fas fa-flask"></i> Flask</span>
+              
+                <span class="tech-badge"><i class="fas fa-fire"></i> PyTorch</span>
+              
+                <span class="tech-badge"><i class="fab fa-react"></i> Next.js</span>
+              
+                <span class="tech-badge"><i class="fab fa-react"></i> React</span>
+              
+                <span class="tech-badge"><i class="fab fa-css3-alt"></i> Tailwind CSS</span>
+              
+                <span class="tech-badge"><i class="fas fa-robot"></i> OpenAI API</span>
+              
+                <span class="tech-badge"><i class="fas fa-eye"></i> YOLOv5</span>
+              
+                <span class="tech-badge"><i class="fas fa-mountain"></i> MiDaS</span>
+              
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4">
+          <div class="project-sidebar card">
+            <div class="card-body">
+              <h4>Project Details</h4>
+              
+              <div class="project-meta">
+                <div class="meta-item">
+                  <strong>Date:</strong>
+                  <span>February 2025</span>
+                </div>
+                
+                
+                
+                
+                <div class="meta-item">
+                  <strong>Category:</strong>
+                  <span>AI &amp; Accessibility</span>
+                </div>
+                
+              </div>
+              
+              <div class="project-links mt-4">
+                
+                <a href="https://drive.google.com/file/d/1Wl9L5GRE-5ZyQLFlioMG-RcnTCGqplIT/view?usp=share_link" target="_blank" class="animated-button w-100 mb-3">
+                  <span class="button-text">View Live</span>
+                  <span class="button-line"></span>
+                </a>
+                
+                
+                
+                <a href="https://github.com/Danjari/hackheist" target="_blank" class="animated-button w-100">
+                  <span class="button-text">GitHub Repo</span>
+                  <span class="button-line"></span>
+                </a>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p class="contact-message">Feel free to contact me through any of these channels:</p>
+      <div class="social-links-footer mb-4">
+        <a href="mailto:enockmecheo@nyu.edu" class="gmail"><i class="bi bi-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/enock-mecheo-56390b1a6/" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
+        <a href="https://github.com/EnockMagara" class="github" target="_blank"><i class="bi bi-github"></i></a>
+      </div>
+      <!-- Visitor Information Section -->
+      <div id="visitor-info" class="visitor-info">
+        <!-- Content will be populated by JavaScript -->
+      </div>
+      
+      <p class="thank-you-message">Thank you for your interest in my work.</p>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="../assets/js/main.js"></script>
+
+</body>
+
+</html> 

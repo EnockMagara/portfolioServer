@@ -5,42 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
     <script>
-        // Clean URL handling for GitHub Pages
+        // Clean URL handling for GitHub Pages (subfolder version)
         (function() {
             const path = window.location.pathname;
-            
-            // Map clean URLs to their .html equivalents
+            // Map clean URLs to their subfolder equivalents
             const urlMap = {
                 '/': '/index.html',
-                '/portfolio': '/portfolio.html',
-                '/commlab': '/commlab.html',
-                '/photos': '/photos.html',
-                '/blog': '/blog.html'
+                '/portfolio': '/portfolio/',
+                '/portfolio/': '/portfolio/',
+                '/commlab': '/commlab/',
+                '/commlab/': '/commlab/',
+                '/photos': '/photos/',
+                '/photos/': '/photos/',
+                '/blog': '/blog/',
+                '/blog/': '/blog/'
             };
-            
             // Check if this is a project page
             if (path.startsWith('/project/')) {
-                const projectId = path.split('/project/')[1];
-                if (projectId) {
-                    window.location.href = `/project/${projectId}.html`;
+                const parts = path.split('/').filter(Boolean);
+                if (parts.length === 2) {
+                    window.location.href = '/project/' + parts[1] + '/';
                     return;
                 }
             }
-            
             // Check if we have a direct mapping
             if (urlMap[path]) {
                 window.location.href = urlMap[path];
                 return;
             }
-            
-            // If no mapping found, try adding .html extension
-            if (!path.includes('.html') && !path.includes('.')) {
-                window.location.href = path + '.html';
+            // If no mapping found, try adding trailing slash
+            if (!path.endsWith('/')) {
+                window.location.href = path + '/';
                 return;
             }
-            
             // If still no match, redirect to home
-            window.location.href = '/index.html';
+            window.location.href = '/';
         })();
     </script>
 </head>
