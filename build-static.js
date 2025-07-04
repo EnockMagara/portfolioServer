@@ -3,6 +3,10 @@ const path = require('path');
 const ejs = require('ejs');
 const { projects } = require('./routes/projects');
 
+// GitHub Pages configuration
+const GITHUB_PAGES_BASE = '/portfolioServer'; // Change this to your repository name
+const IS_GITHUB_PAGES = true; // Set to false for custom domain
+
 // Create docs directory for GitHub Pages
 const docsDir = path.join(__dirname, 'docs');
 if (!fs.existsSync(docsDir)) {
@@ -191,13 +195,13 @@ function renderTemplateToSubfolder(templateName, data = {}, outputSubfolder = te
 
   // Fix paths for GitHub Pages deployment (use trailing slashes)
   let fixedHtml = html
-    .replace(/href="\/(?!assets|project|blog|photos|portfolio|commlab|index)/g, 'href="/')
-    .replace(/href="\/portfolio"/g, 'href="/portfolio/"')
-    .replace(/href="\/commlab"/g, 'href="/commlab/"')
-    .replace(/href="\/photos"/g, 'href="/photos/"')
-    .replace(/href="\/blog"/g, 'href="/blog/"')
-    .replace(/href="\/project\//g, 'href="/project/')
-    .replace(/window\.location\.href = '\/portfolio'/g, "window.location.href = '/portfolio/'");
+    .replace(/href="\/(?!assets|project|blog|photos|portfolio|commlab|index)/g, `href="${GITHUB_PAGES_BASE}/`)
+    .replace(/href="\/portfolio"/g, `href="${GITHUB_PAGES_BASE}/portfolio/"`)
+    .replace(/href="\/commlab"/g, `href="${GITHUB_PAGES_BASE}/commlab/"`)
+    .replace(/href="\/photos"/g, `href="${GITHUB_PAGES_BASE}/photos/"`)
+    .replace(/href="\/blog"/g, `href="${GITHUB_PAGES_BASE}/blog/"`)
+    .replace(/href="\/project\//g, `href="${GITHUB_PAGES_BASE}/project/`)
+    .replace(/window\.location\.href = '\/portfolio'/g, `window.location.href = '${GITHUB_PAGES_BASE}/portfolio/'`);
 
   // Fix asset paths based on subfolder depth
   if (outputSubfolder === '') {
@@ -239,13 +243,13 @@ projects.forEach(project => {
 
   // Fix paths for project detail pages (they're in a subdirectory)
   let fixedHtml = html
-    .replace(/href="\/(?!assets|project|blog|photos|portfolio|commlab|index)/g, 'href="/')
-    .replace(/href="\/portfolio"/g, 'href="/portfolio/"')
-    .replace(/href="\/commlab"/g, 'href="/commlab/"')
-    .replace(/href="\/photos"/g, 'href="/photos/"')
-    .replace(/href="\/blog"/g, 'href="/blog/"')
-    .replace(/href="\/project\//g, 'href="/project/')
-    .replace(/window\.location\.href = '\/portfolio'/g, "window.location.href = '/portfolio/'");
+    .replace(/href="\/(?!assets|project|blog|photos|portfolio|commlab|index)/g, `href="${GITHUB_PAGES_BASE}/`)
+    .replace(/href="\/portfolio"/g, `href="${GITHUB_PAGES_BASE}/portfolio/"`)
+    .replace(/href="\/commlab"/g, `href="${GITHUB_PAGES_BASE}/commlab/"`)
+    .replace(/href="\/photos"/g, `href="${GITHUB_PAGES_BASE}/photos/"`)
+    .replace(/href="\/blog"/g, `href="${GITHUB_PAGES_BASE}/blog/"`)
+    .replace(/href="\/project\//g, `href="${GITHUB_PAGES_BASE}/project/`)
+    .replace(/window\.location\.href = '\/portfolio'/g, `window.location.href = '${GITHUB_PAGES_BASE}/portfolio/'`);
 
   // Fix asset paths for project pages (two levels deep: /project/[id]/)
   fixedHtml = fixedHtml
@@ -269,7 +273,7 @@ const staticBlogData = {
 };
 renderTemplateToSubfolder('blog', staticBlogData, 'blog');
 
-// Update 404.html to redirect to subfolder URLs
+// Update 404.html to redirect to subfolder URLs with correct base path
 const fourOhFourHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -279,39 +283,48 @@ const fourOhFourHtml = `<!DOCTYPE html>
     <script>
         // Clean URL handling for GitHub Pages (subfolder version)
         (function() {
+            const basePath = '${GITHUB_PAGES_BASE}';
             const path = window.location.pathname;
+            
+            // Remove base path from current path for processing
+            const relativePath = path.replace(basePath, '') || '/';
+            
             // Map clean URLs to their subfolder equivalents
             const urlMap = {
-                '/': '/index.html',
-                '/portfolio': '/portfolio/',
-                '/portfolio/': '/portfolio/',
-                '/commlab': '/commlab/',
-                '/commlab/': '/commlab/',
-                '/photos': '/photos/',
-                '/photos/': '/photos/',
-                '/blog': '/blog/',
-                '/blog/': '/blog/'
+                '/': basePath + '/index.html',
+                '/portfolio': basePath + '/portfolio/',
+                '/portfolio/': basePath + '/portfolio/',
+                '/commlab': basePath + '/commlab/',
+                '/commlab/': basePath + '/commlab/',
+                '/photos': basePath + '/photos/',
+                '/photos/': basePath + '/photos/',
+                '/blog': basePath + '/blog/',
+                '/blog/': basePath + '/blog/'
             };
+            
             // Check if this is a project page
-            if (path.startsWith('/project/')) {
-                const parts = path.split('/').filter(Boolean);
+            if (relativePath.startsWith('/project/')) {
+                const parts = relativePath.split('/').filter(Boolean);
                 if (parts.length === 2) {
-                    window.location.href = '/project/' + parts[1] + '/';
+                    window.location.href = basePath + '/project/' + parts[1] + '/';
                     return;
                 }
             }
+            
             // Check if we have a direct mapping
-            if (urlMap[path]) {
-                window.location.href = urlMap[path];
+            if (urlMap[relativePath]) {
+                window.location.href = urlMap[relativePath];
                 return;
             }
+            
             // If no mapping found, try adding trailing slash
-            if (!path.endsWith('/')) {
-                window.location.href = path + '/';
+            if (!relativePath.endsWith('/')) {
+                window.location.href = basePath + relativePath + '/';
                 return;
             }
+            
             // If still no match, redirect to home
-            window.location.href = '/';
+            window.location.href = basePath + '/';
         })();
     </script>
 </head>

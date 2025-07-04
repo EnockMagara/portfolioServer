@@ -7,39 +7,48 @@
     <script>
         // Clean URL handling for GitHub Pages (subfolder version)
         (function() {
+            const basePath = '/portfolioServer';
             const path = window.location.pathname;
+            
+            // Remove base path from current path for processing
+            const relativePath = path.replace(basePath, '') || '/';
+            
             // Map clean URLs to their subfolder equivalents
             const urlMap = {
-                '/': '/index.html',
-                '/portfolio': '/portfolio/',
-                '/portfolio/': '/portfolio/',
-                '/commlab': '/commlab/',
-                '/commlab/': '/commlab/',
-                '/photos': '/photos/',
-                '/photos/': '/photos/',
-                '/blog': '/blog/',
-                '/blog/': '/blog/'
+                '/': basePath + '/index.html',
+                '/portfolio': basePath + '/portfolio/',
+                '/portfolio/': basePath + '/portfolio/',
+                '/commlab': basePath + '/commlab/',
+                '/commlab/': basePath + '/commlab/',
+                '/photos': basePath + '/photos/',
+                '/photos/': basePath + '/photos/',
+                '/blog': basePath + '/blog/',
+                '/blog/': basePath + '/blog/'
             };
+            
             // Check if this is a project page
-            if (path.startsWith('/project/')) {
-                const parts = path.split('/').filter(Boolean);
+            if (relativePath.startsWith('/project/')) {
+                const parts = relativePath.split('/').filter(Boolean);
                 if (parts.length === 2) {
-                    window.location.href = '/project/' + parts[1] + '/';
+                    window.location.href = basePath + '/project/' + parts[1] + '/';
                     return;
                 }
             }
+            
             // Check if we have a direct mapping
-            if (urlMap[path]) {
-                window.location.href = urlMap[path];
+            if (urlMap[relativePath]) {
+                window.location.href = urlMap[relativePath];
                 return;
             }
+            
             // If no mapping found, try adding trailing slash
-            if (!path.endsWith('/')) {
-                window.location.href = path + '/';
+            if (!relativePath.endsWith('/')) {
+                window.location.href = basePath + relativePath + '/';
                 return;
             }
+            
             // If still no match, redirect to home
-            window.location.href = '/';
+            window.location.href = basePath + '/';
         })();
     </script>
 </head>
