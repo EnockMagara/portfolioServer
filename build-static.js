@@ -4,8 +4,9 @@ const ejs = require('ejs');
 const { projects } = require('./routes/projects');
 
 // GitHub Pages configuration
-const GITHUB_PAGES_BASE = '/portfolioServer'; // Change this to your repository name
+const GITHUB_PAGES_BASE = ''; // Empty for custom domain
 const IS_GITHUB_PAGES = true; // Set to false for custom domain
+const CUSTOM_DOMAIN = 'www.enockmecheo.com'; // Your custom domain
 
 // Create docs directory for GitHub Pages
 const docsDir = path.join(__dirname, 'docs');
@@ -273,6 +274,10 @@ const staticBlogData = {
 };
 renderTemplateToSubfolder('blog', staticBlogData, 'blog');
 
+// Create CNAME file for custom domain
+fs.writeFileSync(path.join(docsDir, 'CNAME'), CUSTOM_DOMAIN);
+console.log(`Generated: CNAME file for ${CUSTOM_DOMAIN}`);
+
 // Update 404.html to redirect to subfolder URLs with correct base path
 const fourOhFourHtml = `<!DOCTYPE html>
 <html lang="en">
@@ -335,10 +340,6 @@ const fourOhFourHtml = `<!DOCTYPE html>
 
 fs.writeFileSync(path.join(docsDir, '404.html'), fourOhFourHtml);
 console.log('Generated: 404.html (for clean URL handling)');
-
-// Create CNAME file for custom domain (if needed)
-// Commented out to avoid conflicts - uncomment and set up DNS if you want custom domain
-// fs.writeFileSync(path.join(docsDir, 'CNAME'), 'www.enockmecheo.com');
 
 console.log('Static site generated successfully in docs/ directory!');
 console.log('You can now deploy the docs/ directory to GitHub Pages.');
