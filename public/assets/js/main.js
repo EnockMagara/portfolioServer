@@ -130,7 +130,7 @@
     revealOnScroll();
 
     initPhotosPageEscape();
-    initTimeDisplay();
+
     initLocationDisplay();
     initNewNavigation();
     initAboutToggle();
@@ -466,28 +466,7 @@
     }
   }
 
-  /**
-   * Initialize time display
-   */
-  function initTimeDisplay() {
-    const timeElement = document.getElementById('current-time');
-    if (!timeElement) return;
 
-    function updateTime() {
-      const now = new Date();
-      const timeString = now.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true
-      });
-      timeElement.textContent = timeString;
-    }
-
-    // Update time immediately and then every second
-    updateTime();
-    setInterval(updateTime, 1000);
-  }
 
   /**
    * Initialize location display
@@ -529,7 +508,7 @@
   }
 
   /**
-   * Initialize about toggle functionality
+   * Initialize about toggle functionality with parallax and fade effects
    */
   function initAboutToggle() {
     const aboutTrigger = document.querySelector('.about-trigger');
@@ -537,22 +516,44 @@
     
     if (!aboutTrigger || !aboutContent) return;
     
+    // Add initial parallax fade in effect
+    aboutTrigger.classList.add('parallax-fade');
+    
+    // Remove animation class after animation completes
+    setTimeout(() => {
+      aboutTrigger.classList.remove('parallax-fade');
+    }, 600);
+    
     aboutTrigger.addEventListener('click', function(e) {
       e.preventDefault();
       
-      // Toggle the active class
-      aboutContent.classList.toggle('active');
-      aboutTrigger.classList.toggle('active');
+      // Add fade out effect before toggling
+      aboutTrigger.classList.add('parallax-fade-out');
       
-      // Update the indicator arrow
-      const indicator = aboutTrigger.querySelector('.about-indicator');
-      if (aboutContent.classList.contains('active')) {
-        indicator.textContent = '↓';
-        aboutTrigger.setAttribute('aria-expanded', 'true');
-      } else {
-        indicator.textContent = '→';
-        aboutTrigger.setAttribute('aria-expanded', 'false');
-      }
+      setTimeout(() => {
+        // Toggle the active class
+        aboutContent.classList.toggle('active');
+        aboutTrigger.classList.toggle('active');
+        
+        // Update the indicator arrow
+        const indicator = aboutTrigger.querySelector('.about-indicator');
+        if (aboutContent.classList.contains('active')) {
+          indicator.textContent = '↓';
+          aboutTrigger.setAttribute('aria-expanded', 'true');
+        } else {
+          indicator.textContent = '→';
+          aboutTrigger.setAttribute('aria-expanded', 'false');
+        }
+        
+        // Remove fade out class and add fade in
+        aboutTrigger.classList.remove('parallax-fade-out');
+        aboutTrigger.classList.add('parallax-fade');
+        
+        // Remove animation class after animation completes
+        setTimeout(() => {
+          aboutTrigger.classList.remove('parallax-fade');
+        }, 600);
+      }, 200); // Half of the fade out duration
     });
     
     // Close about content when clicking outside
