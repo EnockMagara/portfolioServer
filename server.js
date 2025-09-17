@@ -26,9 +26,9 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-// Route for the photos page
-app.get('/photos', (req, res) => {
-  res.render('photos');
+// Route for the ML projects page
+app.get('/ml-projects', (req, res) => {
+  res.render('ml-projects');
 });
 
 // Route for the comm lab projects page

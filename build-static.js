@@ -229,8 +229,8 @@ renderTemplateToSubfolder('index', {}, '');
 // Render portfolio page
 renderTemplateToSubfolder('portfolio', { projects }, 'portfolio');
 
-// Render photos page
-renderTemplateToSubfolder('photos', {}, 'photos');
+// Render ML projects page
+renderTemplateToSubfolder('ml-projects', {}, 'ml-projects');
 
 // Render comm lab page
 renderTemplateToSubfolder('commlab', {}, 'commlab');

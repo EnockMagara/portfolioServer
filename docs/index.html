@@ -35,15 +35,8 @@
 
 <body class="index-page">
 
-  <!-- Time Display -->
-  <div id="time-display" class="time-display">
-    <span id="current-time"></span>
-  </div>
 
-  <!-- Location Display -->
-  <div id="location-display" class="location-display">
-    <span id="location-text">Loading location...</span>
-  </div>
+
 
   <!-- Navigation System -->
   <!-- Menu Toggle Button -->
@@ -73,7 +66,7 @@
             <li class="active-page"><a href="/" class="nav-menu-link active">home</a></li>
             <li><a href="/portfolio/" class="nav-menu-link">projects</a></li>
             <li><a href="/commlab/" class="nav-menu-link">comm lab</a></li>
-            <li><a href="/photos/" class="nav-menu-link">photos</a></li>
+            <li><a href="/ml-projects" class="nav-menu-link">ml projects</a></li>
           </ul>
                 </nav>
       </div>
@@ -102,63 +95,362 @@
   <div id="preloader"></div>
 
   <main class="main">
-    <section id="hero" class="hero section">
-      <div class="hero-container">
-        <!-- Stylistic Background Text -->
-        <div class="hero-background-text">
-          <div class="bg-text-line">FULLSTACK</div>
-          <div class="bg-text-line highlight">DEVELOPER</div>
-          <div class="bg-text-line">DEVELOPER</div>
-        </div>
-        
-        <div class="hero-content-new">
-          <div class="hero-text-section">
-            <div class="hero-label">PORTFOLIO 2025</div>
+    <!-- One-Page Landing Layout -->
+    <div class="landing-container">
+      
+      <!-- Hero Section -->
+      <section id="hero" class="hero-section">
+        <div class="hero-content">
+          <div class="hero-text">
+             <div class="hero-label">Hi I am</div>
             <h1 class="hero-title">
-              <span class="hero-title-line hero-title-main">ENOCK</span>
-              <span class="hero-title-line hero-title-secondary">MECHEO</span>
+              <span class="hero-name">ENOCK</span>
+              <span class="hero-surname">MECHEO</span>
             </h1>
-            <div class="hero-subtitle">
-              <span class="hero-role">FULLSTACK DEVELOPER</span>
-              <span class="hero-separator">×</span>
-              <span class="hero-location">NYU ABU DHABI</span>
-            </div>
-          </div>
-          
-          <!-- Interactive About Text -->
-          <div class="hero-about-interactive">
-            <div class="about-trigger">
-              <span class="about-label">ABOUT</span>
-              <span class="about-indicator">→</span>
-            </div>
-            <div class="about-content">
-              <div class="about-text-overlay">
-                <h3>Software Engineer</h3>
-                <p>I am a software engineer with a focus on full-stack web development, mobile app development, and cybersecurity. With experience building real-time platforms using React, Node.js, and MongoDB, as well as cross-platform apps in Flutter, I aim to create secure, efficient, and scalable solutions.</p>
-                <div class="about-highlights">
-                  <span class="highlight-item">Full-Stack Development</span>
-                  <span class="highlight-item">Mobile Apps</span>
-                  <span class="highlight-item">Cybersecurity</span>
-                  <span class="highlight-item">React & Node.js</span>
-                </div>
-              </div>
+            <div class="hero-description">
+              <p>I am a Computer Science student and aspiring Software Engineer with a strong focus on data-driven systems, distributed systems, machine learning, and MLOps.</p>
+              <p>I enjoy working at the intersection of software engineering and data, where I can design robust, distributed architectures, optimize workflows, and deploy intelligent solutions in production.</p>
             </div>
           </div>
           
           <div class="hero-actions">
-            <a href="/portfolio/" class="hero-cta-primary">
-              <span class="cta-text">VIEW PROJECTS</span>
-              <span class="cta-arrow">→</span>
+            <a href="#projects" class="cta-button primary">
+              <span>VIEW PROJECTS</span>
+              <i class="fas fa-arrow-down"></i>
+            </a>
+            <a href="#contact" class="cta-button secondary">
+              <span>CONTACT</span>
+              <i class="fas fa-envelope"></i>
             </a>
           </div>
         </div>
         
-        <div class="hero-background-elements">
-          <div class="bg-grid"></div>
-          <div class="bg-gradient"></div>
+        <!-- Parallax Background Elements -->
+        <div class="parallax-bg">
+          <div class="bg-layer layer-1"></div>
+          <div class="bg-layer layer-2"></div>
+          <div class="bg-layer layer-3"></div>
+        </div>
+      </section>
+
+      <!-- Highlights Section -->
+      <section id="highlights" class="highlights-section">
+        <div class="highlights-container">
+          <div class="highlight-card academic">
+            <h3 class="highlight-title">Relevant Coursework</h3>
+            <p>I have completed relevant coursework in <strong>Data Structures, Algorithms, Software Engineering, Database Design, Operating Systems, Computer Networking, and Mobile Development</strong> - including advanced coursework in <strong>Algorithmic Foundations of Data Science</strong> where I have studied distributed computing, streaming algorithms, and large-scale data processing.</p>
+          </div>
+          
+          <div class="highlight-card experience">
+            <h3 class="highlight-title">Industry Experience</h3>
+            <p><strong>5+ internships</strong> where I have worked on QA, DevOps, and Web Development - building production-ready systems and applications from concept to deployment.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section id="skills" class="skills-section">
+        <div class="section-header">
+          <h2 class="section-title">TECHNICAL EXPERTISE</h2>
+          <div class="section-subtitle">Technologies & Frameworks</div>
+        </div>
+        
+        <div class="skills-grid">
+          <div class="skill-category">
+            <div class="skill-icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <h3>Data Science & ML</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">PyTorch</span>
+              <span class="skill-tag">Spark</span>
+              <span class="skill-tag">Map-Reduce</span>
+              <span class="skill-tag">PCA</span>
+              <span class="skill-tag">SVD</span>
+            </div>
+          </div>
+          
+          <div class="skill-category">
+            <div class="skill-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            <h3>Full-Stack Development</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">React</span>
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">MongoDB</span>
+              <span class="skill-tag">Flask</span>
+              <span class="skill-tag">Express</span>
+            </div>
+          </div>
+          
+          <div class="skill-category">
+            <div class="skill-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3>Mobile & Systems</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Swift</span>
+              <span class="skill-tag">SwiftUI</span>
+              <span class="skill-tag">iOS</span>
+              <span class="skill-tag">Operating Systems</span>
+              <span class="skill-tag">Computer Networking</span>
+            </div>
+          </div>
+          
+          <div class="skill-category">
+            <div class="skill-icon">
+              <i class="fas fa-cogs"></i>
+            </div>
+            <h3>Software Engineering</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Database Design</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Unit Testing</span>
+              <span class="skill-tag">JMeter</span>
+              <span class="skill-tag">CI/CD</span>
+              <span class="skill-tag">Git</span>
+            </div>
+          </div>
+          
+          <div class="skill-category">
+            <div class="skill-icon">
+              <i class="fas fa-cloud"></i>
+            </div>
+            <h3>Cloud & Infrastructure</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">WebSockets</span>
+              <span class="skill-tag">MySQL</span>
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">GitHub Actions</span>
+            </div>
+          </div>
+          
+          <div class="skill-category">
+            <div class="skill-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Testing & QA</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Automated Testing</span>
+              <span class="skill-tag">Security Testing</span>
+              <span class="skill-tag">Performance Testing</span>
+              <span class="skill-tag">Mocha</span>
+              <span class="skill-tag">pytest</span>
+            </div>
+          </div>
+          
+          <div class="skill-category">
+            <div class="skill-icon">
+              <i class="fas fa-project-diagram"></i>
+            </div>
+            <h3>Big Data Algorithms</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Streaming Algorithms</span>
+              <span class="skill-tag">LSH</span>
+              <span class="skill-tag">MinHashing</span>
+              <span class="skill-tag">Clustering</span>
+              <span class="skill-tag">Graph Analysis</span>
+              <span class="skill-tag">EM Algorithm</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Projects Section -->
+      <section id="projects" class="projects-section">
+        <div class="section-header">
+          <h2 class="section-title">FEATURED PROJECTS</h2>
+          <div class="section-subtitle">Selected Work & Case Studies</div>
+        </div>
+        
+        <div class="projects-grid">
+          <div class="project-card" data-project="mms-finance">
+            <div class="project-number">01</div>
+            <div class="project-content">
+              <div class="project-category">ML & Finance</div>
+              <h3 class="project-title">MMS Finance</h3>
+              <p class="project-description">AI-powered portfolio optimization platform with real-time data processing and advanced ML algorithms.</p>
+              <div class="project-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">PyTorch</span>
+                <span class="tech-tag">Flask</span>
+              </div>
+              <a href="/ml-projects" class="project-link">
+                <span>View Details</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="project-card" data-project="cloudtrace">
+            <div class="project-number">02</div>
+            <div class="project-content">
+              <div class="project-category">Network Analysis</div>
+              <h3 class="project-title">CloudTrace</h3>
+              <p class="project-description">High-performance network analysis tool for cloud provider benchmarking with ICMP socket implementation.</p>
+              <div class="project-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Flask</span>
+                <span class="tech-tag">JavaScript</span>
+              </div>
+              <a href="/project/cloudtrace" class="project-link">
+                <span>View Details</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="project-card" data-project="ayn">
+            <div class="project-number">03</div>
+            <div class="project-content">
+              <div class="project-category">AI & Accessibility</div>
+              <h3 class="project-title">AYN</h3>
+              <p class="project-description">AI-powered visual assistant for visually impaired users with real-time object detection and navigation.</p>
+              <div class="project-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">OpenCV</span>
+                <span class="tech-tag">Flask</span>
+              </div>
+              <a href="/project/hackheist" class="project-link">
+                <span>View Details</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="project-card" data-project="mapjournal">
+            <div class="project-number">04</div>
+            <div class="project-content">
+              <div class="project-category">Mobile Development</div>
+              <h3 class="project-title">MapJournal</h3>
+              <p class="project-description">iOS location sharing app built with SwiftUI for discovering and sharing favorite places.</p>
+              <div class="project-tech">
+                <span class="tech-tag">SwiftUI</span>
+                <span class="tech-tag">iOS</span>
+                <span class="tech-tag">MapKit</span>
+              </div>
+              <a href="/project/mapjournal" class="project-link">
+                <span>View Details</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+                </div>
+          
+          <div class="project-card" data-project="assignflow">
+            <div class="project-number">05</div>
+            <div class="project-content">
+              <div class="project-category">Full-Stack Web</div>
+              <h3 class="project-title">AssignFlow</h3>
+              <p class="project-description">Robust task management platform with Node.js/Express stack and MongoDB integration.</p>
+              <div class="project-tech">
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">MongoDB</span>
+                <span class="tech-tag">Express</span>
+              </div>
+              <a href="/project/assignflow" class="project-link">
+                <span>View Details</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="project-card" data-project="calmingspace">
+            <div class="project-number">06</div>
+            <div class="project-content">
+              <div class="project-category">Web Application</div>
+              <h3 class="project-title">Calming Space</h3>
+              <p class="project-description">Full-stack meditation and relaxation application with personalized mindfulness features.</p>
+              <div class="project-tech">
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">MongoDB</span>
+              </div>
+              <a href="/project/calmingspace" class="project-link">
+                <span>View Details</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="projects-cta">
+          <a href="/portfolio/" class="cta-button primary">
+            <span>VIEW ALL PROJECTS</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="contact-section">
+          <div class="section-header">
+            <h2 class="section-title">GET IN TOUCH</h2>
+            <div class="section-subtitle">
+              <a href="mailto:enockmecheo@nyu.edu" class="email-link">
+                <i class="fas fa-envelope"></i>
+                enockmecheo@nyu.edu
+              </a>
+              <a href="https://www.linkedin.com/in/enock-mecheo-56390b1a6/" target="_blank" class="linkedin-icon-link">
+                <i class="fab fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+        
+        <div class="contact-content">
+          <div class="contact-info">
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="contact-details">
+                <h3>Email</h3>
+                <p>enockmecheo@nyu.edu</p>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div class="contact-details">
+                <h3>Location</h3>
+                <p>NYU Abu Dhabi, UAE</p>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <div class="contact-details">
+                <h3>Education</h3>
+                <p>Computer Science</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="social-links">
+            <a href="https://github.com/EnockMagara" target="_blank" class="social-link">
+              <i class="fab fa-github"></i>
+              <span>GitHub</span>
+            </a>
+            <a href="https://www.linkedin.com/in/enock-mecheo-56390b1a6/" target="_blank" class="social-link">
+              <i class="fab fa-linkedin"></i>
+              <span>LinkedIn</span>
+            </a>
+            <a href="mailto:enockmecheo@nyu.edu" class="social-link">
+              <i class="fas fa-envelope"></i>
+              <span>Email</span>
+            </a>
         </div>
       </div>
     </section>
+      
+    </div>
   </main>
 
   <!-- Vendor JS Files -->

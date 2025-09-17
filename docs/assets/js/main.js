@@ -179,6 +179,9 @@
     initLocationDisplay();
     initNewNavigation();
     initAboutToggle();
+    initParallaxEffects();
+    initSmoothScrolling();
+    initLandingAnimations();
   });
   
   /**
@@ -633,6 +636,104 @@
         indicator.textContent = '→';
         aboutTrigger.setAttribute('aria-expanded', 'false');
       }
+    });
+  }
+
+  /**
+   * Initialize parallax effects for landing page
+   */
+  function initParallaxEffects() {
+    const parallaxLayers = document.querySelectorAll('.bg-layer');
+    
+    if (parallaxLayers.length === 0) return;
+    
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const rate = scrolled * -0.5;
+      
+      parallaxLayers.forEach((layer, index) => {
+        const speed = (index + 1) * 0.1;
+        layer.style.transform = `translateY(${rate * speed}px)`;
+      });
+    });
+    
+    // Mouse parallax effect
+    const heroSection = document.querySelector('.hero-section');
+    if (heroSection) {
+      heroSection.addEventListener('mousemove', (e) => {
+        const mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        const mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+        
+        parallaxLayers.forEach((layer, index) => {
+          const speed = (index + 1) * 5;
+          layer.style.transform += ` translate(${mouseX * speed}px, ${mouseY * speed}px)`;
+        });
+      });
+    }
+  }
+
+  /**
+   * Initialize smooth scrolling for anchor links
+   */
+  function initSmoothScrolling() {
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    
+    anchorLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
+          const targetPosition = targetElement.offsetTop - headerHeight - 20;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  }
+
+  /**
+   * Initialize landing page animations
+   */
+  function initLandingAnimations() {
+    // Animate elements on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, observerOptions);
+    
+    // Observe all sections
+    const sections = document.querySelectorAll('.skills-section, .projects-section, .contact-section');
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+    
+    // Observe project cards
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach((card, index) => {
+      card.style.animationDelay = `${index * 0.1}s`;
+      observer.observe(card);
+    });
+    
+    // Observe skill categories
+    const skillCategories = document.querySelectorAll('.skill-category');
+    skillCategories.forEach((category, index) => {
+      category.style.animationDelay = `${index * 0.15}s`;
+      observer.observe(category);
     });
   }
 })();

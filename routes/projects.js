@@ -134,22 +134,6 @@ const projects = [
     ]
   },
   {
-    id: 'jegededge',
-    title: 'JegedEdge Hair Care - Professional Grooming Services',
-    description: 'Designed and developed a professional website for JegedEdge Hair Care, a specialized grooming service for clients in rehab/nursing homes and group homes. The website showcases their premium services while emphasizing their mission to enhance well-being and self-esteem through professional grooming experiences.',
-    challenges: 'The main challenge was creating a website that would appeal to both institutional clients (nursing homes, rehabilitation centers) and individual customers, while effectively communicating the specialized nature of their services. I focused on an accessible design with clear service descriptions and compelling visuals to bridge this gap.',
-    image: '/assets/img/projects/jegededge.jpg',
-    technologies: [
-      { name: 'HTML5', icon: 'fab fa-html5' },
-      { name: 'CSS3', icon: 'fab fa-css3-alt' },
-      { name: 'JavaScript', icon: 'fab fa-js' },
-      { name: 'Responsive Design', icon: 'fas fa-mobile-alt' }
-    ],
-    date: 'November 2024',
-    category: 'Business Website',
-    liveUrl: 'https://jegededgehaircare.com/'
-  },
-  {
     id: 'moraamema',
     title: 'MoraaMema Initiative - Non-Profit Website',
     description: 'Designed and developed the official website for MoraaMema Initiative Inc., a non-profit organization dedicated to improving the lives of underprivileged children in Kenya through educational initiatives. The website serves as the organization\'s primary online presence, providing information about their mission, vision, projects, and facilitating donations.',
@@ -166,24 +150,6 @@ const projects = [
     category: 'web development',
     liveUrl: 'https://moraamema.org/'
   },
-  {
-    id: 'webcanvas',
-    title: 'WEBCANVAS - Interactive Drawing Application',
-    description: 'WEBCANVAS is an interactive web-based drawing application that provides a comprehensive set of tools for digital art creation. Users can engage in free-form drawing with a customizable pen, create shapes like rectangles, circles, and lines, and select colors from a versatile palette. The application also features functionality to save artwork or load existing images, with a clean, intuitive interface for seamless user experience.',
-    challenges: 'Key challenges included implementing precise cursor tracking for drawing tools, creating a responsive canvas that adapts to different screen sizes, and developing an efficient way to handle undo/redo functionality. I also focused on optimizing performance for smooth drawing experience even with complex artwork, and ensuring cross-browser compatibility for consistent behavior across different platforms.',
-    image: '/assets/img/projects/webcanvas.jpg',
-    technologies: [
-      { name: 'HTML5 Canvas', icon: 'fab fa-html5' },
-      { name: 'CSS3', icon: 'fab fa-css3-alt' },
-      { name: 'JavaScript', icon: 'fab fa-js-square' },
-      { name: 'DOM Manipulation', icon: 'fas fa-code' },
-      { name: 'Responsive Design', icon: 'fas fa-mobile-alt' }
-    ],
-    date: 'February 2023',
-    category: 'Interactive Web Application',
-    liveUrl: 'https://enockmagara.github.io/WEBCANVAS/',
-    githubUrl: 'https://github.com/EnockMagara/WEBCANVAS'
-  }
 ];
 
 // Route for portfolio page (projects listing)
