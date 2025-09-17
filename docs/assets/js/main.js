@@ -288,55 +288,6 @@
       });
     });
 
-    // Resume button functionality
-    const showResumeBtn = document.getElementById('showResumeBtn');
-    const resumeFrame = document.getElementById('resumeFrame');
-    
-    if (showResumeBtn && resumeFrame) {
-      let isResumeVisible = false; // Track the state of the resume
-
-      function toggleResume(e) {
-        e.preventDefault(); // Prevent default behavior for both click and touch
-        console.log('Toggle Resume clicked'); // Debug log
-
-        const buttonText = showResumeBtn.querySelector('.button-text');
-
-        if (!isResumeVisible) {
-          resumeFrame.style.display = 'block';
-          // Use setTimeout to ensure the display change has taken effect
-          setTimeout(() => {
-            resumeFrame.style.height = '600px';
-            resumeFrame.style.opacity = '1';
-          }, 10);
-          if (buttonText) buttonText.textContent = 'Hide Resume';
-          isResumeVisible = true;
-          console.log('Showing resume'); // Debug log
-          // Scroll to the resume frame
-          resumeFrame.scrollIntoView({ behavior: 'smooth' });
-        } else {
-          resumeFrame.style.height = '0';
-          resumeFrame.style.opacity = '0';
-          // Use setTimeout to hide the iframe after the transition
-          setTimeout(() => {
-            resumeFrame.style.display = 'none';
-          }, 300);
-          if (buttonText) buttonText.textContent = 'View Resume';
-          isResumeVisible = false;
-          console.log('Hiding resume'); // Debug log
-        }
-      }
-
-      // Add event listeners for both click and touch
-      showResumeBtn.addEventListener('click', toggleResume);
-      showResumeBtn.addEventListener('touchend', function(e) {
-        // Keep preventDefault only for this specific button to allow the toggle function to work
-        // but we're making a special case only for this button
-        e.preventDefault(); 
-        toggleResume(e);
-      });
-
-      console.log('Resume button event listeners added'); // Debug log
-    }
 
     // Disable hover effects on mobile devices
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;

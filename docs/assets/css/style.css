@@ -108,6 +108,8 @@ body.index-page {
   overflow-y: auto;
   min-height: 100vh;
   width: 100vw;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Other pages allow scrolling */
@@ -122,6 +124,8 @@ body:not(.index-page) {
   padding-top: 0;
   margin-top: 0;
   transition: background-color 0.3s ease;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 /* Homepage main section takes full height with more space */
@@ -316,7 +320,7 @@ body.index-page .main {
 }
 
 .mobile-nav-overlay.active {
-  opacity: 1;
+    opacity: 1;
   visibility: visible;
 }
 
@@ -1888,48 +1892,7 @@ footer {
   }
 }
 
-#showResumeBtn {
-display: inline-block;
-padding: 15px 25px;
-color: #e5dbdb;
-text-decoration: none;
-font-weight: bold;
-text-transform: uppercase;
-letter-spacing: 1px;
-border: 2px solid rgb(236, 91, 95);
-border-radius: 5px;
-background-color: transparent;
-transition: background-color 0.3s ease, color 0.3s ease;
-cursor: pointer;
--webkit-tap-highlight-color: transparent;
-font-size: 16px;
-overflow-x: hidden;
-}
 
-#showResumeBtn:hover,
-#showResumeBtn:active {
-background-color: rgb(236, 91, 95);
-color: #fff;
-}
-
-#resumeFrame {
-display: none;
-width: 100%;
-height: 0;
-border: none;
-transition: height 0.3s ease, opacity 0.3s ease;
-opacity: 0;
-position: relative;
-z-index: 1003; /* Higher than the social links top bar */
-}
-
-/* Improve touch area for mobile */
-@media (max-width: 768px) {
-#showResumeBtn {
-  padding: 15px 25px;
-  font-size: 16px;
-}
-}
 
 /* Remove social-links-top as we've moved to footer */
 .social-links-top {
@@ -2149,10 +2112,6 @@ display: inline-block;
 margin-top: 10px;
 }
 
-.resume-container {
-position: relative;
-z-index: 1;
-}
 
 .animated-button {
 display: inline-block;
@@ -4154,6 +4113,7 @@ h1, h2, h3, h4, h5, h6 {
 .landing-container {
   overflow-x: hidden;
   width: 100%;
+  min-height: 100vh;
 }
 
 /* Fix any potential horizontal scrolling issues */
