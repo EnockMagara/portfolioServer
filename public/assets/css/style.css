@@ -158,7 +158,7 @@ body.index-page .main {
   z-index: 1000;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  height: 50px;
+  height: 65px;
   transition: all 0.3s ease;
 }
 
@@ -219,7 +219,7 @@ body.index-page .main {
 .nav-container {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 12px;
   padding: 0 15px;
 }
 
@@ -228,10 +228,10 @@ body.index-page .main {
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: 8px 16px;
+  border-radius: 8px;
   transition: all 0.3s ease;
-  min-width: 70px;
+  min-width: 90px;
   position: relative;
   overflow: hidden;
   justify-content: center;
@@ -256,8 +256,8 @@ body.index-page .main {
 }
 
 .nav-icon {
-  font-size: 0.8rem;
-  margin-bottom: 1px;
+  font-size: 1.1rem;
+  margin-bottom: 3px;
   color: rgb(78, 82, 68);
   transition: all 0.3s ease;
 }
@@ -271,11 +271,11 @@ body.index-page .main {
 .nav-label {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   color: rgb(78, 82, 68);
   text-transform: uppercase;
-  letter-spacing: 0.2px;
-  margin-bottom: 0px;
+  letter-spacing: 0.3px;
+  margin-bottom: 2px;
   transition: all 0.3s ease;
   line-height: 1;
 }
@@ -288,7 +288,7 @@ body.index-page .main {
 .nav-preview {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 400;
-  font-size: 0.5rem;
+  font-size: 0.6rem;
   color: rgba(78, 82, 68, 0.7);
   text-align: center;
   line-height: 1;
@@ -441,7 +441,7 @@ body.index-page .main {
   }
   
   .main-nav {
-    height: 45px;
+    height: 55px;
   }
   
   .burger-menu {
@@ -456,7 +456,7 @@ body.index-page .main {
 
 @media (max-width: 480px) {
   .main-nav {
-    height: 45px;
+    height: 55px;
   }
   
   .burger-menu {
@@ -511,12 +511,12 @@ body.index-page .main {
 
 /* Add padding to main content to account for fixed navigation */
 .main {
-  padding-top: 70px;
+  padding-top: 85px;
 }
 
 @media (max-width: 768px) {
   .main {
-    padding-top: 60px;
+    padding-top: 70px;
   }
 }
 
