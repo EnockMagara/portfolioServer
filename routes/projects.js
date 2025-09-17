@@ -4,6 +4,68 @@ const router = express.Router();
 // Project data
 const projects = [
   {
+    id: 'takeyourvitamins',
+    title: 'TakeYourVitamins - Health Management API',
+    description: 'TakeYourVitamins is a comprehensive Flask-based API for managing vitamin information with MongoDB integration. The system features a robust RESTful API with Swagger documentation, automated testing with Selenium for end-to-end testing, load testing with JMeter supporting up to 1000 concurrent users, and a complete CI/CD pipeline with GitHub Actions. The project includes comprehensive data models for vitamins, supplements, and user interactions with detailed intake practices and interaction warnings.',
+    challenges: 'Key challenges included implementing comprehensive automated testing with Selenium for browser-based end-to-end testing, designing efficient MongoDB data models for complex vitamin interaction data, creating a robust CI/CD pipeline with multiple testing stages, and implementing load testing capabilities to ensure system scalability. The project required careful API design to handle complex supplement interaction data and user intake tracking while maintaining performance under high load.',
+    image: '/assets/img/projects/takeyourvitamins.jpg',
+    technologies: [
+      { name: 'Python', icon: 'fab fa-python' },
+      { name: 'Flask', icon: 'fas fa-flask' },
+      { name: 'MongoDB', icon: 'fas fa-database' },
+      { name: 'Selenium', icon: 'fas fa-robot' },
+      { name: 'JMeter', icon: 'fas fa-chart-bar' },
+      { name: 'GitHub Actions', icon: 'fab fa-github' },
+      { name: 'Swagger', icon: 'fas fa-book' },
+      { name: 'pytest', icon: 'fas fa-vial' },
+      { name: 'TypeScript', icon: 'fab fa-js-square' }
+    ],
+    date: 'December 2024',
+    category: 'Backend API & Testing',
+    githubUrl: 'https://github.com/EnockMagara/TakeYourVitamins',
+    technicalAchievements: [
+      'Comprehensive API Design: Built RESTful API with full CRUD operations for vitamin management with Swagger documentation',
+      'Automated Testing Suite: Implemented Selenium-based end-to-end testing with screenshot capture for debugging',
+      'Load Testing Infrastructure: Configured JMeter for performance testing supporting up to 1000 concurrent users',
+      'CI/CD Pipeline: Established GitHub Actions workflow with automated testing, linting, formatting, and coverage reporting',
+      'Data Modeling: Designed complex MongoDB schemas for vitamins, supplements, interactions, and intake practices',
+      'Test Automation: Created comprehensive test suite with unit tests, integration tests, and system tests',
+      'Documentation: Implemented Swagger UI for interactive API documentation and testing',
+      'Performance Optimization: Achieved high performance and scalability through efficient database design and caching strategies'
+    ]
+  },
+  {
+    id: 'jobboard',
+    title: 'JobBoard - Full-Stack Job Platform',
+    description: 'JobBoard is a comprehensive full-stack job platform built with Python/Flask backend and Next.js frontend, featuring dual user authentication for companies and job seekers. The platform includes advanced A/B testing capabilities using LLM-enhanced job descriptions, comprehensive API endpoints for job management, and automated CI/CD pipeline with Docker containerization. The system implements sophisticated analytics and conversion tracking to optimize job posting effectiveness.',
+    challenges: 'Key challenges included implementing a robust dual authentication system for different user types, creating an efficient A/B testing framework for job descriptions using Together.ai LLM integration, and developing a comprehensive API with proper authorization and data validation. The project required complex database design to handle job applications, user management, and analytics tracking while maintaining performance and scalability.',
+    image: '/assets/img/projects/jobboard.jpg',
+    technologies: [
+      { name: 'Python', icon: 'fab fa-python' },
+      { name: 'Flask', icon: 'fas fa-flask' },
+      { name: 'Next.js', icon: 'fab fa-react' },
+      { name: 'MongoDB', icon: 'fas fa-database' },
+      { name: 'Docker', icon: 'fab fa-docker' },
+      { name: 'GitHub Actions', icon: 'fab fa-github' },
+      { name: 'Together.ai', icon: 'fas fa-robot' },
+      { name: 'JWT', icon: 'fas fa-lock' },
+      { name: 'RESTful API', icon: 'fas fa-server' }
+    ],
+    date: 'January 2025',
+    category: 'Full-stack Web Application',
+    githubUrl: 'https://github.com/EnockMagara/jobboard-public',
+    technicalAchievements: [
+      'Dual Authentication System: Implemented separate authentication flows for companies and job seekers with role-based access control',
+      'A/B Testing Framework: Built comprehensive A/B testing system comparing original vs LLM-enhanced job descriptions with conversion tracking',
+      'RESTful API Design: Created 20+ API endpoints with proper HTTP methods, status codes, and comprehensive error handling',
+      'LLM Integration: Integrated Together.ai for automated job description enhancement and optimization',
+      'Analytics Dashboard: Developed conversion tracking and visualization system with charts and statistical analysis',
+      'Docker Containerization: Implemented containerized deployment with proper environment configuration and dependency management',
+      'CI/CD Pipeline: Established automated testing, building, and deployment workflow using GitHub Actions',
+      'Database Design: Created optimized MongoDB schemas for companies, job seekers, job posts, and applications with proper indexing'
+    ]
+  },
+  {
     id: 'cloudtrace',
     title: 'CloudTrace - Cloud Provider Benchmark',
     description: 'CloudTrace is a high-performance network analysis tool leveraging raw ICMP sockets to benchmark connectivity metrics to major cloud providers. Built on Python/Flask with modular architecture, it performs multi-point traceroute analysis with precise RTT measurements and geospatial visualization. I implement a comprehensive CI/CD pipeline for automated testing and deployment, along with extensive unit testing to ensure reliability.',
