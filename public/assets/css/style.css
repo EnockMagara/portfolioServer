@@ -108,8 +108,6 @@ body.index-page {
   overflow-y: auto;
   min-height: 100vh;
   width: 100vw;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
 }
 
 /* Other pages allow scrolling */
@@ -1806,10 +1804,6 @@ footer {
     padding-top: 0;
   }
   
-  body.index-page {
-    height: auto;
-    overflow-y: auto;
-  }
 
   .time-display {
     top: 15px;
@@ -4125,6 +4119,7 @@ h1, h2, h3, h4, h5, h6 {
 body {
   overflow-x: hidden;
 }
+
 
 /* Header Styles */
 .header {
