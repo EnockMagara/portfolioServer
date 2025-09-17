@@ -1602,7 +1602,7 @@ body.index-page .section {
 .project-description {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: #ffffff;
+  color: var(--text-color);
   margin-bottom: 30px;
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 400;
@@ -2476,6 +2476,7 @@ animation: bounce 1s infinite;
   margin-bottom: 20px;
   line-height: 1.6;
   font-family: 'Space Grotesk', sans-serif;
+  color: var(--text-color);
 }
 
 
@@ -2759,7 +2760,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
   margin-bottom: 25px;
 }
 
@@ -3735,7 +3736,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 0.95rem;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
   margin-bottom: 20px;
   flex: 1;
 }
