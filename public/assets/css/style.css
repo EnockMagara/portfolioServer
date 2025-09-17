@@ -1801,8 +1801,8 @@ footer {
   }
   
   body.index-page {
-    height: 100vh;
-    overflow: hidden;
+    height: auto;
+    overflow-y: auto;
   }
 
   .time-display {
