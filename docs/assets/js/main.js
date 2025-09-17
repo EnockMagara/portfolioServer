@@ -47,7 +47,50 @@
   "use strict";
 
   /**
-   * Header toggle for mobile
+   * Mobile Burger Menu Toggle
+   */
+  const burgerMenu = document.querySelector('.burger-menu');
+  const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+  const mobileNavClose = document.querySelector('.mobile-nav-close');
+
+  if (burgerMenu && mobileNavOverlay) {
+    burgerMenu.addEventListener('click', function() {
+      this.classList.toggle('active');
+      mobileNavOverlay.classList.toggle('active');
+      document.body.style.overflow = mobileNavOverlay.classList.contains('active') ? 'hidden' : '';
+    });
+  }
+
+  if (mobileNavClose && mobileNavOverlay) {
+    mobileNavClose.addEventListener('click', function() {
+      burgerMenu.classList.remove('active');
+      mobileNavOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  }
+
+  // Close mobile nav when clicking on overlay
+  if (mobileNavOverlay) {
+    mobileNavOverlay.addEventListener('click', function(e) {
+      if (e.target === this) {
+        burgerMenu.classList.remove('active');
+        this.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+
+  // Close mobile nav when clicking on nav items
+  document.querySelectorAll('.mobile-nav-item').forEach(navItem => {
+    navItem.addEventListener('click', function() {
+      burgerMenu.classList.remove('active');
+      mobileNavOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+
+  /**
+   * Header toggle for mobile (legacy)
    */
   const headerToggleBtn = document.querySelector('.header-toggle');
   const header = document.querySelector('#header');

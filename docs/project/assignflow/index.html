@@ -35,57 +35,89 @@
 <body class="portfolio-page">
 
   <!-- Navigation System -->
-  <!-- Menu Toggle Button -->
-  <button class="menu-toggle" id="menuToggle">
-    <span class="menu-toggle-text">MENU</span>
-    <div class="menu-toggle-icon">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </button>
-
-  <!-- Navigation Overlay -->
-  <div class="nav-overlay" id="navOverlay">
-    <div class="nav-overlay-content">
-      <!-- Corner Elements -->
-      <div class="nav-corner nav-corner-top-right">
-        <button class="nav-close" id="navClose">
-          <i class="bi bi-x"></i>
-        </button>
-      </div>
-      
-      <!-- Main Navigation -->
-      <div class="nav-main">
-        <nav class="nav-menu">
-          <ul>
-            <li><a href="/" class="nav-menu-link">home</a></li>
-            <li class="active-page"><a href="/portfolio/" class="nav-menu-link active">projects</a></li>
-            <li><a href="/commlab/" class="nav-menu-link">comm lab</a></li>
-            <li><a href="/photos/" class="nav-menu-link">photos</a></li>
-          </ul>
-                </nav>
-      </div>
-      
-      <!-- Bottom Corner Elements -->
-      <div class="nav-corner nav-corner-bottom-left">
-        <div class="corner-info">
-          <div class="corner-text">Enock Mecheo</div>
-          <div class="corner-text">NYU Abu Dhabi</div>
-          <div class="corner-text">Computer Science</div>
-          <div class="corner-text">enockmecheo@nyu.edu</div>
-          <div class="corner-text">github.com/EnockMagara</div>
-        </div>
-      </div>
-      
-      <div class="nav-corner nav-corner-bottom-right">
-        <div class="corner-info">
-          <div class="corner-text">portfolio</div>
-          <div class="corner-text">2025</div>
-        </div>
+  <nav class="main-nav">
+    <!-- Mobile Burger Menu -->
+    <button class="burger-menu" id="burgerMenu">
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+    </button>
+    
+    <!-- Desktop Navigation -->
+    <div class="desktop-nav">
+      <div class="nav-container">
+        <!-- Home Section -->
+        <a href="/" class="nav-item">
+          <div class="nav-icon">
+            <i class="fas fa-home"></i>
+          </div>
+          <div class="nav-label">Home</div>
+          <div class="nav-preview">About & Skills</div>
+        </a>
+        
+        <!-- Portfolio Section -->
+        <a href="/portfolio/" class="nav-item active">
+          <div class="nav-icon">
+            <i class="fas fa-code"></i>
+          </div>
+          <div class="nav-label">Projects</div>
+          <div class="nav-preview">Web & Mobile Apps</div>
+        </a>
+        
+        <!-- ML Projects Section -->
+        <a href="/ml-projects" class="nav-item">
+          <div class="nav-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <div class="nav-label">ML Projects</div>
+          <div class="nav-preview">AI & Data Science</div>
+        </a>
+        
+        <!-- Comm Lab Section -->
+        <a href="/commlab/" class="nav-item">
+          <div class="nav-icon">
+            <i class="fas fa-microphone"></i>
+          </div>
+          <div class="nav-label">Comm Lab</div>
+          <div class="nav-preview">Media & Design</div>
+        </a>
       </div>
     </div>
-  </div>
+    
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay">
+      <div class="mobile-nav-content">
+        <div class="mobile-nav-header">
+          <span class="mobile-nav-title">Navigation</span>
+          <button class="mobile-nav-close" id="mobileNavClose">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="mobile-nav-items">
+          <a href="/" class="mobile-nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+            <small>About & Skills</small>
+          </a>
+          <a href="/portfolio/" class="mobile-nav-item active">
+            <i class="fas fa-code"></i>
+            <span>Projects</span>
+            <small>Web & Mobile Apps</small>
+          </a>
+          <a href="/ml-projects" class="mobile-nav-item">
+            <i class="fas fa-brain"></i>
+            <span>ML Projects</span>
+            <small>AI & Data Science</small>
+          </a>
+          <a href="/commlab/" class="mobile-nav-item">
+            <i class="fas fa-microphone"></i>
+            <span>Comm Lab</span>
+            <small>Media & Design</small>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
 
   <!-- Preloader -->
   <div id="preloader"></div>
