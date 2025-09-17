@@ -212,7 +212,6 @@
   // GSAP Animations
   document.addEventListener('DOMContentLoaded', function() {
     initAnimations();
-    setupThemeToggle();
     setupMobileNav();
     setupNavIndicator();
     revealOnScroll();
@@ -444,67 +443,6 @@
     });
   }
 
-  /**
-   * Set up theme toggle functionality
-   */
-  function setupThemeToggle() {
-    // Create theme toggle button if it doesn't exist
-    if (!document.querySelector('.theme-toggle')) {
-      const themeToggle = document.createElement('button');
-      themeToggle.className = 'theme-toggle';
-      themeToggle.setAttribute('aria-label', 'Toggle dark/light mode');
-      themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
-      document.body.appendChild(themeToggle);
-      
-      // Add click event listener
-      themeToggle.addEventListener('click', toggleTheme);
-    }
-    
-    // Check for saved theme in localStorage
-    const savedTheme = localStorage.getItem('theme');
-    
-    // If there's a saved theme, apply it
-    if (savedTheme) {
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      updateThemeIcon(savedTheme);
-    } else {
-      // If no saved theme, use the default from HTML
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-      localStorage.setItem('theme', currentTheme);
-      updateThemeIcon(currentTheme);
-    }
-  }
-
-  /**
-   * Toggle between dark and light themes
-   */
-  function toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    // Update theme attribute
-    document.documentElement.setAttribute('data-theme', newTheme);
-    
-    // Save preference to localStorage
-    localStorage.setItem('theme', newTheme);
-    
-    // Update icon
-    updateThemeIcon(newTheme);
-  }
-
-  /**
-   * Update theme toggle icon based on current theme
-   */
-  function updateThemeIcon(theme) {
-    const themeToggle = document.querySelector('.theme-toggle');
-    if (!themeToggle) return;
-    
-    if (theme === 'light') {
-      themeToggle.innerHTML = '<i class="bi bi-moon-fill"></i>';
-    } else {
-      themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
-    }
-  }
 
   /**
    * Setup mobile navigation
