@@ -215,6 +215,7 @@
     setupMobileNav();
     setupNavIndicator();
     revealOnScroll();
+    initNavbarScroll();
 
     initPhotosPageEscape();
 
@@ -430,6 +431,41 @@
 
   // Add event listener for scroll
   window.addEventListener('scroll', revealOnScroll);
+
+  /**
+   * Navbar hide/show on scroll functionality
+   */
+  function initNavbarScroll() {
+    const navbar = document.querySelector('.main-nav');
+    if (!navbar) return;
+
+    let lastScrollTop = 0;
+    let ticking = false;
+
+    function updateNavbar() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      if (scrollTop > lastScrollTop && scrollTop > 100) {
+        // Scrolling down - hide navbar
+        navbar.style.transform = 'translateY(-100%)';
+      } else {
+        // Scrolling up - show navbar
+        navbar.style.transform = 'translateY(0)';
+      }
+      
+      lastScrollTop = scrollTop;
+      ticking = false;
+    }
+
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(updateNavbar);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', requestTick, { passive: true });
+  }
 
 
 
