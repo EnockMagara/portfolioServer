@@ -219,7 +219,7 @@ body.index-page .main {
 .nav-container {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   padding: 0 15px;
 }
 
@@ -228,12 +228,13 @@ body.index-page .main {
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 4px 8px;
+  border-radius: 4px;
   transition: all 0.3s ease;
-  min-width: 80px;
+  min-width: 70px;
   position: relative;
   overflow: hidden;
+  justify-content: center;
 }
 
 .nav-item::before {
@@ -255,8 +256,8 @@ body.index-page .main {
 }
 
 .nav-icon {
-  font-size: 1rem;
-  margin-bottom: 2px;
+  font-size: 0.8rem;
+  margin-bottom: 1px;
   color: rgb(78, 82, 68);
   transition: all 0.3s ease;
 }
@@ -270,12 +271,13 @@ body.index-page .main {
 .nav-label {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   color: rgb(78, 82, 68);
   text-transform: uppercase;
-  letter-spacing: 0.3px;
-  margin-bottom: 1px;
+  letter-spacing: 0.2px;
+  margin-bottom: 0px;
   transition: all 0.3s ease;
+  line-height: 1;
 }
 
 .nav-item:hover .nav-label,
@@ -286,7 +288,7 @@ body.index-page .main {
 .nav-preview {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 400;
-  font-size: 0.6rem;
+  font-size: 0.5rem;
   color: rgba(78, 82, 68, 0.7);
   text-align: center;
   line-height: 1;
