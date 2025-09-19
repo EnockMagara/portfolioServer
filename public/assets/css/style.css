@@ -513,12 +513,12 @@ body.index-page .main {
 
 /* Add padding to main content to account for fixed navigation */
 .main {
-  padding-top: 85px;
+  padding-top: 100px;
 }
 
 @media (max-width: 768px) {
   .main {
-    padding-top: 70px;
+    padding-top: 75px;
   }
 }
 
@@ -1989,7 +1989,7 @@ height: 100%;
 }
 
 main.main {
-padding-top: 40px; /* Adjusted padding for the new navbar system */
+padding-top: 100px; /* Adjusted padding for the new navbar system */
 }
 
 .scroll-top {
@@ -2031,7 +2031,7 @@ opacity: 1;
 
 /* Styles specific to portfolio.html */
 .portfolio-page .main {
-padding: 60px 20px 40px; /* Adjusted top padding for navbar */
+padding: 100px 20px 40px; /* Adjusted top padding for navbar */
 }
 
 .portfolio-page .container {
@@ -3657,6 +3657,47 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
+/* Project Category Sections */
+.project-category-section {
+  margin-bottom: 80px;
+  padding-top: 20px;
+}
+
+.project-category-section:first-of-type {
+  padding-top: 40px;
+}
+
+.project-category-section:last-of-type {
+  margin-bottom: 40px;
+}
+
+.project-category-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: rgb(78, 82, 68);
+  text-align: center;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+}
+
+.project-category-title::before,
+.project-category-title::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgb(78, 82, 68), transparent);
+}
+
+.project-category-title i {
+  color: rgb(205, 125, 85);
+  font-size: 1.3rem;
+}
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -4055,6 +4096,22 @@ h1, h2, h3, h4, h5, h6 {
   
   .project-card {
     padding: 25px 20px;
+  }
+  
+  .project-category-title {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .project-category-title::before,
+  .project-category-title::after {
+    display: none;
+  }
+  
+  .project-category-section {
+    margin-bottom: 60px;
   }
   
   .contact-item {

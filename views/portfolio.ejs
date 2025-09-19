@@ -123,22 +123,130 @@
   <div id="preloader"></div>
 
   <main class="main">
-    <div class="projects-grid-new">
-      <% projects.forEach(function(project, index) { %>
-        <div class="project-tile reveal" data-project="<%= project.id %>" style="transition-delay: <%= index * 0.1 %>s;">
-          <div class="project-number"><%= String(index + 1).padStart(2, '0') %></div>
-          <div class="project-image-bg" style="background-image: url('<%= project.image %>')"></div>
-          <div class="project-content">
-            <div class="project-category"><%= project.category || 'PROJECT' %></div>
-            <h3 class="project-title"><%= project.title %></h3>
-            <p class="project-description"><%= project.description.substring(0, 150) %>...</p>
-            <a href="/project/<%= project.id %>" class="project-link">
-              <span>View Details</span>
-              <i class="bi bi-arrow-right"></i>
-            </a>
+    <!-- Web Development Projects -->
+    <div class="project-category-section">
+      <h3 class="project-category-title">
+        <i class="fas fa-code"></i>
+        Web Development Projects
+      </h3>
+      <div class="projects-grid-new">
+        <% 
+        const webProjects = projects.filter(p => 
+          p.category.toLowerCase().includes('web') || 
+          p.category.toLowerCase().includes('full-stack') ||
+          p.category.toLowerCase().includes('backend') ||
+          p.category.toLowerCase().includes('api')
+        );
+        let webIndex = 0;
+        webProjects.forEach(function(project) { %>
+          <div class="project-tile reveal" data-project="<%= project.id %>" style="transition-delay: <%= webIndex * 0.1 %>s;">
+            <div class="project-number"><%= String(webIndex + 1).padStart(2, '0') %></div>
+            <div class="project-image-bg" style="background-image: url('<%= project.image %>')"></div>
+            <div class="project-content">
+              <div class="project-category"><%= project.category || 'PROJECT' %></div>
+              <h3 class="project-title"><%= project.title %></h3>
+              <p class="project-description"><%= project.description.substring(0, 150) %>...</p>
+              <a href="/project/<%= project.id %>" class="project-link">
+                <span>View Details</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
           </div>
-        </div>
-      <% }); %>
+        <% webIndex++; }); %>
+      </div>
+    </div>
+
+    <!-- Mobile Development Projects -->
+    <div class="project-category-section">
+      <h3 class="project-category-title">
+        <i class="fas fa-mobile-alt"></i>
+        Mobile Development Projects
+      </h3>
+      <div class="projects-grid-new">
+        <% 
+        const mobileProjects = projects.filter(p => 
+          p.category.toLowerCase().includes('mobile') || 
+          p.category.toLowerCase().includes('ios')
+        );
+        let mobileIndex = 0;
+        mobileProjects.forEach(function(project) { %>
+          <div class="project-tile reveal" data-project="<%= project.id %>" style="transition-delay: <%= mobileIndex * 0.1 %>s;">
+            <div class="project-number"><%= String(mobileIndex + 1).padStart(2, '0') %></div>
+            <div class="project-image-bg" style="background-image: url('<%= project.image %>')"></div>
+            <div class="project-content">
+              <div class="project-category"><%= project.category || 'PROJECT' %></div>
+              <h3 class="project-title"><%= project.title %></h3>
+              <p class="project-description"><%= project.description.substring(0, 150) %>...</p>
+              <a href="/project/<%= project.id %>" class="project-link">
+                <span>View Details</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        <% mobileIndex++; }); %>
+      </div>
+    </div>
+
+    <!-- AI & Machine Learning Projects -->
+    <div class="project-category-section">
+      <h3 class="project-category-title">
+        <i class="fas fa-brain"></i>
+        AI & Machine Learning Projects
+      </h3>
+      <div class="projects-grid-new">
+        <% 
+        const aiProjects = projects.filter(p => 
+          p.category.toLowerCase().includes('ai') || 
+          p.category.toLowerCase().includes('accessibility')
+        );
+        let aiIndex = 0;
+        aiProjects.forEach(function(project) { %>
+          <div class="project-tile reveal" data-project="<%= project.id %>" style="transition-delay: <%= aiIndex * 0.1 %>s;">
+            <div class="project-number"><%= String(aiIndex + 1).padStart(2, '0') %></div>
+            <div class="project-image-bg" style="background-image: url('<%= project.image %>')"></div>
+            <div class="project-content">
+              <div class="project-category"><%= project.category || 'PROJECT' %></div>
+              <h3 class="project-title"><%= project.title %></h3>
+              <p class="project-description"><%= project.description.substring(0, 150) %>...</p>
+              <a href="/project/<%= project.id %>" class="project-link">
+                <span>View Details</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        <% aiIndex++; }); %>
+      </div>
+    </div>
+
+    <!-- Network & Systems Projects -->
+    <div class="project-category-section">
+      <h3 class="project-category-title">
+        <i class="fas fa-network-wired"></i>
+        Network & Systems Projects
+      </h3>
+      <div class="projects-grid-new">
+        <% 
+        const networkProjects = projects.filter(p => 
+          p.category.toLowerCase().includes('network') || 
+          p.category.toLowerCase().includes('analysis')
+        );
+        let networkIndex = 0;
+        networkProjects.forEach(function(project) { %>
+          <div class="project-tile reveal" data-project="<%= project.id %>" style="transition-delay: <%= networkIndex * 0.1 %>s;">
+            <div class="project-number"><%= String(networkIndex + 1).padStart(2, '0') %></div>
+            <div class="project-image-bg" style="background-image: url('<%= project.image %>')"></div>
+            <div class="project-content">
+              <div class="project-category"><%= project.category || 'PROJECT' %></div>
+              <h3 class="project-title"><%= project.title %></h3>
+              <p class="project-description"><%= project.description.substring(0, 150) %>...</p>
+              <a href="/project/<%= project.id %>" class="project-link">
+                <span>View Details</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        <% networkIndex++; }); %>
+      </div>
     </div>
   </main>
 
