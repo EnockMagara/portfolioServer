@@ -160,7 +160,7 @@ body.index-page .main {
   z-index: 1000;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  height: 65px;
+  height: 80px;
   transition: all 0.3s ease, transform 0.3s ease;
 }
 
@@ -221,7 +221,7 @@ body.index-page .main {
 .nav-container {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 38px;
   padding: 0 15px;
 }
 

@@ -137,7 +137,6 @@
   }
 
   window.addEventListener('load', toggleScrollTop);
-  document.addEventListener('scroll', toggleScrollTop);
 
   /**
    * Preloader
@@ -209,13 +208,26 @@
     });
   }
   
+  // Global scroll manager instance
+  let scrollManager;
+
   // GSAP Animations
   document.addEventListener('DOMContentLoaded', function() {
+    // Handle page refresh - ensure smooth scrolling is ready
+    if (performance.navigation && performance.navigation.type === 1) {
+      // Page was refreshed
+      document.body.style.scrollBehavior = 'auto';
+      setTimeout(() => {
+        document.body.style.scrollBehavior = 'smooth';
+      }, 100);
+    }
+    
     initAnimations();
     setupMobileNav();
     setupNavIndicator();
-    revealOnScroll();
-    initNavbarScroll();
+    
+    // Initialize unified scroll manager
+    scrollManager = new ScrollManager();
 
     initPhotosPageEscape();
 
@@ -429,42 +441,13 @@
     });
   }
 
-  // Add event listener for scroll
-  window.addEventListener('scroll', revealOnScroll);
-
   /**
    * Navbar hide/show on scroll functionality
+   * Now handled by ScrollManager class
    */
   function initNavbarScroll() {
-    const navbar = document.querySelector('.main-nav');
-    if (!navbar) return;
-
-    let lastScrollTop = 0;
-    let ticking = false;
-
-    function updateNavbar() {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      
-      if (scrollTop > lastScrollTop && scrollTop > 100) {
-        // Scrolling down - hide navbar
-        navbar.style.transform = 'translateY(-100%)';
-      } else {
-        // Scrolling up - show navbar
-        navbar.style.transform = 'translateY(0)';
-      }
-      
-      lastScrollTop = scrollTop;
-      ticking = false;
-    }
-
-    function requestTick() {
-      if (!ticking) {
-        requestAnimationFrame(updateNavbar);
-        ticking = true;
-      }
-    }
-
-    window.addEventListener('scroll', requestTick, { passive: true });
+    // Functionality moved to ScrollManager class
+    // This function is kept for compatibility
   }
 
 
@@ -608,6 +591,109 @@
   }
 
   /**
+   * Unified Scroll Manager - Handles all scroll events efficiently
+   */
+  class ScrollManager {
+    constructor() {
+      this.isScrolling = false;
+      this.scrollTimeout = null;
+      this.lastScrollY = 0;
+      this.ticking = false;
+      
+      // Bind methods
+      this.handleScroll = this.handleScroll.bind(this);
+      this.updateScrollEffects = this.updateScrollEffects.bind(this);
+      
+      this.init();
+    }
+    
+    init() {
+      // Use passive listeners for better performance
+      window.addEventListener('scroll', this.handleScroll, { passive: true });
+      
+      // Initial call
+      this.updateScrollEffects();
+    }
+    
+    handleScroll() {
+      if (!this.ticking) {
+        requestAnimationFrame(this.updateScrollEffects);
+        this.ticking = true;
+      }
+    }
+    
+    updateScrollEffects() {
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Update scroll top button
+      this.updateScrollTopButton(scrollY);
+      
+      // Update navbar visibility
+      this.updateNavbarVisibility(scrollY);
+      
+      // Update reveal animations
+      this.updateRevealAnimations();
+      
+      // Update parallax effects
+      this.updateParallaxEffects(scrollY);
+      
+      this.lastScrollY = scrollY;
+      this.ticking = false;
+    }
+    
+    updateScrollTopButton(scrollY) {
+      if (scrollTop) {
+        scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
+      }
+    }
+    
+    updateNavbarVisibility(scrollY) {
+      const navbar = document.querySelector('.main-nav');
+      if (!navbar) return;
+      
+      if (scrollY > this.lastScrollY && scrollY > 100) {
+        // Scrolling down - hide navbar
+        navbar.style.transform = 'translateY(-100%)';
+      } else {
+        // Scrolling up - show navbar
+        navbar.style.transform = 'translateY(0)';
+      }
+    }
+    
+    updateRevealAnimations() {
+      const reveals = document.querySelectorAll('.reveal');
+      const windowHeight = window.innerHeight;
+      
+      reveals.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 100;
+        
+        if (elementTop < windowHeight - elementVisible) {
+          element.classList.add('active');
+        } else {
+          element.classList.remove('active');
+        }
+      });
+    }
+    
+    updateParallaxEffects(scrollY) {
+      const parallaxLayers = document.querySelectorAll('.bg-layer');
+      if (parallaxLayers.length === 0) return;
+      
+      const rate = scrollY * -0.5;
+      
+      parallaxLayers.forEach((layer, index) => {
+        const speed = (index + 1) * 0.1;
+        layer.style.transform = `translateY(${rate * speed}px)`;
+      });
+    }
+    
+    destroy() {
+      window.removeEventListener('scroll', this.handleScroll);
+    }
+  }
+
+  /**
    * Initialize parallax effects for landing page
    */
   function initParallaxEffects() {
@@ -615,17 +701,7 @@
     
     if (parallaxLayers.length === 0) return;
     
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      const rate = scrolled * -0.5;
-      
-      parallaxLayers.forEach((layer, index) => {
-        const speed = (index + 1) * 0.1;
-        layer.style.transform = `translateY(${rate * speed}px)`;
-      });
-    });
-    
-    // Mouse parallax effect
+    // Mouse parallax effect (separate from scroll)
     const heroSection = document.querySelector('.hero-section');
     if (heroSection) {
       heroSection.addEventListener('mousemove', (e) => {
@@ -654,13 +730,25 @@
         const targetElement = document.getElementById(targetId);
         
         if (targetElement) {
-          const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
+          // Temporarily disable scroll manager to prevent conflicts
+          if (scrollManager) {
+            scrollManager.destroy();
+          }
+          
+          const headerHeight = document.querySelector('.main-nav')?.offsetHeight || 80;
           const targetPosition = targetElement.offsetTop - headerHeight - 20;
           
           window.scrollTo({
             top: targetPosition,
             behavior: 'smooth'
           });
+          
+          // Re-enable scroll manager after smooth scroll completes
+          setTimeout(() => {
+            if (scrollManager) {
+              scrollManager = new ScrollManager();
+            }
+          }, 1000);
         }
       });
     });
