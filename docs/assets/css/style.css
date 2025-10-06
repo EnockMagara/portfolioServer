@@ -3056,8 +3056,10 @@ h1, h2, h3, h4, h5, h6 {
   font-size: clamp(1.25rem, 2.6vw, 1.8rem);
   font-weight: 600;
   color: rgb(171, 120, 88);
-  line-height: 1.2;
-  margin-bottom: 10px;
+  line-height: 1.3;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .hero-main {
@@ -3065,7 +3067,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: clamp(2rem, 4.5vw, 3.5rem);
   font-weight: 700;
   color: #ffffff;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
 .hero-description {
@@ -3096,15 +3098,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-btn.primary {
-  background: #4c7fff;
+  background: rgb(171, 120, 88);
   color: #ffffff;
   border: none;
 }
 
 .hero-btn.primary:hover {
-  background: #3d66cc;
+  background: rgb(205, 125, 85);
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(76, 127, 255, 0.3);
+  box-shadow: 0 10px 25px rgba(171, 120, 88, 0.4);
 }
 
 .hero-btn.secondary {
@@ -3273,384 +3275,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Ensure hero background uses theme green regardless of earlier rules */
-body.index-page #hero.hero-section {
-  background: var(--accent-color) !important;
-  border-bottom-left-radius: 48px !important;
-  border-bottom-right-radius: 48px !important;
-}
 
-/* Improve contrast on green hero */
-body.index-page #hero .hero-main,
-body.index-page #hero .hero-description,
-body.index-page #hero .hero-btn.secondary { color: #ffffff; }
-
-.hero-content {
-  max-width: 1200px;
-  width: 100%;
-  text-align: center;
-  z-index: 2;
-  position: relative;
-}
-
-.hero-text {
-  margin-bottom: 60px;
-}
-
-.hero-label {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--text-color);
-  text-transform: none;
-  letter-spacing: 1px;
-  margin-bottom: 30px;
-  opacity: 0.9;
-}
-
-.hero-title {
-  margin-bottom: 30px;
-}
-
-.hero-name {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 5.5rem;
-  font-weight: 800;
-  color: var(--text-color);
-  line-height: 0.85;
-  display: block;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  margin-bottom: 5px;
-  opacity: 0;
-  transform: translateY(50px);
-  animation: slideInUp 1s ease-out forwards;
-  animation-delay: 0.2s;
-}
-
-.hero-surname {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 5.5rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, rgb(171, 120, 88) 0%, rgb(205, 125, 85) 50%, rgb(171, 120, 88) 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 0.85;
-  display: block;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  opacity: 0;
-  transform: translateY(50px);
-  animation: slideInUp 1s ease-out forwards, gradientShift 3s ease infinite;
-  animation-delay: 0.4s, 1.4s;
-}
-
-@keyframes slideInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes gradientShift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-.hero-subtitle {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: var(--text-color);
-  margin-bottom: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.hero-separator {
-  color: rgb(205, 125, 85);
-  font-size: 1.5rem;
-  font-weight: 300;
-}
-
-.hero-description {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.hero-description p {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: var(--text-color);
-  opacity: 0;
-  margin: 0 0 25px 0;
-  text-align: center;
-  font-weight: 400;
-  animation: fadeIn 1s ease-out forwards;
-  animation-delay: 0.8s;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 0.85;
-  }
-}
-
-.hero-description p:last-child {
-  margin-bottom: 0;
-}
-
-.hero-academic-highlight {
-  max-width: 700px;
-  margin: 40px auto 0;
-  padding: 30px;
-  background: rgba(78, 82, 68, 0.05);
-  border: 2px solid rgba(78, 82, 68, 0.1);
-  position: relative;
-}
-
-.hero-academic-highlight::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: rgb(205, 125, 85);
-}
-
-.hero-academic-highlight .highlight-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: rgb(205, 125, 85);
-  margin: 0 0 15px 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.hero-academic-highlight p {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--text-color);
-  margin: 0;
-  text-align: left;
-}
-
-.hero-academic-highlight strong {
-  color: rgb(205, 125, 85);
-  font-weight: 700;
-}
-
-.hero-experience-highlight {
-  max-width: 700px;
-  margin: 30px auto 0;
-  padding: 30px;
-  background: rgba(205, 125, 85, 0.05);
-  border: 2px solid rgba(205, 125, 85, 0.1);
-  position: relative;
-}
-
-.hero-experience-highlight::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: var(--text-color);
-}
-
-.hero-experience-highlight .highlight-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-color);
-  margin: 0 0 15px 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.hero-experience-highlight p {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--text-color);
-  margin: 0;
-  text-align: left;
-}
-
-.hero-experience-highlight strong {
-  color: var(--text-color);
-  font-weight: 700;
-}
-
-.experience-link {
-  color: rgb(205, 125, 85);
-  text-decoration: none;
-  font-weight: 600;
-  border-bottom: 1px solid rgba(205, 125, 85, 0.3);
-  transition: all 0.3s ease;
-}
-
-.experience-link:hover {
-  color: var(--text-color);
-  border-bottom-color: var(--text-color);
-}
-
-.hero-actions {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.cta-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 18px 36px;
-  border-radius: 0;
-  text-decoration: none;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 3px solid;
-  position: relative;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: slideInUp 0.8s ease-out forwards;
-  animation-delay: 1.2s;
-}
-
-.cta-button::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
-}
-
-.cta-button:hover::before {
-  width: 300px;
-  height: 300px;
-}
-
-.cta-button.primary {
-  background: var(--text-color);
-  color: var(--background-color);
-  border-color: var(--text-color);
-}
-
-.cta-button.primary:hover {
-  background: rgb(205, 125, 85);
-  border-color: rgb(205, 125, 85);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.cta-button.secondary {
-  background: transparent;
-  color: var(--text-color);
-  border-color: var(--text-color);
-}
-
-.cta-button.secondary:hover {
-  background: var(--text-color);
-  color: var(--background-color);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-/* Parallax Background */
-.parallax-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.bg-layer {
-  position: absolute;
-  width: 120%;
-  height: 120%;
-  background: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 2px,
-    rgba(78, 82, 68, 0.03) 2px,
-    rgba(78, 82, 68, 0.03) 4px
-  );
-  animation: parallaxMove 20s linear infinite;
-}
-
-.layer-1 {
-  top: -10%;
-  left: -10%;
-  animation-duration: 25s;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 3px,
-    rgba(78, 82, 68, 0.02) 3px,
-    rgba(78, 82, 68, 0.02) 6px
-  );
-}
-
-.layer-2 {
-  top: -10%;
-  left: -10%;
-  animation-duration: 30s;
-  animation-direction: reverse;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent,
-    transparent 4px,
-    rgba(205, 125, 85, 0.02) 4px,
-    rgba(205, 125, 85, 0.02) 8px
-  );
-}
-
-.layer-3 {
-  top: -10%;
-  left: -10%;
-  animation-duration: 35s;
-  background: repeating-linear-gradient(
-    135deg,
-    transparent,
-    transparent 5px,
-    rgba(78, 82, 68, 0.01) 5px,
-    rgba(78, 82, 68, 0.01) 10px
-  );
-}
-
-@keyframes parallaxMove {
-  0% { transform: translateX(0) translateY(0); }
-  100% { transform: translateX(-20px) translateY(-20px); }
-}
 
 /* Landing Page Animations */
 @keyframes fadeInUp {
@@ -4484,6 +4109,27 @@ body.index-page #hero .hero-btn.secondary { color: #ffffff; }
     padding: 15px 20px;
     font-size: 0.9rem;
   }
+}
+
+/* Ensure hero background uses theme green regardless of earlier rules */
+body.index-page #hero.hero-section {
+  background: var(--accent-color) !important;
+  border-bottom-left-radius: 48px !important;
+  border-bottom-right-radius: 48px !important;
+}
+
+/* Improve contrast on green hero */
+body.index-page #hero .hero-main,
+body.index-page #hero .hero-description,
+body.index-page #hero .hero-btn.secondary { color: #ffffff; }
+
+/* Ensure hero heading is visible on green background */
+body.index-page #hero .hero-label { color: rgb(164, 122, 93) !important; }
+body.index-page #hero .hero-name,
+body.index-page #hero .hero-surname {
+  color: rgb(164, 122, 93) !important;
+  background: none !important;
+  -webkit-text-fill-color: rgb(164, 122, 93) !important;
 }
 
 /* Additional responsive improvements */
