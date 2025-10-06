@@ -3828,6 +3828,30 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
 
+/* Portfolio page accent color overrides */
+.portfolio-page .project-category {
+  color: rgb(171, 120, 88);
+}
+
+.portfolio-page .project-category-title i {
+  color: rgb(171, 120, 88);
+}
+
+.portfolio-page .project-card:hover {
+  border-color: rgb(171, 120, 88);
+}
+
+.portfolio-page .project-link:hover {
+  background: rgb(171, 120, 88);
+  border-color: rgb(171, 120, 88);
+}
+
+/* Project detail headings color override */
+.portfolio-page .project-description h3,
+.portfolio-page .project-sidebar h4 {
+  color: rgb(171, 120, 88);
+}
+
 /* Contact Section */
 .contact-section {
   padding: 60px 20px;
