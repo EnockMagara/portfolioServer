@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <title>Enock Mecheo - Movie Review Sentiment Analysis (MapReduce + ML)</title>
+  <meta content="A comprehensive MLOps project for sentiment analysis of movie reviews using Apache Spark MapReduce and machine learning. Includes Spark-based TF-IDF feature extraction, MLlib models (Naive Bayes, Logistic Regression, Random Forest), PyTorch deep learning variants (LSTM/Transformer/BERT), MLflow tracking, Docker, and Makefile-driven workflows." name="description">
+  <meta content="portfolio, computer science, software development, NYU, Enock Mecheo, Enock Magara" name="keywords">
+  <meta name="author" content="Enock Mecheo">
+
+  <!-- Favicons -->
+  <link href="../../assets/img/favicon.png" rel="icon">
+  <link href="../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Space Grotesk Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="../../assets/css/style.css" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- GSAP library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+</head>
+
+<body class="portfolio-page">
+
+  <!-- Navigation System -->
+  <nav class="main-nav">
+    <!-- Mobile Burger Menu -->
+    <button class="burger-menu" id="burgerMenu">
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+    </button>
+    
+    <!-- Desktop Navigation -->
+    <div class="desktop-nav">
+      <div class="nav-container">
+        <!-- Home Section -->
+        <a href="/" class="nav-item">
+          <div class="nav-icon">
+            <i class="fas fa-home"></i>
+          </div>
+          <div class="nav-label">Home</div>
+          <div class="nav-preview">About & Skills</div>
+        </a>
+        
+        <!-- Portfolio Section -->
+        <a href="/portfolio/" class="nav-item active">
+          <div class="nav-icon">
+            <i class="fas fa-code"></i>
+          </div>
+          <div class="nav-label">Projects</div>
+          <div class="nav-preview">Web & Mobile Apps</div>
+        </a>
+        
+        <!-- ML Projects Section -->
+        <a href="/ml-projects" class="nav-item">
+          <div class="nav-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <div class="nav-label">ML Projects</div>
+          <div class="nav-preview">AI & Data Science</div>
+        </a>
+        
+        <!-- Comm Lab Section -->
+        <a href="/commlab/" class="nav-item">
+          <div class="nav-icon">
+            <i class="fas fa-microphone"></i>
+          </div>
+          <div class="nav-label">Comm Lab</div>
+          <div class="nav-preview">Media & Design</div>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay">
+      <div class="mobile-nav-content">
+        <div class="mobile-nav-header">
+          <span class="mobile-nav-title">Navigation</span>
+          <button class="mobile-nav-close" id="mobileNavClose">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="mobile-nav-items">
+          <a href="/" class="mobile-nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+            <small>About & Skills</small>
+          </a>
+          <a href="/portfolio/" class="mobile-nav-item active">
+            <i class="fas fa-code"></i>
+            <span>Projects</span>
+            <small>Web & Mobile Apps</small>
+          </a>
+          <a href="/ml-projects" class="mobile-nav-item">
+            <i class="fas fa-brain"></i>
+            <span>ML Projects</span>
+            <small>AI & Data Science</small>
+          </a>
+          <a href="/commlab/" class="mobile-nav-item">
+            <i class="fas fa-microphone"></i>
+            <span>Comm Lab</span>
+            <small>Media & Design</small>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <main class="main">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <a href="/portfolio/" class="back-button mb-4 d-inline-block">
+            <i class="bi bi-arrow-left"></i> Back to Projects
+          </a>
+          <h1 class="mb-4" style="font-size: 2.5rem;">Movie Review Sentiment Analysis (MapReduce + ML)</h1>
+        </div>
+      </div>
+
+      <div class="row mb-5">
+        <div class="col-lg-8">
+          <img src="../../assets/img/projects/mlops.png" alt="Movie Review Sentiment Analysis (MapReduce + ML)" class="img-fluid rounded mb-4">
+          <div class="project-description">
+            <h3 style="font-size: 2rem;">Description</h3>
+            <p style="font-size: 1.2rem;">A comprehensive MLOps project for sentiment analysis of movie reviews using Apache Spark MapReduce and machine learning. Includes Spark-based TF-IDF feature extraction, MLlib models (Naive Bayes, Logistic Regression, Random Forest), PyTorch deep learning variants (LSTM/Transformer/BERT), MLflow tracking, Docker, and Makefile-driven workflows.</p>
+            
+            
+            <h3 style="font-size: 2rem;">Challenges & Solutions</h3>
+            <p style="font-size: 1.2rem;">Designing a unified pipeline supporting both Spark MLlib and PyTorch while maintaining reproducibility and comparability. Implementing TF-IDF at scale, robust experiment tracking with MLflow, and containerized, repeatable training/inference flows. Balancing performance and resource usage across distributed and GPU workloads.</p>
+            
+            
+            
+            <h3 style="font-size: 2rem;">Technical Achievements</h3>
+            <ul class="technical-achievements-list" style="font-size: 1.2rem;">
+              
+                <li>Hybrid Pipeline: Unified Spark MapReduce feature engineering with parallel PyTorch deep learning path</li>
+              
+                <li>Model Zoo: Implemented Naive Bayes, Logistic Regression, Random Forest, plus LSTM/Transformer/BERT variants</li>
+              
+                <li>Experiment Tracking: Full MLflow integration with metrics, params, and artifact logging</li>
+              
+                <li>Reproducibility: Makefile + Docker workflows for install, train, evaluate, and predict</li>
+              
+                <li>Scalability: Distributed TF-IDF and training with Spark, GPU-ready PyTorch training scripts</li>
+              
+                <li>CI-ready Structure: Config-driven scripts, tests, and modular code layout for extension</li>
+              
+            </ul>
+            
+            
+            <h3 style="font-size: 2rem;">Technologies Used</h3>
+            <div class="tech-icons my-3" style="font-size: 1.2rem;">
+              
+                <span class="tech-badge"><i class="fas fa-bolt"></i> Apache Spark</span>
+              
+                <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
+              
+                <span class="tech-badge"><i class="fas fa-fire"></i> PyTorch</span>
+              
+                <span class="tech-badge"><i class="fas fa-chart-line"></i> MLflow</span>
+              
+                <span class="tech-badge"><i class="fab fa-docker"></i> Docker</span>
+              
+                <span class="tech-badge"><i class="fas fa-cogs"></i> Make</span>
+              
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4">
+          <div class="project-sidebar card">
+            <div class="card-body">
+              <h4>Project Details</h4>
+              
+              <div class="project-meta">
+                <div class="meta-item">
+                  <strong>Date:</strong>
+                  <span>2025</span>
+                </div>
+                
+                
+                
+                
+                <div class="meta-item">
+                  <strong>Category:</strong>
+                  <span>MLOps &amp; Distributed ML</span>
+                </div>
+                
+              </div>
+              
+              <div class="project-links mt-4">
+                
+                
+                
+                <a href="https://github.com/EnockMagara/MapReduceMLOps" target="_blank" class="animated-button w-100">
+                  <span class="button-text">GitHub Repo</span>
+                  <span class="button-line"></span>
+                </a>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p class="contact-message">Feel free to contact me through any of these channels:</p>
+      <div class="social-links-footer mb-4">
+        <a href="mailto:enockmecheo@nyu.edu" class="gmail"><i class="bi bi-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/enock-mecheo-56390b1a6/" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
+        <a href="https://github.com/EnockMagara" class="github" target="_blank"><i class="bi bi-github"></i></a>
+      </div>
+      <!-- Visitor Information Section -->
+      <div id="visitor-info" class="visitor-info">
+        <!-- Content will be populated by JavaScript -->
+      </div>
+      
+      <p class="thank-you-message">Thank you for your interest in my work.</p>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="../../assets/js/main.js"></script>
+
+</body>
+
+</html> 

@@ -35,6 +35,32 @@ const projects = [
     ]
   },
   {
+    id: 'mapreducemlops',
+    title: 'Movie Review Sentiment Analysis (MapReduce + ML)',
+    description: 'A comprehensive MLOps project for sentiment analysis of movie reviews using Apache Spark MapReduce and machine learning. Includes Spark-based TF-IDF feature extraction, MLlib models (Naive Bayes, Logistic Regression, Random Forest), PyTorch deep learning variants (LSTM/Transformer/BERT), MLflow tracking, Docker, and Makefile-driven workflows.',
+    challenges: 'Designing a unified pipeline supporting both Spark MLlib and PyTorch while maintaining reproducibility and comparability. Implementing TF-IDF at scale, robust experiment tracking with MLflow, and containerized, repeatable training/inference flows. Balancing performance and resource usage across distributed and GPU workloads.',
+    image: '/assets/img/projects/mlops.png',
+    technologies: [
+      { name: 'Apache Spark', icon: 'fas fa-bolt' },
+      { name: 'Python', icon: 'fab fa-python' },
+      { name: 'PyTorch', icon: 'fas fa-fire' },
+      { name: 'MLflow', icon: 'fas fa-chart-line' },
+      { name: 'Docker', icon: 'fab fa-docker' },
+      { name: 'Make', icon: 'fas fa-cogs' }
+    ],
+    date: '2025',
+    category: 'MLOps & Distributed ML',
+    githubUrl: 'https://github.com/EnockMagara/MapReduceMLOps',
+    technicalAchievements: [
+      'Hybrid Pipeline: Unified Spark MapReduce feature engineering with parallel PyTorch deep learning path',
+      'Model Zoo: Implemented Naive Bayes, Logistic Regression, Random Forest, plus LSTM/Transformer/BERT variants',
+      'Experiment Tracking: Full MLflow integration with metrics, params, and artifact logging',
+      'Reproducibility: Makefile + Docker workflows for install, train, evaluate, and predict',
+      'Scalability: Distributed TF-IDF and training with Spark, GPU-ready PyTorch training scripts',
+      'CI-ready Structure: Config-driven scripts, tests, and modular code layout for extension'
+    ]
+  },
+  {
     id: 'jobboard',
     title: 'JobBoard - Full-Stack Job Platform',
     description: 'JobBoard is a comprehensive full-stack job platform built with Python/Flask backend and Next.js frontend, featuring dual user authentication for companies and job seekers. The platform includes advanced A/B testing capabilities using LLM-enhanced job descriptions, comprehensive API endpoints for job management, and automated CI/CD pipeline with Docker containerization. The system implements sophisticated analytics and conversion tracking to optimize job posting effectiveness.',
