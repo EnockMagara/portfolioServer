@@ -35,6 +35,30 @@ const projects = [
     ]
   },
   {
+    id: 'quantopt',
+    title: 'QuantOpt - AI Portfolio Optimization',
+    description: 'A comprehensive machine learning system for portfolio optimization using PySpark and PyTorch. Implements Modern Portfolio Theory optimizers, Deep Reinforcement Learning (DDPG/PPO) for dynamic rebalancing, and Monte Carlo risk simulations with robust backtesting and evaluation.',
+    challenges: 'Designing a unified pipeline that scales from classical optimization to deep RL while ensuring reproducibility, robust feature engineering, and realistic backtesting with transaction costs and stress scenarios.',
+    image: '/assets/img/projects/quantopt.png',
+    technologies: [
+      { name: 'Python', icon: 'fab fa-python' },
+      { name: 'PySpark', icon: 'fas fa-bolt' },
+      { name: 'PyTorch', icon: 'fas fa-fire' },
+      { name: 'CVXPY', icon: 'fas fa-calculator' },
+      { name: 'Reinforcement Learning', icon: 'fas fa-brain' }
+    ],
+    date: '2025',
+    category: 'Quant Finance & ML',
+    githubUrl: 'https://github.com/EnockMagara/QuantOpt',
+    technicalAchievements: [
+      'End-to-end pipeline: preprocessing, feature engineering, modeling, and evaluation with PySpark + PyTorch',
+      'Multiple optimizers: MPT (max Sharpe, min variance), Deep RL rebalancing (DDPG/PPO), and Monte Carlo risk',
+      'Backtesting framework with stress testing (e.g., 2008-like crash scenarios) and rich metrics',
+      'Config-driven architecture with reproducible runs and scalable data handling',
+      'Extensible module layout with unit tests and results reporting'
+    ]
+  },
+  {
     id: 'mapreducemlops',
     title: 'Movie Review Sentiment Analysis (MapReduce + ML)',
     description: 'A comprehensive MLOps project for sentiment analysis of movie reviews using Apache Spark MapReduce and machine learning. Includes Spark-based TF-IDF feature extraction, MLlib models (Naive Bayes, Logistic Regression, Random Forest), PyTorch deep learning variants (LSTM/Transformer/BERT), MLflow tracking, Docker, and Makefile-driven workflows.',
