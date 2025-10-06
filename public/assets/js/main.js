@@ -92,6 +92,10 @@
   }
 
   window.addEventListener('load', toggleScrollTop);
+  // Safety: ensure the body regains scroll after all assets load
+  window.addEventListener('load', () => {
+    document.body.style.overflow = '';
+  });
 
   /**
    * Preloader
@@ -168,6 +172,21 @@
 
   // GSAP Animations
   document.addEventListener('DOMContentLoaded', function() {
+    // Safety: ensure no lingering scroll locks or open overlays on load
+    try {
+      document.body.style.overflow = '';
+      const overlays = [
+        document.querySelector('.mobile-nav-overlay'),
+        document.getElementById('navOverlay')
+      ].filter(Boolean);
+      overlays.forEach(el => el.classList.remove('active'));
+      const toggles = [
+        document.querySelector('.burger-menu'),
+        document.getElementById('menuToggle')
+      ].filter(Boolean);
+      toggles.forEach(btn => btn.classList.remove('active'));
+    } catch (_) {}
+
     // Handle page refresh - ensure smooth scrolling is ready
     if (performance.navigation && performance.navigation.type === 1) {
       // Page was refreshed
@@ -525,6 +544,8 @@
   /**
    * Unified Scroll Manager - Handles all scroll events efficiently
    */
+  const NAV_AUTOHIDE = false; // disable nav translateY hide/show to avoid sticky scroll
+
   class ScrollManager {
     constructor() {
       this.isScrolling = false;
@@ -582,13 +603,15 @@
     updateNavbarVisibility(scrollY) {
       const navbar = document.querySelector('.main-nav');
       if (!navbar) return;
-      
-      if (scrollY > this.lastScrollY && scrollY > 100) {
-        // Scrolling down - hide navbar
-        navbar.style.transform = 'translateY(-100%)';
+      if (NAV_AUTOHIDE) {
+        if (scrollY > this.lastScrollY && scrollY > 100) {
+          navbar.style.transform = 'translateY(-100%)';
+        } else {
+          navbar.style.transform = 'translateY(0)';
+        }
       } else {
-        // Scrolling up - show navbar
-        navbar.style.transform = 'translateY(0)';
+        // Keep navbar fixed and visible without transforms
+        navbar.style.transform = '';
       }
     }
     
