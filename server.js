@@ -31,7 +31,17 @@ app.get('/', (req, res) => {
 
 // Route for the ML projects page
 app.get('/ml-projects', (req, res) => {
-  res.render('ml-projects');
+  // Import projects data and filter for ML projects
+  const { projects } = require('./routes/projects');
+  const mlProjects = projects.filter(project => 
+    project.category.includes('ML') || 
+    project.category.includes('Quant') || 
+    project.category.includes('AI') ||
+    project.title.toLowerCase().includes('ml') ||
+    project.title.toLowerCase().includes('ai')
+  );
+  
+  res.render('ml-projects', { mlProjects });
 });
 
 // Route for the comm lab projects page

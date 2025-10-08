@@ -129,207 +129,86 @@
 
       <!-- ML Projects Grid -->
       <div class="ml-projects-grid">
-        <!-- MapReduceMLOps Project -->
-        <div class="ml-project-card reveal" style="transition-delay: 0.05s;">
-          <div class="project-number">00</div>
-          <div class="project-header">
-            <div class="project-icon">
-              <i class="fas fa-bolt"></i>
-            </div>
-            <div class="project-meta">
-              <span class="project-category">Distributed ML</span>
-              <span class="project-year">2025</span>
-            </div>
-          </div>
-          <div class="project-content">
-            <h2 class="project-title">MapReduceMLOps - Sentiment Analysis</h2>
-            <p class="project-description">
-              End-to-end sentiment analysis using Spark MapReduce and ML with TF-IDF, MLlib models (Naive Bayes, Logistic Regression, Random Forest), optional PyTorch models (LSTM/Transformer/BERT), MLflow tracking, and Dockerized workflows.
-            </p>
-            <div class="tech-stack">
-              <span class="tech-tag">Apache Spark</span>
-              <span class="tech-tag">PyTorch</span>
-              <span class="tech-tag">MLflow</span>
-              <span class="tech-tag">Docker</span>
-            </div>
-            <div class="project-actions">
-              <a href="/project/mapreducemlops" class="project-link primary">
-                <span>View Details</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <a href="https://github.com/EnockMagara/MapReduceMLOps" target="_blank" class="project-link secondary">
-                <i class="fab fa-github"></i>
-                <span>GitHub</span>
-              </a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- QuantOpt Project -->
-        <div class="ml-project-card reveal" style="transition-delay: 0.08s;">
-          <div class="project-number">01</div>
-          <div class="project-header">
-            <div class="project-icon">
-              <i class="fas fa-chart-line"></i>
-            </div>
-            <div class="project-meta">
-              <span class="project-category">Quant Finance & ML</span>
-              <span class="project-year">2025</span>
-            </div>
-          </div>
-          <div class="project-content">
-            <h2 class="project-title">QuantOpt - AI Portfolio Optimization</h2>
-            <p class="project-description">
-              PySpark + PyTorch pipeline for portfolio optimization: MPT optimizers, Deep RL rebalancing (DDPG/PPO), and Monte Carlo risk simulations with backtesting.
-            </p>
-            <div class="tech-stack">
-              <span class="tech-tag">PySpark</span>
-              <span class="tech-tag">PyTorch</span>
-              <span class="tech-tag">CVXPY</span>
-            </div>
-            <div class="project-actions">
-              <a href="/project/quantopt" class="project-link primary">
-                <span>View Details</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <a href="https://github.com/EnockMagara/QuantOpt" target="_blank" class="project-link secondary">
-                <i class="fab fa-github"></i>
-                <span>GitHub</span>
-              </a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- MMS Finance Project -->
-        <div class="ml-project-card reveal" style="transition-delay: 0.1s;">
-          <div class="project-number">01</div>
-          <div class="project-header">
-            <div class="project-icon">
-              <i class="fas fa-chart-line"></i>
-            </div>
-            <div class="project-meta">
-              <span class="project-category">Quantitative Finance</span>
-              <span class="project-year">2024</span>
-            </div>
-          </div>
-          
-          <div class="project-content">
-            <h2 class="project-title">MMS Finance - AI Portfolio Optimization</h2>
-            <p class="project-description">
-              A comprehensive hybrid machine learning platform for quantitative portfolio optimization, combining traditional financial theory with modern AI techniques. Features real-time data processing, advanced feature engineering, and multiple optimization strategies.
-            </p>
-            
-            <div class="tech-stack">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">PySpark</span>
-              <span class="tech-tag">PyTorch</span>
-              <span class="tech-tag">Flask</span>
-              <span class="tech-tag">CVXPY</span>
-              <span class="tech-tag">Scikit-learn</span>
-            </div>
-            
-            <div class="project-features">
-              <div class="feature-item">
-                <i class="fas fa-database"></i>
-                <span>50+ Financial Instruments</span>
+        <% if (mlProjects && mlProjects.length > 0) { %>
+          <% mlProjects.forEach((project, index) => { %>
+            <div class="ml-project-card reveal" style="transition-delay: <%= (index * 0.05) + 0.05 %>s;">
+              <div class="project-number"><%= String(index).padStart(2, '0') %></div>
+              <div class="project-header">
+                <div class="project-icon">
+                  <% if (project.category.includes('MLOps') || project.category.includes('Distributed')) { %>
+                    <i class="fas fa-bolt"></i>
+                  <% } else if (project.category.includes('Quant') || project.category.includes('Finance')) { %>
+                    <i class="fas fa-chart-line"></i>
+                  <% } else if (project.category.includes('AI') || project.category.includes('Accessibility')) { %>
+                    <i class="fas fa-robot"></i>
+                  <% } else { %>
+                    <i class="fas fa-brain"></i>
+                  <% } %>
+                </div>
+                <div class="project-meta">
+                  <span class="project-category"><%= project.category %></span>
+                  <span class="project-year"><%= project.date %></span>
+                </div>
               </div>
-              <div class="feature-item">
+              <div class="project-content">
+                <h2 class="project-title"><%= project.title %></h2>
+                <p class="project-description">
+                  <%= project.description %>
+                </p>
+                <div class="tech-stack">
+                  <% if (project.technologies) { %>
+                    <% project.technologies.slice(0, 6).forEach(tech => { %>
+                      <span class="tech-tag"><%= tech.name %></span>
+                    <% }); %>
+                  <% } %>
+                </div>
+                <div class="project-actions">
+                  <a href="/project/<%= project.id %>" class="project-link primary">
+                    <span>View Details</span>
+                    <i class="fas fa-arrow-right"></i>
+                  </a>
+                  <% if (project.githubUrl) { %>
+                    <a href="<%= project.githubUrl %>" target="_blank" class="project-link secondary">
+                      <i class="fab fa-github"></i>
+                      <span>GitHub</span>
+                    </a>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+          <% }); %>
+        <% } else { %>
+          <div class="ml-project-card coming-soon reveal" style="transition-delay: 0.05s;">
+            <div class="project-number">00</div>
+            <div class="project-header">
+              <div class="project-icon">
                 <i class="fas fa-brain"></i>
-                <span>ML Portfolio Optimization</span>
               </div>
-              <div class="feature-item">
-                <i class="fas fa-chart-bar"></i>
-                <span>2.89 Sharpe Ratio</span>
-              </div>
-              <div class="feature-item">
-                <i class="fas fa-globe"></i>
-                <span>Web Application</span>
+              <div class="project-meta">
+                <span class="project-category">Machine Learning</span>
+                <span class="project-year">Coming Soon</span>
               </div>
             </div>
-            
-            <div class="project-actions">
-              <a href="#" class="project-link primary">
-                <span>View Details</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <a href="#" class="project-link secondary">
-                <i class="fab fa-github"></i>
-                <span>GitHub</span>
-              </a>
+            <div class="project-content">
+              <h2 class="project-title">ML Projects Coming Soon</h2>
+              <p class="project-description">
+                Exciting machine learning and AI projects are currently in development. Check back soon for updates!
+              </p>
+              <div class="tech-stack">
+                <span class="tech-tag">PyTorch</span>
+                <span class="tech-tag">TensorFlow</span>
+                <span class="tech-tag">Scikit-learn</span>
+                <span class="tech-tag">Python</span>
+              </div>
+              <div class="project-actions">
+                <a href="#" class="project-link disabled">
+                  <span>Coming Soon</span>
+                  <i class="fas fa-clock"></i>
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-
-        <!-- Placeholder for Future Projects -->
-        <div class="ml-project-card coming-soon reveal" style="transition-delay: 0.2s;">
-          <div class="project-number">02</div>
-          <div class="project-header">
-            <div class="project-icon">
-              <i class="fas fa-robot"></i>
-            </div>
-            <div class="project-meta">
-              <span class="project-category">Deep Learning</span>
-              <span class="project-year">Coming Soon</span>
-            </div>
-          </div>
-          
-          <div class="project-content">
-            <h2 class="project-title">Computer Vision Project</h2>
-            <p class="project-description">
-              Advanced computer vision model for real-time object detection and classification. Built with state-of-the-art deep learning architectures.
-            </p>
-            
-            <div class="tech-stack">
-              <span class="tech-tag">PyTorch</span>
-              <span class="tech-tag">OpenCV</span>
-              <span class="tech-tag">TensorFlow</span>
-              <span class="tech-tag">YOLO</span>
-            </div>
-            
-            <div class="project-actions">
-              <a href="#" class="project-link disabled">
-                <span>Coming Soon</span>
-                <i class="fas fa-clock"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Another Placeholder -->
-        <div class="ml-project-card coming-soon reveal" style="transition-delay: 0.3s;">
-          <div class="project-number">03</div>
-          <div class="project-header">
-            <div class="project-icon">
-              <i class="fas fa-language"></i>
-            </div>
-            <div class="project-meta">
-              <span class="project-category">NLP</span>
-              <span class="project-year">Coming Soon</span>
-            </div>
-          </div>
-          
-          <div class="project-content">
-            <h2 class="project-title">Natural Language Processing</h2>
-            <p class="project-description">
-              Advanced NLP model for sentiment analysis and text generation. Leveraging transformer architectures for high-performance text processing.
-            </p>
-            
-            <div class="tech-stack">
-              <span class="tech-tag">Transformers</span>
-              <span class="tech-tag">Hugging Face</span>
-              <span class="tech-tag">BERT</span>
-              <span class="tech-tag">GPT</span>
-            </div>
-            
-            <div class="project-actions">
-              <a href="#" class="project-link disabled">
-                <span>Coming Soon</span>
-                <i class="fas fa-clock"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
+        <% } %>
       </div>
 
       <!-- Skills Section -->
