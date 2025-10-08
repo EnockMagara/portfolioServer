@@ -229,8 +229,17 @@ renderTemplateToSubfolder('index', {}, '');
 // Render portfolio page
 renderTemplateToSubfolder('portfolio', { projects }, 'portfolio');
 
+// Filter ML projects from the main projects array
+const mlProjects = projects.filter(project => 
+  project.category.includes('ML') || 
+  project.category.includes('Quant') || 
+  project.category.includes('AI') ||
+  project.title.toLowerCase().includes('ml') ||
+  project.title.toLowerCase().includes('ai')
+);
+
 // Render ML projects page
-renderTemplateToSubfolder('ml-projects', {}, 'ml-projects');
+renderTemplateToSubfolder('ml-projects', { mlProjects }, 'ml-projects');
 
 // Render comm lab page
 renderTemplateToSubfolder('commlab', {}, 'commlab');
