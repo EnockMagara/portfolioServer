@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# PortfolioServer HTTPS Setup Script
-# This script sets up HTTPS for enockmecheo.com using Let's Encrypt
+
 
 # Exit on error
 set -e
@@ -9,7 +8,7 @@ set -e
 # Set domains to include both www and non-www versions
 PRIMARY_DOMAIN="enockmecheo.com"
 WWW_DOMAIN="www.enockmecheo.com"
-EMAIL="your-email@example.com"  # Placeholder - real email is set via GitHub secrets
+EMAIL="email@example.com" 
 
 echo "=== Setting up HTTPS for $PRIMARY_DOMAIN and $WWW_DOMAIN ==="
 
@@ -26,7 +25,7 @@ if ! command -v certbot &> /dev/null; then
     apt-get install -y certbot python3-certbot-nginx
 fi
 
-# Ensure Nginx is installed
+
 if ! command -v nginx &> /dev/null; then
     echo "Installing Nginx..."
     apt-get install -y nginx
