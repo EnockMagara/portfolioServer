@@ -1,0 +1,167 @@
+%-------------------------
+% Resume in Latex - Software Engineering Focus
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Enock Mecheo} \\ \vspace{1pt}
+    \small +971545404319 $|$ \href{mailto:enockmecheo@nyu.edu}{\underline{enockmecheo@nyu.edu}} $|$ 
+    \href{https://linkedin.com/in/enock-mecheo-56390b1a6/}{\underline{linkedin.com/in/enock-mecheo}} $|$
+    \href{https://github.com/EnockMagara}{\underline{github.com/EnockMagara}} $|$
+    \href{https://enockmecheo.com}{\underline{enockmecheo.com}}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {New York University Abu Dhabi}{Abu Dhabi, UAE}
+      {Bachelor of Science in Computer Science \& Interactive Media}{Aug. 2022 -- May 2026}
+      \resumeItemListStart
+        \resumeItem{\textbf{Relevant Coursework:} Software Engineering, Distributed Systems, Database Systems, Computer Networks, Algorithms \& Data Structures}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Tiny Totos Kenya}{Nairobi, Kenya}
+      {Software Engineering Intern}{June 2025 -- Present}
+      \resumeItemListStart
+        \resumeItem{Built and maintained automated test scripts using Selenium and pytest, reducing manual testing time by 40\% and improving development turnaround for weekly app releases}
+        \resumeItem{Designed and deployed CI/CD pipeline using GitHub Actions, cutting deployment errors by 70\% and reducing integration time from hours to under 15 minutes}
+        \resumeItem{Developed and maintained the company website (mtotoapp.dev) using modern web technologies, improving user engagement and brand visibility}
+      \resumeItemListEnd
+    
+    \resumeSubheading
+      {New York University (SANAD Lab)}{Abu Dhabi, UAE}
+      {Research Assistant}{Jan. 2025 -- Present}
+      \resumeItemListStart
+        \resumeItem{Developed GitHub App for automated Java dependency repair, reducing manual maintenance effort by 80\% through LLM-powered fix generation and CI/CD validation}
+        \resumeItem{Engineered automated workflow system processing 500+ GitHub webhooks daily, achieving 95\% success rate in pull request generation with validated fixes}
+      \resumeItemListEnd
+    
+    \resumeSubheading
+      {TechSavanna Technologies}{Nairobi, Kenya}
+      {Software Engineering Intern}{June 2024 -- Aug. 2024}
+      \resumeItemListStart
+        \resumeItem{Developed and optimized responsive front-end components using React.js and JavaScript, enhancing user interface performance and improving user satisfaction scores by 25\%}
+        \resumeItem{Contributed to scalable back-end development using Node.js and Python, implementing robust server-side logic that increased data processing efficiency by 40\% and supported 50,000+ concurrent users}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{JobBoard - Full-Stack Job Platform} \href{https://github.com/EnockMagara/jobboard-public}{\underline{Link}} $|$ \emph{Python, Flask, Next.js, MongoDB, Docker, CI/CD}}{}
+          \resumeItemListStart
+            \resumeItem{Full-stack development with secure JWT authentication, dual user management, and comprehensive testing framework}
+            \resumeItem{Implemented A/B testing framework with LLM-powered job description optimization and analytics dashboard}
+            \resumeItem{Docker containerization with automated CI/CD workflows, performance benchmarking, and security testing}
+          \resumeItemListEnd
+      
+      \resumeProjectHeading
+          {\textbf{TakeYourVitamins - Health Management API} \href{https://github.com/EnockMagara/TakeYourVitamins}{\underline{Link}} $|$ \emph{Python, Flask, MongoDB, Selenium, JMeter, CI/CD}}{}
+          \resumeItemListStart
+            \resumeItem{Developed comprehensive Flask-based API with MongoDB integration, featuring RESTful endpoints and Swagger documentation}
+            \resumeItem{Implemented automated testing suite with Selenium for end-to-end testing and JMeter for load testing supporting 1000+ concurrent users}
+            \resumeItem{Established robust CI/CD pipeline with GitHub Actions, automated testing, linting, and coverage reporting}
+          \resumeItemListEnd
+      
+      \resumeProjectHeading
+          {\textbf{CloudTrace - Network Analysis Tool} \href{https://github.com/EnockMagara/CloudTrace}{\underline{Link}} $|$ \emph{Python, Flask, ICMP Sockets, Geospatial Visualization}}{}
+          \resumeItemListStart
+            \resumeItem{High-performance network analysis tool leveraging raw ICMP sockets to benchmark connectivity metrics to major cloud providers}
+            \resumeItem{Implemented multi-point traceroute analysis with precise RTT measurements and geospatial visualization}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Programming Languages}{: Python, JavaScript, TypeScript, C/C++, HTML/CSS, SQL} \\
+     \textbf{Web Development}{: React, Next.js, Node.js, Express, Flask, RESTful APIs, WebSockets, JWT} \\
+     \textbf{Testing \& QA}{: Selenium, pytest, Mocha, Chai, JMeter, Unit Testing, Integration Testing, E2E Testing} \\
+     \textbf{DevOps \& CI/CD}{: GitHub Actions, Docker, Automated Testing, Performance Testing, Load Testing} \\
+     \textbf{Databases}{: MongoDB, MySQL, PostgreSQL, Sequelize ORM, Database Design, Query Optimization} \\
+     \textbf{Tools}{: Git, Swagger, Linux, AWS, WebSockets}
+    }}
+ \end{itemize}
+
+\end{document}

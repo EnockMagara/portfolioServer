@@ -1,0 +1,161 @@
+%-------------------------
+% Resume in Latex - Machine Learning & AI Focus
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Enock Mecheo} \\ \vspace{1pt}
+    \small +971545404319 $|$ \href{mailto:enockmecheo@nyu.edu}{\underline{enockmecheo@nyu.edu}} $|$ 
+    \href{https://linkedin.com/in/enock-mecheo-56390b1a6/}{\underline{linkedin.com/in/enock-mecheo}} $|$
+    \href{https://github.com/EnockMagara}{\underline{github.com/EnockMagara}} $|$
+    \href{https://enockmecheo.com}{\underline{enockmecheo.com}}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {New York University Abu Dhabi}{Abu Dhabi, UAE}
+      {Bachelor of Science in Computer Science \& Interactive Media}{Aug. 2022 -- May 2026}
+      \resumeItemListStart
+        \resumeItem{\textbf{Relevant Coursework:} Algorithmic Foundations of Data Science, Machine Learning, Distributed Systems, Software Engineering, Database Systems}
+        \resumeItem{\textbf{Research Focus:} LLM-powered automation, dependency repair systems, geospatial data analysis}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {New York University (SANAD Lab)}{Abu Dhabi, UAE}
+      {Research Assistant}{Jan. 2025 -- Present}
+      \resumeItemListStart
+        \resumeItem{Developed GitHub App for automated Java dependency repair using LLM-powered fix generation, reducing manual maintenance effort by 80\% through intelligent code analysis}
+        \resumeItem{Engineered automated workflow system processing 500+ GitHub webhooks daily, achieving 95\% success rate in pull request generation with validated AI-generated fixes}
+        \resumeItem{Implemented comprehensive evaluation framework using BUMP benchmark dataset across 200+ real-world Java projects, ensuring reliability and performance of AI systems}
+      \resumeItemListEnd
+    
+    \resumeSubheading
+      {Tiny Totos Kenya}{Nairobi, Kenya}
+      {Software Engineering Intern}{June 2025 -- Present}
+      \resumeItemListStart
+        \resumeItem{Built and maintained automated test scripts using Selenium and pytest, reducing manual testing time by 40\% and improving development turnaround for weekly app releases}
+        \resumeItem{Designed and deployed CI/CD pipeline using GitHub Actions, cutting deployment errors by 70\% and reducing integration time from hours to under 15 minutes}
+      \resumeItemListEnd
+    
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{JobBoard - AI-Powered Job Platform} \href{https://github.com/EnockMagara/jobboard-public}{\underline{Link}} $|$ \emph{Python, Flask, Next.js, MongoDB, LLM Integration, A/B Testing}}{}
+          \resumeItemListStart
+            \resumeItem{Implemented A/B testing framework with LLM-powered job description optimization using Together.ai, improving job posting effectiveness through intelligent content enhancement}
+            \resumeItem{Developed analytics dashboard with conversion tracking and visualization system, enabling data-driven optimization of AI-generated content}
+            \resumeItem{Full-stack development with secure authentication, comprehensive testing framework, and Docker containerization}
+          \resumeItemListEnd
+      
+      \resumeProjectHeading
+          {\textbf{TakeYourVitamins - Health Management API} \href{https://github.com/EnockMagara/TakeYourVitamins}{\underline{Link}} $|$ \emph{Python, Flask, MongoDB, Automated Testing, Performance Analysis}}{}
+          \resumeItemListStart
+            \resumeItem{Developed comprehensive Flask-based API with MongoDB integration, featuring intelligent data models for complex vitamin interaction analysis}
+            \resumeItem{Implemented automated testing suite with Selenium for end-to-end testing and JMeter for load testing supporting 1000+ concurrent users}
+            \resumeItem{Established robust CI/CD pipeline with automated testing, performance monitoring, and comprehensive coverage reporting}
+          \resumeItemListEnd
+      
+      \resumeProjectHeading
+          {\textbf{AYN - AI-Powered Wearable Assistant} \href{https://drive.google.com/file/d/1Wl9L5GRE-5ZyQLFlioMG-RcnTCGqplIT/view}{\underline{Link}} $|$ \emph{AI, Computer Vision, Real-time Processing, Wearable Technology}}{}
+          \resumeItemListStart
+            \resumeItem{Finalist at Nokia's AI for Good Hackathon (103 teams), built AI-powered wearable assistant for visually impaired with real-time object detection}
+            \resumeItem{Implemented voice navigation and safety alerts using computer vision and natural language processing technologies}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Programming Languages}{: Python, JavaScript, TypeScript, C/C++} \\
+     \textbf{Machine Learning \& AI}{: LLM Integration, Computer Vision, Natural Language Processing, A/B Testing, Data Analysis} \\
+     \textbf{ML/AI Frameworks}{: TensorFlow, PyTorch, Scikit-learn, Matplotlib, Seaborn, Pandas, NumPy} \\
+     \textbf{Data Science}{: Geospatial Analysis, Statistical Modeling, Data Visualization, Performance Analysis} \\
+     \textbf{Web Development}{: React, Next.js, Node.js, Express, Flask, RESTful APIs, MongoDB} \\
+     \textbf{Tools \& Platforms}{: GitHub Actions, Docker, AWS, Git, Swagger, Linux}
+    }}
+ \end{itemize}
+
+\end{document}
