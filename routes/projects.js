@@ -39,7 +39,7 @@ const projects = [
     title: 'QuantOpt - AI Portfolio Optimization',
     description: 'A comprehensive machine learning system for portfolio optimization using PySpark and PyTorch. Implements Modern Portfolio Theory optimizers, Deep Reinforcement Learning (DDPG/PPO) for dynamic rebalancing, and Monte Carlo risk simulations with robust backtesting and evaluation.',
     challenges: 'Designing a unified pipeline that scales from classical optimization to deep RL while ensuring reproducibility, robust feature engineering, and realistic backtesting with transaction costs and stress scenarios.',
-    image: '/assets/img/projects/quantopt.png',
+    image: '/assets/img/projects/project-cover.svg',
     technologies: [
       { name: 'Python', icon: 'fab fa-python' },
       { name: 'PySpark', icon: 'fas fa-bolt' },
