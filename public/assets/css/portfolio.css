@@ -481,17 +481,19 @@ section { padding: 96px 0; }
 .contact-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 70px 32px;
+  border-radius: 16px;
+  padding: 40px 36px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 .contact-card h2 {
   font-family: var(--font-title);
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
-.contact-card p { color: var(--text-dim); max-width: 500px; margin: 0 auto 34px; font-size: 1.02rem; }
+.contact-card p { color: var(--text-dim); max-width: 420px; margin: 0 auto 24px; font-size: 0.96rem; }
 .social-row { display: flex; gap: 14px; justify-content: center; margin-top: 38px; }
 .social-row a {
   width: 46px; height: 46px;
@@ -663,7 +665,7 @@ section { padding: 96px 0; }
   section { padding: 64px 0; }
   .hero { padding: 120px 0 60px; }
   .hero-meta { gap: 26px; }
-  .contact-card { padding: 48px 22px; }
+  .contact-card { padding: 32px 20px; }
   .code-chip { left: 0; }
 }
 
