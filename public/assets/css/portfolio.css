@@ -126,8 +126,9 @@ img { max-width: 100%; display: block; }
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.25fr 0.9fr;
-  gap: 56px;
+  grid-template-columns: 1fr;
+  max-width: 760px;
+  gap: 24px;
   align-items: center;
 }
 .eyebrow {
