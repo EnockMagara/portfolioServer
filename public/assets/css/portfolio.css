@@ -176,14 +176,6 @@ img { max-width: 100%; display: block; }
   color: var(--text-faint);
   margin-bottom: 20px;
 }
-.hero-status::before {
-  content: '';
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: #4ade80;
-  box-shadow: 0 0 0 3px rgba(74,222,128,0.2);
-  flex-shrink: 0;
-}
 .hero-lead {
   font-size: 1.08rem;
   color: var(--text-dim);
