@@ -65,6 +65,33 @@ const projects = [
     ]
   },
   {
+    id: 'safipoints',
+    title: 'SafiPoints — Blockchain Loyalty Rewards on XRPL',
+    description: 'Blockchain-powered loyalty and cashback system for restaurants, built on the XRP Ledger. Customers earn SAFI tokens automatically when they pay via SafiSend, store them on-chain, and redeem for discounts at checkout. Extended with SafiScore — a verifiable on-chain credit profile built from retail spending history. Selected as 1 of 15 fellows at the Ripple XRPL Builder Residency; presented at Ripple Demo Day, London.',
+    challenges: 'Designing a seamless token mint-and-redeem flow that works invisibly inside a real restaurant ordering session, handling XRPL testnet latency, SMS OTP claim for first-time users, and building a verifiable on-chain credit score from spend history using Solidity on the XRPL EVM Sidechain.',
+    image: '/assets/img/projects/safipoints.jpg',
+    technologies: [
+      { name: 'React', icon: 'fab fa-react' },
+      { name: 'Node.js', icon: 'fab fa-node-js' },
+      { name: 'XRPL', icon: 'fas fa-link' },
+      { name: 'Solidity', icon: 'fas fa-file-code' },
+      { name: 'MongoDB', icon: 'fas fa-database' },
+      { name: 'Docker', icon: 'fab fa-docker' },
+      { name: 'Nginx', icon: 'fas fa-cloud' }
+    ],
+    date: 'Mar – Apr 2026',
+    category: 'Blockchain · Fintech · DeFi',
+    githubUrl: 'https://github.com/EnockMagara/SAFIPOINTS',
+    technicalAchievements: [
+      'SAFI token minted on XRPL Testnet as IOU: 10% cashback auto-minted on every qualifying payment',
+      'SMS OTP claim flow for first-time users; returning customers get auto-minted tokens',
+      'SafiScore: verifiable on-chain credit profile built from retail spend history, using Solidity smart contracts on XRPL EVM Sidechain',
+      'Full React SPA with Framer Motion animations, custom CSS, connected to Express/MongoDB backend',
+      'Dockerized deployment behind Nginx with SSL; seed scripts to bootstrap XRPL wallets and demo data',
+      'Selected as 1 of 15 XRPL Builder Residency fellows; presented live at Ripple Demo Day, London'
+    ]
+  },
+  {
     id: 'quantopt',
     title: 'QuantOpt - AI Portfolio Optimization',
     description: 'A comprehensive machine learning system for portfolio optimization using PySpark and PyTorch. Implements Modern Portfolio Theory optimizers, Deep Reinforcement Learning (DDPG/PPO) for dynamic rebalancing, and Monte Carlo risk simulations with robust backtesting and evaluation.',
