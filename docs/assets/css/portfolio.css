@@ -1,14 +1,14 @@
 /* =========================================================
    Enock Mecheo — AI Engineer · Portfolio
-   Palette: near-black rgb(10,12,18) + gold rgb(233,196,103)
+   Palette: navy rgb(10,14,35) + gold rgb(233,196,103)
    Titles: Cinzel · Body: Montserrat · Editorial / no gradients
    ========================================================= */
 
 :root {
-  --bg: rgb(13, 13, 13);
-  --bg-soft: rgb(17, 17, 17);
-  --surface: rgb(20, 20, 20);
-  --surface-2: rgb(24, 24, 24);
+  --bg: rgb(10, 14, 35);
+  --bg-soft: rgb(13, 18, 44);
+  --surface: rgb(16, 22, 52);
+  --surface-2: rgb(20, 27, 62);
   --border: rgba(233, 196, 103, 0.12);
   --border-soft: rgba(255, 255, 255, 0.06);
   --rule: rgba(233, 196, 103, 0.18);
@@ -52,7 +52,7 @@ img { max-width: 100%; display: block; }
   transition: background 0.3s, border-color 0.3s;
 }
 .nav.scrolled {
-  background: rgba(13, 13, 13, 0.92);
+  background: rgba(10, 12, 18, 0.92);
   backdrop-filter: blur(14px);
   border-bottom-color: var(--rule);
 }
