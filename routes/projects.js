@@ -4,6 +4,36 @@ const router = express.Router();
 // Project data
 const projects = [
   {
+    id: 'safisend',
+    title: 'SafiSend - Restaurant Ordering & Payments Platform',
+    description: 'SafiSend is a full-stack restaurant technology platform I founded and led as product and engineering lead. Customers scan a QR code at the table to browse a digital menu, place orders, and pay — including split billing across multiple diners. The system integrates WhatsApp Business API for automated order notifications, M-Pesa for mobile payments, and a real-time admin dashboard for kitchen and order management. Deployed at www.safisend.com.',
+    challenges: 'Building a reliable, real-time ordering flow across QR code, WhatsApp, and web surfaces simultaneously, while handling split-bill logic, M-Pesa payment callbacks, and live kitchen order state — all with a small team under tight timelines.',
+    image: '/assets/img/projects/safisend.jpg',
+    technologies: [
+      { name: 'React', icon: 'fab fa-react' },
+      { name: 'Node.js', icon: 'fab fa-node-js' },
+      { name: 'Express', icon: 'fas fa-server' },
+      { name: 'MongoDB', icon: 'fas fa-database' },
+      { name: 'WhatsApp API', icon: 'fab fa-whatsapp' },
+      { name: 'Docker', icon: 'fab fa-docker' },
+      { name: 'Nginx', icon: 'fas fa-cloud' },
+      { name: 'JMeter', icon: 'fas fa-chart-bar' }
+    ],
+    date: 'Aug 2025 – May 2026',
+    category: 'Product · Full-Stack · Fintech',
+    liveUrl: 'https://www.safisend.com',
+    technicalAchievements: [
+      'QR-to-order flow: customers scan, browse, and pay entirely from their phone with no app install',
+      'Split billing: multiple diners at the same table can split a bill in real time',
+      'WhatsApp Business API integration for automated order confirmations and kitchen alerts',
+      'M-Pesa payment processing with callback handling and reconciliation',
+      'Real-time admin dashboard for live order state, inventory, and analytics',
+      'Dockerized microservices behind Nginx with automated deployment pipeline',
+      'Load tested to 500+ concurrent users with JMeter; optimized bottlenecks under production load',
+      'SafiPoints: blockchain loyalty program on the XRP Ledger, presented at Ripple Demo Day London'
+    ]
+  },
+  {
     id: 'takeyourvitamins',
     title: 'TakeYourVitamins - Health Management API',
     description: 'TakeYourVitamins is a comprehensive Flask-based API for managing vitamin information with MongoDB integration. The system features a robust RESTful API with Swagger documentation, automated testing with Selenium for end-to-end testing, load testing with JMeter supporting up to 1000 concurrent users, and a complete CI/CD pipeline with GitHub Actions. The project includes comprehensive data models for vitamins, supplements, and user interactions with detailed intake practices and interaction warnings.',
