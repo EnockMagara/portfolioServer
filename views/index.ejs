@@ -1,503 +1,310 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 
 <head>
-  <!-- Meta tags -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <title>Enock Mecheo - Portfolio</title>
-  <meta content="Portfolio of Enock Mecheo, Computer Science student at NYU Abu Dhabi" name="description">
-  <meta content="portfolio, computer science, software development, NYU, Enock Mecheo, Enock Magara" name="keywords">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enock Mecheo — AI Engineer</title>
+  <meta name="description" content="Enock Mecheo — AI Engineer. A showcase of work in machine learning, MLOps, and distributed data systems.">
+  <meta name="keywords" content="AI Engineer, Machine Learning, MLOps, Distributed Systems, Enock Mecheo, PyTorch, Spark">
   <meta name="author" content="Enock Mecheo">
 
-  <!-- Favicons -->
   <link href="/assets/img/favicon.png" rel="icon">
   <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Space Grotesk Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Vendor CSS Files -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Main CSS File -->
-  <link href="/assets/css/style.css" rel="stylesheet">
-
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- GSAP library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+  <link href="/assets/css/portfolio.css" rel="stylesheet">
 </head>
 
-<body class="index-page">
+<body>
 
-
-
-
-  <!-- Navigation System -->
-  <nav class="main-nav">
-    <!-- Mobile Burger Menu -->
-    <button class="burger-menu" id="burgerMenu">
-      <span class="burger-line"></span>
-      <span class="burger-line"></span>
-      <span class="burger-line"></span>
-  </button>
-
-    <!-- Desktop Navigation -->
-    <div class="desktop-nav">
-      <div class="nav-container">
-        <!-- Home Section -->
-        <a href="/" class="nav-item active">
-          <div class="nav-icon">
-            <i class="fas fa-home"></i>
-          </div>
-          <div class="nav-label">Home</div>
-          <div class="nav-preview">About & Skills</div>
-        </a>
-        
-        <!-- Portfolio Section -->
-        <a href="/portfolio" class="nav-item">
-          <div class="nav-icon">
-            <i class="fas fa-code"></i>
-          </div>
-          <div class="nav-label">Projects</div>
-          <div class="nav-preview">Web & Mobile Apps</div>
-        </a>
-        
-        <!-- ML Projects Section -->
-        <a href="/ml-projects" class="nav-item">
-          <div class="nav-icon">
-            <i class="fas fa-brain"></i>
-      </div>
-          <div class="nav-label">ML Projects</div>
-          <div class="nav-preview">AI & Data Science</div>
-        </a>
-        
-        <!-- Comm Lab Section -->
-        <a href="/commlab" class="nav-item">
-          <div class="nav-icon">
-            <i class="fas fa-microphone"></i>
-          </div>
-          <div class="nav-label">Comm Lab</div>
-          <div class="nav-preview">Media & Design</div>
-        </a>
-      </div>
-      </div>
-      
-    <!-- Mobile Navigation Overlay -->
-    <div class="mobile-nav-overlay" id="mobileNavOverlay">
-      <div class="mobile-nav-content">
-        <div class="mobile-nav-header">
-          <span class="mobile-nav-title">Navigation</span>
-          <button class="mobile-nav-close" id="mobileNavClose">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-        <div class="mobile-nav-items">
-          <a href="/" class="mobile-nav-item active">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-            <small>About & Skills</small>
-          </a>
-          <a href="/portfolio" class="mobile-nav-item">
-            <i class="fas fa-code"></i>
-            <span>Projects</span>
-            <small>Web & Mobile Apps</small>
-          </a>
-          <a href="/ml-projects" class="mobile-nav-item">
-            <i class="fas fa-brain"></i>
-            <span>ML Projects</span>
-            <small>AI & Data Science</small>
-          </a>
-          <a href="/commlab" class="mobile-nav-item">
-            <i class="fas fa-microphone"></i>
-            <span>Comm Lab</span>
-            <small>Media & Design</small>
-          </a>
-        </div>
+  <!-- ===================== NAV ===================== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#top" class="brand"><span class="dot"></span> Enock Mecheo</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact" class="nav-cta">Connect</a>
       </div>
     </div>
   </nav>
 
-  <!-- Preloader -->
-  <div id="preloader"></div>
+  <span id="top"></span>
 
-  <main class="main">
-    <!-- One-Page Landing Layout -->
-    <div class="landing-container">
-      
-      <!-- Hero Section -->
-      <section id="hero" class="hero-section">
-        <div class="hero-container">
-          <div class="hero-left">
-            <div class="hero-text-content">
-              <div class="hero-label">Hi I am</div>
-              <h1 class="hero-title">
-                <span class="hero-name">ENOCK</span>
-                <span class="hero-surname">MECHEO</span>
-              </h1>
-              <div class="hero-description">
-                <p>I am a  Software Engineer with a strong focus on data-driven systems, distributed systems, machine learning, and MLOps.</p>
-                <p>I enjoy working at the intersection of software engineering and data, where I can design robust, distributed architectures, optimize workflows, and deploy intelligent solutions in production.</p>
-              </div>
-            </div>
-            
-            <div class="hero-actions">
-              <a href="#projects" class="hero-btn primary">VIEW PROJECTS</a>
-              <a href="mailto:enockmecheo@nyu.edu" class="hero-btn secondary">CONTACT</a>
-            </div>
-            
-          </div>
-          
-          <div class="hero-right">
-            <div class="hero-image-wrapper">
-              <img src="/assets/img/IMG_3692.avif" alt="Enock Mecheo" class="hero-image">
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Highlights Section -->
-      <section id="highlights" class="highlights-section">
-        <div class="highlights-container">
-          <div class="highlight-card academic">
-            <h3 class="highlight-title">Relevant Coursework</h3>
-            <p>I have completed relevant coursework in <strong>Data Structures, Algorithms, Software Engineering, Database Design, Operating Systems, Computer Networking, and Mobile Development</strong> - including advanced coursework in <strong>Algorithmic Foundations of Data Science</strong> where I have studied distributed computing, streaming algorithms, and large-scale data processing.</p>
-          </div>
-          
-          <div class="highlight-card experience">
-            <h3 class="highlight-title">Industry Experience</h3>
-            <p><strong>5+ internships</strong> where I have worked on QA, DevOps, and Web Development - building production-ready systems and applications from concept to deployment.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Skills Section -->
-      <section id="skills" class="skills-section">
-        <div class="section-header">
-          <h2 class="section-title">TECHNICAL EXPERTISE</h2>
-          <div class="section-subtitle">Technologies & Frameworks</div>
-        </div>
-        
-        <div class="skills-grid">
-          <div class="skill-category">
-            <div class="skill-icon">
-              <i class="fas fa-brain"></i>
-            </div>
-            <h3>Data Science & ML</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">PyTorch</span>
-              <span class="skill-tag">Spark</span>
-              <span class="skill-tag">Map-Reduce</span>
-              <span class="skill-tag">PCA</span>
-              <span class="skill-tag">SVD</span>
-            </div>
-          </div>
-          
-          <div class="skill-category">
-            <div class="skill-icon">
-              <i class="fas fa-code"></i>
-            </div>
-            <h3>Full-Stack Development</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">React</span>
-              <span class="skill-tag">Node.js</span>
-              <span class="skill-tag">JavaScript</span>
-              <span class="skill-tag">MongoDB</span>
-              <span class="skill-tag">Flask</span>
-              <span class="skill-tag">Express</span>
-            </div>
-          </div>
-          
-          <div class="skill-category">
-            <div class="skill-icon">
-              <i class="fas fa-mobile-alt"></i>
-            </div>
-            <h3>Mobile & Systems</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">Swift</span>
-              <span class="skill-tag">SwiftUI</span>
-              <span class="skill-tag">iOS</span>
-              <span class="skill-tag">Operating Systems</span>
-              <span class="skill-tag">Computer Networking</span>
-            </div>
-          </div>
-          
-          <div class="skill-category">
-            <div class="skill-icon">
-              <i class="fas fa-cogs"></i>
-            </div>
-            <h3>Software Engineering</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">Database Design</span>
-              <span class="skill-tag">Docker</span>
-              <span class="skill-tag">Unit Testing</span>
-              <span class="skill-tag">JMeter</span>
-              <span class="skill-tag">CI/CD</span>
-              <span class="skill-tag">Git</span>
-            </div>
-          </div>
-          
-          <div class="skill-category">
-            <div class="skill-icon">
-              <i class="fas fa-cloud"></i>
-            </div>
-            <h3>Cloud & Infrastructure</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">AWS</span>
-              <span class="skill-tag">WebSockets</span>
-              <span class="skill-tag">MySQL</span>
-              <span class="skill-tag">PostgreSQL</span>
-              <span class="skill-tag">GitHub Actions</span>
-            </div>
-          </div>
-          
-          <div class="skill-category">
-            <div class="skill-icon">
-              <i class="fas fa-shield-alt"></i>
-            </div>
-            <h3>Testing & QA</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">Automated Testing</span>
-              <span class="skill-tag">Security Testing</span>
-              <span class="skill-tag">Performance Testing</span>
-              <span class="skill-tag">Mocha</span>
-              <span class="skill-tag">pytest</span>
-            </div>
-          </div>
-          
-          <div class="skill-category">
-            <div class="skill-icon">
-              <i class="fas fa-project-diagram"></i>
-            </div>
-            <h3>Big Data Algorithms</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">Streaming Algorithms</span>
-              <span class="skill-tag">LSH</span>
-              <span class="skill-tag">MinHashing</span>
-              <span class="skill-tag">Clustering</span>
-              <span class="skill-tag">Graph Analysis</span>
-              <span class="skill-tag">EM Algorithm</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Featured Projects Section -->
-      <section id="projects" class="projects-section">
-        <div class="section-header">
-          <h2 class="section-title">FEATURED PROJECTS</h2>
-          <div class="section-subtitle">Selected Work & Case Studies</div>
-        </div>
-        
-        <!-- Machine Learning & AI Projects -->
-        <div class="project-category-section">
-          <h3 class="project-category-title">
-            <i class="fas fa-brain"></i>
-            Machine Learning & AI Projects
-          </h3>
-          <div class="projects-grid">
-            <div class="project-card" data-project="mapreducemlops">
-              <div class="project-number">00</div>
-              <div class="project-content">
-                <div class="project-category">Distributed ML & MLOps</div>
-                <h3 class="project-title">MapReduceMLOps</h3>
-                <p class="project-description">Spark MapReduce + ML pipeline for movie review sentiment with MLflow and Docker.</p>
-                <div class="project-tech">
-                  <span class="tech-tag">Spark</span>
-                  <span class="tech-tag">PyTorch</span>
-                  <span class="tech-tag">MLflow</span>
-                </div>
-                <a href="/project/mapreducemlops" class="project-link">
-                  <span>View Details</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-              <div class="project-card" data-project="quantopt">
-                <div class="project-number">01</div>
-                <div class="project-content">
-                  <div class="project-category">Quant Finance & ML</div>
-                  <h3 class="project-title">QuantOpt</h3>
-                  <p class="project-description">AI portfolio optimization with PySpark + PyTorch: MPT, Deep RL rebalancing, and Monte Carlo risk simulations.</p>
-                  <div class="project-tech">
-                    <span class="tech-tag">PySpark</span>
-                    <span class="tech-tag">PyTorch</span>
-                    <span class="tech-tag">CVXPY</span>
-                  </div>
-                  <a href="/project/quantopt" class="project-link">
-                    <span>View Details</span>
-                    <i class="fas fa-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-            <div class="project-card" data-project="mms-finance">
-              <div class="project-number">02</div>
-              <div class="project-content">
-                <div class="project-category">ML & Finance</div>
-                <h3 class="project-title">MMS Finance</h3>
-                <p class="project-description">AI-powered portfolio optimization platform with real-time data processing and advanced ML algorithms.</p>
-                <div class="project-tech">
-                  <span class="tech-tag">Python</span>
-                  <span class="tech-tag">PyTorch</span>
-                  <span class="tech-tag">Flask</span>
-                </div>
-                <a href="/ml-projects" class="project-link">
-                  <span>View Details</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-            
-            <div class="project-card" data-project="ayn">
-              <div class="project-number">02</div>
-              <div class="project-content">
-                <div class="project-category">AI & Accessibility</div>
-                <h3 class="project-title">AYN</h3>
-                <p class="project-description">AI-powered visual assistant for visually impaired users with real-time object detection and navigation.</p>
-                <div class="project-tech">
-                  <span class="tech-tag">Python</span>
-                  <span class="tech-tag">OpenCV</span>
-                  <span class="tech-tag">Flask</span>
-                </div>
-                <a href="/project/hackheist" class="project-link">
-                  <span>View Details</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Web Development Projects -->
-        <div class="project-category-section">
-          <h3 class="project-category-title">
-            <i class="fas fa-code"></i>
-            Web Development Projects
-          </h3>
-          <div class="projects-grid">
-            <div class="project-card" data-project="cloudtrace">
-              <div class="project-number">03</div>
-              <div class="project-content">
-                <div class="project-category">Network Analysis</div>
-                <h3 class="project-title">CloudTrace</h3>
-                <p class="project-description">High-performance network analysis tool for cloud provider benchmarking with ICMP socket implementation.</p>
-                <div class="project-tech">
-                  <span class="tech-tag">Python</span>
-                  <span class="tech-tag">Flask</span>
-                  <span class="tech-tag">JavaScript</span>
-                </div>
-                <a href="/project/cloudtrace" class="project-link">
-                  <span>View Details</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-            
-            <div class="project-card" data-project="assignflow">
-              <div class="project-number">04</div>
-              <div class="project-content">
-                <div class="project-category">Full-Stack Web</div>
-                <h3 class="project-title">AssignFlow</h3>
-                <p class="project-description">Robust task management platform with Node.js/Express stack and MongoDB integration.</p>
-                <div class="project-tech">
-                  <span class="tech-tag">Node.js</span>
-                  <span class="tech-tag">MongoDB</span>
-                  <span class="tech-tag">Express</span>
-                </div>
-                <a href="/project/assignflow" class="project-link">
-                  <span>View Details</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-            
-            <div class="project-card" data-project="calmingspace">
-              <div class="project-number">05</div>
-              <div class="project-content">
-                <div class="project-category">Web Application</div>
-                <h3 class="project-title">Calming Space</h3>
-                <p class="project-description">Full-stack meditation and relaxation application with personalized mindfulness features.</p>
-                <div class="project-tech">
-                  <span class="tech-tag">React</span>
-                  <span class="tech-tag">Node.js</span>
-                  <span class="tech-tag">MongoDB</span>
-                </div>
-                <a href="/project/calmingspace" class="project-link">
-                  <span>View Details</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Mobile Development Projects -->
-        <div class="project-category-section">
-          <h3 class="project-category-title">
-            <i class="fas fa-mobile-alt"></i>
-            Mobile Development Projects
-          </h3>
-          <div class="projects-grid">
-            <div class="project-card" data-project="mapjournal">
-              <div class="project-number">06</div>
-              <div class="project-content">
-                <div class="project-category">Mobile Development</div>
-                <h3 class="project-title">MapJournal</h3>
-                <p class="project-description">iOS location sharing app built with SwiftUI for discovering and sharing favorite places.</p>
-                <div class="project-tech">
-                  <span class="tech-tag">SwiftUI</span>
-                  <span class="tech-tag">iOS</span>
-                  <span class="tech-tag">MapKit</span>
-                </div>
-                <a href="/project/mapjournal" class="project-link">
-                  <span>View Details</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="projects-cta">
-          <a href="/portfolio" class="hero-btn primary">VIEW ALL PROJECTS</a>
-        </div>
-      </section>
-
-      
-    </div>
-  </main>
-
-  <footer>
+  <!-- ===================== HERO ===================== -->
+  <header class="hero">
     <div class="container">
-      <p class="contact-message">Feel free to contact me through any of these channels:</p>
-      <div class="social-links-footer mb-4">
-        <a href="mailto:enockmecheo@nyu.edu" class="gmail"><i class="bi bi-envelope"></i></a>
-        <a href="https://www.linkedin.com/in/enock-mecheo-56390b1a6/" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
-        <a href="https://github.com/EnockMagara" class="github" target="_blank"><i class="bi bi-github"></i></a>
-      </div>
+      <div class="hero-grid">
+        <div class="hero-content">
+          <span class="eyebrow">AI Engineer · Portfolio</span>
+          <h1>Building <span class="gold">Intelligent</span> Systems That Ship.</h1>
+          <p class="hero-lead">I design and deliver <strong>machine learning</strong> and <strong>MLOps</strong> systems — from distributed data pipelines to production-grade models that scale. This is a showcase of my work at the intersection of <strong>research and engineering</strong>.</p>
+          <div class="hero-actions">
+            <a href="#work" class="btn btn-primary">
+              View Work
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="https://github.com/EnockMagara" target="_blank" rel="noopener" class="btn btn-ghost">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C17 4.3 18 4.6 18 4.6c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+              GitHub
+            </a>
+          </div>
+          <div class="hero-meta">
+            <div class="stat"><div class="num">5+</div><div class="lbl">Internships</div></div>
+            <div class="stat"><div class="num">15+</div><div class="lbl">Projects shipped</div></div>
+            <div class="stat"><div class="num">ML · MLOps</div><div class="lbl">Core focus</div></div>
+          </div>
+        </div>
 
-      
-      <p class="thank-you-message">Thank you for your interest in my work.</p>
+        <div class="hero-visual">
+          <div class="avatar-wrap">
+            <img src="/assets/img/IMG_3692.avif" alt="Enock Mecheo" class="avatar">
+            <div class="code-chip">
+              <span class="k">role</span>: <span class="v">"AI Engineer"</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </header>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid reveal">
+        <div class="about-text">
+          <span class="section-tag">About</span>
+          <h2>Engineering Intelligence Into Production.</h2>
+          <p>I'm an AI engineer focused on building <strong>data-driven, distributed systems</strong> — designing robust architectures, optimizing ML workflows, and deploying intelligent solutions that perform reliably at scale.</p>
+          <p>My background spans <strong>distributed computing, streaming algorithms, and large-scale data processing</strong>, with deep hands-on experience across the full ML lifecycle: from feature engineering and model training to experiment tracking, containerization, and CI/CD.</p>
+        </div>
+        <div class="focus-list">
+          <div class="focus-item">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 1 3 3 3 3 0 0 1 3 3 3 3 0 0 1 0 6 3 3 0 0 1-3 3 3 3 0 0 1-6 0 3 3 0 0 1-3-3 3 3 0 0 1 0-6 3 3 0 0 1 3-3 3 3 0 0 1 3-3Z"/></svg></div>
+            <div><h4>Machine Learning</h4><p>Deep learning, NLP, model training &amp; evaluation</p></div>
+          </div>
+          <div class="focus-item">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M12 7v5l3 3"/></svg></div>
+            <div><h4>MLOps &amp; Pipelines</h4><p>MLflow, Docker, CI/CD, reproducible training</p></div>
+          </div>
+          <div class="focus-item">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+            <div><h4>Distributed Systems</h4><p>Spark, MapReduce, streaming, large-scale data</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SKILLS ===================== -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag">Stack</span>
+        <h2>Technical Expertise</h2>
+        <p>The tools and frameworks I use to build, train, and ship intelligent systems.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 1 3 3 3 3 0 0 1 3 3 3 3 0 0 1 0 6 3 3 0 0 1-3 3 3 3 0 0 1-6 0 3 3 0 0 1-3-3 3 3 0 0 1 0-6 3 3 0 0 1 3-3 3 3 0 0 1 3-3Z"/></svg></div>
+          <h3>ML &amp; Deep Learning</h3>
+          <div class="tags">
+            <span class="tag">PyTorch</span><span class="tag">Transformers</span><span class="tag">LSTM</span><span class="tag">Reinforcement Learning</span><span class="tag">scikit-learn</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M12 7v5l3 3"/></svg></div>
+          <h3>MLOps &amp; Infra</h3>
+          <div class="tags">
+            <span class="tag">MLflow</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span><span class="tag">AWS</span><span class="tag">CI/CD</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+          <h3>Big Data &amp; Distributed</h3>
+          <div class="tags">
+            <span class="tag">Spark</span><span class="tag">PySpark</span><span class="tag">MapReduce</span><span class="tag">Streaming</span><span class="tag">LSH</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 16 4-4-4-4M6 8l-4 4 4 4M14.5 4l-5 16"/></svg></div>
+          <h3>Backend &amp; APIs</h3>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">REST</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></div>
+          <h3>Data &amp; Storage</h3>
+          <div class="tags">
+            <span class="tag">MongoDB</span><span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">TF-IDF</span><span class="tag">PCA / SVD</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+          <h3>Testing &amp; Quality</h3>
+          <div class="tags">
+            <span class="tag">pytest</span><span class="tag">Selenium</span><span class="tag">JMeter</span><span class="tag">Load Testing</span><span class="tag">QA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== WORK ===================== -->
+  <section id="work">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag">Selected Work</span>
+        <h2>Featured Projects</h2>
+        <p>A selection of AI and systems projects — from distributed ML pipelines to applied research.</p>
+      </div>
+      <div class="projects-grid">
+
+        <article class="project reveal">
+          <div class="project-top">
+            <span class="project-cat">MLOps · Distributed ML</span>
+            <span class="project-num">01</span>
+          </div>
+          <h3>MapReduceMLOps</h3>
+          <p>End-to-end sentiment analysis pipeline pairing Spark MapReduce TF-IDF feature engineering with PyTorch deep models (LSTM / Transformer / BERT), tracked via MLflow and containerized with Docker.</p>
+          <div class="tags"><span class="tag">Spark</span><span class="tag">PyTorch</span><span class="tag">MLflow</span><span class="tag">Docker</span></div>
+          <a href="/project/mapreducemlops" class="project-link">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article>
+
+        <article class="project reveal">
+          <div class="project-top">
+            <span class="project-cat">Quant Finance · ML</span>
+            <span class="project-num">02</span>
+          </div>
+          <h3>QuantOpt</h3>
+          <p>AI portfolio optimization built on PySpark + PyTorch — Modern Portfolio Theory optimizers, Deep RL (DDPG/PPO) rebalancing, and Monte Carlo risk simulations with realistic backtesting.</p>
+          <div class="tags"><span class="tag">PySpark</span><span class="tag">PyTorch</span><span class="tag">CVXPY</span><span class="tag">Deep RL</span></div>
+          <a href="/project/quantopt" class="project-link">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article>
+
+        <article class="project reveal">
+          <div class="project-top">
+            <span class="project-cat">LLM · Full-Stack</span>
+            <span class="project-num">03</span>
+          </div>
+          <h3>JobBoard</h3>
+          <p>Full-stack job platform with an LLM-powered A/B testing framework comparing original vs. AI-enhanced job descriptions, with conversion analytics, dual auth, and a Dockerized CI/CD deploy.</p>
+          <div class="tags"><span class="tag">Flask</span><span class="tag">Next.js</span><span class="tag">Together.ai</span><span class="tag">MongoDB</span></div>
+          <a href="/project/jobboard" class="project-link">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article>
+
+        <article class="project reveal">
+          <div class="project-top">
+            <span class="project-cat">Computer Vision · A11y</span>
+            <span class="project-num">04</span>
+          </div>
+          <h3>AYN</h3>
+          <p>AI visual assistant for visually impaired users — real-time object detection and navigation guidance powered by OpenCV and a Python inference backend.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">Flask</span></div>
+          <a href="/project/hackheist" class="project-link">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article>
+
+      </div>
+      <div class="projects-cta reveal">
+        <a href="/portfolio" class="btn btn-ghost">
+          Browse all projects
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EXPERIENCE ===================== -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag">Background</span>
+        <h2>Experience &amp; Education</h2>
+        <p>Hands-on engineering across QA, DevOps, and ML — backed by rigorous CS foundations.</p>
+      </div>
+      <div class="timeline">
+        <div class="exp reveal">
+          <div class="when">2023 — 2025</div>
+          <div>
+            <h4>Software / ML Engineering</h4>
+            <div class="org">QA · DevOps · Web &amp; ML Development</div>
+            <p>Across 5+ internships, built and shipped production-ready systems — automated testing infrastructure, CI/CD pipelines, and ML-driven features from concept to deployment.</p>
+          </div>
+        </div>
+        <div class="exp reveal">
+          <div class="when">CS · Data Science</div>
+          <div>
+            <h4>Computer Science — NYU Abu Dhabi</h4>
+            <div class="org">Algorithmic Foundations of Data Science</div>
+            <p>Advanced study in distributed computing, streaming algorithms, and large-scale data processing — alongside core coursework in algorithms, databases, OS, and networking.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="contact-card reveal">
+        <span class="section-tag">Connect</span>
+        <h2>Let's Talk Engineering.</h2>
+        <p>Always happy to trade notes on AI, ML, and distributed systems, or to talk through any of the work shown here. Reach out anytime.</p>
+        <a href="mailto:enockmecheo@nyu.edu" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          enockmecheo@nyu.edu
+        </a>
+        <div class="social-row">
+          <a href="https://github.com/EnockMagara" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C17 4.3 18 4.6 18 4.6c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/enock-mecheo-56390b1a6/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 20.4h-3.6v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9v5.7H9.2V9h3.4v1.6h.1c.5-.9 1.6-1.9 3.4-1.9 3.6 0 4.3 2.4 4.3 5.5v6.2ZM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2Zm1.8 13H3.5V9h3.6v11.4ZM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7c0-.9-.8-1.7-1.8-1.7Z"/></svg>
+          </a>
+          <a href="mailto:enockmecheo@nyu.edu" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer container">
+    <span>© <span id="year"></span> Enock Mecheo</span>
+    <span>Designed &amp; built with care.</span>
   </footer>
 
-  <!-- Scroll Top -->
-  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <script>
+    var nav = document.getElementById('nav');
+    var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 24); };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
 
-  <!-- Vendor JS Files -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
+    var toggle = document.getElementById('navToggle');
+    var links = document.getElementById('navLinks');
+    toggle.addEventListener('click', function () { links.classList.toggle('open'); });
+    Array.prototype.forEach.call(links.querySelectorAll('a'), function (a) {
+      a.addEventListener('click', function () { links.classList.remove('open'); });
+    });
 
-  <!-- Main JS File -->
-  <script src="/assets/js/main.js"></script>
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    Array.prototype.forEach.call(document.querySelectorAll('.reveal'), function (el) { io.observe(el); });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 
 </body>
 
