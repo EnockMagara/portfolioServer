@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Enock Mecheo — AI Engineer">
+  <rect width="1200" height="630" fill="rgb(18,23,36)"/>
+  <g stroke="rgba(233,196,103,0.08)" stroke-width="1">
+    <line x1="0" y1="157" x2="1200" y2="157"/>
+    <line x1="0" y1="315" x2="1200" y2="315"/>
+    <line x1="0" y1="472" x2="1200" y2="472"/>
+    <line x1="300" y1="0" x2="300" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="900" y1="0" x2="900" y2="630"/>
+  </g>
+  <circle cx="100" cy="100" r="8" fill="rgb(233,196,103)"/>
+  <text x="130" y="108" fill="rgb(233,196,103)"
+        font-family="'Montserrat', Arial, sans-serif" font-size="26" font-weight="600"
+        letter-spacing="4">ENOCK MECHEO</text>
+  <text x="98" y="300" fill="#eef1f6"
+        font-family="'Cinzel', Georgia, serif" font-size="84" font-weight="700"
+        letter-spacing="2">BUILDING</text>
+  <text x="98" y="400" fill="#eef1f6"
+        font-family="'Cinzel', Georgia, serif" font-size="84" font-weight="700"
+        letter-spacing="2">INTELLIGENT <tspan fill="rgb(233,196,103)">SYSTEMS</tspan></text>
+  <text x="100" y="500" fill="#aab1c2"
+        font-family="'Montserrat', Arial, sans-serif" font-size="28" font-weight="500"
+        letter-spacing="1">AI Engineer · Machine Learning · MLOps · Distributed Systems</text>
+  <rect x="100" y="540" width="120" height="4" fill="rgb(233,196,103)"/>
+</svg>
