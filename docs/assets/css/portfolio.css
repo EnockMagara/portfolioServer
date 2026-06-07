@@ -5,10 +5,10 @@
    ========================================================= */
 
 :root {
-  --bg: rgb(10, 12, 18);
-  --bg-soft: rgb(14, 17, 26);
-  --surface: rgb(16, 19, 28);
-  --surface-2: rgb(20, 24, 36);
+  --bg: rgb(13, 13, 13);
+  --bg-soft: rgb(17, 17, 17);
+  --surface: rgb(20, 20, 20);
+  --surface-2: rgb(24, 24, 24);
   --border: rgba(233, 196, 103, 0.12);
   --border-soft: rgba(255, 255, 255, 0.06);
   --rule: rgba(233, 196, 103, 0.18);
@@ -52,7 +52,7 @@ img { max-width: 100%; display: block; }
   transition: background 0.3s, border-color 0.3s;
 }
 .nav.scrolled {
-  background: rgba(10, 12, 18, 0.92);
+  background: rgba(13, 13, 13, 0.92);
   backdrop-filter: blur(14px);
   border-bottom-color: var(--rule);
 }
