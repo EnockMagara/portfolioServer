@@ -1,22 +1,22 @@
 /* =========================================================
    Enock Mecheo — AI Engineer · Portfolio
-   Palette: navy rgb(10,14,35) + gold rgb(233,196,103)
+   Palette: smoky-black #11120D + bone #D8CFBC
    Titles: Cinzel · Body: Montserrat · Editorial / no gradients
    ========================================================= */
 
 :root {
-  --bg: rgb(19, 23, 35);
-  --bg-soft: rgb(23, 28, 42);
-  --surface: rgb(27, 32, 48);
-  --surface-2: rgb(32, 38, 56);
-  --border: rgba(233, 196, 103, 0.12);
-  --border-soft: rgba(255, 255, 255, 0.06);
-  --rule: rgba(233, 196, 103, 0.18);
-  --gold: rgb(233, 196, 103);
-  --gold-dim: rgba(233, 196, 103, 0.65);
-  --text: #e8e2d4;
-  --text-dim: #a09888;
-  --text-faint: #5e5a52;
+  --bg: #11120D;
+  --bg-soft: #191A13;
+  --surface: #1F2018;
+  --surface-2: #272820;
+  --border: rgba(216,207,188,0.12);
+  --border-soft: rgba(255,251,244,0.06);
+  --rule: rgba(216,207,188,0.18);
+  --gold: #D8CFBC;
+  --gold-dim: rgba(216,207,188,0.65);
+  --text: #FFFBF4;
+  --text-dim: #D8CFBC;
+  --text-faint: #565449;
   --radius: 12px;
   --radius-sm: 8px;
   --maxw: 1100px;
@@ -52,7 +52,7 @@ img { max-width: 100%; display: block; }
   transition: background 0.3s, border-color 0.3s;
 }
 .nav.scrolled {
-  background: rgba(10, 12, 18, 0.92);
+  background: rgba(17, 18, 13, 0.92);
   backdrop-filter: blur(14px);
   border-bottom-color: var(--rule);
 }
@@ -91,7 +91,7 @@ img { max-width: 100%; display: block; }
   color: var(--bg) !important;
   font-weight: 600 !important;
 }
-.nav-cta:hover { background: #f0d07f !important; }
+.nav-cta:hover { background: #EBE4D6 !important; }
 .nav-toggle { display: none; background: none; border: 0; color: var(--text); cursor: pointer; }
 
 /* =================== Buttons =================== */
@@ -111,7 +111,7 @@ img { max-width: 100%; display: block; }
 }
 .btn svg { width: 17px; height: 17px; }
 .btn-primary { background: var(--gold); color: var(--bg); }
-.btn-primary:hover { background: #f0d07f; transform: translateY(-2px); }
+.btn-primary:hover { background: #EBE4D6; transform: translateY(-2px); }
 .btn-ghost {
   background: transparent;
   border-color: var(--border);
@@ -144,8 +144,8 @@ img { max-width: 100%; display: block; }
   object-fit: cover;
   object-position: top;
   border-radius: 50%;
-  border: 2px solid rgba(233,196,103,0.3);
-  box-shadow: 0 0 0 8px rgba(233,196,103,0.06);
+  border: 2px solid rgba(216,207,188,0.3);
+  box-shadow: 0 0 0 8px rgba(216,207,188,0.06);
 }
 .eyebrow {
   display: inline-block;
@@ -297,7 +297,7 @@ section:first-of-type { border-top: none; }
   flex: 0 0 40px; height: 40px;
   display: grid; place-items: center;
   border-radius: 9px;
-  background: rgba(233, 196, 103, 0.1);
+  background: rgba(216,207,188,0.1);
   color: var(--gold);
 }
 .focus-item .ic svg { width: 19px; height: 19px; }
@@ -334,7 +334,7 @@ section:first-of-type { border-top: none; }
   font-weight: 500;
   color: var(--text-faint);
   background: transparent;
-  border: 1px solid rgba(233,196,103,0.18);
+  border: 1px solid rgba(216,207,188,0.18);
   padding: 4px 10px;
   border-radius: 0;
   letter-spacing: 0.06em;
@@ -357,7 +357,7 @@ section:first-of-type { border-top: none; }
   transition: background 0.2s;
   cursor: default;
 }
-.project:hover { background: rgba(233,196,103,0.03); }
+.project:hover { background: rgba(216,207,188,0.03); }
 .project::before { display: none; }
 .project-top {
   display: flex;
@@ -425,7 +425,7 @@ section:first-of-type { border-top: none; }
   letter-spacing: 0.02em;
   color: var(--text);
   width: fit-content;
-  border-bottom: 1px solid rgba(233,196,103,0.35);
+  border-bottom: 1px solid rgba(216,207,188,0.35);
   padding-bottom: 2px;
   transition: color 0.2s, border-color 0.2s;
 }
@@ -473,7 +473,7 @@ section:first-of-type { border-top: none; }
   text-decoration: none;
 }
 .paper-card:hover {
-  background: rgba(233,196,103,0.03);
+  background: rgba(216,207,188,0.03);
   border-color: var(--rule);
   transform: none;
   box-shadow: none;
