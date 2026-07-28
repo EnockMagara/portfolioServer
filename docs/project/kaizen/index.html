@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Enock Mecheo — Kaizen — AI-Native Personal Operating System</title>
-  <meta content="Kaizen is a personal operating system for habits, goals, journaling, and weekly reviews, built around an AI Coach. What makes it different is that the Coach actually does things rather than just talking about them. Ask it to &#34;add a habit to read every morning and set a goal to run a 5K next month&#34; and it creates them — reload the page and they are really there. It does this through 12 tools wired to the same internal functions the rest of the app uses, so the AI cannot take shortcuts or corrupt data in ways the normal interface would not allow." name="description">
+  <meta content="Kaizen is an AI-native personal operating system for habits, goals, journaling, and reviews, built around a Coach that acts on the user&#39;s data rather than merely discussing it. Ask it to &#34;add a habit to read every morning and create a goal to run a 5K next month&#34; and it creates both — reload the page and the rows are genuinely there. It does this through a streaming tool-use loop exposing 12 tools, each bound to the same service-layer functions the REST API calls, so the agent writes through identical validated code paths as the UI. Built on FastAPI and SQLAlchemy 2.0 with Postgres/pgvector and a Next.js App Router frontend." name="description">
   <meta content="portfolio, AI engineer, machine learning, MLOps, Enock Mecheo, Enock Magara" name="keywords">
   <meta name="author" content="Enock Mecheo">
 
@@ -59,13 +59,13 @@
 
           <div class="cs-block">
             <h3>Overview</h3>
-            <p>Kaizen is a personal operating system for habits, goals, journaling, and weekly reviews, built around an AI Coach. What makes it different is that the Coach actually does things rather than just talking about them. Ask it to &#34;add a habit to read every morning and set a goal to run a 5K next month&#34; and it creates them — reload the page and they are really there. It does this through 12 tools wired to the same internal functions the rest of the app uses, so the AI cannot take shortcuts or corrupt data in ways the normal interface would not allow.</p>
+            <p>Kaizen is an AI-native personal operating system for habits, goals, journaling, and reviews, built around a Coach that acts on the user&#39;s data rather than merely discussing it. Ask it to &#34;add a habit to read every morning and create a goal to run a 5K next month&#34; and it creates both — reload the page and the rows are genuinely there. It does this through a streaming tool-use loop exposing 12 tools, each bound to the same service-layer functions the REST API calls, so the agent writes through identical validated code paths as the UI. Built on FastAPI and SQLAlchemy 2.0 with Postgres/pgvector and a Next.js App Router frontend.</p>
           </div>
 
           
           <div class="cs-block">
             <h3>Challenges &amp; Solutions</h3>
-            <p>The real problem was trust: letting an AI write to someone&#39;s actual data, not just chat beside it. My approach was to give the model no special privileges. Its tools call exactly the same validated functions the buttons in the UI call, so there is no separate, less careful path into the database. Beyond that, the model had to be kept honest about reality — it reads the user&#39;s current state before giving advice, and it is told the real date and timezone so &#34;tomorrow at 7am&#34; becomes an actual correct time instead of a guessed one. Its actions stream to the screen as they happen, so the user watches what it is doing rather than waiting on a silent pause and hoping. A second goal was avoiding lock-in to one AI vendor, so I designed a single interface that both Claude and OpenAI plug into, and the app still works normally if no AI key is configured at all.</p>
+            <p>The core design problem was making an LLM a trustworthy actor on real user data rather than a chat surface bolted onto a CRUD app. The governing decision was to give the model no privileged write path: its tools dispatch to the very same service functions the UI calls, so the agent cannot bypass validation or drift from application invariants. Beyond that the model had to stay grounded — it is instructed to read current dashboard state before offering progress advice, and the system prompt injects the user&#39;s real timezone and current datetime so relative expressions like &#34;tomorrow at 7am&#34; resolve to correct ISO datetimes instead of plausible-looking guesses. Multi-round tool use streams to the client over SSE, so the user watches tool activity unfold rather than waiting through a silent pause. A secondary goal was avoiding vendor lock-in: a single provider interface that both Anthropic Claude and OpenAI implement against the same streaming contract, with every AI path degrading gracefully when no key is configured at all.</p>
           </div>
           
 
@@ -74,23 +74,23 @@
             <h3>Technical Achievements</h3>
             <ul class="cs-list">
               
-                <li>An AI Coach with 12 real abilities — create goals, log habits, write journal entries, generate reviews, schedule calendar events, send email — each one wired to the same internal function the app&#39;s own buttons use, so the AI writes data through the same safe, validated path as a normal user action</li>
+                <li>Agentic tool-use loop exposing 12 tools — create_goal, log_habit, add_journal_entry, generate_review, query_knowledge, schedule_event, send_email and others — each dispatched against the same service layer the REST API uses, so the agent has no separate, less-validated route into the database</li>
               
-                <li>Works with either Claude or OpenAI behind one shared interface, chosen automatically based on which key is available. Swapping AI providers does not touch the rest of the app</li>
+                <li>Provider-neutral LLM abstraction: a single stream_agent contract implemented by both an Anthropic provider (streaming with adaptive thinking, preserving thinking and redacted_thinking blocks across tool rounds) and an OpenAI provider (function calling), selected at runtime by a factory based on whichever key is available</li>
               
-                <li>The Coach&#39;s work streams to the screen live: you see it thinking, calling each tool, and reporting back, instead of staring at a spinner during a long multi-step task</li>
+                <li>Server-Sent Events streaming of both tokens and tool invocations, so a multi-round agent turn renders as visible, legible activity rather than a long silent wait</li>
               
-                <li>Grounded in reality rather than guessing: the AI is given the user&#39;s real date and timezone so &#34;tomorrow at 7am&#34; becomes a genuinely correct calendar time, and it is required to check the user&#39;s current progress before offering advice</li>
+                <li>Prompt grounding for correctness: the system prompt injects the user&#39;s real timezone and current datetime so relative scheduling resolves to exact ISO datetimes, and requires the model to read dashboard state before giving progress advice — keeping it anchored to actual data instead of plausible invention</li>
               
-                <li>Semantic search across saved notes, so searching for an idea finds related entries by meaning rather than exact wording, with a plain keyword search as an automatic fallback</li>
+                <li>Semantic knowledge search over pgvector with a pluggable embedding backend (Voyage AI or OpenAI, both normalized to 1024 dimensions so the vector column stays provider-agnostic) and automatic keyword fallback when embeddings are unavailable</li>
               
-                <li>Quick capture: type or speak one ordinary sentence and the AI turns it into a properly structured goal, habit, or journal entry, shown as an editable card to confirm before saving</li>
+                <li>Natural-language capture: a structured-output call converts a single free-form sentence into a typed goal, habit, or journal draft returned as strict JSON, surfaced as an editable confirmation card rather than written blindly</li>
               
-                <li>Built to fail safely: the AI is capped on how many steps it can take in one turn, and if no AI key is configured every AI feature explains itself politely while the rest of the app keeps working normally</li>
+                <li>Bounded, resilient execution: the tool loop is iteration-capped, and every AI path degrades to a clear message when no API key is present while the rest of the application remains fully usable</li>
               
-                <li>Google Calendar integration for reading and creating real events, with access tokens encrypted before they are stored</li>
+                <li>Google Calendar OAuth (read and write) with tokens encrypted at rest via Fernet, making the Coach schedule-aware and able to create real calendar events</li>
               
-                <li>Full-stack build: a 14-table database, roughly 7,500 lines across a Python FastAPI backend and a Next.js frontend, with containerized setup</li>
+                <li>Full-stack delivery: a 14-table relational model, roughly 7,500 lines across a FastAPI backend and Next.js App Router frontend, with Dockerized Postgres and pgvector</li>
               
             </ul>
           </div>
