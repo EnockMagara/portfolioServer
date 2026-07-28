@@ -145,9 +145,9 @@
                 </div>
               </div>
               <div class="project-content">
-                <h2 class="project-title">SafiSend — Restaurant Commerce Platform with a Personalized Menu Recommender</h2>
+                <h2 class="project-title">SafiSend — Restaurant Ordering Platform with a Personalized Menu</h2>
                 <p class="project-description">
-                  SafiSend is a production restaurant technology platform I founded and lead as product and engineering lead, deployed at www.safisend.com. Customers scan a QR code to browse, order, and pay from their phone. Underneath the ordering flow I built the platform&#39;s machine learning layer: a hybrid recommender that personalizes the menu per diner by combining OpenAI embeddings, collaborative filtering, and a from-scratch FP-Growth market basket miner, plus a GPT-4o Vision OCR pipeline that onboards a restaurant by reading its existing paper menu. The system spans ~144k lines across 57 data models and 156 services, with 859 commits and 68 test suites.
+                  SafiSend is a restaurant platform I founded and lead, live in production at www.safisend.com. Diners scan a QR code at the table to browse the menu, order, and pay from their phone. The part I am most proud of is the machine learning layer underneath: instead of showing everyone the same menu, SafiSend learns what each person likes and reorders the menu for them. It also lets a restaurant join by simply photographing its paper menu — an AI vision model reads the photo and builds the digital menu automatically. The platform is roughly 144,000 lines of code with 859 commits and 68 test suites.
                 </p>
                 <div class="tech-stack">
                   
@@ -192,7 +192,7 @@
               <div class="project-content">
                 <h2 class="project-title">Kaizen — AI-Native Personal Operating System</h2>
                 <p class="project-description">
-                  Kaizen is an AI-native personal operating system for habits, goals, journaling, and reviews. Its differentiator is an AI Coach that reads and writes the user&#39;s real data rather than just chatting about it: a streaming tool-use loop gives the model 12 tools that map onto the exact same service-layer functions the REST API uses, so the agent mutates state through identical, validated code paths as the UI. Built on FastAPI + SQLAlchemy 2.0 with Postgres/pgvector and a Next.js App Router frontend.
+                  Kaizen is a personal operating system for habits, goals, journaling, and weekly reviews, built around an AI Coach. What makes it different is that the Coach actually does things rather than just talking about them. Ask it to &#34;add a habit to read every morning and set a goal to run a 5K next month&#34; and it creates them — reload the page and they are really there. It does this through 12 tools wired to the same internal functions the rest of the app uses, so the AI cannot take shortcuts or corrupt data in ways the normal interface would not allow.
                 </p>
                 <div class="tech-stack">
                   
