@@ -1,236 +1,353 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Projects — Enock Mecheo</title>
-  <meta name="description" content="Every project, including the smaller ones: AI agents, ML pipelines, a network tool, an iOS app.">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <title>Enock Mecheo - Projects</title>
+  <meta content="Portfolio of Enock Mecheo, Computer Science student at NYU Abu Dhabi" name="description">
+  <meta content="portfolio, computer science, software development, NYU, Enock Mecheo, Enock Magara" name="keywords">
   <meta name="author" content="Enock Mecheo">
+
+  <!-- Favicons -->
   <link href="../assets/img/favicon.png" rel="icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link href="../assets/css/site.css" rel="stylesheet">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Space Grotesk Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- GSAP library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
 </head>
-<body>
-  <header class="site-header wrap">
-    <a href="/" class="brand">Enock Mecheo</a>
-    <nav class="back-nav" aria-label="Site">
-      <a href="/#work">← Home</a>
-    </nav>
-  </header>
 
-  <main>
-    <section class="cs-hero wrap">
-      <div class="eyebrow">All projects</div>
-      <h1 style="font-size: 36px;">Everything, including the small ones.</h1>
-      <p class="lede">The two platforms have their own pages. The rest are course projects, hackathon builds and experiments, kept here for completeness.</p>
-    </section>
+<body class="portfolio-page">
 
-    <section class="wrap index-list" style="padding-bottom: 96px;">
-      
-        <article class="index-item">
-          <div>
-            <h3><a href="/project/mybizna">Mybizna</a></h3>
-            <p>A multi-tenant commerce platform for small businesses in Kenya: a website on the seller&#39;s own domain, orders and bookings, payments settled to M-Pesa or a bank, a web dashboard and a seller app on the App Store and…</p>
+  <!-- Navigation System -->
+  <nav class="main-nav">
+    <!-- Mobile Burger Menu -->
+    <button class="burger-menu" id="burgerMenu">
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+    </button>
+    
+    <!-- Desktop Navigation -->
+    <div class="desktop-nav">
+      <div class="nav-container">
+        <!-- Home Section -->
+        <a href="/" class="nav-item">
+          <div class="nav-icon">
+            <i class="fas fa-home"></i>
           </div>
-          <div class="side">
-            Sept 2026 – present<br>
-            Commerce platform · Payments · Multi-tenant<br>
-            <a href="https://mybizna.com" target="_blank" rel="noopener">Live</a>
-            
-            
+          <div class="nav-label">Home</div>
+          <div class="nav-preview">About & Skills</div>
+        </a>
+        
+        <!-- Portfolio Section -->
+        <a href="/portfolio/" class="nav-item active">
+          <div class="nav-icon">
+            <i class="fas fa-code"></i>
           </div>
-        </article>
-      
-        <article class="index-item">
-          <div>
-            <h3><a href="/project/safisend">SafiSend for restaurants</a></h3>
-            <p>Restaurant operations for Kenya: QR and WhatsApp ordering, split bills, M-Pesa and card payments, inventory and analytics, with an AI layer that may act on the business only through a typed tool registry gated by risk.</p>
+          <div class="nav-label">Projects</div>
+          <div class="nav-preview">Web & Mobile Apps</div>
+        </a>
+        
+        <!-- ML Projects Section -->
+        <a href="/ml-projects" class="nav-item">
+          <div class="nav-icon">
+            <i class="fas fa-brain"></i>
           </div>
-          <div class="side">
-            Aug 2025 – Sept 2026<br>
-            Restaurant platform · AI tools · Payments<br>
-            <a href="https://safisend.com" target="_blank" rel="noopener">Live</a>
-            
-            
+          <div class="nav-label">ML Projects</div>
+          <div class="nav-preview">AI & Data Science</div>
+        </a>
+        
+        <!-- Comm Lab Section -->
+        <a href="/commlab/" class="nav-item">
+          <div class="nav-icon">
+            <i class="fas fa-microphone"></i>
           </div>
-        </article>
-      
-        <article class="index-item">
-          <div>
-            <h3><a href="/project/kaizen">Kaizen — AI-Native Personal Operating System</a></h3>
-            <p>Kaizen is an AI-native personal operating system for habits, goals, journaling, and reviews, built around a Coach that acts on the user&#39;s data rather than merely discussing it. Ask it to &#34;add a habit to read every…</p>
+          <div class="nav-label">Comm Lab</div>
+          <div class="nav-preview">Media & Design</div>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay">
+      <div class="mobile-nav-content">
+        <div class="mobile-nav-header">
+          <span class="mobile-nav-title">Navigation</span>
+          <button class="mobile-nav-close" id="mobileNavClose">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="mobile-nav-items">
+          <a href="/" class="mobile-nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+            <small>About & Skills</small>
+          </a>
+          <a href="/portfolio/" class="mobile-nav-item active">
+            <i class="fas fa-code"></i>
+            <span>Projects</span>
+            <small>Web & Mobile Apps</small>
+          </a>
+          <a href="/ml-projects" class="mobile-nav-item">
+            <i class="fas fa-brain"></i>
+            <span>ML Projects</span>
+            <small>AI & Data Science</small>
+          </a>
+          <a href="/commlab/" class="mobile-nav-item">
+            <i class="fas fa-microphone"></i>
+            <span>Comm Lab</span>
+            <small>Media & Design</small>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <main class="main">
+    <!-- Web Development Projects -->
+    <div class="project-category-section">
+      <h3 class="project-category-title">
+        <i class="fas fa-code"></i>
+        Web Development Projects
+      </h3>
+      <div class="projects-grid-new">
+        
+          <div class="project-tile reveal" data-project="takeyourvitamins" style="transition-delay: 0s;">
+            <div class="project-number">01</div>
+            <div class="project-image-bg" style="background-image: url('../assets/img/projects/takeyourvitamins.jpg')"></div>
+            <div class="project-content">
+              <div class="project-category">Backend API &amp; Testing</div>
+              <h3 class="project-title">TakeYourVitamins - Health Management API</h3>
+              <p class="project-description">TakeYourVitamins is a comprehensive Flask-based API for managing vitamin information with MongoDB integration. The system features a robust RESTful AP...</p>
+              <a href="/project/takeyourvitamins" class="project-link">
+                <span>View Details</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
           </div>
-          <div class="side">
-            2026<br>
-            AI Engineering · Agentic Systems<br>
-            
-            
-            
+        
+          <div class="project-tile reveal" data-project="jobboard" style="transition-delay: 0.1s;">
+            <div class="project-number">02</div>
+            <div class="project-image-bg" style="background-image: url('../assets/img/projects/jobboard.jpg')"></div>
+            <div class="project-content">
+              <div class="project-category">Full-stack Web Application</div>
+              <h3 class="project-title">JobBoard - Full-Stack Job Platform</h3>
+              <p class="project-description">JobBoard is a comprehensive full-stack job platform built with Python/Flask backend and Next.js frontend, featuring dual user authentication for compa...</p>
+              <a href="/project/jobboard" class="project-link">
+                <span>View Details</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
           </div>
-        </article>
-      
-        <article class="index-item">
-          <div>
-            <h3><a href="/project/takeyourvitamins">TakeYourVitamins - Health Management API</a></h3>
-            <p>TakeYourVitamins is a comprehensive Flask-based API for managing vitamin information with MongoDB integration. The system features a robust RESTful API with Swagger documentation, automated testing with Selenium for…</p>
+        
+          <div class="project-tile reveal" data-project="assignflow" style="transition-delay: 0.2s;">
+            <div class="project-number">03</div>
+            <div class="project-image-bg" style="background-image: url('../assets/img/projects/assignflow.png')"></div>
+            <div class="project-content">
+              <div class="project-category">Full-stack web development</div>
+              <h3 class="project-title">AssignFlow - Task Management System</h3>
+              <p class="project-description">AssignFlow is a robust task management platform built with a modern Node.js/Express stack and MongoDB integration. This application leverages a compre...</p>
+              <a href="/project/assignflow" class="project-link">
+                <span>View Details</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
           </div>
-          <div class="side">
-            December 2024<br>
-            Backend API &amp; Testing<br>
-            
-            
-            <a href="https://github.com/EnockMagara/TakeYourVitamins" target="_blank" rel="noopener">Repository</a>
+        
+          <div class="project-tile reveal" data-project="calmingspace" style="transition-delay: 0.30000000000000004s;">
+            <div class="project-number">04</div>
+            <div class="project-image-bg" style="background-image: url('../assets/img/projects/calmingspace.jpg')"></div>
+            <div class="project-content">
+              <div class="project-category">Full-stack Web Application</div>
+              <h3 class="project-title">Calming Space - Meditation &amp; Relaxation App</h3>
+              <p class="project-description">Calming Space is a full-stack meditation and relaxation application designed to create a personalized sanctuary for mindfulness. It features ambient s...</p>
+              <a href="/project/calmingspace" class="project-link">
+                <span>View Details</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
           </div>
-        </article>
-      
-        <article class="index-item">
-          <div>
-            <h3><a href="/project/safipoints">SafiPoints — Blockchain Loyalty Rewards on XRPL</a></h3>
-            <p>Blockchain-powered loyalty and cashback system for restaurants, built on the XRP Ledger. Customers earn SAFI tokens automatically when they pay via SafiSend, store them on-chain, and redeem for discounts at checkout.…</p>
+        
+          <div class="project-tile reveal" data-project="moraamema" style="transition-delay: 0.4s;">
+            <div class="project-number">05</div>
+            <div class="project-image-bg" style="background-image: url('../assets/img/projects/moraamema.jpg')"></div>
+            <div class="project-content">
+              <div class="project-category">web development</div>
+              <h3 class="project-title">MoraaMema Initiative - Non-Profit Website</h3>
+              <p class="project-description">Designed and developed the official website for MoraaMema Initiative Inc., a non-profit organization dedicated to improving the lives of underprivileg...</p>
+              <a href="/project/moraamema" class="project-link">
+                <span>View Details</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
           </div>
-          <div class="side">
-            Mar – Apr 2026<br>
-            Blockchain · Fintech · DeFi<br>
-            
-            
-            <a href="https://github.com/EnockMagara/SAFIPOINTS" target="_blank" rel="noopener">Repository</a>
+        
+      </div>
+    </div>
+
+    <!-- Mobile Development Projects -->
+    <div class="project-category-section">
+      <h3 class="project-category-title">
+        <i class="fas fa-mobile-alt"></i>
+        Mobile Development Projects
+      </h3>
+      <div class="projects-grid-new">
+        
+          <div class="project-tile reveal" data-project="mapjournal" style="transition-delay: 0s;">
+            <div class="project-number">01</div>
+            <div class="project-image-bg" style="background-image: url('../assets/img/projects/mapjournal.jpg')"></div>
+            <div class="project-content">
+              <div class="project-category">Mobile Development</div>
+              <h3 class="project-title">MapJournal - iOS Location Sharing App</h3>
+              <p class="project-description">MapJournal is an iOS application built with SwiftUI that allows users to discover, save, and share their favorite places. The app features interactive...</p>
+              <a href="/project/mapjournal" class="project-link">
+                <span>View Details</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
           </div>
-        </article>
-      
-        <article class="index-item">
-          <div>
-            <h3><a href="/project/quantopt">QuantOpt - AI Portfolio Optimization</a></h3>
-            <p>A comprehensive machine learning system for portfolio optimization using PySpark and PyTorch. Implements Modern Portfolio Theory optimizers, Deep Reinforcement Learning (DDPG/PPO) for dynamic rebalancing, and Monte Carlo…</p>
+        
+      </div>
+    </div>
+
+    <!-- AI & Machine Learning Projects -->
+    <div class="project-category-section">
+      <h3 class="project-category-title">
+        <i class="fas fa-brain"></i>
+        AI & Machine Learning Projects
+      </h3>
+      <div class="projects-grid-new">
+        
+          <div class="project-tile reveal" data-project="safisend" style="transition-delay: 0s;">
+            <div class="project-number">01</div>
+            <div class="project-image-bg" style="background-image: url('../assets/img/projects/safisend.jpg')"></div>
+            <div class="project-content">
+              <div class="project-category">AI/ML · Recommender Systems · Product</div>
+              <h3 class="project-title">SafiSend — Restaurant Ordering Platform with a Personalized Menu</h3>
+              <p class="project-description">SafiSend is a production restaurant platform I founded and lead, deployed at www.safisend.com. Diners scan a QR code at the table to browse, order, an...</p>
+              <a href="/project/safisend" class="project-link">
+                <span>View Details</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
           </div>
-          <div class="side">
-            2025<br>
-            Quant Finance &amp; ML<br>
-            
-            
-            <a href="https://github.com/EnockMagara/QuantOpt" target="_blank" rel="noopener">Repository</a>
+        
+          <div class="project-tile reveal" data-project="kaizen" style="transition-delay: 0.1s;">
+            <div class="project-number">02</div>
+            <div class="project-image-bg" style="background-image: url('../assets/img/projects/project-cover.svg')"></div>
+            <div class="project-content">
+              <div class="project-category">AI Engineering · Agentic Systems</div>
+              <h3 class="project-title">Kaizen — AI-Native Personal Operating System</h3>
+              <p class="project-description">Kaizen is an AI-native personal operating system for habits, goals, journaling, and reviews, built around a Coach that acts on the user&#39;s data rather ...</p>
+              <a href="/project/kaizen" class="project-link">
+                <span>View Details</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
           </div>
-        </article>
-      
-        <article class="index-item">
-          <div>
-            <h3><a href="/project/mapreducemlops">Movie Review Sentiment Analysis (MapReduce + ML)</a></h3>
-            <p>A comprehensive MLOps project for sentiment analysis of movie reviews using Apache Spark MapReduce and machine learning. Includes Spark-based TF-IDF feature extraction, MLlib models (Naive Bayes, Logistic Regression,…</p>
+        
+          <div class="project-tile reveal" data-project="safipoints" style="transition-delay: 0.2s;">
+            <div class="project-number">03</div>
+            <div class="project-image-bg" style="background-image: url('../assets/img/projects/safipoints.jpg')"></div>
+            <div class="project-content">
+              <div class="project-category">Blockchain · Fintech · DeFi</div>
+              <h3 class="project-title">SafiPoints — Blockchain Loyalty Rewards on XRPL</h3>
+              <p class="project-description">Blockchain-powered loyalty and cashback system for restaurants, built on the XRP Ledger. Customers earn SAFI tokens automatically when they pay via Sa...</p>
+              <a href="/project/safipoints" class="project-link">
+                <span>View Details</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
           </div>
-          <div class="side">
-            2025<br>
-            MLOps &amp; Distributed ML<br>
-            
-            
-            <a href="https://github.com/EnockMagara/MapReduceMLOps" target="_blank" rel="noopener">Repository</a>
+        
+          <div class="project-tile reveal" data-project="hackheist" style="transition-delay: 0.30000000000000004s;">
+            <div class="project-number">04</div>
+            <div class="project-image-bg" style="background-image: url('../assets/img/projects/hackheist.jpg')"></div>
+            <div class="project-content">
+              <div class="project-category">AI &amp; Accessibility</div>
+              <h3 class="project-title">AYN - AI-Powered Visual Assistant</h3>
+              <p class="project-description">AYN is an advanced visual assistance application designed to help visually impaired users navigate and understand their surroundings. This full-stack ...</p>
+              <a href="/project/hackheist" class="project-link">
+                <span>View Details</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
           </div>
-        </article>
-      
-        <article class="index-item">
-          <div>
-            <h3><a href="/project/jobboard">JobBoard - Full-Stack Job Platform</a></h3>
-            <p>JobBoard is a comprehensive full-stack job platform built with Python/Flask backend and Next.js frontend, featuring dual user authentication for companies and job seekers. The platform includes advanced A/B testing…</p>
+        
+      </div>
+    </div>
+
+    <!-- Network & Systems Projects -->
+    <div class="project-category-section">
+      <h3 class="project-category-title">
+        <i class="fas fa-network-wired"></i>
+        Network & Systems Projects
+      </h3>
+      <div class="projects-grid-new">
+        
+          <div class="project-tile reveal" data-project="cloudtrace" style="transition-delay: 0s;">
+            <div class="project-number">01</div>
+            <div class="project-image-bg" style="background-image: url('../assets/img/projects/cloudtrace.png')"></div>
+            <div class="project-content">
+              <div class="project-category">Network Analysis</div>
+              <h3 class="project-title">CloudTrace - Cloud Provider Benchmark</h3>
+              <p class="project-description">CloudTrace is a high-performance network analysis tool leveraging raw ICMP sockets to benchmark connectivity metrics to major cloud providers. Built o...</p>
+              <a href="/project/cloudtrace" class="project-link">
+                <span>View Details</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
           </div>
-          <div class="side">
-            January 2025<br>
-            Full-stack Web Application<br>
-            
-            
-            <a href="https://github.com/EnockMagara/jobboard-public" target="_blank" rel="noopener">Repository</a>
-          </div>
-        </article>
-      
-        <article class="index-item">
-          <div>
-            <h3><a href="/project/cloudtrace">CloudTrace - Cloud Provider Benchmark</a></h3>
-            <p>CloudTrace is a high-performance network analysis tool leveraging raw ICMP sockets to benchmark connectivity metrics to major cloud providers. Built on Python/Flask with modular architecture, it performs multi-point…</p>
-          </div>
-          <div class="side">
-            March 2025<br>
-            Network Analysis<br>
-            <a href="https://cloudtrace.duckdns.org/" target="_blank" rel="noopener">Live</a>
-             · 
-            <a href="https://github.com/EnockMagara/CloudTrace-Benchmark" target="_blank" rel="noopener">Repository</a>
-          </div>
-        </article>
-      
-        <article class="index-item">
-          <div>
-            <h3><a href="/project/hackheist">AYN - AI-Powered Visual Assistant</a></h3>
-            <p>AYN is an advanced visual assistance application designed to help visually impaired users navigate and understand their surroundings. This full-stack application combines machine learning-based object detection with…</p>
-          </div>
-          <div class="side">
-            February 2025<br>
-            AI &amp; Accessibility<br>
-            <a href="https://drive.google.com/file/d/1Wl9L5GRE-5ZyQLFlioMG-RcnTCGqplIT/view?usp=share_link" target="_blank" rel="noopener">Live</a>
-             · 
-            <a href="https://github.com/Danjari/hackheist" target="_blank" rel="noopener">Repository</a>
-          </div>
-        </article>
-      
-        <article class="index-item">
-          <div>
-            <h3><a href="/project/mapjournal">MapJournal - iOS Location Sharing App</a></h3>
-            <p>MapJournal is an iOS application built with SwiftUI that allows users to discover, save, and share their favorite places. The app features interactive mapping with MapKit and CoreLocation, secure user authentication via…</p>
-          </div>
-          <div class="side">
-            November 2024<br>
-            Mobile Development<br>
-            <a href="https://drive.google.com/file/d/1QkNvNutOjk3Q9SezRdckK_e_FsCcYred/view?usp=sharing" target="_blank" rel="noopener">Live</a>
-             · 
-            <a href="https://github.com/EnockMagara/molab-2024-09-Enock/tree/main/WEEK10" target="_blank" rel="noopener">Repository</a>
-          </div>
-        </article>
-      
-        <article class="index-item">
-          <div>
-            <h3><a href="/project/assignflow">AssignFlow - Task Management System</a></h3>
-            <p>AssignFlow is a robust task management platform built with a modern Node.js/Express stack and MongoDB integration. This application leverages a comprehensive MVC architecture to provide dynamic task allocation, intuitive…</p>
-          </div>
-          <div class="side">
-            December 2024<br>
-            Full-stack web development<br>
-            <a href="https://assignflow.duckdns.org/" target="_blank" rel="noopener">Live</a>
-            
-            
-          </div>
-        </article>
-      
-        <article class="index-item">
-          <div>
-            <h3><a href="/project/calmingspace">Calming Space - Meditation &amp; Relaxation App</a></h3>
-            <p>Calming Space is a full-stack meditation and relaxation application designed to create a personalized sanctuary for mindfulness. It features ambient sound mixing, a mindfulness timer, user authentication, and Spotify…</p>
-          </div>
-          <div class="side">
-            October 2024<br>
-            Full-stack Web Application<br>
-            <a href="https://calmingspace.duckdns.org/dashboard" target="_blank" rel="noopener">Live</a>
-             · 
-            <a href="https://github.com/EnockMagara/calming_space" target="_blank" rel="noopener">Repository</a>
-          </div>
-        </article>
-      
-        <article class="index-item">
-          <div>
-            <h3><a href="/project/moraamema">MoraaMema Initiative - Non-Profit Website</a></h3>
-            <p>Designed and developed the official website for MoraaMema Initiative Inc., a non-profit organization dedicated to improving the lives of underprivileged children in Kenya through educational initiatives. The website…</p>
-          </div>
-          <div class="side">
-            July 2024<br>
-            web development<br>
-            <a href="https://moraamema.org/" target="_blank" rel="noopener">Live</a>
-            
-            
-          </div>
-        </article>
-      
-    </section>
+        
+      </div>
+    </div>
   </main>
 
-  <footer class="site-footer wrap">
-    <span>© 2026 Enock Mecheo</span>
-    <a href="mailto:enockmecheo@nyu.edu">enockmecheo@nyu.edu</a>
+  <footer>
+    <div class="container">
+      <p class="contact-message">Feel free to contact me through any of these channels:</p>
+      <div class="social-links-footer mb-4">
+        <a href="mailto:enockmecheo@nyu.edu" class="gmail"><i class="bi bi-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/enock-magara-56390b1a6/" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
+        <a href="https://github.com/EnockMagara" class="github" target="_blank"><i class="bi bi-github"></i></a>
+      </div>
+
+      
+      <p class="thank-you-message">Thank you for your interest in my work.</p>
+    </div>
   </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="../assets/js/main.js"></script>
+
 </body>
+
 </html>
