@@ -64,6 +64,10 @@
           </div>
 
           
+          
+          
+
+          
           <div class="cs-block">
             <h3>Challenges &amp; Solutions</h3>
             <p>The core design problem was making an LLM a trustworthy actor on real user data rather than a chat surface bolted onto a CRUD app. The governing decision was to give the model no privileged write path: its tools dispatch to the very same service functions the UI calls, so the agent cannot bypass validation or drift from application invariants. Beyond that the model had to stay grounded — it is instructed to read current dashboard state before offering progress advice, and the system prompt injects the user&#39;s real timezone and current datetime so relative expressions like &#34;tomorrow at 7am&#34; resolve to correct ISO datetimes instead of plausible-looking guesses. Multi-round tool use streams to the client over SSE, so the user watches tool activity unfold rather than waiting through a silent pause. A secondary goal was avoiding vendor lock-in: a single provider interface that both Anthropic Claude and OpenAI implement against the same streaming contract, with every AI path degrading gracefully when no key is configured at all.</p>

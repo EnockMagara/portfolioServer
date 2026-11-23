@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Enock Mecheo — SafiSend — Restaurant Platform with an AI Layer That Acts Through Typed Tools</title>
-  <meta content="SafiSend is a restaurant operations platform for Kenya, live at safisend.com: QR and WhatsApp ordering, split bills, M-Pesa and card payments, inventory and analytics. I led its engineering from August 2025 to September 2026, when Mybizna was forked from it. The part worth a reviewer&#39;s time is how a model was allowed to act on a real business without being trusted: a typed registry of 30 tools, each with a risk tier, behind nine fail-closed gates. Measured in the repository on 23 November 2026: 1,320 commits over 132 active days, 2,100+ test cases in 163 files plus Playwright, Selenium and JMeter suites, 80 models, 90 services and 68 route files." name="description">
+  <meta content="Restaurant operations for Kenya: QR and WhatsApp ordering, split bills, M-Pesa and card payments, inventory and analytics. Lead engineer from August 2025 to September 2026. Mybizna was forked from it. Live at safisend.com." name="description">
   <meta content="portfolio, AI engineer, machine learning, MLOps, Enock Mecheo, Enock Magara" name="keywords">
   <meta name="author" content="Enock Mecheo">
 
@@ -60,38 +60,44 @@
 
           <div class="cs-block">
             <h3>Overview</h3>
-            <p>SafiSend is a restaurant operations platform for Kenya, live at safisend.com: QR and WhatsApp ordering, split bills, M-Pesa and card payments, inventory and analytics. I led its engineering from August 2025 to September 2026, when Mybizna was forked from it. The part worth a reviewer&#39;s time is how a model was allowed to act on a real business without being trusted: a typed registry of 30 tools, each with a risk tier, behind nine fail-closed gates. Measured in the repository on 23 November 2026: 1,320 commits over 132 active days, 2,100+ test cases in 163 files plus Playwright, Selenium and JMeter suites, 80 models, 90 services and 68 route files.</p>
+            <p>Restaurant operations for Kenya: QR and WhatsApp ordering, split bills, M-Pesa and card payments, inventory and analytics. Lead engineer from August 2025 to September 2026. Mybizna was forked from it. Live at safisend.com.</p>
           </div>
 
           
           <div class="cs-block">
-            <h3>Challenges &amp; Solutions</h3>
-            <p>The governing rule is that numbers are computed, never generated. A model chooses which tools to call and how to phrase the answer; every figure it reports came back from a tool result and is cited to the rows that produced it, because prose from a model reads as equally confident whether or not it is grounded. The restaurant id is never a tool parameter: it is bound from the actor and injected, and the registry asserts that at boot, so nothing a model emits can redirect a call to another restaurant. Two agents run on schedulers and neither can apply anything itself. The 86 agent proposes taking a dish off the menu when stock cannot cover the rest of service, and only ever undoes its own snooze; the margin agent proposes prices but holds the analytics permission and not the menu-update permission, so it cannot change a price even if its own code asked. Tenant scoping was the other hard problem: roughly 1,300 query sites each had to remember the tenant filter, and a review found the same failure in several places, including two menu routes with no middleware at all. The fix was structural, and the same design, hardened, became Mybizna&#39;s.</p>
+            <h3>Problem</h3>
+            <p>Owners wanted a model that could act on the business: pull a dish, change a price, say what to fix. A model trusted with those actions can reach another restaurant&#39;s data or invent a number, and neither failure looks different from a right answer.</p>
+          </div>
+          
+          
+          <div class="cs-block">
+            <h3>Solution</h3>
+            <p>A typed registry of 30 tools, each with a risk tier, behind nine fail-closed gates. The tenant is bound from the actor, never a parameter. Reads run; low-risk writes run and are audited; high-risk changes become proposals a person approves. Every figure the model reports is a tool result, cited to the rows that produced it.</p>
+          </div>
+          
+          
+          <div class="cs-block">
+            <h3>Impact</h3>
+            <p>Two agents, stock and margin, run daily and cannot apply anything themselves. Tenant scoping moved from convention to three enforced layers, which found and fixed 37 unguarded endpoints. 1,320 commits, 2,100+ tests, and a hash-chained financial audit log.</p>
           </div>
           
 
           
+
+          
           <div class="cs-block">
-            <h3>Technical Achievements</h3>
+            <h3>What was built</h3>
             <ul class="cs-list">
               
-                <li>Typed tool registry of 30 tools (25 read, 2 low-risk, 3 high-risk) behind nine fail-closed gates: resolve, actor kind, tenant bound from the actor, the actor&#39;s own permissions, per-restaurant feature flags, strict schema validation, ownership, risk routing and audited dispatch</li>
+                <li>30 tools, 9 gates, three risk tiers: 25 read, 2 low-risk, 3 high-risk</li>
               
-                <li>Agents propose, people decide: high-risk actions file a proposal and wait for a person, who applies it under their own authority; the agents&#39; decision arithmetic lives in pure modules with no I/O, clock or database, so it is exhaustively tested</li>
+                <li>Agents propose, people decide. Decision logic in pure modules, exhaustively tested</li>
               
-                <li>Ask-your-data copilot as a bounded multi-turn tool loop, capped at 5 iterations and 30 seconds, every call audited under one run id, with the tool catalogue narrowed twice: to read-only tools, and to what that person&#39;s permissions allow</li>
+                <li>Copilot loop capped at 5 iterations and 30 seconds, every call audited</li>
               
-                <li>Tenant scoping moved from convention to three layers: membership verified before any handler runs, a Mongoose plugin that reports or rejects a query that does not constrain the tenant, and a static ratchet that blocks new unscoped sites in CI; 37 unguarded endpoints found and fixed on the way</li>
+                <li>Hash-chained financial audit log; load tests followed by invariant checks</li>
               
-                <li>Hash-chained financial audit log with atomic sequence allocation and tamper detection; every payment&#39;s ledger entry carries device, touchpoint, channel, method and origin</li>
-              
-                <li>JMeter fintech runs followed by an invariant check: totals balance, no order paid twice, no orphaned ledger row</li>
-              
-                <li>Everything ships dark: the registry, copilot and proposal routes mount only behind flags, each agent needs its own flag, and tools work with no model key at all</li>
-              
-                <li>A menu recommender over OpenAI embeddings, collaborative filtering and FP-Growth basket mining written from the paper, with a five-tier cold-start ladder for anonymous diners and a cross-restaurant taste profile gated on history and opt-out</li>
-              
-                <li>Menu onboarding from a photograph with a second pass over low-confidence items and human review before a price is published; QR-to-order with no app install; split billing across several diners at one table</li>
+                <li>Menu recommender (embeddings, collaborative filtering, FP-Growth) with a cold-start ladder; menu onboarding from a photo with human review</li>
               
             </ul>
           </div>
@@ -115,9 +121,7 @@
               
                 <span class="tech-badge"><i class="fab fa-whatsapp"></i> WhatsApp API</span>
               
-                <span class="tech-badge"><i class="fas fa-robot"></i> Playwright · Selenium</span>
-              
-                <span class="tech-badge"><i class="fas fa-chart-bar"></i> JMeter</span>
+                <span class="tech-badge"><i class="fas fa-robot"></i> Playwright · JMeter</span>
               
                 <span class="tech-badge"><i class="fab fa-docker"></i> Docker · Nginx</span>
               

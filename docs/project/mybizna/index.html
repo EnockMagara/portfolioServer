@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Enock Mecheo — Mybizna — Commerce Platform for Small Businesses in Kenya</title>
-  <meta content="Mybizna is a multi-tenant commerce platform I build and run as the only engineer, live at mybizna.com and on the App Store and Google Play. A seller signs up, gets a website on their own domain, takes orders and bookings, and is paid to M-Pesa or a bank through Paystack split settlement. One deployment serves every seller: an Express and Mongoose API, a Next.js 16 dashboard with host-routed storefronts, a Flutter seller app, and Zod schemas shared as one OpenAPI spec. In its first 65 days: 3,043 commits, 554 reviewed pull requests, about 10,000 automated tests, 43 numbered design documents and more than 130 logged deploys. Every figure here was counted in the repository on 23 November 2026." name="description">
+  <meta content="A multi-tenant commerce platform for small businesses. A seller gets a website on their own domain, takes orders and bookings, and in Kenya is paid to M-Pesa or a bank. Sellers in any open country take orders over WhatsApp; online payments abroad are not built yet. I am the only engineer. Live at mybizna.com and on both app stores." name="description">
   <meta content="portfolio, AI engineer, machine learning, MLOps, Enock Mecheo, Enock Magara" name="keywords">
   <meta name="author" content="Enock Mecheo">
 
@@ -60,38 +60,48 @@
 
           <div class="cs-block">
             <h3>Overview</h3>
-            <p>Mybizna is a multi-tenant commerce platform I build and run as the only engineer, live at mybizna.com and on the App Store and Google Play. A seller signs up, gets a website on their own domain, takes orders and bookings, and is paid to M-Pesa or a bank through Paystack split settlement. One deployment serves every seller: an Express and Mongoose API, a Next.js 16 dashboard with host-routed storefronts, a Flutter seller app, and Zod schemas shared as one OpenAPI spec. In its first 65 days: 3,043 commits, 554 reviewed pull requests, about 10,000 automated tests, 43 numbered design documents and more than 130 logged deploys. Every figure here was counted in the repository on 23 November 2026.</p>
+            <p>A multi-tenant commerce platform for small businesses. A seller gets a website on their own domain, takes orders and bookings, and in Kenya is paid to M-Pesa or a bank. Sellers in any open country take orders over WhatsApp; online payments abroad are not built yet. I am the only engineer. Live at mybizna.com and on both app stores.</p>
           </div>
 
           
           <div class="cs-block">
-            <h3>Challenges &amp; Solutions</h3>
-            <p>The problem that shapes everything is that one process serves every shop, so a query that forgets the shop does not return slightly wrong data: it returns another business&#39;s data. Convention had already failed at this once, on the restaurant platform, where a review found 37 unguarded endpoints. So the boundary is held in three places. One middleware resolves the shop from the signed-in user&#39;s memberships and nothing else reads the header; an ESLint rule fails any other read. The verified shop enters an AsyncLocalStorage context. A Mongoose plugin registered before any model hooks every query, aggregate, save and bulk write, and refuses a filter whose tenant names another shop; the only way past is a crossTenant call that must carry a reason string, so every exception is one grep away. The second problem was money. Ledger rows are never edited; a scheduler polls Paystack settlements and matches them to sales, payouts are verified against the processor&#39;s own records, and a failed settlement is a named state rather than a silent skip. The open items are written down too: a sale on a failed settlement still stalls the matcher, found on 20 November and not yet fixed.</p>
+            <h3>Problem</h3>
+            <p>One deployment serves every seller, so a query that forgets its shop leaks another business&#39;s data. The same code moves real money, and a wrong ledger row is a seller not paid. Both had to be safe to ship daily, by one person.</p>
+          </div>
+          
+          
+          <div class="cs-block">
+            <h3>Solution</h3>
+            <p>Tenancy is enforced by the runtime, not remembered by the author: the verified shop enters a request context, a Mongoose guard refuses any query naming another shop, and a CI ratchet blocks new unscoped queries. Money is append-only, then reconciled: settlements polled and matched to sales, payouts verified against Paystack. Every rule has a check in CI whose count can only fall.</p>
+          </div>
+          
+          
+          <div class="cs-block">
+            <h3>Impact</h3>
+            <p>3,043 commits and 554 reviewed pull requests shipped in 65 days. About 10,000 automated tests. 130+ deploys, each logged with how to verify it. A 135-finding security review with every finding tracked to a status. The seller app live on the App Store and Google Play.</p>
           </div>
           
 
           
+
+          
           <div class="cs-block">
-            <h3>Technical Achievements</h3>
+            <h3>What was built</h3>
             <ul class="cs-list">
               
-                <li>Tenancy enforced by the runtime, not remembered by the author: a verified tenant context, a global Mongoose guard that refuses a filter naming another shop and refuses unscoped queries in staging, and a static ratchet in CI (193 sites across 37 models on 25 September, falling since)</li>
+                <li>Tenant guard plus CI ratchet: 193 unscoped query sites across 37 models in September, falling since</li>
               
-                <li>Eleven architecture ratchets in CI, each with a baseline file that can only fall: tenancy, layering, structured logging, silent failures, native writes, secrets, typed environment, generated feature flags, country seam, one-off design values and helper copy length</li>
+                <li>Eleven architecture checks in CI. A pull request can lower a count, never raise it</li>
               
-                <li>Money that is append-only, then reconciled: Paystack split settlement to M-Pesa or bank, settlements polled and matched to sales, payouts verified against the processor, the money model written as a document before it was code</li>
+                <li>Append-only ledger, reconciled against Paystack settlements and payouts</li>
               
-                <li>Observability before the second seller: one pino logger with ECS fields shared by API and web, a request id carried through every log line and returned in every response, liveness and readiness checks, graceful shutdown, Prometheus metrics behind a token</li>
+                <li>Request ids end to end, health checks, graceful shutdown, Prometheus metrics</li>
               
-                <li>A security review of 135 findings, each with a status line a later reader can verify a fix against, and a launch review recording the delta after 293 further commits</li>
+                <li>Sellers&#39; own domains through Cloudflare for SaaS; delivery priced by road distance from a self-hosted router</li>
               
-                <li>Sellers&#39; own domains through Cloudflare for SaaS with one Worker, because Railway caps custom domains at 20 per service and would have made every seller edit DNS on any move</li>
+                <li>One gateway for every model call: Claude first, OpenAI fallback, a budget per prompt</li>
               
-                <li>Delivery priced by road distance from a private Valhalla router built from Kenya&#39;s OpenStreetMap roads, answering in under 1.5 seconds for a flat monthly cost; pins never reach a log</li>
-              
-                <li>One door for every model call: Cloudflare AI Gateway, Claude Haiku first with the feature&#39;s OpenAI model as fallback, a budget per prompt, and a help assistant that answers only from written articles and prepares changes the seller confirms</li>
-              
-                <li>Shipped on three surfaces: 104 API models, 118 web pages and 61 Flutter screens, with about 9,000 API test cases across 680 files and 1,600 on the web</li>
+                <li>A country seam: currency, clock, phone rule and tax labels come from the shop&#39;s country through one helper per client, and a CI check fails when Kenya is written anywhere else</li>
               
             </ul>
           </div>
@@ -113,11 +123,9 @@
               
                 <span class="tech-badge"><i class="fas fa-money-bill-wave"></i> Paystack · M-Pesa</span>
               
-                <span class="tech-badge"><i class="fas fa-cloud"></i> Cloudflare for SaaS</span>
+                <span class="tech-badge"><i class="fas fa-cloud"></i> Cloudflare</span>
               
                 <span class="tech-badge"><i class="fas fa-train"></i> Railway</span>
-              
-                <span class="tech-badge"><i class="fas fa-route"></i> Valhalla routing</span>
               
                 <span class="tech-badge"><i class="fas fa-brain"></i> Claude · OpenAI</span>
               

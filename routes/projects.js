@@ -6,8 +6,10 @@ const projects = [
   {
     id: 'mybizna',
     title: 'Mybizna — Commerce Platform for Small Businesses in Kenya',
-    description: 'Mybizna is a multi-tenant commerce platform I build and run as the only engineer, live at mybizna.com and on the App Store and Google Play. A seller signs up, gets a website on their own domain, takes orders and bookings, and is paid to M-Pesa or a bank through Paystack split settlement. One deployment serves every seller: an Express and Mongoose API, a Next.js 16 dashboard with host-routed storefronts, a Flutter seller app, and Zod schemas shared as one OpenAPI spec. In its first 65 days: 3,043 commits, 554 reviewed pull requests, about 10,000 automated tests, 43 numbered design documents and more than 130 logged deploys. Every figure here was counted in the repository on 23 November 2026.',
-    challenges: 'The problem that shapes everything is that one process serves every shop, so a query that forgets the shop does not return slightly wrong data: it returns another business\'s data. Convention had already failed at this once, on the restaurant platform, where a review found 37 unguarded endpoints. So the boundary is held in three places. One middleware resolves the shop from the signed-in user\'s memberships and nothing else reads the header; an ESLint rule fails any other read. The verified shop enters an AsyncLocalStorage context. A Mongoose plugin registered before any model hooks every query, aggregate, save and bulk write, and refuses a filter whose tenant names another shop; the only way past is a crossTenant call that must carry a reason string, so every exception is one grep away. The second problem was money. Ledger rows are never edited; a scheduler polls Paystack settlements and matches them to sales, payouts are verified against the processor\'s own records, and a failed settlement is a named state rather than a silent skip. The open items are written down too: a sale on a failed settlement still stalls the matcher, found on 20 November and not yet fixed.',
+    description: 'A multi-tenant commerce platform for small businesses. A seller gets a website on their own domain, takes orders and bookings, and in Kenya is paid to M-Pesa or a bank. Sellers in any open country take orders over WhatsApp; online payments abroad are not built yet. I am the only engineer. Live at mybizna.com and on both app stores.',
+    problem: 'One deployment serves every seller, so a query that forgets its shop leaks another business\'s data. The same code moves real money, and a wrong ledger row is a seller not paid. Both had to be safe to ship daily, by one person.',
+    solution: 'Tenancy is enforced by the runtime, not remembered by the author: the verified shop enters a request context, a Mongoose guard refuses any query naming another shop, and a CI ratchet blocks new unscoped queries. Money is append-only, then reconciled: settlements polled and matched to sales, payouts verified against Paystack. Every rule has a check in CI whose count can only fall.',
+    impact: '3,043 commits and 554 reviewed pull requests shipped in 65 days. About 10,000 automated tests. 130+ deploys, each logged with how to verify it. A 135-finding security review with every finding tracked to a status. The seller app live on the App Store and Google Play.',
     image: '/assets/img/projects/mybizna.jpg',
     technologies: [
       { name: 'TypeScript', icon: 'fas fa-code' },
@@ -16,31 +18,30 @@ const projects = [
       { name: 'Flutter', icon: 'fas fa-mobile-alt' },
       { name: 'MongoDB', icon: 'fas fa-database' },
       { name: 'Paystack · M-Pesa', icon: 'fas fa-money-bill-wave' },
-      { name: 'Cloudflare for SaaS', icon: 'fas fa-cloud' },
+      { name: 'Cloudflare', icon: 'fas fa-cloud' },
       { name: 'Railway', icon: 'fas fa-train' },
-      { name: 'Valhalla routing', icon: 'fas fa-route' },
       { name: 'Claude · OpenAI', icon: 'fas fa-brain' }
     ],
     date: 'Sept 2026 – present',
     category: 'Commerce · Payments · Multi-tenant',
     liveUrl: 'https://mybizna.com',
     technicalAchievements: [
-      'Tenancy enforced by the runtime, not remembered by the author: a verified tenant context, a global Mongoose guard that refuses a filter naming another shop and refuses unscoped queries in staging, and a static ratchet in CI (193 sites across 37 models on 25 September, falling since)',
-      'Eleven architecture ratchets in CI, each with a baseline file that can only fall: tenancy, layering, structured logging, silent failures, native writes, secrets, typed environment, generated feature flags, country seam, one-off design values and helper copy length',
-      'Money that is append-only, then reconciled: Paystack split settlement to M-Pesa or bank, settlements polled and matched to sales, payouts verified against the processor, the money model written as a document before it was code',
-      'Observability before the second seller: one pino logger with ECS fields shared by API and web, a request id carried through every log line and returned in every response, liveness and readiness checks, graceful shutdown, Prometheus metrics behind a token',
-      'A security review of 135 findings, each with a status line a later reader can verify a fix against, and a launch review recording the delta after 293 further commits',
-      'Sellers\' own domains through Cloudflare for SaaS with one Worker, because Railway caps custom domains at 20 per service and would have made every seller edit DNS on any move',
-      'Delivery priced by road distance from a private Valhalla router built from Kenya\'s OpenStreetMap roads, answering in under 1.5 seconds for a flat monthly cost; pins never reach a log',
-      'One door for every model call: Cloudflare AI Gateway, Claude Haiku first with the feature\'s OpenAI model as fallback, a budget per prompt, and a help assistant that answers only from written articles and prepares changes the seller confirms',
-      'Shipped on three surfaces: 104 API models, 118 web pages and 61 Flutter screens, with about 9,000 API test cases across 680 files and 1,600 on the web'
+      'Tenant guard plus CI ratchet: 193 unscoped query sites across 37 models in September, falling since',
+      'Eleven architecture checks in CI. A pull request can lower a count, never raise it',
+      'Append-only ledger, reconciled against Paystack settlements and payouts',
+      'Request ids end to end, health checks, graceful shutdown, Prometheus metrics',
+      'Sellers\' own domains through Cloudflare for SaaS; delivery priced by road distance from a self-hosted router',
+      'One gateway for every model call: Claude first, OpenAI fallback, a budget per prompt',
+      'A country seam: currency, clock, phone rule and tax labels come from the shop\'s country through one helper per client, and a CI check fails when Kenya is written anywhere else'
     ]
   },
   {
     id: 'safisend',
     title: 'SafiSend — Restaurant Platform with an AI Layer That Acts Through Typed Tools',
-    description: 'SafiSend is a restaurant operations platform for Kenya, live at safisend.com: QR and WhatsApp ordering, split bills, M-Pesa and card payments, inventory and analytics. I led its engineering from August 2025 to September 2026, when Mybizna was forked from it. The part worth a reviewer\'s time is how a model was allowed to act on a real business without being trusted: a typed registry of 30 tools, each with a risk tier, behind nine fail-closed gates. Measured in the repository on 23 November 2026: 1,320 commits over 132 active days, 2,100+ test cases in 163 files plus Playwright, Selenium and JMeter suites, 80 models, 90 services and 68 route files.',
-    challenges: 'The governing rule is that numbers are computed, never generated. A model chooses which tools to call and how to phrase the answer; every figure it reports came back from a tool result and is cited to the rows that produced it, because prose from a model reads as equally confident whether or not it is grounded. The restaurant id is never a tool parameter: it is bound from the actor and injected, and the registry asserts that at boot, so nothing a model emits can redirect a call to another restaurant. Two agents run on schedulers and neither can apply anything itself. The 86 agent proposes taking a dish off the menu when stock cannot cover the rest of service, and only ever undoes its own snooze; the margin agent proposes prices but holds the analytics permission and not the menu-update permission, so it cannot change a price even if its own code asked. Tenant scoping was the other hard problem: roughly 1,300 query sites each had to remember the tenant filter, and a review found the same failure in several places, including two menu routes with no middleware at all. The fix was structural, and the same design, hardened, became Mybizna\'s.',
+    description: 'Restaurant operations for Kenya: QR and WhatsApp ordering, split bills, M-Pesa and card payments, inventory and analytics. Lead engineer from August 2025 to September 2026. Mybizna was forked from it. Live at safisend.com.',
+    problem: 'Owners wanted a model that could act on the business: pull a dish, change a price, say what to fix. A model trusted with those actions can reach another restaurant\'s data or invent a number, and neither failure looks different from a right answer.',
+    solution: 'A typed registry of 30 tools, each with a risk tier, behind nine fail-closed gates. The tenant is bound from the actor, never a parameter. Reads run; low-risk writes run and are audited; high-risk changes become proposals a person approves. Every figure the model reports is a tool result, cited to the rows that produced it.',
+    impact: 'Two agents, stock and margin, run daily and cannot apply anything themselves. Tenant scoping moved from convention to three enforced layers, which found and fixed 37 unguarded endpoints. 1,320 commits, 2,100+ tests, and a hash-chained financial audit log.',
     image: '/assets/img/projects/safisend.jpg',
     technologies: [
       { name: 'TypeScript', icon: 'fas fa-code' },
@@ -50,23 +51,18 @@ const projects = [
       { name: 'OpenAI', icon: 'fas fa-brain' },
       { name: 'Paystack · M-Pesa', icon: 'fas fa-money-bill-wave' },
       { name: 'WhatsApp API', icon: 'fab fa-whatsapp' },
-      { name: 'Playwright · Selenium', icon: 'fas fa-robot' },
-      { name: 'JMeter', icon: 'fas fa-chart-bar' },
+      { name: 'Playwright · JMeter', icon: 'fas fa-robot' },
       { name: 'Docker · Nginx', icon: 'fab fa-docker' }
     ],
     date: 'Aug 2025 – Sept 2026',
     category: 'Restaurant platform · AI tools · Payments',
     liveUrl: 'https://safisend.com',
     technicalAchievements: [
-      'Typed tool registry of 30 tools (25 read, 2 low-risk, 3 high-risk) behind nine fail-closed gates: resolve, actor kind, tenant bound from the actor, the actor\'s own permissions, per-restaurant feature flags, strict schema validation, ownership, risk routing and audited dispatch',
-      'Agents propose, people decide: high-risk actions file a proposal and wait for a person, who applies it under their own authority; the agents\' decision arithmetic lives in pure modules with no I/O, clock or database, so it is exhaustively tested',
-      'Ask-your-data copilot as a bounded multi-turn tool loop, capped at 5 iterations and 30 seconds, every call audited under one run id, with the tool catalogue narrowed twice: to read-only tools, and to what that person\'s permissions allow',
-      'Tenant scoping moved from convention to three layers: membership verified before any handler runs, a Mongoose plugin that reports or rejects a query that does not constrain the tenant, and a static ratchet that blocks new unscoped sites in CI; 37 unguarded endpoints found and fixed on the way',
-      'Hash-chained financial audit log with atomic sequence allocation and tamper detection; every payment\'s ledger entry carries device, touchpoint, channel, method and origin',
-      'JMeter fintech runs followed by an invariant check: totals balance, no order paid twice, no orphaned ledger row',
-      'Everything ships dark: the registry, copilot and proposal routes mount only behind flags, each agent needs its own flag, and tools work with no model key at all',
-      'A menu recommender over OpenAI embeddings, collaborative filtering and FP-Growth basket mining written from the paper, with a five-tier cold-start ladder for anonymous diners and a cross-restaurant taste profile gated on history and opt-out',
-      'Menu onboarding from a photograph with a second pass over low-confidence items and human review before a price is published; QR-to-order with no app install; split billing across several diners at one table'
+      '30 tools, 9 gates, three risk tiers: 25 read, 2 low-risk, 3 high-risk',
+      'Agents propose, people decide. Decision logic in pure modules, exhaustively tested',
+      'Copilot loop capped at 5 iterations and 30 seconds, every call audited',
+      'Hash-chained financial audit log; load tests followed by invariant checks',
+      'Menu recommender (embeddings, collaborative filtering, FP-Growth) with a cold-start ladder; menu onboarding from a photo with human review'
     ]
   },
   {

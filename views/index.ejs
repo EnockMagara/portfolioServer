@@ -62,7 +62,7 @@
           <span class="eyebrow">Engineer</span>
           <p class="hero-status">Founding engineer, Mybizna · NYU Abu Dhabi CS ’26</p>
           <h1>Building the systems small businesses get paid through.</h1>
-          <p class="hero-lead">Sole engineer on <strong>Mybizna</strong>, a multi-tenant commerce platform: a website, orders and bookings for each seller, payments settled to <strong>M-Pesa or a bank</strong>, a dashboard on the web and an app on both stores. Shipped daily since September 2026. Before it, the restaurant platform it grew out of, and a first-author paper at <strong>FSE 2026</strong>.</p>
+          <p class="hero-lead">Sole engineer on <strong>Mybizna</strong>, a multi-tenant commerce platform: a website for each seller, orders and bookings, payments settled to <strong>M-Pesa or a bank</strong>, and an app on both stores. Shipped daily since September 2026. First author at <strong>FSE 2026</strong>.</p>
           <div class="hero-actions">
             <a href="#work" class="btn btn-primary">
               View Work
@@ -169,7 +169,7 @@
           </div>
           <div class="project-body">
             <h3>Mybizna</h3>
-            <p>Multi-tenant commerce platform for small businesses in Kenya, live on the web and on both app stores. I am the only engineer. Tenancy is enforced by the runtime: a tenant context, a Mongoose guard that refuses a query naming another shop, and a CI ratchet whose count only falls. Money is append-only and reconciled against Paystack settlements. Sellers' own domains run through Cloudflare for SaaS; delivery is priced by road distance from our own router.</p>
+            <p>Multi-tenant commerce platform for small businesses, live on the web and both app stores: a website and WhatsApp orders from any open country, payments to M-Pesa or a bank in Kenya. I am the only engineer. Tenancy is enforced by the runtime, money is append-only and reconciled against Paystack, and every architecture rule has a CI check whose count can only fall.</p>
             <div class="tags"><span class="tag">TypeScript</span><span class="tag">Express</span><span class="tag">Next.js 16</span><span class="tag">Flutter</span><span class="tag">Paystack · M-Pesa</span><span class="tag">Cloudflare</span></div>
             <p class="project-metric">3,043 commits · 554 PRs · ~10,000 tests · 43 design docs · 130+ logged deploys</p>
           </div>
@@ -185,7 +185,7 @@
           </div>
           <div class="project-body">
             <h3>SafiSend for restaurants</h3>
-            <p>QR and WhatsApp ordering, split bills and M-Pesa for Kenyan restaurants, with an AI layer that acts on the business only through a typed tool registry. Thirty tools, each with a risk tier: reads run, low-risk writes run and are audited, high-risk changes become proposals a person approves. Every figure the model reports came back from a tool. A hash-chained financial audit log holds the money.</p>
+            <p>QR and WhatsApp ordering, split bills and M-Pesa for Kenyan restaurants, with an AI layer that acts only through 30 typed tools gated by risk. High-risk changes become proposals a person approves; every number the model reports is a tool result.</p>
             <div class="tags"><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">MongoDB</span><span class="tag">OpenAI</span><span class="tag">Paystack · M-Pesa</span><span class="tag">JMeter</span></div>
             <p class="project-metric">1,320 commits · 2,100+ tests · 30 tools behind 9 gates · 37 unguarded endpoints found and fixed</p>
           </div>
