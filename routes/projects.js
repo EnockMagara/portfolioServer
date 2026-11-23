@@ -3,41 +3,7 @@ const router = express.Router();
 
 // Project data
 const projects = [
-  {
-    id: 'safisend',
-    title: 'SafiSend — Restaurant Ordering Platform with a Personalized Menu',
-    description: 'SafiSend is a production restaurant platform I founded and lead, deployed at www.safisend.com. Diners scan a QR code at the table to browse, order, and pay from their phone. Beneath that flow sits the work I am proudest of: a personalization layer that ranks the menu per diner by combining semantic embeddings, collaborative filtering, and market basket analysis, alongside a vision-model pipeline that onboards a restaurant by reading photographs of its existing paper menu. The platform runs to roughly 144,000 lines across 57 data models and 156 services, with 859 commits and 68 test suites.',
-    challenges: 'The central problem was cold start. A diner scanning a QR code is usually anonymous, has no order history, and will leave within the hour, so there is no opportunity to learn their preferences the conventional way. I addressed it with a five-tier strategy ladder that degrades gracefully — personalized history, then live session signals, then a cross-restaurant taste profile, then popularity-based defaults — so every request resolves to a meaningful ranking rather than an arbitrary sort. The transfer tier is the most interesting piece: because every restaurant\'s menu is embedded by the same model into a shared 1536-dimensional space, "spicy chicken" at one restaurant sits near "fiery wings" at another, so a returning customer\'s taste carries into a restaurant they have never visited. Shipping that meant treating it as a privacy problem as much as a modeling one — the transfer is gated on sufficient history (at least 5 orders across 2 or more restaurants), blended at low weight and decayed to zero as local history accumulates, never reveals to one restaurant where else a customer eats, and is opt-out. The second challenge was menu onboarding: restaurants arrive with a photo or a PDF, and extraction had to clear a far higher accuracy bar than typical OCR, because a misread price flows straight through to a paying customer.',
-    image: '/assets/img/projects/safisend.jpg',
-    technologies: [
-      { name: 'OpenAI Embeddings', icon: 'fas fa-brain' },
-      { name: 'GPT-4o Vision', icon: 'fas fa-eye' },
-      { name: 'FP-Growth', icon: 'fas fa-project-diagram' },
-      { name: 'React', icon: 'fab fa-react' },
-      { name: 'Node.js', icon: 'fab fa-node-js' },
-      { name: 'MongoDB', icon: 'fas fa-database' },
-      { name: 'WhatsApp API', icon: 'fab fa-whatsapp' },
-      { name: 'M-Pesa', icon: 'fas fa-mobile-alt' },
-      { name: 'Docker', icon: 'fab fa-docker' },
-      { name: 'Nginx', icon: 'fas fa-cloud' },
-      { name: 'JMeter', icon: 'fas fa-chart-bar' }
-    ],
-    date: 'Aug 2025 – May 2026',
-    category: 'AI/ML · Recommender Systems · Product',
-    liveUrl: 'https://www.safisend.com',
-    technicalAchievements: [
-      'Hybrid recommender scoring every menu item across five weighted signals: semantic similarity to the diner\'s taste vector (0.35), collaborative filtering from similar customers (0.20), their own behavioral profile (0.20), live popularity as real social proof (0.15), and recency (0.10). Results then pass through diversity enforcement and context-aware filtering tuned separately for the menu, cart, and checkout surfaces',
-      'Five-tier cold-start ladder — personalized → session learning → cross-restaurant transfer → new customer → anonymous — so an anonymous first-time diner still receives a meaningfully ranked menu rather than a default sort',
-      'Cross-restaurant transfer learning: a platform-level taste profile aggregates a customer\'s per-restaurant embeddings, weighted by order count and recency, into a single normalized vector that personalizes their experience at a restaurant they have never visited. Gated at ≥5 orders across ≥2 restaurants, blended at 30% and decaying to zero as local history grows, with no cross-restaurant data exposure and customer opt-out',
-      'FP-Growth market basket analysis implemented from scratch in dependency-free JavaScript — FP-tree construction, header tables with node links, and recursive conditional pattern base mining, following Han, Pei & Yin (2000) — and unit tested. It mines frequent itemsets and association rules scored on support, confidence, and lift, which is what separates a genuine pairing from two items that simply happen to both be popular',
-      'Embedding engine over OpenAI text-embedding-3-small: 1536-dimensional vectors for menu items and customers, customer vectors computed as normalized weighted averages of what they have ordered, matched by cosine similarity, with batch generation and a cache instrumented for hit rate',
-      'Real-time session learning that blends a live session embedding with the stored customer vector at 70/30, so recommendations adapt to what a diner is browsing in the current sitting without letting one curious tap overwrite months of established history',
-      'GPT-4o Vision menu OCR engineered for accuracy over convenience: Sharp-based image preprocessing, a full extraction pass, then a focused second pass that re-analyzes only items scoring below the 0.85 confidence threshold before merging results. Per-item confidence scores route uncertain extractions to human review rather than silently publishing a wrong price, alongside currency detection, category inference, and dietary attribute inference',
-      'Closed-loop recommendation analytics: impressions, clicks, and add-to-cart events are logged per surface with the originating strategy and score on compound indexes, making it measurable which strategies actually convert instead of assumed',
-      'Upsell engine classifying premium upgrades, add-ons, and meal completers, scored on embedding similarity (0.50), price uplift (0.30), and co-purchase rate (0.20), precomputed by a scheduled mining job so suggestions are instant at order time',
-      'Production commerce foundation: QR-to-order with no app install, real-time split billing, WhatsApp Business API notifications, M-Pesa payments with callback handling and reconciliation, a live kitchen dashboard, Dockerized services behind Nginx, and JMeter load testing to 500+ concurrent users'
-    ]
-  },
+  ...require('./caseStudies'),
   {
     id: 'kaizen',
     title: 'Kaizen — AI-Native Personal Operating System',

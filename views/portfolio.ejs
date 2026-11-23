@@ -1,281 +1,54 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
-
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <title>Enock Mecheo - Projects</title>
-  <meta content="Portfolio of Enock Mecheo, Computer Science student at NYU Abu Dhabi" name="description">
-  <meta content="portfolio, computer science, software development, NYU, Enock Mecheo, Enock Magara" name="keywords">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Projects — Enock Mecheo</title>
+  <meta name="description" content="Every project, including the smaller ones: AI agents, ML pipelines, a network tool, an iOS app.">
   <meta name="author" content="Enock Mecheo">
-
-  <!-- Favicons -->
   <link href="/assets/img/favicon.png" rel="icon">
-  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Space Grotesk Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Vendor CSS Files -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css" rel="stylesheet">
-
-  <!-- Main CSS File -->
-  <link href="/assets/css/style.css" rel="stylesheet">
-
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- GSAP library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="/assets/css/site.css" rel="stylesheet">
 </head>
+<body>
+  <header class="site-header wrap">
+    <a href="/" class="brand">Enock Mecheo</a>
+    <nav class="back-nav" aria-label="Site">
+      <a href="/#work">← Home</a>
+    </nav>
+  </header>
 
-<body class="portfolio-page">
+  <main>
+    <section class="cs-hero wrap">
+      <div class="eyebrow">All projects</div>
+      <h1 style="font-size: 36px;">Everything, including the small ones.</h1>
+      <p class="lede">The two platforms have their own pages. The rest are course projects, hackathon builds and experiments, kept here for completeness.</p>
+    </section>
 
-  <!-- Navigation System -->
-  <nav class="main-nav">
-    <!-- Mobile Burger Menu -->
-    <button class="burger-menu" id="burgerMenu">
-      <span class="burger-line"></span>
-      <span class="burger-line"></span>
-      <span class="burger-line"></span>
-    </button>
-    
-    <!-- Desktop Navigation -->
-    <div class="desktop-nav">
-      <div class="nav-container">
-        <!-- Home Section -->
-        <a href="/" class="nav-item">
-          <div class="nav-icon">
-            <i class="fas fa-home"></i>
+    <section class="wrap index-list" style="padding-bottom: 96px;">
+      <% projects.forEach(function (p) { %>
+        <article class="index-item">
+          <div>
+            <h3><a href="/project/<%= p.id %>"><%= p.shortTitle || p.title %></a></h3>
+            <p><%= p.description.length > 220 ? p.description.slice(0, p.description.lastIndexOf(' ', 220)) + '…' : p.description %></p>
           </div>
-          <div class="nav-label">Home</div>
-          <div class="nav-preview">About & Skills</div>
-        </a>
-        
-        <!-- Portfolio Section -->
-        <a href="/portfolio" class="nav-item active">
-          <div class="nav-icon">
-            <i class="fas fa-code"></i>
+          <div class="side">
+            <% if (p.date) { %><%= p.date %><br><% } %>
+            <% if (p.category) { %><%= p.category %><br><% } %>
+            <% if (p.liveUrl) { %><a href="<%= p.liveUrl %>" target="_blank" rel="noopener">Live</a><% } %>
+            <% if (p.liveUrl && p.githubUrl) { %> · <% } %>
+            <% if (p.githubUrl) { %><a href="<%= p.githubUrl %>" target="_blank" rel="noopener">Repository</a><% } %>
           </div>
-          <div class="nav-label">Projects</div>
-          <div class="nav-preview">Web & Mobile Apps</div>
-        </a>
-        
-        <!-- ML Projects Section -->
-        <a href="/ml-projects" class="nav-item">
-          <div class="nav-icon">
-            <i class="fas fa-brain"></i>
-          </div>
-          <div class="nav-label">ML Projects</div>
-          <div class="nav-preview">AI & Data Science</div>
-        </a>
-        
-        <!-- Comm Lab Section -->
-        <a href="/commlab" class="nav-item">
-          <div class="nav-icon">
-            <i class="fas fa-microphone"></i>
-          </div>
-          <div class="nav-label">Comm Lab</div>
-          <div class="nav-preview">Media & Design</div>
-        </a>
-      </div>
-    </div>
-    
-    <!-- Mobile Navigation Overlay -->
-    <div class="mobile-nav-overlay" id="mobileNavOverlay">
-      <div class="mobile-nav-content">
-        <div class="mobile-nav-header">
-          <span class="mobile-nav-title">Navigation</span>
-          <button class="mobile-nav-close" id="mobileNavClose">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-        <div class="mobile-nav-items">
-          <a href="/" class="mobile-nav-item">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-            <small>About & Skills</small>
-          </a>
-          <a href="/portfolio" class="mobile-nav-item active">
-            <i class="fas fa-code"></i>
-            <span>Projects</span>
-            <small>Web & Mobile Apps</small>
-          </a>
-          <a href="/ml-projects" class="mobile-nav-item">
-            <i class="fas fa-brain"></i>
-            <span>ML Projects</span>
-            <small>AI & Data Science</small>
-          </a>
-          <a href="/commlab" class="mobile-nav-item">
-            <i class="fas fa-microphone"></i>
-            <span>Comm Lab</span>
-            <small>Media & Design</small>
-          </a>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <main class="main">
-    <!-- Web Development Projects -->
-    <div class="project-category-section">
-      <h3 class="project-category-title">
-        <i class="fas fa-code"></i>
-        Web Development Projects
-      </h3>
-      <div class="projects-grid-new">
-        <% 
-        const webProjects = projects.filter(p => 
-          p.category.toLowerCase().includes('web') || 
-          p.category.toLowerCase().includes('full-stack') ||
-          p.category.toLowerCase().includes('backend') ||
-          p.category.toLowerCase().includes('api')
-        );
-        let webIndex = 0;
-        webProjects.forEach(function(project) { %>
-          <div class="project-tile reveal" data-project="<%= project.id %>" style="transition-delay: <%= webIndex * 0.1 %>s;">
-            <div class="project-number"><%= String(webIndex + 1).padStart(2, '0') %></div>
-            <div class="project-image-bg" style="background-image: url('<%= project.image %>')"></div>
-            <div class="project-content">
-              <div class="project-category"><%= project.category || 'PROJECT' %></div>
-              <h3 class="project-title"><%= project.title %></h3>
-              <p class="project-description"><%= project.description.substring(0, 150) %>...</p>
-              <a href="/project/<%= project.id %>" class="project-link">
-                <span>View Details</span>
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        <% webIndex++; }); %>
-      </div>
-    </div>
-
-    <!-- Mobile Development Projects -->
-    <div class="project-category-section">
-      <h3 class="project-category-title">
-        <i class="fas fa-mobile-alt"></i>
-        Mobile Development Projects
-      </h3>
-      <div class="projects-grid-new">
-        <% 
-        const mobileProjects = projects.filter(p => 
-          p.category.toLowerCase().includes('mobile') || 
-          p.category.toLowerCase().includes('ios')
-        );
-        let mobileIndex = 0;
-        mobileProjects.forEach(function(project) { %>
-          <div class="project-tile reveal" data-project="<%= project.id %>" style="transition-delay: <%= mobileIndex * 0.1 %>s;">
-            <div class="project-number"><%= String(mobileIndex + 1).padStart(2, '0') %></div>
-            <div class="project-image-bg" style="background-image: url('<%= project.image %>')"></div>
-            <div class="project-content">
-              <div class="project-category"><%= project.category || 'PROJECT' %></div>
-              <h3 class="project-title"><%= project.title %></h3>
-              <p class="project-description"><%= project.description.substring(0, 150) %>...</p>
-              <a href="/project/<%= project.id %>" class="project-link">
-                <span>View Details</span>
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        <% mobileIndex++; }); %>
-      </div>
-    </div>
-
-    <!-- AI & Machine Learning Projects -->
-    <div class="project-category-section">
-      <h3 class="project-category-title">
-        <i class="fas fa-brain"></i>
-        AI & Machine Learning Projects
-      </h3>
-      <div class="projects-grid-new">
-        <% 
-        const aiProjects = projects.filter(p => 
-          p.category.toLowerCase().includes('ai') || 
-          p.category.toLowerCase().includes('accessibility')
-        );
-        let aiIndex = 0;
-        aiProjects.forEach(function(project) { %>
-          <div class="project-tile reveal" data-project="<%= project.id %>" style="transition-delay: <%= aiIndex * 0.1 %>s;">
-            <div class="project-number"><%= String(aiIndex + 1).padStart(2, '0') %></div>
-            <div class="project-image-bg" style="background-image: url('<%= project.image %>')"></div>
-            <div class="project-content">
-              <div class="project-category"><%= project.category || 'PROJECT' %></div>
-              <h3 class="project-title"><%= project.title %></h3>
-              <p class="project-description"><%= project.description.substring(0, 150) %>...</p>
-              <a href="/project/<%= project.id %>" class="project-link">
-                <span>View Details</span>
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        <% aiIndex++; }); %>
-      </div>
-    </div>
-
-    <!-- Network & Systems Projects -->
-    <div class="project-category-section">
-      <h3 class="project-category-title">
-        <i class="fas fa-network-wired"></i>
-        Network & Systems Projects
-      </h3>
-      <div class="projects-grid-new">
-        <% 
-        const networkProjects = projects.filter(p => 
-          p.category.toLowerCase().includes('network') || 
-          p.category.toLowerCase().includes('analysis')
-        );
-        let networkIndex = 0;
-        networkProjects.forEach(function(project) { %>
-          <div class="project-tile reveal" data-project="<%= project.id %>" style="transition-delay: <%= networkIndex * 0.1 %>s;">
-            <div class="project-number"><%= String(networkIndex + 1).padStart(2, '0') %></div>
-            <div class="project-image-bg" style="background-image: url('<%= project.image %>')"></div>
-            <div class="project-content">
-              <div class="project-category"><%= project.category || 'PROJECT' %></div>
-              <h3 class="project-title"><%= project.title %></h3>
-              <p class="project-description"><%= project.description.substring(0, 150) %>...</p>
-              <a href="/project/<%= project.id %>" class="project-link">
-                <span>View Details</span>
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        <% networkIndex++; }); %>
-      </div>
-    </div>
+        </article>
+      <% }); %>
+    </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <p class="contact-message">Feel free to contact me through any of these channels:</p>
-      <div class="social-links-footer mb-4">
-        <a href="mailto:enockmecheo@nyu.edu" class="gmail"><i class="bi bi-envelope"></i></a>
-        <a href="https://www.linkedin.com/in/enock-magara-56390b1a6/" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
-        <a href="https://github.com/EnockMagara" class="github" target="_blank"><i class="bi bi-github"></i></a>
-      </div>
-
-      
-      <p class="thank-you-message">Thank you for your interest in my work.</p>
-    </div>
+  <footer class="site-footer wrap">
+    <span>© 2026 Enock Mecheo</span>
+    <a href="mailto:enockmecheo@nyu.edu">enockmecheo@nyu.edu</a>
   </footer>
-
-  <!-- Scroll Top -->
-  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
-
-  <!-- Main JS File -->
-  <script src="/assets/js/main.js"></script>
-
 </body>
-
 </html>

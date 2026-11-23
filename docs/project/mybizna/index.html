@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Mybizna — Enock Mecheo</title>
+  <meta name="description" content="A commerce platform for small businesses in Kenya. A seller signs up, gets a website on their own domain, takes orders and bookings, and is paid to M-Pesa or a bank. I am the only engineer. This page is about the decisions that made it safe to ship daily.">
+  <meta name="author" content="Enock Mecheo">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Enock Mecheo">
+  <meta property="og:title" content="Mybizna: one deployment, every seller, real money">
+  <meta property="og:description" content="A commerce platform for small businesses in Kenya. A seller signs up, gets a website on their own domain, takes orders and bookings, and is paid to M-Pesa or a bank. I am the only engineer. This page is about the decisions that made it safe to ship daily.">
+  <meta property="og:image" content="https://www.enockmecheo.com/assets/img/og-image.png">
+  <link href="../../assets/img/favicon.png" rel="icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="../../assets/css/site.css" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header wrap wrap--narrow">
+    <a href="/" class="brand">Enock Mecheo</a>
+    <nav class="back-nav" aria-label="Site">
+      <a href="/#work">← All work</a>
+    </nav>
+  </header>
+
+  <main>
+  
+    <section class="cs-hero wrap wrap--narrow">
+      <div class="eyebrow">Case study</div>
+      <h1>Mybizna: one deployment, every seller, real money</h1>
+      <p class="lede">A commerce platform for small businesses in Kenya. A seller signs up, gets a website on their own domain, takes orders and bookings, and is paid to M-Pesa or a bank. I am the only engineer. This page is about the decisions that made it safe to ship daily.</p>
+      <dl class="meta">
+        
+          <dt>Role</dt><dd>Founding engineer, SafiSend Limited. API, web, mobile, infrastructure, security review, release process.</dd>
+        
+          <dt>When</dt><dd>September 2026 to present</dd>
+        
+          <dt>Stack</dt><dd>TypeScript. Express and Mongoose API; Next.js 16 dashboard and host-routed storefronts; Flutter seller app; Zod schemas shared as one OpenAPI spec. Railway, Cloudflare, Paystack, Cloudinary.</dd>
+        
+          <dt>Live</dt><dd><a href="https://mybizna.com" rel="noopener" target="_blank">mybizna.com</a> · <a href="https://apps.apple.com/app/id6819720099" rel="noopener" target="_blank">App Store</a> · <a href="https://play.google.com/store/apps/details?id=com.safisend.business" rel="noopener" target="_blank">Google Play</a></dd>
+        
+      </dl>
+    </section>
+
+    <section class="wrap wrap--narrow" style="padding-bottom: 56px;">
+      <table class="numbers num" aria-label="Measured from the repository">
+        <tbody>
+          
+            <tr><td class="v">3,043</td><td>commits, 19 September to 23 November 2026</td></tr>
+          
+            <tr><td class="v">554</td><td>pull requests, each reviewed before merge</td></tr>
+          
+            <tr><td class="v">~10,000</td><td>test cases: about 9,000 on the API across 680 files, 1,600 on the web, plus Flutter</td></tr>
+          
+            <tr><td class="v">43</td><td>numbered design documents, from data model to security review to money model</td></tr>
+          
+            <tr><td class="v">130+</td><td>deploys logged in the release checklist, each with what changed and how to verify it</td></tr>
+          
+            <tr><td class="v">11</td><td>architecture ratchets in CI whose counts can only fall</td></tr>
+          
+            <tr><td class="v">104 · 118 · 61</td><td>models on the API, pages on the web, screens in the app</td></tr>
+          
+        </tbody>
+      </table>
+      <p class="note">Counted in the repository on 23 November 2026.</p>
+    </section>
+
+    <section class="cs-section wrap wrap--narrow" style="padding-bottom: 0;">
+      <div class="rule"></div>
+      <h2>Decisions that mattered</h2>
+      <p>Each one names the problem, what I chose, and where a reviewer can check it.</p>
+    </section>
+
+    <section class="wrap wrap--narrow decisions" style="padding-bottom: 56px; padding-top: 16px;">
+      
+        <article class="decision">
+          <h3>1. The tenant is a property of the actor, and the runtime refuses anything else</h3>
+          <p>One process serves every shop, so a query that forgets the shop does not return slightly wrong data. It returns another business's data. Convention had failed at this once before, on the restaurant platform, where a review found 37 unguarded endpoints. So here the boundary is held in three places.</p><p>One middleware resolves the shop from the signed-in user's memberships and nothing else reads the header; an ESLint rule fails any other read. The verified shop enters an <code>AsyncLocalStorage</code> context. A Mongoose plugin registered before any model hooks every query, aggregate, save and bulk write: inside a context it refuses a filter whose tenant names another shop, outside one it refuses an unscoped query in staging and logs it in production until seven quiet days pass. The only way past is <code>.crossTenant('reason')</code>, and the reason is a string so every exception is one grep away.</p>
+          
+          <div class="evidence">Evidence: docs/14 §1, <code>models/plugins/tenantScoped.ts</code>, <code>tests/unit/tenantIsolation.test.ts</code>, the ratchet in <code>scripts/arch/audit-tenant-scoping.js</code> (193 sites across 37 models on 25 September, falling since).</div>
+        </article>
+      
+        <article class="decision">
+          <h3>2. Rules get a check in CI that can only get stricter</h3>
+          <p>A standards document nobody runs is a wish. Each rule here has an audit script with a baseline file: tenancy, layering (routes never touch models), structured logging, silent failures, native writes that skip the guard, secrets in the tree, environment variables typed in one place, feature flags generated from one registry, country-specific words outside the locale seam, one-off design values, and helper copy over eight words. A pull request may lower a count or hold it. The build fails if a count rises. The numbers trend down because that is the only direction allowed.</p>
+          
+          <div class="evidence">Evidence: <code>pnpm api lint:arch</code> in <code>.github/workflows/ci.yml</code>; the eleven <code>.*-baseline.json</code> files; docs/14 §11.</div>
+        </article>
+      
+        <article class="decision">
+          <h3>3. Money is append-only, then reconciled against the processor</h3>
+          <p>Sellers are paid through Paystack split settlement: the buyer pays once, the platform fee and the seller's share are divided at the processor, and the seller's share lands in their M-Pesa or bank. Ledger rows are never edited.</p><p>A scheduler polls settlements and matches them to sales; payouts are verified against the processor's own records; a failed settlement is a named state, not a silent skip. The money model (fee ladder, split timing, what the seller sees on each screen) is a document before it is code, and the first live payout was reconciled by hand against it. The open items are written down too: a sale on a failed settlement still stalls the matcher, found 20 November, not yet fixed.</p>
+          
+          <div class="evidence">Evidence: docs/13 money model, docs/16 Paystack review, docs/30 §2.8 append-only records, the settlement and payout schedulers under <code>services/</code>.</div>
+        </article>
+      
+        <article class="decision">
+          <h3>4. Observability was built before the second seller, not after the first outage</h3>
+          <p>One logger on pino with ECS fields, shared by API and web. A request id minted at the edge, carried through every log line and returned in every response and error body, so a seller's screenshot leads to the exact trace. Liveness and readiness endpoints that check the database, graceful shutdown that drains in-flight requests, Prometheus metrics behind a token, and an access log. The audit that led to it listed nine gaps; each has a finding number and a status.</p>
+          
+          <div class="evidence">Evidence: docs/30 production readiness, <code>packages/logger</code>, <code>/api/health/live</code>, <code>/api/health/ready</code>, <code>/metrics</code>.</div>
+        </article>
+      
+        <article class="decision">
+          <h3>5. A security review with a status line per finding</h3>
+          <p>A full review of authentication, tenancy, payments, the public storefront, uploads, the Worker, the app, schedulers and secrets produced 135 findings. Each carries a status a later reader can verify a fix against, and the launch review three weeks later recorded the delta after 293 commits. Dependency advisories are triaged by whether the vulnerable path is reachable, not by count: of seven in one Next.js upgrade, two applied.</p>
+          
+          <div class="evidence">Evidence: docs/25 security review, docs/40 help-assistant security review, the Next.js 16.4.6 upgrade PR.</div>
+        </article>
+      
+        <article class="decision">
+          <h3>6. Sellers&#39; own domains through Cloudflare for SaaS, with one Worker</h3>
+          <p>Railway caps custom domains at 20 per service and gives each a different CNAME target, which would have meant every seller editing DNS if we ever moved. Instead a seller points a CNAME at a stable name under our zone, Cloudflare issues the certificate, and a Worker forwards to an origin host Railway knows, caching only hashed static files. Capacity is a number with a warning at 80 percent.</p>
+          
+          <div class="evidence">Evidence: docs/19 custom domains, <code>infra/cloudflare/</code>.</div>
+        </article>
+      
+        <article class="decision">
+          <h3>7. Road distance from our own router, so a pin never leaves the house</h3>
+          <p>Delivery priced by distance needs road kilometres between two pins. Google's Distance Matrix costs per call and sees both addresses. A private Valhalla service on Railway builds Kenya's OpenStreetMap roads once and answers in under 1.5 seconds for a flat monthly cost; past the timeout, the straight line times 1.3 prices the order and the record says which method it used. The pins never reach a log.</p>
+          
+          <div class="evidence">Evidence: docs/26 delivery workflow, <code>services/routing/valhalla.ts</code>, <code>infra/railway/Dockerfile.routing</code>.</div>
+        </article>
+      
+        <article class="decision">
+          <h3>8. One door for every model call</h3>
+          <p>Product descriptions, the help assistant, photo judgement and listing moderation all go through one gateway: Cloudflare AI Gateway in front, Claude Haiku first, the feature's OpenAI model as the fallback, a budget per prompt, and an alert when a feature's failure rate climbs. The help assistant answers only from written articles, builds its cards on the server, and prepares changes the seller confirms rather than applying them.</p>
+          
+          <div class="evidence">Evidence: docs/36 AI gateway, docs/39 help assistant, docs/40 its security review.</div>
+        </article>
+      
+    </section>
+
+    
+      <section class="cs-section wrap wrap--narrow">
+        <div class="rule"></div>
+        <h2>What I would do differently</h2>
+        <p>Build the declared database indexes by migration from day one; Mongoose's auto-indexing was off and several declared indexes were never created in production. Put the four-shard API test suite in CI before the suite reached the size that needs sharding. Write the country seam before the first Kenya-specific string, not after a thousand of them.</p>
+      </section>
+    
+
+    <section class="cs-section wrap wrap--narrow" style="padding-bottom: 96px;">
+      <div class="rule"></div>
+      <h2>Links</h2>
+      <div class="link-list">
+        
+          <a href="https://mybizna.com" target="_blank" rel="noopener">mybizna.com</a>
+        
+          <a href="https://apps.apple.com/app/id6819720099" target="_blank" rel="noopener">Mybizna on the App Store</a>
+        
+          <a href="https://play.google.com/store/apps/details?id=com.safisend.business" target="_blank" rel="noopener">Mybizna on Google Play</a>
+        
+      </div>
+      <p class="note" style="padding-top: 8px;">The repository is private. I can walk through any of it, including the documents named above, on a call.</p>
+    </section>
+  
+  </main>
+
+  <footer class="site-footer wrap wrap--narrow">
+    <span>© 2026 Enock Mecheo</span>
+    <a href="/project/safisend">Next: SafiSend for restaurants</a>
+  </footer>
+</body>
+</html>
